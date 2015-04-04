@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>E-commerce</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  
+</head>
+<style>
+#j1 {
+  margin-bottom: 0px;
+  height:350;
+  color: white;
+  text-shadow: black 0.3em 0.3em 0.3em;
+  background:white;
+  
+}
+
+div.img {
+    margin: 1px;
+    padding: 10px;
+    border: 1px solid #000000;
+    height:auto;
+    width:auto;
+    float: left;
+    background:white;
+    text-align:left;
+    
+} 
+
+#iimg {
+    display: inline;
+    margin: 5px;
+    border: 1px solid #ffffff;
+    -webkit-transition: all 1s ease; /* Safari and Chrome */
+    -moz-transition: all 1s ease; /* Firefox */
+    -ms-transition: all 1s ease; /* IE 9 */
+    -o-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
+    overflow: hidden;
+}
+#iimg:hover {
+    border: 1px solid #0000ff;
+    height: 200px;
+    width: 200px;
+    -webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+     transform:scale(1.25);
+     overflow: hidden;
+}
+
+div.desc {
+  text-align:center;
+  font-weight: bolder;
+  width: 120px;
+  margin: 5px;
+
+}
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    background-color: black;
+    color: black;
+}
+.letterlist ul {
+    margin: 0; 
+    padding: 0; 
+    list-style-type: none; 
+    
+}
+
+.letterlist li {
+    
+    margin: 0px 0;
+}
+
+ul.enlarge{
+list-style-type:none; /*remove the bullet point*/
+margin-left:0;
+}
+ul.enlarge li{
+display:inline-block; /*places the images in a line*/
+position:relative;
+z-index: 0; /*resets the stack order of the list items - later we'll increase this*/
+margin:10px 40px 0 20px;
+}
+ul.enlarge img{
+background-color:#ffffff;
+padding: 6px;
+-webkit-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+-moz-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+box-shadow: 0 0 6px rgba(132, 132, 132, .75);
+-webkit-border-radius: 4px; 
+-moz-border-radius: 4px; 
+border-radius: 4px; 
+}
+ul.enlarge span{
+position:absolute;
+left: -9999px;
+background-color:#ffffff;
+padding: 10px;
+font-family: 'Droid Sans', sans-serif;
+font-size:.9em;
+text-align: center; 
+color: #495a62; 
+-webkit-box-shadow: 0 0 20px rgba(0,0,0, .75));
+-moz-box-shadow: 0 0 20px rgba(0,0,0, .75);
+box-shadow: 0 0 20px rgba(0,0,0, .75);
+-webkit-border-radius: 8px; 
+-moz-border-radius: 8px; 
+border-radius:8px;
+}
+ul.enlarge li:hover{
+z-index: 1000;
+cursor:pointer;
+}
+ul.enlarge span img{
+padding:2px;
+background:#ccc;
+}
+ul.enlarge li:hover span{ 
+top: -50px; /*the distance from the bottom of the thumbnail to the top of the popup image*/
+left: 0px; /*distance from the left of the thumbnail to the left of the popup image*/
+}
+ul.enlarge li:hover img{
+  
+}
+ul.enlarge li:hover:nth-child(2) span{
+left: -100px; 
+}
+ul.enlarge li:hover:nth-child(3) span{
+left: -200px; 
+}
+ul.enlarge img, ul.enlarge span{
+behavior: url(pie/PIE.htc); 
+}
+table#t01 th {
+    color: white;
+    background-color: black;
+    text-align: center;
+    padding: 10px;
+
+}
+table#t01 td {
+    text-align: center;
+    padding: 10px;
+    width: 20%;
+
+}
+table#mt td {
+    vertical-align: top;
+
+}
+table#t01{
+  border-collapse:separate;
+    border-spacing:0 5px;
+}
+table#t02 td {
+    vertical-align: middle;
+    width: 20%;
+
+}
+</style>
+<link href="animation.css" rel="stylesheet">
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">E-commerce</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li ><a href="#">Home</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Offers<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Offer-1</a></li>
+            <li><a href="#">Offer-2</a></li>
+            <li><a href="#">Offer-3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+        <li ><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+         <li ><a href="#" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Login</h3>
+      </div>
+      <div class="modal-body">
+      <div class="container">
+      <form role="form">
+      <div class="col-md-4">
+      <div class="form-group">
+      <label for="lemail">Email:</label>
+      <input type="email" class="form-control" id="lemail">
+      </div>  
+      <div class="form-group">
+      <label for="lpwd">Password:</label>
+      <input type="password" class="form-control" id="lpwd">
+      </div> 
+      
+      </form>
+      </div>
+    </div>
+    </div>
+      
+      <div class="modal-footer">
+        <p align="center">
+        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;">Login</button>
+        <br><br>
+        <a href="#">Forgot password?</a>
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Choose Location</h3>
+      </div>
+      <div class="modal-body">
+      <iframe
+    width="100%"
+    height="100%"
+    frameborder="0" style="border:0;padding: 10px;"
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwpmNVR7SyjIzeaY8xij4Gq92qo_VpS94
+      &q=Butchart+Gardens+Victoria+BC
+      &attribution_source=Google+Maps+Embed+API
+      &attribution_web_url=http://www.butchartgardens.com/
+      &attribution_ios_deep_link_id=comgooglemaps://?daddr=Butchart+Gardens+Victoria+BC">
+  </iframe>
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;">Submit</button>
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-app="items" ng-controller="itemdisplay" style:"animation-name: animation;animation-duration: 4s;
+    animation-iteration-count: infinite;">
+
+
+<table style:"border: 4px solid black;width: 100%;table-layout: fixed;white-space: nowrap;overflow: hidden;" id="mt"> 
+<tr style="border: 4px solid black;padding: 10px;">
+<td style="border: 4px solid black;padding: 10px;width: 13%;overflow: hidden;table-layout: fixed;">
+
+      <ul class="nav nav-pills nav-stacked" style="padding-top: 0px;padding-left: 5px;width: 100%;">
+        <h2>Refine by</h4>
+        <hr>
+        <h3>Price</h3>
+        <li> <input type="checkbox" name="l20" value="1" ng-model="check1" ng-init="check1=true"> Less than Rs.20<br> </li>
+        <li> <input type="checkbox" name="l50" value="2" ng-model="check2" ng-init="check2=true"> Rs.21 to Rs.50<br> </li>
+        <li> <input type="checkbox" name="l100" value="3" ng-model="check3" ng-init="check3=true"> Rs.51 to Rs.100<br> </li>
+        <li> <input type="checkbox" name="l200" value="4" ng-model="check4" ng-init="check4=true"> Rs.101 to Rs.200<br> </li>
+        <li> <input type="checkbox" name="l500" value="5" ng-model="check5" ng-init="check5=true"> Rs.201 and above<br> </li>
+        <hr>
+        <h3>Quantity</h3>
+        <li> <input type="checkbox" name="l500" value="11" ng-model="check6" ng-init="check6=true"> Less than 500 gm<br> </li>
+        <li> <input type="checkbox" name="l999" value="12" ng-model="check7" ng-init="check7=true"> 500 gm to 999 gm<br> </li>
+        <li> <input type="checkbox" name="l2" value="13" ng-model="check8" ng-init="check8=true"> 1 kg to 2 kg<br> </li>
+        <li> <input type="checkbox" name="l23" value="14" ng-model="check9" ng-init="check9=true"> 2 kg to 3kg<br> </li>
+        <li> <input type="checkbox" name="l10" value="15" ng-model="check10" ng-init="check10=true"> 3kg and above<br> </li>
+        <hr>
+        
+      </ul>
+  
+</td>
+
+<td style="border: 4px solid black;width: 70%;">
+
+
+<div class="jumbotron" >
+
+<div class="col-md-8">
+<h3>Item Name</h3>
+</div>
+
+<div class="col-md-4" style="float:right|bottom;">
+<select class="form-control" style="float:right;" id="cat" ng-options="option.label for option in values" ng-model="selected">
+</select>
+</div>
+
+<br>
+<br>
+<br>
+
+<hr>
+<br>
+
+<ul  style="list-style-type:none">
+    <li  style="margin-bottom : 0px;"ng-repeat="x in names1|orderBy:selected.sub:selected.rev" for="{{x.id}}">
+<div ng-if="(((x.price*x.q1)<=max[0] && (x.price*x.q1)>=min[0]) || ((x.price*x.q1)<=max[1] && (x.price*x.q1)>=min[1]) || ((x.price*x.q1)<=max[2] && (x.price*x.q1)>=min[2]) || ((x.price*x.q1)<=max[3] && (x.price*x.q1)>=min[3]) || ((x.price*x.q1)<=max[4] && (x.price*x.q1)>=min[4]))">
+
+
+<table style="width: 60%;background-color: white; margin: 0px;" id="t02">
+<tr style="height: 10%">
+
+<td align="center" style="padding: 5px;">
+<input type="number" align="right"  min="1" max="10" value="1" id="{{x.id}}" ng-model="names1[$index].qty">
+</td>
+<td style="padding: 10px;" align="center"> 
+<ul class="enlarge">
+<li><img src={{x.image}} alt={{ x.name }} width="80" height="80" /><span><img src={{x.image}} alt={{ x.name }} /><br />{{x.name}}</span></li>
+
+</ul>
+
+</td>
+<td style="padding: 10px;" align="center">
+<div class="desc">{{ x.name }}</div>
+</td>
+
+<td style="padding: 0px;"align="center"><select  ng-model="names1[$index].q" style:"width: 200px;"  id="{{x.id}}" >
+  <option selected="selected" value="0.5">0.5 kg</option>
+  <option value="1">1 kg</option>
+</select>
+</td>
+<td align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price*names1[$index].q*names1[$index].qty}}</div></td>
+
+<td align="center" style="padding: 10px;"><button class="btn btn-success" ng-click="add(names1[$index].qty,x.name,names1[$index].q,x.price*names1[$index].q*names1[$index].qty)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
+</tr>
+</table>
+
+
+<hr>
+</div>
+
+</li>
+
+</ul>
+</div>
+</td>
+<td style="border: 4px solid black;padding: 0px;margin: 0px;width: 30%; ">
+<div class="jumbotron" style="padding: 10px;">
+<h2>SHOPPING CART</h2>
+<hr>
+<table style="width: 100%;" id="t01">
+<tr style="padding: 10px;" align="center">Total bill : Rs. {{tprice}} </tr>
+<tr style="padding: 10px;" align="center">
+    <th>Qty</th>
+    <th>Name</th>   
+    <th>Weight</th>
+    <th>Price</th>
+</tr>
+
+<tr ng-repeat="x in addeditems">
+<td> {{x.qty}} </td>
+<td> {{x.nam}} </td>
+<td> {{x.w}} </td>
+<td> {{x.price}} </td>
+<td><button class="btn btn-danger btn-xs" ng-click="remove(x.id)"><span class="glyphicon glyphicon-trash" ng-click="remove(x.id)"></span></button></td>
+</tr>
+
+
+
+</table>
+<p align="center"><button class="btn btn-success btn-xs" align="center" style="margin: 10px;"><span class="glyphicon glyphicon-shopping-cart"></span> Check out.</button></p>
+</div>
+</td>
+
+</tr>
+
+</table>
+</div>
+
+<script src="itemController.js"></script>
+</body>
+</html>
+<!--<table>
+<tr>
+<td style="text-align: center;">
+
+<div class="col-md-3" ng-repeat="x in names1|orderBy: selected.sub">
+<div class="container" >
+<div class="img">
+<img src={{x.image}} alt={{ x.name }} width="220" height="180">
+ <div class="desc">{{ x.name }}</div>
+</br>
+  <select class="form-control">
+  <option>{{ x.q1 }} kg</option>
+  <option>{{ x.q2 }} kg</option>
+</select>
+</br>
+<div class="desc">Rs.{{ x.price*x.q1}}</div>
+<br>
+<p align="center"><button class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span> Add</button></p>
+<br>
+
+</div>
+</div>
+</div>
+
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<div class="col-md-3" ng-repeat="x in names2">
+<div class="container" >
+<div class="img">
+<img src={{x.image}} alt={{ x.name }} width="220" height="180">
+ <div class="desc">{{ x.name }}</div>
+</br>
+ <select class="form-control">
+  <option>{{ x.q1 }} kg</option>
+  <option>{{ x.q2 }} kg</option>
+</select>
+</br>
+<div class="desc">Rs.{{ x.price*x.q1}}</div>
+<br>
+<p align="center"><button class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span> Add</button></p>
+<br>
+
+</div>
+</div>
+</div>
+
+</td>
+</tr>
+
+
+</table>-->
+
