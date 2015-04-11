@@ -172,10 +172,34 @@ table#t02 td {
     width: 20%;
 
 }
+.navbar-inverse{
+
+    background-color: #8fb242;
+    border-color: #E7E7E7;
+    color: #FFFFFF;
+    background: -webkit-linear-gradient(left, #8fb242 , #E7E7E7); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #8fb242, #E7E7E7); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #8fb242, #E7E7E7); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #8fb242 , #c7de94); /* Standard syntax */
+
+}
+.navbar-inverse.navbar-brand{
+  background-color: #FFFFFF;
+}
+.navbar-inverse.navbar-nav > li {
+    color: #FFFFFF;
+}
+html {
+background: url(intro-bg.jpg) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
 </style>
 <link href="animation.css" rel="stylesheet">
-<body>
-  <nav class="navbar navbar-inverse">
+<body >
+  <nav class="navbar navbar-inverse" >
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">E-commerce</a>
@@ -194,7 +218,7 @@ table#t02 td {
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
          <li ><a href="#" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
 
@@ -271,12 +295,12 @@ table#t02 td {
   </div>
 </div>
 <div ng-app="items" ng-controller="itemdisplay" style:"animation-name: animation;animation-duration: 4s;
-    animation-iteration-count: infinite;">
+    animation-iteration-count: infinite;background: #000000;opacity:0.0;">
 
 
-<table style:"border: 4px solid black;width: 100%;table-layout: fixed;white-space: nowrap;overflow: hidden;" id="mt"> 
-<tr style="border: 4px solid black;padding: 10px;">
-<td style="border: 4px solid black;padding: 10px;width: 13%;overflow: hidden;table-layout: fixed;">
+<table style:"border: 4px solid black;width: 100%;table-layout: fixed;white-space: nowrap;overflow: hidden;background: #000000;opacity: 0.0;" id="mt"> 
+<tr style="padding: 10px;">
+<td style="padding: 10px;width: 20%;overflow: hidden;table-layout: fixed;">
 
       <ul class="nav nav-pills nav-stacked" style="padding-top: 0px;padding-left: 5px;width: 100%;">
         <h2>Refine by</h4>
@@ -300,10 +324,10 @@ table#t02 td {
   
 </td>
 
-<td style="border: 4px solid black;width: 70%;">
+<td style="width: 65%;">
 
 
-<div class="jumbotron" >
+<div class="jumbotron" style="background:#FFFFFF">
 
 <div class="col-md-8">
 <h3>Item Name</h3>
@@ -363,8 +387,8 @@ table#t02 td {
 </ul>
 </div>
 </td>
-<td style="border: 4px solid black;padding: 0px;margin: 0px;width: 30%; ">
-<div class="jumbotron" style="padding: 10px;">
+<td style="padding: 0px;margin: 0px;width: 40%; ">
+<div class="jumbotron" style="border: 4px solid black;padding: 10px;">
 <h2>SHOPPING CART</h2>
 <hr>
 <table style="width: 100%;" id="t01">
