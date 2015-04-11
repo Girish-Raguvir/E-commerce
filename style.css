@@ -1,3 +1,7 @@
+$navbar-height: 50px;
+$big-logo-padding: 15px; // adjust these 2 values
+$small-logo-padding: 2px;
+
 #j1 {
   margin-bottom: 0px;
   height:350;

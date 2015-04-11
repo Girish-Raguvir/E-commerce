@@ -11,10 +11,11 @@ angular.module('items', []).controller('itemdisplay', function($scope) {
         
     ];
     $(window).scroll(function() {
-  var navbarColor = "62,195,246";//color attr for rgba
-  var smallLogoHeight = $('.small-logo').height();
-  var bigLogoHeight = $('.big-logo').height();
-  var navbarHeight = $('.navbar').height(); 
+  var navbarColor = "121,147,59";//color attr for rgba
+
+  var smallLogoHeight = 30;
+  var bigLogoHeight = 90;
+  var navbarHeight = $('.navbar-inverse').height(); 
   
   var smallLogoEndPos = 0;
   var smallSpeed = (smallLogoHeight / bigLogoHeight);
@@ -26,19 +27,29 @@ angular.module('items', []).controller('itemdisplay', function($scope) {
   if (smallPadding < smallLogoEndPos) { smallPadding = smallLogoEndPos; }
   if (smallPadding < 0) { smallPadding = 0; }
   
-  $('.small-logo-container ').css({ "padding-top": smallPadding});
   
-  var navOpacity = ySmall / smallLogoHeight; 
-  if  (navOpacity > 1) { navOpacity = 1; }
+  
+  var navOpacity = ySmall / smallLogoHeight;
+  $('.navbar').css({ "height": 100*(1-navOpacity/8)});
+  navOpacity/=10;
+  navOpacity+=0.8;
+  
+  
+  if(navOpacity!=0) 
+ { if  (navOpacity > 1) { navOpacity = 1; }
   if (navOpacity < 0 ) { navOpacity = 0; }
   var navBackColor = 'rgba(' + navbarColor + ',' + navOpacity + ')';
-  $('.navbar').css({"background-color": navBackColor});
+  $('.navbar-inverse').css({"background": navBackColor});}
+  else
+  {
+    $('.navbar-inverse').css({"background":"rgba(121,147,59,0.8)"});
+  }
   
   var shadowOpacity = navOpacity * 0.4;
   if ( ySmall > 1) {
-    $('.navbar').css({"box-shadow": "0 2px 3px rgba(0,0,0," + shadowOpacity + ")"});
+    $('.navbar-inverse').css({"box-shadow": "0 2px 3px rgba(0,0,0," + shadowOpacity + ")"});
   } else {
-    $('.navbar').css({"box-shadow": "none"});
+    $('.navbar-inverse').css({"box-shadow": "none"});
   }
   
   
