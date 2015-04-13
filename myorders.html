@@ -64,17 +64,7 @@ div.desc {
   margin: 5px;
 
 }
-hr { 
-    display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;
-    background-color: black;
-    color: black;
-}
+
 .letterlist ul {
     margin: 0; 
     padding: 0; 
@@ -147,32 +137,7 @@ left: -200px;
 ul.enlarge img, ul.enlarge span{
 behavior: url(pie/PIE.htc); 
 }
-table#t01 th {
-    color: white;
-    background-color: black;
-    text-align: center;
-    padding: 10px;
 
-}
-table#t01 td {
-    text-align: center;
-    padding: 10px;
-    width: 20%;
-
-}
-table#mt td {
-    vertical-align: top;
-
-}
-table#t01{
-  border-collapse:separate;
-    border-spacing:0 5px;
-}
-table#t02 td {
-    vertical-align: middle;
-    width: 20%;
-
-}
 
 .navbar-brand{
   color: #FFFFFF;
@@ -227,7 +192,15 @@ background: white;
 }
 .navbar-inverse .navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus {
  
-  background:;
+ 
+}
+th, td, tr {
+    
+    padding: 5px;
+    text-align: center;
+}
+table {
+  border: 1px solid black;
 }
 </style>
 <link href="animation.css" rel="stylesheet">
@@ -358,43 +331,29 @@ background: white;
     </div>
   </div>
 </div>
-<div ng-app="items" ng-controller="itemdisplay" style="animation-name: animation;animation-duration: 4s;
-    animation-iteration-count: infinite;padding-top: 110px;">
+<div class="container-fluid" ng-app="orders" ng-controller="orderdisplay"  style="padding-top: 150px;">
 
 
-<table style="width: 100%;table-layout: fixed;white-space: nowrap;overflow: hidden;" id="mt"> 
-<tr style="padding: 10px;">
-<td style="padding: 5px;width: 13%;overflow: hidden;table-layout: fixed;">
+<div class="col-md-2" align="center">
 
-      <ul class="nav nav-pills nav-stacked" style="padding-top: 0px;padding-left: 5px;width: 100%;">
-        <h2>Refine by</h4>
+      <ul class="nav nav-pills nav-stacked" style="padding-top: 0px;padding-left: 5px;width: 100%;vertical-align: top;">
+        <h2 >My Account</h2>
         <hr>
-        <h3>Price</h3>
-        <li> <input type="checkbox" name="l20" value="1" ng-model="check1" ng-init="check1=true"> Less than Rs.20<br> </li>
-        <li> <input type="checkbox" name="l50" value="2" ng-model="check2" ng-init="check2=true"> Rs.21 to Rs.50<br> </li>
-        <li> <input type="checkbox" name="l100" value="3" ng-model="check3" ng-init="check3=true"> Rs.51 to Rs.100<br> </li>
-        <li> <input type="checkbox" name="l200" value="4" ng-model="check4" ng-init="check4=true"> Rs.101 to Rs.200<br> </li>
-        <li> <input type="checkbox" name="l500" value="5" ng-model="check5" ng-init="check5=true"> Rs.201 and above<br> </li>
-        <hr>
-        <h3>Quantity</h3>
-        <li> <input type="checkbox" name="l500" value="11" ng-model="check6" ng-init="check6=true"> Less than 500 gm<br> </li>
-        <li> <input type="checkbox" name="l999" value="12" ng-model="check7" ng-init="check7=true"> 500 gm to 999 gm<br> </li>
-        <li> <input type="checkbox" name="l2" value="13" ng-model="check8" ng-init="check8=true"> 1 kg to 2 kg<br> </li>
-        <li> <input type="checkbox" name="l23" value="14" ng-model="check9" ng-init="check9=true"> 2 kg to 3kg<br> </li>
-        <li> <input type="checkbox" name="l10" value="15" ng-model="check10" ng-init="check10=true"> 3kg and above<br> </li>
-        <hr>
+        <a href="Account.html" style="padding: 5px;"><h5>Personal Details</h5></a>
+        
+        <a href="#"><h5>My Orders</h5></a>
+        
         
       </ul>
   
-</td>
-
-<td style="width: 65%;table-layout: fixed;">
+</div>
 
 
-<div class="jumbotron" style="background:#FFFFFF">
+<div class="col-md-10" >
+<div class="jumbotron" style="">
 
 <div class="col-md-8">
-<h3>Item Name</h3>
+<h2>My Orders</h2>
 </div>
 
 <div class="col-md-4" style="float:right|bottom;">
@@ -410,38 +369,30 @@ background: white;
 <br>
 
 <ul  style="list-style-type:none">
-    <li  style="margin-bottom : 0px;"ng-repeat="x in names1|orderBy:selected.sub:selected.rev" for="{{x.id}}">
-<div ng-if="(((x.price*x.q1)<=max[0] && (x.price*x.q1)>=min[0]) || ((x.price*x.q1)<=max[1] && (x.price*x.q1)>=min[1]) || ((x.price*x.q1)<=max[2] && (x.price*x.q1)>=min[2]) || ((x.price*x.q1)<=max[3] && (x.price*x.q1)>=min[3]) || ((x.price*x.q1)<=max[4] && (x.price*x.q1)>=min[4]))">
-
-
-<table style="width: 60%;background-color: white; margin: 0px;" id="t02">
-<tr style="height: 10%">
-
-<td align="center" style="padding: 5px;">
-<input type="number" align="right"  min="1" max="10" value="1" id="{{x.id}}" ng-model="names1[$index].qty">
-</td>
-<td style="padding: 10px;" align="center"> 
-<ul class="enlarge">
-<li><img src={{x.image}} alt={{ x.name }} width="80" height="80" /><span><img src={{x.image}} alt={{ x.name }} /><br />{{x.name}}</span></li>
-
-</ul>
-
-</td>
-<td style="padding: 10px;" align="center">
-<div class="desc">{{ x.name }}</div>
-</td>
-
-<td style="padding: 0px;"align="center"><select  ng-model="names1[$index].q" style:"width: 200px;"  id="{{x.id}}" >
-  <option selected="selected" value="0.5">0.5 kg</option>
-  <option value="1.0">1 kg</option>
-</select>
-</td>
-<td align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price*names1[$index].q*names1[$index].qty}}</div></td>
-
-<td align="center" style="padding: 10px;"><button class="btn btn-success" ng-click="add(names1[$index].id,names1[$index].qty,x.name,names1[$index].q*1,x.price*names1[$index].q*names1[$index].qty)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
+    <li  style="margin-bottom : 0px;"ng-repeat="x in orders|orderBy:selected.sub:selected.rev">
+<div ng-if="true">
+  <br>
+<table style="border-spacing: 5px;
+    border-collapse: separate;">
+<tr >
+<td colspan="5" valign="middle" style=" border: 1px solid black;background: rgba(121,147,59,0.8);"><h4>Order number: {{x.ono}}</h4></td>
+</tr>
+<tr >
+<th>Seller</th>
+<th>Description</th>
+<th nowrap>Date of Delivery</th>  
+<th>Address of Delivery</th>
+<th nowrap>Price amount</th>
+</tr>
+<tr>
+<td>{{x.s}}</td>
+<td nowrap>{{x.desc}}</td>
+<td>{{x.dod}}</td>
+<td nowrap>{{x.aod}}</td>
+<td>Rs.{{x.p}}</td>
 </tr>
 </table>
-
+<br>
 
 <hr>
 </div>
@@ -450,94 +401,11 @@ background: white;
 
 </ul>
 </div>
-</td>
-<td style="padding: 3px;margin: 0px;width: 28%; ">
-<div class="jumbotron" style="padding: 5px;width:100%;background: #E0D8E0;table-layout: fixed;">
-<h2>SHOPPING CART</h2>
-<hr>
-<table style="width: 100%;" id="t01">
-<tr style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
-<tr style="padding: 10px;" align="center">
-    <th>Qty</th>
-    <th>Name</th>   
-    <th>Weight</th>
-    <th>Price</th>
-</tr>
-
-<tr ng-repeat="x in addeditems">
-<td> {{x.qty}} </td>
-<td> {{x.nam}} </td>
-<td> {{x.w}} </td>
-<td> {{x.price}} </td>
-<td><button class="btn btn-danger btn-xs" ng-click="remove(x.id)"><span class="glyphicon glyphicon-trash" ng-click="remove(x.id)"></span></button></td>
-</tr>
-
-
-
-</table>
-<p align="center"><button class="btn btn-success btn-md" align="center" style="margin: 10px;"><span class="glyphicon glyphicon-shopping-cart"></span> Check out.</button></p>
 </div>
-</td>
-
-</tr>
-
-</table>
 </div>
 
-<script src="js/itemController.js"></script>
+<script src="js/myorders.js"></script>
 </body>
 </html>
-<!--<table>
-<tr>
-<td style="text-align: center;">
 
-<div class="col-md-3" ng-repeat="x in names1|orderBy: selected.sub">
-<div class="container" >
-<div class="img">
-<img src={{x.image}} alt={{ x.name }} width="220" height="180">
- <div class="desc">{{ x.name }}</div>
-</br>
-  <select class="form-control">
-  <option>{{ x.q1 }} kg</option>
-  <option>{{ x.q2 }} kg</option>
-</select>
-</br>
-<div class="desc">Rs.{{ x.price*x.q1}}</div>
-<br>
-<p align="center"><button class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span> Add</button></p>
-<br>
-
-</div>
-</div>
-</div>
-
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<div class="col-md-3" ng-repeat="x in names2">
-<div class="container" >
-<div class="img">
-<img src={{x.image}} alt={{ x.name }} width="220" height="180">
- <div class="desc">{{ x.name }}</div>
-</br>
- <select class="form-control">
-  <option>{{ x.q1 }} kg</option>
-  <option>{{ x.q2 }} kg</option>
-</select>
-</br>
-<div class="desc">Rs.{{ x.price*x.q1}}</div>
-<br>
-<p align="center"><button class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span> Add</button></p>
-<br>
-
-</div>
-</div>
-</div>
-
-</td>
-</tr>
-
-
-</table>-->
 

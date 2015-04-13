@@ -136,202 +136,75 @@ background: white;
     </div>
   </div>
 </div>
-<div ng-app="registration" ng-controller="register" class="container" style="padding-top: 110px;">
-<h2>Register</h2>
-<br>
-Thank you for the interest in registration and membership at ecommerce.com. Please do note that we currently serve the cities of Bangalore,Mumbai,Delhi and Chennai . If you currently live in some other city, please send an email with your current location to customerservice@ecommerce.com. We will write to you when we launch our service in your city.
-Fields marked with <span style="color:red;">*</span> are mandatory
-<br><br>
-<hr>
+<div class="container-fluid" ng-app="registration" ng-controller="register"  style="padding-top: 150px;">
+<div class="col-md-2" align="center">
+
+      <ul class="nav nav-pills nav-stacked" style="padding-top: 0px;padding-left: 5px;width: 100%;vertical-align: top;">
+        <h2 style="">My Account</h2>
+        <hr>
+        <a href="#" style="padding: 4px;"><h5>Personal Details</h5></a>
+        
+        <a href="myorders.html" style="padding: 4px;"><h5>My Orders</h5></a>
+        
+       </ul>
+  
+</div>
+<div class="col-md-9" style="">
 <div class="jumbotron">
-<table>
-<tr>
-<td>
 <div class="container">
 
-  <h2>Login Details</h2>
-
-  <form role="form">
-<div class="col-md-7">
-    <div class="form-group">
-
-      <label for="email"><span style="color:red;">*</span> Email Address:</label>
-       
-      <input type="email" class="form-control" id="email" placeholder="Enter email">
-      
-    </div>
-    <div class="form-group">
-      <label for="phonenumber"><span class="glyphicon glyphicon-phone"></span> Mobile number:</label>
-      <input type="tel" class="form-control" id="phonenumber" placeholder="Enter mobile number">
-    </div>
-    <div class="form-group">
-      <label for="pwd"><span style="color:red;">*</span> Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-    </div>
-    <div class="form-group">
-      <label for="cpwd"><span style="color:red;">*</span> Confirm Password:</label>
-      <input type="password" class="form-control" id="cpwd" placeholder="Confirm password">
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox"> Remember me</label>
-    </div>
-    
-</div>
-  </form>
-
-</div>
-</td>
-
-</tr>
-</table>
-</div>
-<hr>
-<div class="jumbotron">
-<table>
-<tr>
-<td>
-<div class="container">
 
   <h2>Personal Details</h2>
 <hr>
   <form role="form">
 <div class="col-md-7">
-<div class="form-group">
-<label for="sel1">Salutation:</label>
-<select class="form-control" id="sel1">
-    <option>Mr.</option>
-    <option>Mrs.</option>
-    <option>Ms.</option>
-    
-  </select>
 
-</div>
     <div class="form-group">
 
-      <label for="fname"><span style="color:red;">*</span> First name:</label>
+      <label for="fname"> First name:</label>
        
-      <input type="text" class="form-control" id="fname" placeholder="Enter first name">
+      <input type="text" class="form-control" id="fname" placeholder="">
       
     </div>
     <div class="form-group">
 
-      <label for="lname"><span style="color:red;">*</span> Last name:</label>
+      <label for="lname"> Last name:</label>
        
-      <input type="text" class="form-control" id="lname" placeholder="Enter last name">
+      <input type="text" class="form-control" id="lname" placeholder="">
       
     </div>
     <div class="form-group">
 
       <label for="dob">Date of Birth:</label>
        
-      <input type="date" class="form-control" id="dob" placeholder="Date of birth">
+      <input type="date" class="form-control" id="dob" placeholder="">
       
     </div>
 <div class="form-group">
 
       <label for="telno"><span class="glyphicon glyphicon-phone-alt"></span> Telephone number:</label>
        
-      <input type="tel" class="form-control" id="telno" placeholder="Telephone number">
+      <input type="tel" class="form-control" id="telno" placeholder="">
       
     </div>
-    
+     <div class="form-group">
+      <label for="phonenumber"><span class="glyphicon glyphicon-phone"></span> Mobile number:</label>
+      <input type="tel" class="form-control" id="phonenumber" placeholder="">
+    </div>
+    <br>
+     <button class="btn btn-success">Save Changes</button> 
 </div>
+
   </form>
 
-</div>
-</td>
 
-</tr>
-</table>
+
 </div>
+</div>
+</div>
+</div>
+
 <hr>
-<div class="jumbotron">
-<table>
-<tr>
-<td>
-<div class="container">
-
-  <h2>Address Details</h2>
-<hr>
-  <form role="form">
-<div class="col-md-7">
-    <div class="form-group">
-
-      <label for="h"><span style="color:red;">*</span> House no & Details:</label>
-       
-      <input type="text" class="form-control" id="h" placeholder="House no & Details">
-      
-    </div>
-    <div class="form-group">
-
-      <label for="s">Street Details:</label>
-       
-      <input type="text" class="form-control" id="s" placeholder="Street Details">
-      
-    </div>
-    <div class="form-group">
-
-      <label for="area"><span style="color:red;">*</span> Area:</label>
-       
-      <input type="text" class="form-control" id="area" placeholder="Area">
-      
-    </div>
-<div class="form-group">
-
-      <label for="rc">Residential Complex:</label>
-       
-      <input type="text" class="form-control" id="rc" placeholder="Residential Complex">
-      
-    </div>
-<div class="form-group">
-
-      <label for="l">Landmark:</label>
-       
-      <input type="text" class="form-control" id="l" placeholder="Landmark">
-      
-    </div>
-<div class="form-group">
-<label for="sel">City:</label>
-<select class="form-control" id="sel">
-    <option>Chennai</option>
-    <option>Bangalore</option>
-    <option>Mumbai</option>
-    <option>Delhi</option>
-  </select>
-</div>
-<div class="form-group">
-
-      <label for="p"><span style="color:red;">*</span> Pin Code:</label>
-       
-      <input type="tel" class="form-control" id="p" placeholder="Pincode">
-      
-    </div>
-    
-</div>
-  </form>
-
-</div>
-</td>
-
-</tr>
-</table>
-</div>
-<div class="col-md-12">
-<label>Type characters shown in box:</label>
-</br><br>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrePJIGttnAKPvDJVYE2YGkMAgHxT6mT5iY8gd45-PXlHSaZf3" style="width:10%;height:5%;"></img>
-<br><br>
-<input type="text" style="width:15%;"class="form-control" id="char" placeholder="">
-</br>
-<label><input type="checkbox">  I accept the <a href="#">Terms and Conditions.</a></label>
-</br></br></br>
-
-</div>
-
-<p align="center">
-<button type="submit" class="btn btn-success" align="center">Submit</button>
-</p>
-</div>
 <script src="js/register.js"></script>
 </body>
 </html>

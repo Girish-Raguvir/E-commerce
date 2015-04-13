@@ -161,11 +161,17 @@ $scope.addeditems=[
 
 }];
 $scope.i=-1;
-$scope.add=function(qty,name,w,price){
+$scope.add=function(id,qty,name,w,price){
 //$scope.itemd=$scope.names1[1];
+var j=0,f=0;
 if($scope.i==-1)$scope.addeditems.splice(0,1);
+for(j=0;j<$scope.addeditems.length;j++)
+  if($scope.addeditems[j].id==id)
+    {$scope.addeditems[j].qty+=qty;$scope.addeditems[j].w+=w;$scope.addeditems[j].price+=price;f=1;break;}
+  if(!f)
+{
 $scope.addeditems.push({ id:$scope.i+1,qty: qty,nam:name ,w: w,price: price});
-$scope.i++;
+$scope.i++;}
 $scope.tprice=$scope.tprice+price;
 };
 $scope.remove=function(y)
