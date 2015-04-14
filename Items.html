@@ -229,9 +229,14 @@ background: white;
  
   background:;
 }
+#cart > tr,th,td{
+  padding: 5px;
+ 
+}
 </style>
 <link href="animation.css" rel="stylesheet">
 <body >
+  <div ng-app="items" ng-controller="itemdisplay">
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;">
       <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;" >
 
@@ -358,7 +363,108 @@ background: white;
     </div>
   </div>
 </div>
-<div ng-app="items" ng-controller="itemdisplay" style="animation-name: animation;animation-duration: 4s;
+<div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cart</h3>
+      </div>
+      <div class="modal-body" >
+      <table style="width: 100%;" cellpadding="10" cellspacing="10" id="cart">
+<tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
+<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;">
+    <th style="text-align: center;">Qty</th>
+    <th style="text-align: center;">Name</th>   
+    <th style="text-align: center;">Weight</th>
+    <th style="text-align: center;">Price</th>
+</tr>
+
+<tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
+<td> {{x.qty}} </td>
+<td> {{x.nam}} </td>
+<td> {{x.w}} </td>
+<td> {{x.price}} </td>
+
+</tr>
+<tr ng-if="tprice==0"><h3 align="center">{{i+1}} items in cart</h3></tr>
+
+
+</table>
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+        <!--<button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>-->
+        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;">   Proceed <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
+        
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="detailsmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Delivery Details</h3>
+      </div>
+      <div class="modal-body">
+      <div class="form">
+      <div class="form-group">
+      <input type="text" class="form-control"placeholder="Name"></input>
+      <br>
+      <input type="tel" class="form-control"placeholder="Telephone Number"></input>
+      <br>
+      <input type="text" class="form-control"placeholder="Address"></input>
+      <br>
+      </div>
+      </div>
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+         <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#paymodal"style="width:40%;">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="paymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Payment</h3>
+      </div>
+      <div class="modal-body">
+      
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+         <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back</button>
+        
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div  style="animation-name: animation;animation-duration: 4s;
     animation-iteration-count: infinite;padding-top: 110px;">
 
 
@@ -475,7 +581,7 @@ background: white;
 
 
 </table>
-<p align="center"><button class="btn btn-success btn-md" align="center" style="margin: 10px;"><span class="glyphicon glyphicon-shopping-cart"></span> Check out.</button></p>
+<p align="center"><button class="btn btn-success btn-md" align="center" data-toggle="modal" data-target="#cartmodal"style="margin: 10px;"><span class="glyphicon glyphicon-shopping-cart"></span> Check out.</button></p>
 </div>
 </td>
 
@@ -483,7 +589,7 @@ background: white;
 
 </table>
 </div>
-
+</div>
 <script src="js/itemController.js"></script>
 </body>
 </html>
