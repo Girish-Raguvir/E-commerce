@@ -1,13 +1,13 @@
 
 angular.module('items', []).controller('itemdisplay', function($scope) {
     $scope.names1 = [
-        {id:0,qty:1,name:'Tomatoes',q:0.5,q1:0.5,q2:1,price:80,image:'nature.jpg'},
-        {id:1,qty:1,name:'Onions',q:0.5,q1:0.5,q2:1,price:50,image:'nature.jpg'},
-        {id:2,qty:1,name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'nature.jpg'},
-        {id:3,qty:1,name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'nature.jpg'},
-        {id:4,qty:1,name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'nature.jpg'},
-        {id:5,qty:1,name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'nature.jpg'},
-        {id:6,qty:1,name:'Spinach',q:0.5,q1:0.5,q2:1,price:200,image:'nature.jpg'}
+        {id:0,qty:1,brand:'Test',name:'Tomatoes',q:0.5,q1:0.5,q2:1,price:80,image:'nature.jpg'},
+        {id:1,qty:1,brand:'Test',name:'Onions',q:0.5,q1:0.5,q2:1,price:50,image:'nature.jpg'},
+        {id:2,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'nature.jpg'},
+        {id:3,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'nature.jpg'},
+        {id:4,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'nature.jpg'},
+        {id:5,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'nature.jpg'},
+        {id:6,qty:1,brand:'Test',name:'Spinach',q:0.5,q1:0.5,q2:1,price:200,image:'nature.jpg'}
         
     ];
     $(window).scroll(function() {
@@ -161,17 +161,18 @@ $scope.addeditems=[
 
 }];
 $scope.i=-1;
+$scope.titems=0;
 $scope.add=function(id,qty,name,w,price){
 //$scope.itemd=$scope.names1[1];
 var j=0,f=0;
 if($scope.i==-1)$scope.addeditems.splice(0,1);
 for(j=0;j<$scope.addeditems.length;j++)
   if($scope.addeditems[j].id==id)
-    {$scope.addeditems[j].qty+=qty;$scope.addeditems[j].w+=w;$scope.addeditems[j].price+=price;f=1;break;}
+    {$scope.addeditems[j].qty+=qty;$scope.addeditems[j].price+=price;f=1;$scope.titems=$scope.titems+qty;break;}
   if(!f)
 {
 $scope.addeditems.push({ id:$scope.i+1,qty: qty,nam:name ,w: w,price: price});
-$scope.i++;}
+$scope.i++;$scope.titems=$scope.titems+qty;}
 $scope.tprice=$scope.tprice+price;
 };
 $scope.remove=function(y)
@@ -179,10 +180,11 @@ $scope.remove=function(y)
   for(p=0;p<$scope.addeditems.length;p++)
   {
     if($scope.addeditems[p].id==y)
-     value=$scope.addeditems.splice(p,1)[0]; 
+     { $scope.titems=$scope.titems-$scope.addeditems[p].qty;value=$scope.addeditems.splice(p,1)[0];}
   }
   
   $scope.i--;
+  
   if($scope.i==-1){$scope.addeditems.push({ id:0,qty: 0,nam:'-' ,w: 0,price: 0});$scope.tprice=0;}
   else{
   $scope.tprice=$scope.tprice-value.price;}
