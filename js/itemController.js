@@ -65,42 +65,81 @@ angular.module('items', []).controller('itemdisplay', function($scope) {
       w: 0.5,
       qty: 1
     };
+    // var maxq=new Array(0,0,0,0,0);
+    // var minq=new Array(20000,20000,20000,20000,20000);
+    //  var max=new Array(0,0,0,0,0);
+    // var min=new Array(20000,20000,20000,20000,20000);
+    function changeq()
+    {
+      maxq=new Array(0,0,0,0,0);
+      minq=new Array(20000,20000,20000,20000,20000);
+    $scope.t=false;
+    if($scope.check6==true)
+    {maxq[0]=0.499;
+     minq[0]=0; 
+    //if($scope.t==false){$scope.min=0;$scope.t=true;}
+    }
+    if($scope.check7==true)
+    {
+      maxq[1]=0.999;
+      minq[1]=0.5;
+    //if($scope.t==false){$scope.min=21;$scope.t=true;}
+    }
+    if($scope.check8==true)
+    {
+     maxq[2]=1.999;
+      minq[2]=1;
+    //if($scope.t==false){$scope.min=51;$scope.t=true;}
+    }
+    if($scope.check9==true)
+    {
+      maxq[3]=2.999;
+    minq[3]=2;
+   //if($scope.t==false){$scope.min=101;$scope.t=true;}
+    }
+    if($scope.check10==true)
+    {
+      maxq[4]=20000;
+      minq[4]=3;
+    //if($scope.t==false){$scope.min=201;$scope.t=true;}
+    }
+    }
     function changep()
     {
-      $scope.max=new Array(0,0,0,0,0);
-      $scope.min=new Array(20000,20000,20000,20000,20000);
+      max=new Array(0,0,0,0,0);
+      min=new Array(20000,20000,20000,20000,20000);
     $scope.t=false;
     if($scope.check1==true)
-    {$scope.max[0]=20;
-     $scope.min[0]=0; 
+    {max[0]=20;
+    min[0]=0; 
     //if($scope.t==false){$scope.min=0;$scope.t=true;}
     }
     if($scope.check2==true)
     {
-      $scope.max[1]=50;
-      $scope.min[1]=21;
+      max[1]=50;
+      min[1]=21;
     //if($scope.t==false){$scope.min=21;$scope.t=true;}
     }
     if($scope.check3==true)
     {
-      $scope.max[2]=100;
-      $scope.min[2]=51;
+      max[2]=100;
+      min[2]=51;
     //if($scope.t==false){$scope.min=51;$scope.t=true;}
     }
     if($scope.check4==true)
     {
-      $scope.max[3]=200;
-      $scope.min[3]=101;
+      max[3]=200;
+      min[3]=101;
    //if($scope.t==false){$scope.min=101;$scope.t=true;}
     }
     if($scope.check5==true)
     {
-      $scope.max[4]=20000;
-      $scope.min[4]=201;
+      max[4]=20000;
+      min[4]=201;
     //if($scope.t==false){$scope.min=201;$scope.t=true;}
     }
     }
-    function changeq()
+    /*function changeq()
     {
     $scope.maxq=20000;
     $scope.minq=0;
@@ -129,7 +168,7 @@ angular.module('items', []).controller('itemdisplay', function($scope) {
       $scope.maxq=20000;
     if($scope.tq==false){$scope.minq=3;$scope.tq=true;}
     }
-    }
+    }*/
     $scope.values = [
     {
   id: 1,
@@ -188,6 +227,12 @@ $scope.remove=function(y)
   if($scope.i==-1){$scope.addeditems.push({ id:0,qty: 0,nam:'-' ,w: 0,price: 0});$scope.tprice=0;}
   else{
   $scope.tprice=$scope.tprice-value.price;}
+}
+$scope.check=function(x){
+  if((((x.price)<=max[0] && (x.price)>=min[0]) || ((x.price)<=max[1] && (x.price)>=min[1]) || ((x.price)<=max[2] && (x.price)>=min[2]) || ((x.price)<=max[3] && (x.price)>=min[3]) || ((x.price)<=max[4] && (x.price)>=min[4])) 
+    && (((x.q)<=maxq[0] && (x.q)>=minq[0]) || ((x.q)<=maxq[1] && (x.q)>=minq[1]) || ((x.q)<=maxq[2] && (x.q)>=minq[2]) || ((x.q)<=maxq[3] && (x.q)>=minq[3]) || ((x.q)<=maxq[4] && (x.q)>=minq[4])))
+    return true;
+  else return false;
 }
 $scope.tprice=0;
 /*$scope.qtyval=[

@@ -233,6 +233,7 @@ background: white;
   padding: 5px;
  
 }
+
 </style>
 <link href="animation.css" rel="stylesheet">
 <body >
@@ -483,10 +484,10 @@ background: white;
         <li> <input type="checkbox" name="l500" value="5" ng-model="check5" ng-init="check5=true"> Rs.201 and above<br> </li>
         <hr>
         <h3>Quantity</h3>
-        <li> <input type="checkbox" name="l500" value="11" ng-model="check6" ng-init="check6=true"> Less than 500 gm<br> </li>
+        <li> <input type="checkbox" name="l500" value="11" ng-model="check6" ng-init="check6=true"> Less than 499 gm<br> </li>
         <li> <input type="checkbox" name="l999" value="12" ng-model="check7" ng-init="check7=true"> 500 gm to 999 gm<br> </li>
-        <li> <input type="checkbox" name="l2" value="13" ng-model="check8" ng-init="check8=true"> 1 kg to 2 kg<br> </li>
-        <li> <input type="checkbox" name="l23" value="14" ng-model="check9" ng-init="check9=true"> 2 kg to 3kg<br> </li>
+        <li> <input type="checkbox" name="l2" value="13" ng-model="check8" ng-init="check8=true"> 1 kg to 1.999 kg<br> </li>
+        <li> <input type="checkbox" name="l23" value="14" ng-model="check9" ng-init="check9=true"> 2 kg to 2.999kg<br> </li>
         <li> <input type="checkbox" name="l10" value="15" ng-model="check10" ng-init="check10=true"> 3kg and above<br> </li>
         <hr>
         
@@ -517,7 +518,7 @@ background: white;
 
 <ul  style="list-style-type:none">
     <li  style="margin-bottom : 0px;"ng-repeat="x in names1|orderBy:selected.sub:selected.rev" for="{{x.id}}">
-<div ng-if="(((x.price)<=max[0] && (x.price)>=min[0]) || ((x.price)<=max[1] && (x.price)>=min[1]) || ((x.price)<=max[2] && (x.price)>=min[2]) || ((x.price)<=max[3] && (x.price)>=min[3]) || ((x.price)<=max[4] && (x.price)>=min[4]))">
+<div ng-if="(check(x))">
 
 
 <table style="width: 60%;background-color: white; margin: 0px;" id="t02">
