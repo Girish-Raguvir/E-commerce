@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Grocery Store</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js."></script>
+
+  <link rel="stylesheet" type="text/css" href="front page.css">
+</head>
+<body>
+
+	<div class="combi">
+ 
+	<div id="phone"></div>
+	
+	<div class="offer">
+	<p> <b>Free Delivery completely exclusive!</b> </p>
+	</div>
+	
+	<div >
+	<p id="Login"> <a href="#">Login </a></p>
+	<span id="vertical"></span>
+	<p id="Register"> <a href="#">Register</a> </p>
+	</div>
+
+	<div > 
+	<span id="hline3"></span>
+	</div>
+
+	</div> <!-- ending of combi class-->
+	
+	<div class="form-group has-feedback" id="inputSuccess2">
+	    <label class="control-label" for="inputSuccess2"></label>
+	    <input type="text" class="form-control"  placeholder="Search for a product, category or brand" id="placeholder"/>
+	    <span class="glyphicon glyphicon-search form-control-feedback" id="search"></span>
+		<span id="searchbtn"> Search </span>
+	</div>
+
+	
+
+	<div> 
+	<!--button id="cart"> <span class="glyphicon glyphicon-shopping-cart" style="padding-right:30px;"></span>Cart </button-->
+	<button id="cart"class="btn btn-blue btn-cart"> <span class="glyphicon glyphicon-shopping-cart" style="padding-right:30px;"></span>Cart </button>
+	</div>	
+
+	<!-- Implementing the side navbar with animation-->
+	<div ng-app="myApp"> 
+	<div ng-controller="myCtrl" >
+	<!--span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span-->
+	
+	<i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()"></i>
+
+	<div ng-class="{'rectangle':visibility,'rectangle-click':!visibility}"> </div>
+	
+	<div ng-class="{'Home':visibility,'Home-click':!visibility}"> <p ng-show="!visibility">Home </p> </div>
+	<div ng-class="{'rectangle2':visibility,'rectangle2-click':!visibility}"><p ng-show="!visibility"> FAQ</div>
+	<div ng-class="{'rectangle3':visibility,'rectangle3-click':!visibility}"><p ng-show="!visibility">Contacts</div>
+	<div ng-class="{'rectangle4':visibility,'rectangle4-click':!visibility}"><p ng-show="!visibility"> Founders</div>
+
+	</div> <!-- ending the myCtrl controller-->
+	
+	<div ng-controller="cities" > <!-- beginning of cities controller-->
+	
+	<!--div class="container">
+	<select class="form-control" id="places"  >
+<ul>
+	<option><li> {{city1}}  </li></option>
+	<option><li>{{city2}}</li></option>
+	<option><li>{{city3}}</li></option>
+</ul>
+	</select>
+	</div>
+	</div-->
+	<input id="places" type="text" ng-model="places">
+	<button type="submit" id="submit" ng-click="onClick()">submit</button> 
+	<!--div ng-class="{'Chennai':places=='Chennai','Mumbai':places=='Mumbai','Bangalore':places=='Bangalore'}"></div-->		
+	
+		<div class="container">
+		<div id="Chennai" ng-hide="sight1">  <!-- selecting local areas 1. Chennai-->
+		
+		<select class="form-control" >
+	<ul>
+		<option><li>KK Nagar</li></option>
+		<option><li>Saligramam</li></option>
+		<option><li>Adyar</li></option>
+	 
+	</ul>	
+		</select>
+		</div>
+		</div> <!-- ending Chennai local areas-->
+
+		<div class="container">
+		<div id="Mumbai" ng-hide="sight2">  <!-- selecting local areas 2. Mumbai-->
+		<select class="form-control" >
+	<ul>
+		<option><li>Bandra</li></option>
+		<option><li>Thane</li></option>
+		<option><li>Worli</li></option>
+	 
+	</ul>	
+		</select>
+		</div>
+		</div> <!-- ending Mumbai local areas-->
+
+		<div class="container">
+		<div id="Bangalore" ng-hide="sight3">  <!-- selecting local areas 3. Bangalore-->
+		<select class="form-control" >
+	<ul>
+		<option><li>Girish-1</li></option>
+		<option><li>Girish-2</li></option>
+		<option><li>Girish-3</li></option>
+	 
+	</ul>	
+		</select>
+		</div>
+		</div> <!-- ending Bangalore local areas-->
+	</div> <!-- ending of cities controller-->
+
+	<div > 
+	<span id="hline"></span>
+	</div>
+	
+	<!-- beginning of the navbar control-->
+	<div ng-controller="navbar">
+	<div> 
+	<span class="ordinary1"></span>
+	</div>
+
+	<div ng-mouseenter="onHover1()"  ng-mouseLeave="onLeave1()">
+	<span class="Meat">Meat </span>
+	<span class="glyphicon glyphicon-chevron-down" id="arrow1-down" ng-show="visibilitydown1"></span>
+	<span class="glyphicon glyphicon-chevron-up" id="arrow1-up" ng-show="visibilityup1"></span>
+	<div class="options"  ng-mouseenter="barEnter1()" ng-mouseLeave="barLeave1()">
+	
+	
+	<span id="chicken" ng-mouseOver="chicken()" ng-mouseLeave="chickenLeave()"> Chicken <span class="glyphicon glyphicon-chevron-	 right" id="#right" ng-show="!vischicken"></span></span>
+	<span id="seafood" >Sea Food</span>
+	<span id="mutton"> Mutton </span>
+	<span id="pork"> Pork and Others </span>
+	</div>
+	</div> <!-- ending of first dropdown-->
+
+	<div>
+	<span class="Imported" ng-mouseOver="onHover2()" ng-mouseLeave="onLeave2()">Imported </span>
+	<span class="glyphicon glyphicon-chevron-down" id="arrow2-down" ng-show="visibilitydown2"></span>
+	<span class="glyphicon glyphicon-chevron-up" id="arrow2-up" ng-show="visibilityup2"></span>
+	</div>
+
+
+	<div>
+	<span class="Household" ng-mouseOver="onHover3()" ng-mouseLeave="onLeave3()">Household </span>
+	<span class="glyphicon glyphicon-chevron-down" id="arrow3-down" ng-show="visibilitydown3"></span>
+	<span class="glyphicon glyphicon-chevron-up" id="arrow3-up" ng-show="visibilityup3"></span>
+	</div>
+
+	<div>
+	<span class="Personal" ng-mouseOver="onHover4()" ng-mouseLeave="onLeave4()">Personal Care </span>
+	<span class="glyphicon glyphicon-chevron-down" id="arrow4-down" ng-show="visibilitydown4"></span>
+	<span class="glyphicon glyphicon-chevron-up" id="arrow4-up" ng-show="visibilityup4"></span>
+	</div>
+
+	<div>
+	<span class="Branded" ng-mouseOver="onHover5()" ng-mouseLeave="onLeave5()">Branded Foods</span>
+	<span class="glyphicon glyphicon-chevron-down" id="arrow5-down" ng-show="visibilitydown5"></span>
+	<span class="glyphicon glyphicon-chevron-up" id="arrow5-up" ng-show="visibilityup5"></span>
+	</div>
+	
+	<div> 
+	<span class="ordinary2"></span>
+	</div>
+
+	
+
+	</div> <!-- ending of navbar controller-->
+	<!--hr id="hline2"-->
+	<div > 
+	<span id="hline2"></span>
+	</div>
+	<p id="quick"> Go quickly to </p>
+	<span class="glyphicon glyphicon-arrow-right" id="quick-arrow"></span>
+	<p id="Rice"> Rice </p>
+
+	<div ng-controller="slideshow"> <!-- beginning of carousel controller-->
+	<div>
+	<img src="rice-01.jpg" alt="Kohinoor Rice" ng-class="{'image1':visimg1,'image1-copy':!visimg1}">	
+	<span ng-class="{'rice-jpg':!visimg1,'rice-hover':visimg1}" ng-mouseOver="onHover1()"> Rice</span>
+	
+	<img src="pulses.jpg" alt="What Bullshit!" id="image2" ng-show="visimg2">	
+	<span ng-class="{'pulse-jpg':!visimg2,'pulse-hover':visimg2}" ng-mouseOver="onHover2()"> Pulses</span>
+	
+	<img src="fish" alt="Something" id="image3" ng-show="visimg3">	
+	<span ng-class="{'fish-jpg':!visimg3,'fish-hover':visimg3}" ng-mouseOver="onHover3()"> Fish</span>
+	
+
+	<img src="interstellar" alt="Interstellar" id="image4" ng-show="visimg4">	
+	<span ng-class="{'interstellar-jpg':!visimg4,'interstellar-hover':visimg4}" ng-mouseOver="onHover4()"> Interstellar</span>
+	
+	</div> <!-- ending of slideshow controller-->
+
+	<div class="payment-gateway">
+	<p id="pay-options"> Payment Options </p>
+	<p id="COD"> Cash On Delivery </p>
+	<span id="sep1"></span>
+	<img src="visa" alt="Payment Mode: Visa" id="visa">
+	</div> 
+
+	<div class="Mobile-App">
+	<h3 id="playstore">Get our App on PlayStore and AppStore!</h3>
+	<img src="Google-App-store-icon.png" alt="Google Play Store" id="google">
+	<img src="Apple-App-store-icon.png" alt="Apple App Store" id="iStore">
+	<h3 id="follow"> Follow us on </h3>
+	<img src="facebook" alt="Facebook" id="facebook">
+	<img src="twitter" alt="Twitter" id="twitter">
+	<img src="googleplus" alt="gplus" id="googleplus">
+	</div>
+	
+	
+
+	</div> <!-- ending the my app-->
+	<script src="front page.js"></script>
+	
+</body>
+</html>
