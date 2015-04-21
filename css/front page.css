@@ -1,14 +1,29 @@
+	.combi
+	{	position:fixed;
+		top:0px;	
+		width:1285px;
+		background-color:#e7e7e5;
+		height:119px;
+		z-index:1;
+	}	
 	.offer
 	{
 		position:absolute;
 		top:23px;
 		right:145px;
 	}
-	#Login,#Register
-	a{
+	#Login a
+	{
 		position:absolute;
 		top:23px;
 		right:100px;
+		color:red;
+	}
+	#Register a
+	{ 
+		position:absolute;
+		top:23px;
+		right:37px;
 		color:red;
 	}
 	#Login a:hover
@@ -16,7 +31,11 @@
 		font-weight:bold;
 		text-decoration:underline;
 	}
-	#Register a:hover	
+	#Register a:hover
+	{
+		font-weight:bold;
+		text-decoration:underline;
+	}		
 	#vertical
 	{
 		position:absolute;
@@ -26,23 +45,35 @@
 		height:13px;
 		right:95px;
 	}
-	#Register
+	#cart
 	{
-		position:absolute;
-		top:23px;
-		right:37px;
-		color:red;
+		position:fixed;
+		top:62px;
+		right:240px;
+		width:100px;
+		height:30px;
+		background-color:#009933;
+		color:white;
+		border:1px solid #009933;
+		padding-right:20px;
+	}
+	#cart:hover
+	{
+		background-color:#66ff33;
+		border:#66ff33;
 	}
 	#places
-	{	position:absolute;
+	{	position:fixed;
 		width:200px;
-		top:23px;
+		top:15px;
 		left:85px;
+		z-index:1;
 	}
 	#submit
-	{	position:absolute;
-		top:23px;
+	{	position:fixed;
+		top:15px;
 		left:313px;
+		z-index:1;
 	}
 	/*#phone
 	{	position:absolute;
@@ -68,14 +99,53 @@
 	}
 	#inputSuccess2
 	{
-		position:absolute;
+		position:fixed;
 		top:40px;
 		width:500px;
 		left:350px;
+		z-index:1;
 		/*height:40px*/
-		box-shadow: 5px 10px 5px #ccc9c9;
+		/*box-shadow: 5px 10px 5px #ccc9c9;*/
 	}
+	#search
+	{
+		position:absolute;
+		top:20px;
+		font-size:1.25em;
+		color:white;
+		right:60px;	
+		
+	}
+	#searchbtn
+	{
+		position:absolute;
+		top:20px;
+		color:white;
+		right:0px;
+		width:100px;
+		height:33px;
+		background-color:#006600;
+		padding-left:45px;
+		padding-top:7px;
+		font-weight:bold;
+	}
+	::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #006600;
 	
+	/*direction:rtl;
+	text-align:center;*/
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #909;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #909;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    #909;
+}
 	#products
 	{	position:absolute;
 		background-color:white;
@@ -86,15 +156,47 @@
 		font-style:bold;
 	}
 	#sidebar
-	{	position:absolute;
-		font-size:3em;
-		top:15px;
+	{	position:fixed;
+		font-size:2em;
+		top:17px;
 		left:7px;
+		z-index:1;
 	}
 	#sidebar:hover
 	{
 		color:#00cc00;
 	}
+
+	/* Here begins the animation for text in the side bar*/
+	
+	
+	
+	@keyframes slideout
+	{
+	  from {
+	    padding-left: 0px;
+	     
+	  }
+	
+	  to {
+	    padding-left:30px;
+	    
+	  }
+	}
+
+	@keyframes slidein
+	{
+	  from {
+	    padding-left: 30px;
+	     
+	  }
+	
+	  to {
+	    padding-left:0px;
+	    
+	  }
+	}
+
 	.rectangle
 	{	position:absolute;
 		top:170px;
@@ -105,12 +207,11 @@
     		transition: width 0.4s;
 		border-bottom:1px solid red;
 		padding-top:30px;
-		padding-left:0px;
+		
 	}	
-	.rectangle p
-	{
-		-webkit-transition: padding-left 0.4s; /* For Safari 3.1 to 6.0 */
-    		transition: padding-left 0.4s;
+	p.rectangle {
+	  animation-duration: 0.2s;
+	  animation-name: slidein;
 	}
 	.rectangle-click
 	{	position:absolute;
@@ -124,10 +225,9 @@
 		padding-top:30px;
 		padding-left:35px;
 	}
-	.rectangle-click p
-	{
-		-webkit-transition: padding-left 0.4s; /* For Safari 3.1 to 6.0 */
-    		transition: padding-left 0.4s;	
+	p.rectangle-click {
+	  animation-duration: 3s;
+	  animation-name: slideout;
 	}
 	.rectangle2
 	{	position:absolute;
@@ -243,7 +343,7 @@
 		position:absolute;
 		top:120px;
 		height:3px;
-		width:1500px;
+		width:1285px;
 		background-color:#00cc00;
 	}
 	#hline2
@@ -251,7 +351,7 @@
 		position:absolute;
 		top:160px;
 		height:3px;
-		width:1500px;
+		width:1285px;
 		background-color:#00cc00;	
 	}
 	#hline3
@@ -259,7 +359,7 @@
 		background-color:#00cc00;
 		top:53px;
 		height:3px;
-		width:1500px;	
+		width:1285px;	
 	}
 	.ordinary1
 	{
@@ -282,7 +382,6 @@
 		padding-left:45px;
 		font-size:1.25em;
 		border-right:1px solid #000000;
-		
 	}
 	.Imported
 	{
@@ -352,15 +451,13 @@
 	#arrow1-down,#arrow1-up,#arrow2-down,#arrow2-up,#arrow3-down,#arrow3-up,#arrow4-down,#arrow4-up,#arrow5-down,#arrow5-up
 	{
 		position:absolute;
-		top:136px;
+		top:139px;
 		color:black;
-				
-		font-size:1em;
+		font-size:0.65em;
 	}	
 	#arrow1-down,#arrow1-up
 	{
 		left:260px;
-		
 	}
 	#arrow2-down,#arrow2-up
 	{
@@ -378,6 +475,13 @@
 	{
 		left:990px;
 	}
+
+	/*#arrow1-down:hover,#arrow1-up:hover,#arrow2-down:hover,#arrow2-up:hover,#arrow3-down:hover,#arrow3-up:hover,#arrow4-down:hover,#arrow4-up:hover,#arrow5-down:hover,#arrow5-up:hover
+	{
+		color:#00cc00;
+	}*/
+	
+	
 	.Meat:hover,.Imported:hover,.Household:hover,.Personal:hover,.Branded:hover
 	{
 		background-color:white;
@@ -399,7 +503,7 @@
 		background-color:#ffffff;
 		border: 1px solid #000000;
 		border-top:#00cc00;
-		opacity: 1.0;
+		z-index: 1;
 	}
 	#chicken,#mutton,#seafood,#pork
 	{
@@ -434,10 +538,14 @@
 		color:#000000;
 		
 	}
+	#right
+	{	position:absolute;
+		font-size:0.9em;
+		right:2px;
+	}
 	#quick,#Rice
 	{
 		position:absolute;
-		/*left:160px;*/
 		top:175px;
 	}
 	#quick
@@ -459,7 +567,7 @@
 		color:#0066ff;
 		text-decoration:underline;
 	}
-	#image1,#image2,#image3,#image4
+	#image2,#image3,#image4
 	{
 		position:absolute;
 		top:210px;
@@ -467,6 +575,39 @@
 		height:360px;
 		width:520px;
 	}
+	@-webkit-keyframes imagefadeout
+	{
+		from{opacity:1;}
+		to{opacity:0;}
+	}
+	@keyframes imagefadein
+	{
+		from{opacity:0;}
+		to{opacity:1;}
+	}
+	.image1
+	{
+		position:absolute;
+		top:210px;
+		left:300px;
+		height:360px;
+		width:520px;
+		opacity:1.0;
+		-webkit-animation-name:imagefadeout;
+		-webkit-animation-duration:10s;
+	}
+	.image1-copy
+	{
+		position:absolute;
+		top:210px;
+		left:300px;
+		height:360px;
+		width:520px;
+		opacity:0.0;
+		-webkit-animation-name:imagefadein;
+		-webkit-animation-duration:10s;
+	}
+	
 	.rice-jpg,.pulse-jpg,.fish-jpg,.interstellar-jpg
 	{
 		position:absolute;
@@ -477,7 +618,7 @@
 		color:white;
 		
 		text-align:center;
-		padding-top:6px;
+		padding-top:10px;
 		font-size:0.75
 	}
 	.rice-jpg
@@ -502,13 +643,7 @@
 		left:690px;
 		border-left:1px solid black;
 	}
-	/*.rice-hover,.pulse-hover,.fish-hover,.interstellar-hover
-	{
-		background-color:white;
-		color:#009933;
-		border-right: white;
-		border-bottom:1.5px solid #009933;
-	}*/
+	
 	.interstellar-hover
 	{
 		background-color:white;
@@ -524,7 +659,7 @@
 		width:130px;
 		height:40px;
 		text-align:center;
-		padding-top:6px;
+		padding-top:9px;
 		font-size:0.75
 	}
 	.pulse-hover
@@ -542,7 +677,7 @@
 		width:130px;
 		height:40px;
 		text-align:center;
-		padding-top:6px;
+		padding-top:9px;
 		font-size:0.75
 	}
 	.fish-hover
@@ -560,7 +695,7 @@
 		width:130px;
 		height:40px;
 		text-align:center;
-		padding-top:6px;
+		padding-top:9px;
 		font-size:0.75
 	}
 	.rice-hover
@@ -576,6 +711,108 @@
 		width:130px;
 		height:40px;
 		text-align:center;
-		padding-top:6px;
+		padding-top:9px;
 		font-size:0.75
 	}
+	.payment-gateway
+	{
+		position:absolute;
+		top:610px;
+		width:1285px;
+		height:100px;
+		background-color:#e7e7e5;
+	}
+	#pay-options
+	{
+		position:absolute;
+		top:70px;
+		left:30px;
+	}
+	#COD
+	{
+		position:absolute;
+		top:70px;
+		left:170px;
+	}
+	#sep1
+	{
+		position:absolute;
+		top:50px;
+		width:1px;
+		height:50px;
+		left:150px;
+		background-color:#b9b9b7;
+	}
+	#visa
+	{
+		position:absolute;
+		top:60px;
+		width:40px;
+		height:40px;
+		left:300px;
+	}
+	.Mobile-App
+	{
+		position:absolute;
+		top:710px;
+		width:1285px;
+		height:200px;
+	}
+	#playstore
+	{
+		position:absolute;
+		top:20px;
+		left:100px;
+		font-weight:700;
+	}
+		
+	#google,#iStore
+	{
+		position:absolute;
+		top:80px;
+		
+		
+	}
+	#google
+	{
+		left:100px;
+	}
+	#iStore
+	{
+		left:300px;
+	}
+	
+	#follow
+	{
+		position:absolute;
+		top:20px;
+		left:900px;
+	}
+	#facebook,#twitter,#googleplus
+	{
+		position:absolute;
+		
+		top:80px;
+		width:100px;
+		height:100px;
+	}
+	#facebook
+	{	
+		
+		right:280px;
+	}
+	#twitter
+	{	
+		top:75px;		
+		width:110px;
+		height:110px;
+		right:150px;
+	}
+	#googleplus
+	{
+		right:40px;
+		width:110px;
+		height:110px;
+		top:75px;
+	}
+	

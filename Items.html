@@ -233,8 +233,9 @@ background: white;
   padding: 5px;
  
 }
+
 </style>
-<link href="animation.css" rel="stylesheet">
+<link href="css/animation.css" rel="stylesheet">
 <body >
   <div ng-app="items" ng-controller="itemdisplay">
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;">
@@ -383,11 +384,11 @@ background: white;
 <tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
 <td> {{x.qty}} </td>
 <td> {{x.nam}} </td>
-<td> {{x.w}} </td>
-<td> {{x.price}} </td>
+<td> {{x.w}} kg</td>
+<td> Rs.{{x.price}} </td>
 
 </tr>
-<tr ng-if="tprice==0"><h3 align="center">{{i+1}} items in cart</h3></tr>
+<tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
 
 
 </table>
@@ -483,10 +484,10 @@ background: white;
         <li> <input type="checkbox" name="l500" value="5" ng-model="check5" ng-init="check5=true"> Rs.201 and above<br> </li>
         <hr>
         <h3>Quantity</h3>
-        <li> <input type="checkbox" name="l500" value="11" ng-model="check6" ng-init="check6=true"> Less than 500 gm<br> </li>
+        <li> <input type="checkbox" name="l500" value="11" ng-model="check6" ng-init="check6=true"> Less than 499 gm<br> </li>
         <li> <input type="checkbox" name="l999" value="12" ng-model="check7" ng-init="check7=true"> 500 gm to 999 gm<br> </li>
-        <li> <input type="checkbox" name="l2" value="13" ng-model="check8" ng-init="check8=true"> 1 kg to 2 kg<br> </li>
-        <li> <input type="checkbox" name="l23" value="14" ng-model="check9" ng-init="check9=true"> 2 kg to 3kg<br> </li>
+        <li> <input type="checkbox" name="l2" value="13" ng-model="check8" ng-init="check8=true"> 1 kg to 1.999 kg<br> </li>
+        <li> <input type="checkbox" name="l23" value="14" ng-model="check9" ng-init="check9=true"> 2 kg to 2.999kg<br> </li>
         <li> <input type="checkbox" name="l10" value="15" ng-model="check10" ng-init="check10=true"> 3kg and above<br> </li>
         <hr>
         
@@ -517,7 +518,7 @@ background: white;
 
 <ul  style="list-style-type:none">
     <li  style="margin-bottom : 0px;"ng-repeat="x in names1|orderBy:selected.sub:selected.rev" for="{{x.id}}">
-<div ng-if="(((x.price*x.q1)<=max[0] && (x.price*x.q1)>=min[0]) || ((x.price*x.q1)<=max[1] && (x.price*x.q1)>=min[1]) || ((x.price*x.q1)<=max[2] && (x.price*x.q1)>=min[2]) || ((x.price*x.q1)<=max[3] && (x.price*x.q1)>=min[3]) || ((x.price*x.q1)<=max[4] && (x.price*x.q1)>=min[4]))">
+<div ng-if="(check(x))">
 
 
 <table style="width: 60%;background-color: white; margin: 0px;" id="t02">
@@ -525,6 +526,9 @@ background: white;
 
 <td align="center" style="padding: 5px;">
 <input type="number" align="right"  min="1" max="10" value="1" id="{{x.id}}" ng-model="names1[$index].qty">
+</td>
+<td style="padding: 10px;"align="center">
+<b>{{ x.brand }}</b>
 </td>
 <td style="padding: 10px;" align="center"> 
 <ul class="enlarge">
@@ -537,14 +541,12 @@ background: white;
 <div class="desc">{{ x.name }}</div>
 </td>
 
-<td style="padding: 0px;"align="center"><select  ng-model="names1[$index].q" style:"width: 200px;"  id="{{x.id}}" >
-  <option selected="selected" value="0.5">0.5 kg</option>
-  <option value="1.0">1 kg</option>
-</select>
+<td style="padding: 0px;"align="center">
+<b>{{ x.q }} kg</b>
 </td>
-<td align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price*names1[$index].q*names1[$index].qty}}</div></td>
+<td align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
 
-<td align="center" style="padding: 10px;"><button class="btn btn-success" ng-click="add(names1[$index].id,names1[$index].qty,x.name,names1[$index].q*1,x.price*names1[$index].q*names1[$index].qty)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
+<td align="center" style="padding: 10px;"><button class="btn btn-success" ng-click="add(names1[$index].id,names1[$index].qty,x.name,names1[$index].q*1,x.price*names1[$index].qty)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
 </tr>
 </table>
 

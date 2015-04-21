@@ -50,11 +50,19 @@ var app=angular.module("myApp",[]);
 		$scope.visibilityup3=false;
 		$scope.visibilityup4=false;
 		$scope.visibilityup5=false;
+
+		$scope.vischicken=true;
+
 		$scope.onHover1=function()
 		{
 			$scope.visibilitydown1=false;
 			$scope.visibilityup1=true;
 		}
+		/*$scope.barHover1()=function()
+		{
+			if($scope.visibilityup1==true)
+			$scope.barout1=true;
+		}*/
 		$scope.onLeave1=function()
 		{
 			$scope.visibilitydown1=true;;
@@ -99,6 +107,15 @@ var app=angular.module("myApp",[]);
 		{
 			$scope.visibilitydown5=true;
 			$scope.visibilityup5=false;
+		}
+
+		$scope.chicken=function()
+		{
+			$scope.vischicken=false;
+		}
+		$scope.chickenLeave=function()
+		{
+			$scope.vischicken=true;
 		}
 	});
 	
