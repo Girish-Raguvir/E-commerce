@@ -9,7 +9,7 @@
 
 .jumbotron {
     margin-bottom: 0px;
-    background-image: url(images/bg.jpg);
+    background-image: url(../images/bg.jpg);
     background-position: 0% 25%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -63,10 +63,10 @@ img:hover {
     background: rgb(255,255,255);
 }
 
-#tile10{
 
-    height: 100;
-    width: 100;
+#tile10{
+    background: rgb(0,0,0);
+    height: 200px;
 }
 
 a:hover, a:visited, a:link, a:active
