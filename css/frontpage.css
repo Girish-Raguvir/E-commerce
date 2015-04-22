@@ -7,7 +7,7 @@
 }
 
 
-.jumbotron {
+#cat {
     margin-bottom: 0px;
     background-image: url(../images/bg.jpg);
     background-position: 0% 25%;
@@ -827,22 +827,17 @@ a:hover, a:visited, a:link, a:active
 	.payment-gateway
 	{
 		position:absolute;
-		top:610px;
-		width:1285px;
+		top:900px;
+		width:100%;
 		height:100px;
 		background-color:#e7e7e5;
 	}
 	#pay-options
 	{
-		position:absolute;
-		top:70px;
-		left:30px;
-	}
+		}
 	#COD
 	{
-		position:absolute;
-		top:70px;
-		left:170px;
+		
 	}
 	#sep1
 	{
@@ -863,9 +858,9 @@ a:hover, a:visited, a:link, a:active
 	}
 	.Mobile-App
 	{
-		position:absolute;
-		top:710px;
-		width:1285px;
+		position:relative;
+		
+		width:100%;
 		height:200px;
 	}
 	#playstore
@@ -883,6 +878,12 @@ a:hover, a:visited, a:link, a:active
 		
 		
 	}
+	.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
 	#google
 	{
 		left:100px;
@@ -905,6 +906,7 @@ a:hover, a:visited, a:link, a:active
 		top:80px;
 		width:100px;
 		height:100px;
+		padding:5px;
 	}
 	#facebook
 	{	

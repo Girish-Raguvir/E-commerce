@@ -1,6 +1,4 @@
-$navbar-height: 50px;
-$big-logo-padding: 15px; // adjust these 2 values
-$small-logo-padding: 2px;
+
 
 #j1 {
   margin-bottom: 0px;
@@ -22,10 +20,7 @@ div.img {
     text-align:left;
     
 } 
-.navbar-inverse .navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus {
- 
-  background:;
-}
+
 #iimg {
     display: inline;
     margin: 5px;
@@ -186,8 +181,8 @@ background-size: cover;
    background: linear-gradient(to right,#79933b,#8fb242);
 }
 .navbar-inverse .navbar-toggle {
-  border: 1px solid #333;
-  border-color: rgba(255,255,255,0.7);
+  border: 1px solid #000000;
+  border-color: rgb(0,0,0,0);
 }
 .navbar-inverse .navbar-header .navbar-brand {
   color: white;
@@ -196,7 +191,7 @@ background-size: cover;
   color: black;
 }
 .navbar-inverse .navbar-header:hover{
-  background: white;
+  color:black;
 }
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
    border-color: transparent;
@@ -211,9 +206,5 @@ color: white;
 }
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
 color: black;
-
-}
-.navbar-inverse .navbar-nav > li:hover, .navbar-inverse .navbar-nav > li:focus {
-background: white;
 
 }
