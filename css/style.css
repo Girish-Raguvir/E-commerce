@@ -176,9 +176,9 @@ background-size: cover;
 }
 
 .navbar-inverse {
-   background: rgba(62,195,246,0);
+   
   border-bottom: none;
-   background: linear-gradient(to right,#79933b,#8fb242);
+   background: rgba(121,147,59,0.9);
 }
 .navbar-inverse .navbar-toggle {
   border: 1px solid #000000;
