@@ -1,7 +1,20 @@
-angular.module('registration', []).controller('register', function($scope) {
- $(window).scroll(function() {
+var app=angular.module('registration', []);
+app.controller('register', function($scope) {
+ 
+});
+app.controller("myCtrl",function($scope)
+  {
+    $scope.visibility=true;
+    $scope.onClick=function()
+    {
+      $scope.visibility=!$scope.visibility;
+    }
+  });
+app.controller("nav",function($scope)
+  {
+    $(window).scroll(function() {
   var navbarColor = "121,147,59";//color attr for rgba
-
+  //var navbarColor = "62,195,246";
   var smallLogoHeight = 30;
   var bigLogoHeight = 90;
   var navbarHeight = $('.navbar-inverse').height(); 
@@ -19,9 +32,9 @@ angular.module('registration', []).controller('register', function($scope) {
   
   
   var navOpacity = ySmall / smallLogoHeight;
-  $('.navbar').css({ "height": 100*(1-navOpacity/20)});
+  $('.navbar').css({ "height": 100*(1-navOpacity/8)});
   navOpacity/=10;
-  navOpacity+=0.8;
+  navOpacity+=0.9;
   
   
   if(navOpacity!=0) 
@@ -44,5 +57,4 @@ angular.module('registration', []).controller('register', function($scope) {
   
   
 });
-
 });

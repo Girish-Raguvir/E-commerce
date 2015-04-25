@@ -7,8 +7,17 @@ var app=angular.module("myApp",[]);
 			$scope.visibility=!$scope.visibility;
 		}
 	});
+	
 	app.controller("nav",function($scope)
-	{
+	{//static f=0;
+
+            // $(window).load(function(){
+            //   if(f==0)
+            //     {$('#locmodal').modal('show');f=1;}
+            // });
+            $(document).ready(function() {
+    $('#locmodal').modal('show');
+});
 		$(window).scroll(function() {
   var navbarColor = "121,147,59";//color attr for rgba
   //var navbarColor = "62,195,246";
@@ -223,7 +232,7 @@ var app=angular.module("myApp",[]);
 });
 $scope.check=true;
 $scope.toggle=function(){
-    $scope.check=(!$scope.check);
+    $scope.check=($scope.check);
     $( document ).ready(function() {
     $(".tile").height($("#tile1").width());
     $(".carousel").height($("#tile1").width());

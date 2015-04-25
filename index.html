@@ -16,8 +16,9 @@
   <link rel="stylesheet" type="text/css" href="css/about.css">
 </head>
 <body>
+ 
  <div class="container-fluid" ng-app="myApp">
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;" ng-controller="nav">
       <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
 
         
@@ -33,7 +34,7 @@
   <div ng-class="{'rectangle4':visibility,'rectangle4-click':!visibility}"><p ng-show="!visibility"> Founders</div>
 
   </div>
-          <div class="navbar-header">
+          <div class="navbar-header" >
           <!-- <span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span> -->
            
   
@@ -60,14 +61,14 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-         <!-- <li ><a href="#" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li> -->
-        <li>
+        <li ><a href="#" data-toggle="modal" data-target="#locmodal"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
+        <!-- <li>
         <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;">
           <option>Chennai</option>
           <option>Bangalore</option>
           <option>Mumbai</option>
           <option>Delhi</option>
-        </select> 
+        </select>  -->
         <!-- <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;">
   
         <li class="dropdown-submenu">
@@ -106,7 +107,8 @@
     </div>
   
  
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -130,12 +132,55 @@
       </div>
     </div>
     </div>
-      
       <div class="modal-footer">
         <p align="center">
         <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;">Login</button>
         <br><br>
         <a href="#">Forgot password?</a>
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="locmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Location</h3>
+      </div>
+      <div class="modal-body">
+      <div class="container">
+      <form role="form">
+      <div class="col-md-4">
+      <div class="form-group">
+      <label for="lemail">City:</label>
+      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;">
+          <option>Chennai</option>
+          <option>Bangalore</option>
+          <option>Mumbai</option>
+          <option>Delhi</option>
+        </select> 
+      </div>  
+      <div class="form-group">
+      <label for="lpwd">Area:</label>
+      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;">
+          <option>Area1</option>
+          <option>Area2</option>
+          <option>Area3</option>
+          <option>Area4</option>
+        </select> 
+      </div> 
+      
+      </form>
+      </div>
+    </div>
+    </div>
+      <div class="modal-footer">
+        <p align="center">
+        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;">Submit</button>
+        
       </p>
         
       </div>
@@ -369,7 +414,7 @@
     
   </div>
 
-    <div class="col-md-8" align="center" ng-controller="tiles">
+    <div class="col-md-8" align="center" ng-controller="tiles" >
 <div class="jumbotron" style="margin-top: 140px;" align="center" id="cat">
 <div class="row " ng-if="check" style="margin-left: 5px;" >
     <div class="col-sm-12 col-xs-8">
@@ -406,10 +451,10 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <a href="#"><img src="images/fv1.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/BDE1.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
             <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/BDE2.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
           </div>
         </div>
@@ -423,10 +468,10 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <a href="#"><img src="images/fv1.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/bev1.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
             <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/bev2.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
           </div>
         </div>
@@ -440,10 +485,10 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <a href="#"><img src="images/fv1.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/Brd_foods1.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
             <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/Brd_foods2.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
           </div>
         </div>
@@ -457,10 +502,10 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <a href="#"><img src="images/fv1.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/FV1.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
             <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/FV2.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
           </div>
         </div>
@@ -478,10 +523,10 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <img src="images/fv1.png"  ng-click="toggle()"/>
+               <img src="images/Categories/GS1.jpg"  ng-click="toggle()"/>
             </div>
             <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/GS2.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
           </div>
         </div>
@@ -495,10 +540,10 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <a href="#"><img src="images/fv1.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/H1.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
             <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/H2.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
           </div>
         </div>
@@ -512,10 +557,10 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <a href="#"><img src="images/fv1.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/IG1.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
             <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/IG2.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
           </div>
         </div>
@@ -529,10 +574,34 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <a href="#"><img src="images/fv1.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/PC1.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
             <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
+               <a href="Items.html"><img src="images/Categories/PC2.jpg" class="img-responsive" ng-click="toggle()" /></a>
+            </div>
+          </div>
+        </div>
+         
+      </div>
+  </div>
+  
+</div>
+<br>
+<div class="row" ng-if="(check)" style="margin-left: 20px;">
+<!-- <button class="btn btn-success" style="background: rgba(0,0,0,0);"><a href="Categories.html" style="color: white;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span></t>&nbsp;&nbsp;Back</a></button>
+<br><br> -->
+<div class="row">
+ <div class="col-sm-2 col-xs-4 col-md-3">
+      <div id="tile1" class="tile">
+        
+         <div class="carousel slide" data-ride="carousel">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item active">
+               <a href="Items.html"><img src="images/Categories/spices1.jpg" class="img-responsive" ng-click="toggle()" /></a>
+            </div>
+            <div class="item">
+               <a href="Items.html"><img src="images/Categories/spices2.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
           </div>
         </div>
@@ -542,62 +611,6 @@
   
 </div>
 
-<div class="row" ng-if="(!check)" style="margin-left: 20px;">
-<button class="btn btn-success" style="background: rgba(0,0,0,0);"><a href="Categories.html" style="color: white;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span></t>&nbsp;&nbsp;Back</a></button>
-<br><br>
-<div class="row">
- <div class="col-sm-2 col-xs-4 col-md-3">
-      <div id="tile1" class="tile">
-        
-         <div class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-            <div class="item active">
-               <a href="#"><img src="images/fv1.png" class="img-responsive" ng-click="toggle()" /></a>
-            </div>
-            <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
-            </div>
-          </div>
-        </div>
-         
-      </div>
-  </div>
-  <div class="col-sm-2 col-xs-4 col-md-3">
-      <div id="tile1" class="tile">
-        
-         <div class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-            <div class="item active">
-               <a href="#"><img src="images/fv1.png" class="img-responsive" ng-click="toggle()" /></a>
-            </div>
-            <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
-            </div>
-          </div>
-        </div>
-         
-      </div>
-  </div>
-  <div class="col-sm-2 col-xs-4 col-md-3">
-      <div id="tile1" class="tile">
-        
-         <div class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-            <div class="item active">
-               <a href="#"><img src="images/fv1.png" class="img-responsive" ng-click="toggle()" /></a>
-            </div>
-            <div class="item">
-               <a href="#"><img src="images/fv2.png" class="img-responsive" ng-click="toggle()" /></a>
-            </div>
-          </div>
-        </div>
-         
-      </div>
-  </div>
-</div>
 </div>
 </div>
 </div>

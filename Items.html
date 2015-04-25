@@ -6,296 +6,70 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-   <link rel="stylesheet" type="text/css" href="css/about.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js."></script>
+
+  <link rel="stylesheet" type="text/css" href="css/frontpage.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/about.css">
   
 </head>
-<style>
-#j1 {
-  margin-bottom: 0px;
-  height:350;
-  color: white;
-  text-shadow: black 0.3em 0.3em 0.3em;
-  background:white;
-  
-}
 
-div.img {
-    margin: 1px;
-    padding: 10px;
-    border: 1px solid #000000;
-    height:auto;
-    width:auto;
-    float: left;
-    background:white;
-    text-align:left;
-    
-} 
-
-#iimg {
-    display: inline;
-    margin: 5px;
-    border: 1px solid #ffffff;
-    -webkit-transition: all 1s ease; /* Safari and Chrome */
-    -moz-transition: all 1s ease; /* Firefox */
-    -ms-transition: all 1s ease; /* IE 9 */
-    -o-transition: all 1s ease; /* Opera */
-    transition: all 1s ease;
-    overflow: hidden;
-}
-#iimg:hover {
-    border: 1px solid #0000ff;
-    height: 200px;
-    width: 200px;
-    -webkit-transform:scale(1.25); /* Safari and Chrome */
-    -moz-transform:scale(1.25); /* Firefox */
-    -ms-transform:scale(1.25); /* IE 9 */
-    -o-transform:scale(1.25); /* Opera */
-     transform:scale(1.25);
-     overflow: hidden;
-}
-
-div.desc {
-  text-align:center;
-  font-weight: bolder;
-  width: 120px;
-  margin: 5px;
-
-}
-hr { 
-    display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;
-    background-color: black;
-    color: black;
-}
-.letterlist ul {
-    margin: 0; 
-    padding: 0; 
-    list-style-type: none; 
-    
-}
-
-.letterlist li {
-    
-    margin: 0px 0;
-}
-
-ul.enlarge{
-list-style-type:none; /*remove the bullet point*/
-margin-left:0;
-}
-ul.enlarge li{
-display:inline-block; /*places the images in a line*/
-position:relative;
-z-index: 0; /*resets the stack order of the list items - later we'll increase this*/
-margin:10px 40px 0 20px;
-}
-ul.enlarge img{
-background-color:#ffffff;
-padding: 0px;
--webkit-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
--moz-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
-box-shadow: 0 0 6px rgba(132, 132, 132, .75);
--webkit-border-radius: 4px; 
--moz-border-radius: 4px; 
-border-radius: 3px; 
-}
-ul.enlarge span{
-position:absolute;
-left: -9999px;
-background-color:#ffffff;
-padding: 5px;
-font-family: 'Droid Sans', sans-serif;
-font-size:.9em;
-text-align: center; 
-color: #495a62; 
--webkit-box-shadow: 0 0 20px rgba(0,0,0, .75));
--moz-box-shadow: 0 0 20px rgba(0,0,0, .75);
-box-shadow: 0 0 20px rgba(0,0,0, .75);
--webkit-border-radius: 8px; 
--moz-border-radius: 8px; 
-border-radius:3px;
-}
-ul.enlarge li:hover{
-z-index: 1000;
-cursor:pointer;
-}
-ul.enlarge span img{
-padding:2px;
-background:#ccc;
-}
-ul.enlarge li:hover span{ 
-top: -50px; /*the distance from the bottom of the thumbnail to the top of the popup image*/
-left: 0px; /*distance from the left of the thumbnail to the left of the popup image*/
-}
-ul.enlarge li:hover img{
-  
-}
-ul.enlarge li:hover:nth-child(2) span{
-left: -100px; 
-}
-ul.enlarge li:hover:nth-child(3) span{
-left: -200px; 
-}
-ul.enlarge img, ul.enlarge span{
-behavior: url(pie/PIE.htc); 
-}
-table#t01 th {
-    color: white;
-    background-color: black;
-    text-align: center;
-    padding: 10px;
-
-}
-table#t01 td {
-    text-align: center;
-    padding: 10px;
-    width: 20%;
-
-}
-table#mt td {
-    vertical-align: top;
-
-}
-table#t01{
-  border-collapse:separate;
-    border-spacing:0 5px;
-}
-table#t02 td {
-    vertical-align: middle;
-    width: 20%;
-
-}
-
-.navbar-brand{
-  color: #FFFFFF;
-}
-.navbar-inverse.navbar-nav > li {
-  color: #FFFFFF;
-}
-html {
-background: url() no-repeat center center fixed;
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
-}
-
-.navbar-inverse {
-   background: rgba(121,147,59,0.8);
-  border-bottom: none;
-   
-}
-.navbar-inverse .navbar-toggle {
-  border: 1px solid #333;
-  border-color: rgba(255,255,255,0.7);
-}
-.navbar-inverse .navbar-header .navbar-brand {
-  color: white;
-}
-.navbar-inverse .navbar-header .navbar-brand:hover {
-  color: black;
-}
-.navbar-inverse .navbar-header:hover{
-  background: white;
-}
-.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-   border-color: transparent;
-  @media (max-width: 767px) {
-    background: rgba(255,255,255,0.75);
-  }
-}
-.navbar-inverse .navbar-nav > li > a {
-color: white;
-  
-
-}
-.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-color: black;
-
-}
-.navbar-inverse .navbar-nav > li:hover, .navbar-inverse .navbar-nav > li:focus {
-background: white;
-
-}
-.navbar-inverse .navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus {
- 
-  background:;
-}
-#cart > tr,th,td{
-  padding: 5px;
- 
-}
-
-</style>
 <link href="css/animation.css" rel="stylesheet">
 <body >
-  <div ng-app="items" ng-controller="itemdisplay">
-  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;">
-      <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;" >
+  <div ng-app="items">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;" ng-controller="nav">
+      <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
 
-        <div class="navbar-header">
-          
-         <a class="navbar-brand" href="#"> E-commerce</a>
-        </div>
+        
         <div class="navbar-collapse collapse">
-          
-          <ul class="nav navbar-nav">
-        <li ><a href="#">Home</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Offers<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Offer-1</a></li>
-            <li><a href="#">Offer-2</a></li>
-            <li><a href="#">Offer-3</a></li>
-          </ul>
+          <div ng-controller="myCtrl" > 
+  <i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()" style="padding-right:10px;"></i>
+
+  <div ng-class="{'rectangle':visibility,'rectangle-click':!visibility}"> </div>
+  
+  <div ng-class="{'Home':visibility,'Home-click':!visibility}"> <p ng-show="!visibility">Home </p> </div>
+  <div ng-class="{'rectangle2':visibility,'rectangle2-click':!visibility}"><p ng-show="!visibility"> FAQ</div>
+  <div ng-class="{'rectangle3':visibility,'rectangle3-click':!visibility}"><p ng-show="!visibility">Contacts</div>
+  <div ng-class="{'rectangle4':visibility,'rectangle4-click':!visibility}"><p ng-show="!visibility"> Founders</div>
+
+  </div>
+          <div class="navbar-header" >
+          <!-- <span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span> -->
+           
+  
+         <a class="navbar-brand" href="index.html" style="padding-left:50px;">E-commerce</a> 
+        </div>
+          <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
+        <li>
+        <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for a product, category or brand">
+        <span class="input-group-btn" >
+        <button class="btn btn-default" type="button" style="background: #79933b;"><span class="glyphicon glyphicon-search"></span> Submit</button>
+       </span>
+        </div>
         </li>
-        <li><a href="#">New Arrivals</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+        </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-         <li ><a href="#" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
-
+         <!-- <li ><a href="#" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li> -->
+        <li>
+        <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;">
+          <option>Chennai</option>
+          <option>Bangalore</option>
+          <option>Mumbai</option>
+          <option>Delhi</option>
+        </select> 
+        
+        </li>
       </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </div>
-  
-  <!--<nav class="navbar navbar-inverse" >
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">E-commerce</a>
-    </div>
-    <div>
-      <ul class="nav navbar-nav">
-        <li ><a href="#">Home</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Offers<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Offer-1</a></li>
-            <li><a href="#">Offer-2</a></li>
-            <li><a href="#">Offer-3</a></li>
-          </ul>
-        </li>
-        <li><a href="#">New Arrivals</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-        <li ><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-         <li ><a href="#" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
-
-      </ul>
-    </div>
-  </div>
-</nav>-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -364,8 +138,9 @@ background: white;
     </div>
   </div>
 </div>
-<div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
-  <div class="modal-dialog">
+<div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="itemdisplay">
+ 
+  <div class="modal-dialog" >
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -374,7 +149,7 @@ background: white;
       <div class="modal-body" >
       <table style="width: 100%;" cellpadding="10" cellspacing="10" id="cart">
 <tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
-<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;">
+<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
     <th style="text-align: center;">Qty</th>
     <th style="text-align: center;">Name</th>   
     <th style="text-align: center;">Weight</th>
@@ -466,7 +241,7 @@ background: white;
   </div>
 </div>
 <div  style="animation-name: animation;animation-duration: 4s;
-    animation-iteration-count: infinite;padding-top: 110px;">
+    animation-iteration-count: infinite;padding-top: 110px;" ng-controller="itemdisplay">
 
 
 <table style="width: 100%;table-layout: fixed;white-space: nowrap;overflow: hidden;" id="mt"> 
@@ -505,7 +280,7 @@ background: white;
 </div>
 
 <div class="col-md-4" style="float:right|bottom;">
-<select class="form-control" style="float:right;" id="cat" ng-options="option.label for option in values" ng-model="selected">
+<select class="form-control" style="float:right;"  ng-options="option.label for option in values" ng-model="selected">
 </select>
 </div>
 

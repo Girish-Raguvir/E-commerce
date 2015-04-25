@@ -1,50 +1,6 @@
-
-var app=angular.module('orders', []);
-app.controller('orderdisplay', function($scope) {
-    $scope.orders = [
-        {ono:123456,s:"IIT-M",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:2000},
-         {ono:123456,s:"IIT-B",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:1000},
-          {ono:123456,s:"IIT-K",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:5000},
-           {ono:123456,s:"IIT-D",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:8000},
-            {ono:123456,s:"IIT-K",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:3000},
-             {ono:123456,s:"IIT-M",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:4000}
-        
-    ];
-    
-   
-    $scope.values = [
-    {
-  id: 1,
-  label: 'Price-Lower to Higher',
-  sub: 'p',
-  rev:false
-  
-}, 
-{
-  id: 2,
-  label: 'Price-Higher to Lower',
-  sub: 'p',
-  rev:true
-  
-},{
-  id: 3,
-  label: 'Seller-Alphabetical',
-  sub: 's',
-  rev:false
-  
-}
-];
-$scope.i=-1;
-
-
-
-$scope.selected =$scope.values[0];
-$scope.s='p';
-    
-    if($scope.selected.label=='Price')
-    $scope.s='p';
-    else 
-    $scope.s='s';
+var app=angular.module('account', []);
+app.controller('myaccount', function($scope) {
+ 
 });
 app.controller("myCtrl",function($scope)
   {
