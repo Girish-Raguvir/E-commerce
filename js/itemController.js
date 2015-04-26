@@ -26,11 +26,17 @@ app.controller('itemdisplay', function($scope) {
     // var $scope.minq=new Array(20000,20000,20000,20000,20000);
     //  var $scope.max=new Array(0,0,0,0,0);
     // var $scope.min=new Array(20000,20000,20000,20000,20000);
+    $scope.maxq=new Array(0,0,0,0,0);
+      $scope.minq=new Array(20000,20000,20000,20000,20000);
     function changeq()
     {
-      $scope.maxq=new Array(0,0,0,0,0);
-      $scope.minq=new Array(20000,20000,20000,20000,20000);
+      
     $scope.t=false;
+     for(i=0;i<5;i++)
+     {
+      $scope.maxq[i]=0;
+      $scope.minq[i]=0;
+     }
     if($scope.check6==true)
     {$scope.maxq[0]=0.499;
      $scope.minq[0]=0; 
@@ -61,10 +67,15 @@ app.controller('itemdisplay', function($scope) {
     //if($scope.t==false){$scope.min=201;$scope.t=true;}
     }
     }
+     $scope.max=new Array(0,0,0,0,0);
+      $scope.min=new Array(20000,20000,20000,20000,20000);
     function changep()
     {
-      $scope.max=new Array(0,0,0,0,0);
-      $scope.min=new Array(20000,20000,20000,20000,20000);
+     for(i=0;i<5;i++)
+     {
+      $scope.max[i]=0;
+      $scope.min[i]=0;
+     }
     $scope.t=false;
     if($scope.check1==true)
     {$scope.max[0]=20;
@@ -158,6 +169,7 @@ $scope.addeditems=[
 }];
 $scope.i=-1;
 $scope.titems=0;
+$scope.tprice=0;
 $scope.add=function(id,qty,name,w,price){
 //$scope.itemd=$scope.names1[1];
 var j=0,f=0;
@@ -191,7 +203,7 @@ $scope.check=function(x){
     return true;
   else return false;
 }
-$scope.tprice=0;
+
 /*$scope.qtyval=[
 {id:1,label:'0.5 kg',val:0.5},
 {id=2,label:'1 kg',val:1}
@@ -244,6 +256,7 @@ app.controller("nav",function($scope)
   
   var navOpacity = ySmall / smallLogoHeight;
   $('.navbar').css({ "height": 100*(1-navOpacity/8)});
+   $('#cartnav').css({"margin-top":50});
   navOpacity/=10;
   navOpacity+=0.9;
   
@@ -263,6 +276,58 @@ app.controller("nav",function($scope)
     $('.navbar-inverse').css({"box-shadow": "0 2px 3px rgba(0,0,0," + shadowOpacity + ")"});
   } else {
     $('.navbar-inverse').css({"box-shadow": "none"});
+  }
+  
+  
+  
+});
+});
+app.controller("navcart",function($scope)
+  {
+    $(window).scroll(function() {
+  var navbarColor = "121,147,59";//color attr for rgba
+  //var navbarColor = "62,195,246";
+
+  if($(window).scrollTop() ==0) $('#cartnav').css({"opacity": 0});
+  else $('#cartnav').css({"opacity": 1});
+  var smallLogoHeight = 30;
+  var bigLogoHeight = 90;
+  var navbarHeight = $('#cartnav').height(); 
+  
+  var smallLogoEndPos = 0;
+  var smallSpeed = (smallLogoHeight / bigLogoHeight);
+  
+  var ySmall = ($(window).scrollTop() * smallSpeed); 
+  
+  var smallPadding = navbarHeight - ySmall;
+  if (smallPadding > navbarHeight) { smallPadding = navbarHeight; }
+  if (smallPadding < smallLogoEndPos) { smallPadding = smallLogoEndPos; }
+  if (smallPadding < 0) { smallPadding = 0; }
+  
+  
+  
+  var navOpacity = ySmall / smallLogoHeight;
+  $('#cartnav').css({ "height":50});
+  
+  navOpacity/=10;
+  navOpacity+=0.9;
+  
+  
+  if(navOpacity!=0) 
+ { if  (navOpacity > 1) { navOpacity = 1; }
+  if (navOpacity < 0 ) { navOpacity = 0; }
+  var navBackColor = 'rgba(' + navbarColor + ',' + navOpacity + ')';
+  $('#cartnav').css({"background": navBackColor});}
+  else
+  {
+    $('#cartnav').css({"background":"rgba(121,147,59,0.8)"});
+  }
+  
+  var shadowOpacity = navOpacity * 0.4;
+  if ( ySmall > 1) {
+    $('#cartnav').css({"box-shadow": "0 2px 3px rgba(0,0,0," + shadowOpacity + ")"});
+  } else {
+    $('#cartnav').css({"box-shadow": "none"});
   }
   
   

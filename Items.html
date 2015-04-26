@@ -138,51 +138,7 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="itemdisplay">
- 
-  <div class="modal-dialog" >
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Cart</h3>
-      </div>
-      <div class="modal-body" >
-      <table style="width: 100%;" cellpadding="10" cellspacing="10" id="cart">
-<tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
-<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
-    <th style="text-align: center;">Qty</th>
-    <th style="text-align: center;">Name</th>   
-    <th style="text-align: center;">Weight</th>
-    <th style="text-align: center;">Price</th>
-</tr>
 
-<tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
-<td> {{x.qty}} </td>
-<td> {{x.nam}} </td>
-<td> {{x.w}} kg</td>
-<td> Rs.{{x.price}} </td>
-
-</tr>
-<tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
-
-
-</table>
-    </div>
-    
-      
-      <div class="modal-footer">
-        <p align="center">
-        <!--<button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>-->
-        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;">   Proceed <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
-        
-        <br><br>
-        
-      </p>
-        
-      </div>
-    </div>
-  </div>
-</div>
 <div class="modal fade" id="detailsmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -242,7 +198,51 @@
 </div>
 <div  style="animation-name: animation;animation-duration: 4s;
     animation-iteration-count: infinite;padding-top: 110px;" ng-controller="itemdisplay">
+<div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+ 
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cart</h3>
+      </div>
+      <div class="modal-body" >
+      <table style="width: 100%;" cellpadding="10" cellspacing="10" >
+<tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
+<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
+    <th style="text-align: center;">Qty</th>
+    <th style="text-align: center;">Name</th>   
+    <th style="text-align: center;">Weight</th>
+    <th style="text-align: center;">Price</th>
+</tr>
 
+<tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
+<td> {{x.qty}} </td>
+<td> {{x.nam}} </td>
+<td> {{x.w}} kg</td>
+<td> Rs.{{x.price}} </td>
+
+</tr>
+<tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
+
+
+</table>
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+        <!--<button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>-->
+        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;">   Proceed <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
+        
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 <table style="width: 100%;table-layout: fixed;white-space: nowrap;overflow: hidden;" id="mt"> 
 <tr style="padding: 10px;">
@@ -307,7 +307,7 @@
 </td>
 <td style="padding: 10px;" align="center"> 
 <ul class="enlarge">
-<li><img src={{x.image}} alt={{ x.name }} width="80" height="80" /><span><img src={{x.image}} alt={{ x.name }} /><br />{{x.name}}</span></li>
+<li><img src={{x.image}} alt={{ x.name }} width="80" height="80" /><span><img id="itemimg"src={{x.image}} alt={{ x.name }} /><br />{{x.name}}</span></li>
 
 </ul>
 
@@ -335,7 +335,21 @@
 </div>
 </td>
 <td style="padding: 3px;margin: 0px;width: 28%; ">
-<div class="jumbotron" style="padding: 5px;width:100%;background: #E0D8E0;table-layout: fixed;">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="opacity:0;height:50px;margin-top: 100px;width:26%;margin-left: 73.7%;z-index: 1;" id="cartnav"ng-controller="navcart">
+      <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
+
+        <div class="navbar-header" >
+          <!-- <span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span> -->
+           
+  
+         <a class="navbar-brand" href="index.html" style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 1;"></span>&nbsp; &nbsp; View Cart</a> 
+        </div>
+         
+        </div>
+      </div>
+    </div>
+<div class="jumbotron" style="padding: 5px;width:100%;background: #E0D8E0;table-layout: fixed;z-index: -2;">
+ 
 <h2>SHOPPING CART</h2>
 <hr>
 <table style="width: 100%;" id="t01">
@@ -358,7 +372,7 @@
 
 
 </table>
-<p align="center"><button class="btn btn-success btn-md" align="center" data-toggle="modal" data-target="#cartmodal"style="margin: 10px;"><span class="glyphicon glyphicon-shopping-cart"></span> Check out.</button></p>
+<p align="center" ><button class="btn btn-success btn-md" align="center" data-toggle="modal" data-target="#cartmodal"style="margin: 10px;"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 0;"></span> Check out.</button></p>
 </div>
 </td>
 
