@@ -2,19 +2,23 @@ var app=angular.module('account', []);
 app.controller('myaccount', function($scope) {
  
 });
-app.controller("myCtrl",function($scope)
+app.controller("myCtrl",function($scope,$rootScope)
   {
     $scope.visibility=true;
     $scope.onClick=function()
     {
-      $scope.visibility=!$scope.visibility;
-    }
+       $("#wrapper").toggleClass("toggled");
+       $rootScope.f = !$rootScope.f;    }
   });
-app.controller("nav",function($scope)
-  {
+app.controller("nav",function($scope,$rootScope)
+  {$rootScope.f = 0;
+   
+     $("#wrapper").toggleClass("toggled");
+  
     $(window).scroll(function() {
+     
   var navbarColor = "121,147,59";//color attr for rgba
-  //var navbarColor = "62,195,246";
+  
   var smallLogoHeight = 30;
   var bigLogoHeight = 90;
   var navbarHeight = $('.navbar-inverse').height(); 
@@ -32,7 +36,9 @@ app.controller("nav",function($scope)
   
   
   var navOpacity = ySmall / smallLogoHeight;
+  
   $('.navbar').css({ "height": 100*(1-navOpacity/8)});
+  
   navOpacity/=10;
   navOpacity+=0.9;
   
@@ -50,8 +56,10 @@ app.controller("nav",function($scope)
   var shadowOpacity = navOpacity * 0.4;
   if ( ySmall > 1) {
     $('.navbar-inverse').css({"box-shadow": "0 2px 3px rgba(0,0,0," + shadowOpacity + ")"});
+    if($rootScope.f==1){$("#wrapper").toggleClass("toggled");$rootScope.f=0;}
   } else {
     $('.navbar-inverse').css({"box-shadow": "none"});
+    
   }
   
   

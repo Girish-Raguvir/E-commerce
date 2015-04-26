@@ -1,52 +1,5 @@
-
-var app=angular.module('orders', []);
-app.controller('orderdisplay', function($scope) {
-    $scope.orders = [
-        {ono:123456,s:"IIT-M",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:2000},
-         {ono:123456,s:"IIT-B",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:1000},
-          {ono:123456,s:"IIT-K",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:5000},
-           {ono:123456,s:"IIT-D",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:8000},
-            {ono:123456,s:"IIT-K",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:3000},
-             {ono:123456,s:"IIT-M",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:4000}
-        
-    ];
-    
-   
-    $scope.values = [
-    {
-  id: 1,
-  label: 'Price-Lower to Higher',
-  sub: 'p',
-  rev:false
-  
-}, 
-{
-  id: 2,
-  label: 'Price-Higher to Lower',
-  sub: 'p',
-  rev:true
-  
-},{
-  id: 3,
-  label: 'Seller-Alphabetical',
-  sub: 's',
-  rev:false
-  
-}
-];
-$scope.i=-1;
-
-
-
-$scope.selected =$scope.values[0];
-$scope.s='p';
-    
-    if($scope.selected.label=='Price')
-    $scope.s='p';
-    else 
-    $scope.s='s';
-});
-app.controller("myCtrl",function($scope,$rootScope)
+var app=angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope,$rootScope)
   {
     $scope.visibility=true;
     $scope.onClick=function()
@@ -110,3 +63,50 @@ app.controller("nav",function($scope,$rootScope)
   
 });
 });
+	
+	app.controller("tiles",function($scope)
+	{
+     $( document ).ready(function() {
+    $(".tile").height($("#tile1").width());
+    $(".carousel").height($("#tile1").width());
+     $(".item").height($("#tile1").width());
+     
+    $(window).resize(function() {
+    if(this.resizeTO) clearTimeout(this.resizeTO);
+	this.resizeTO = setTimeout(function() {
+		$(this).trigger('resizeEnd');
+	}, 10);
+    });
+    
+    $(window).bind('resizeEnd', function() {
+    	$(".tile").height($("#tile1").width());
+        $(".carousel").height($("#tile1").width());
+        $(".item").height($("#tile1").width());
+    });
+
+});
+$scope.check=true;
+$scope.toggle=function(){
+    $scope.check=($scope.check);
+    $( document ).ready(function() {
+    $(".tile").height($("#tile1").width());
+    $(".carousel").height($("#tile1").width());
+     $(".item").height($("#tile1").width());
+     
+    $(window).resize(function() {
+    if(this.resizeTO) clearTimeout(this.resizeTO);
+    this.resizeTO = setTimeout(function() {
+        $(this).trigger('resizeEnd');
+    }, 10);
+    });
+    
+    $(window).bind('resizeEnd', function() {
+        $(".tile").height($("#tile1").width());
+        $(".carousel").height($("#tile1").width());
+        $(".item").height($("#tile1").width());
+    });
+
+});
+    //return $scope.check;
+};
+	});	

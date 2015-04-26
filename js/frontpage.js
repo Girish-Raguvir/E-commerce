@@ -1,26 +1,23 @@
 var app=angular.module("myApp",[]);
-	app.controller("myCtrl",function($scope)
-	{
-		$scope.visibility=true;
-		$scope.onClick=function()
-		{
-			$scope.visibility=!$scope.visibility;
-		}
-	});
-	
-	app.controller("nav",function($scope)
-	{//static f=0;
+	app.controller("myCtrl",function($scope,$rootScope)
+  {
+    $scope.visibility=true;
+    $scope.onClick=function()
+    {
+       $("#wrapper").toggleClass("toggled");
+       $rootScope.f = !$rootScope.f;    }
+  });
+app.controller("nav",function($scope,$rootScope)
+  {$rootScope.f = 1;
+  $(document).ready(function () {
 
-            // $(window).load(function(){
-            //   if(f==0)
-            //     {$('#locmodal').modal('show');f=1;}
-            // });
-            $(document).ready(function() {
     $('#locmodal').modal('show');
+
 });
-		$(window).scroll(function() {
+    $(window).scroll(function() {
+     
   var navbarColor = "121,147,59";//color attr for rgba
-  //var navbarColor = "62,195,246";
+  
   var smallLogoHeight = 30;
   var bigLogoHeight = 90;
   var navbarHeight = $('.navbar-inverse').height(); 
@@ -38,7 +35,9 @@ var app=angular.module("myApp",[]);
   
   
   var navOpacity = ySmall / smallLogoHeight;
+  
   $('.navbar').css({ "height": 100*(1-navOpacity/8)});
+  
   navOpacity/=10;
   navOpacity+=0.9;
   
@@ -56,14 +55,16 @@ var app=angular.module("myApp",[]);
   var shadowOpacity = navOpacity * 0.4;
   if ( ySmall > 1) {
     $('.navbar-inverse').css({"box-shadow": "0 2px 3px rgba(0,0,0," + shadowOpacity + ")"});
+    if($rootScope.f==1){$("#wrapper").toggleClass("toggled");$rootScope.f=0;}
   } else {
     $('.navbar-inverse').css({"box-shadow": "none"});
+    
   }
   
   
   
 });
-	});
+});
 	app.controller("cities",function($scope)
 	{
 		/*$scope.city1="Chennai";
@@ -234,6 +235,7 @@ $scope.check=true;
 $scope.toggle=function(){
     $scope.check=($scope.check);
     $( document ).ready(function() {
+    $("#locmodal").modal('show');
     $(".tile").height($("#tile1").width());
     $(".carousel").height($("#tile1").width());
      $(".item").height($("#tile1").width());

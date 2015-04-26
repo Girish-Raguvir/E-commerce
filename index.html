@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="css/frontpage.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/about.css">
+  <link href="css/simple-sidebar.css" rel="stylesheet">
 </head>
 <body>
  
@@ -24,21 +25,13 @@
         
         <div class="navbar-collapse collapse">
           <div ng-controller="myCtrl" > 
-  <i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()" style="padding-right:10px;"></i>
-
-  <div ng-class="{'rectangle':visibility,'rectangle-click':!visibility}"> </div>
-  
-  <div ng-class="{'Home':visibility,'Home-click':!visibility}"> <p ng-show="!visibility">Home </p> </div>
-  <div ng-class="{'rectangle2':visibility,'rectangle2-click':!visibility}"><p ng-show="!visibility"> FAQ</div>
-  <div ng-class="{'rectangle3':visibility,'rectangle3-click':!visibility}"><p ng-show="!visibility">Contacts</div>
-  <div ng-class="{'rectangle4':visibility,'rectangle4-click':!visibility}"><p ng-show="!visibility"> Founders</div>
-
+ <i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()" ></i>
   </div>
           <div class="navbar-header" >
           <!-- <span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span> -->
            
   
-         <a class="navbar-brand" href="#" style="padding-left:50px;">E-commerce</a> 
+         <a class="navbar-brand" href="#" style="padding-left:80px;">E-commerce</a> 
         </div>
           <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
         <li>
@@ -62,44 +55,7 @@
         <li><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         <li ><a href="#" data-toggle="modal" data-target="#locmodal"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
-        <!-- <li>
-        <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;">
-          <option>Chennai</option>
-          <option>Bangalore</option>
-          <option>Mumbai</option>
-          <option>Delhi</option>
-        </select>  -->
-        <!-- <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;">
-  
-        <li class="dropdown-submenu">
-        <a tabindex="-1" href="#">Chennai</a>
-        <ul class="dropdown-menu">
-        <li>Adyar</li>
-        <li>Thiruvanmiyur</li>
-        </ul>
-        </li>
-        <li class="dropdown-submenu">
-        <a tabindex="-1" href="#">Chennai</a>
-        <ul class="dropdown-menu">
-        <li>Adyar</li>
-        <li>Thiruvanmiyur</li>
-        </ul>
-        </li>
-        <li class="dropdown-submenu">
-        <a tabindex="-1" href="#">Chennai</a>
-        <ul class="dropdown-menu">
-        <li>Adyar</li>
-        <li>Thiruvanmiyur</li>
-        </ul>
-        </li>
-        <li class="dropdown-submenu">
-        <a tabindex="-1" href="#">Chennai</a>
-        <ul class="dropdown-menu">
-        <li>Adyar</li>
-        <li>Thiruvanmiyur</li>
-        </ul>
-        </li>
-        </ul> -->
+        
         </li>
       </ul>
         </div><!--/.nav-collapse -->
@@ -219,208 +175,59 @@
     </div>
   </div>
 </div>
-  <!-- <div class="combi">
- 
-  <div id="phone"></div>
   
-  <div class="offer">
-  <p> <b>Free Delivery completely exclusive!</b> </p>
-  </div>
-  
-  <div >
-  <p id="Login"> <a href="#">Login </a></p>
-  <span id="vertical"></span>
-  <p id="Register"> <a href="#">Register</a> </p>
-  </div>
-
-  <div > 
-  <span id="hline3"></span>
-  </div>
- -->
-  <!--</div> <!-- ending of combi class-->
-  
-  <!-- <div class="form-group has-feedback" id="inputSuccess2">
-      <label class="control-label" for="inputSuccess2"></label>
-      <input type="text" class="form-control"  placeholder="Search for a product, category or brand" id="placeholder"/>
-      <span class="glyphicon glyphicon-search form-control-feedback" id="search"></span>
-    <span id="searchbtn"> Search </span>
-  </div>
-
-  
-
-  <div> 
-  <!--button id="cart"> <span class="glyphicon glyphicon-shopping-cart" style="padding-right:30px;"></span>Cart </button-->
-  <!-- <button id="cart"class="btn btn-blue btn-cart"> <span class="glyphicon glyphicon-shopping-cart" style="padding-right:30px;"></span>Cart </button>
-  </div>   -->
-
-  <!-- Implementing the side navbar with animation-->
-  <!-- <div ng-app="myApp"> 
-  <div ng-controller="myCtrl" > -->
-  <!-- <span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span>
-  
-  <i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()"></i>
-
-  <div ng-class="{'rectangle':visibility,'rectangle-click':!visibility}"> </div>
-  
-  <div ng-class="{'Home':visibility,'Home-click':!visibility}"> <p ng-show="!visibility">Home </p> </div>
-  <div ng-class="{'rectangle2':visibility,'rectangle2-click':!visibility}"><p ng-show="!visibility"> FAQ</div>
-  <div ng-class="{'rectangle3':visibility,'rectangle3-click':!visibility}"><p ng-show="!visibility">Contacts</div>
-  <div ng-class="{'rectangle4':visibility,'rectangle4-click':!visibility}"><p ng-show="!visibility"> Founders</div>
-
-  </div> -->  <!-- ending the myCtrl controller-->
-  
-  <!-- <!--<div ng-controller="cities" > <!-- beginning of cities controller-->
-  
-  <!--div class="container">
-  <select class="form-control" id="places"  >
-<ul>
-  <option><li> {{city1}}  </li></option>
-  <option><li>{{city2}}</li></option>
-  <option><li>{{city3}}</li></option>
-</ul>
-  </select>
-  </div>
-  </div-->
-  <!--<input id="places" type="text" ng-model="places">
-  <button type="submit" id="submit" ng-click="onClick()">submit</button> 
-  <!--div ng-class="{'Chennai':places=='Chennai','Mumbai':places=='Mumbai','Bangalore':places=='Bangalore'}"></div-->   
-  
-    <!--<div class="container">
-    <div id="Chennai" ng-hide="sight1">  <!-- selecting local areas 1. Chennai-->
-    
-    <!--<select class="form-control" >
-  <ul>
-    <option><li>KK Nagar</li></option>
-    <option><li>Saligramam</li></option>
-    <option><li>Adyar</li></option>
-   
-  </ul> 
-    </select>
-    </div>
-    </div> <!-- ending Chennai local areas-->
-
-    <!--<div class="container">
-    <div id="Mumbai" ng-hide="sight2">  <!-- selecting local areas 2. Mumbai-->
-    <!--<select class="form-control" >
-  <ul>
-    <option><li>Bandra</li></option>
-    <option><li>Thane</li></option>
-    <option><li>Worli</li></option>
-   
-  </ul> 
-    </select>
-    </div>
-    </div> <!-- ending Mumbai local areas-->
-
-    <!--<div class="container">
-    <div id="Bangalore" ng-hide="sight3">  <!-- selecting local areas 3. Bangalore-->
-    <!--<select class="form-control" >
-  <ul>
-    <option><li>Girish-1</li></option>
-    <option><li>Girish-2</li></option>
-    <option><li>Girish-3</li></option>
-   
-  </ul> 
-    </select>
-    </div>
-    </div> <!-- ending Bangalore local areas-->
-  <!--</div> <!-- ending of cities controller-->
-
-<!--  <div > 
-  <span id="hline"></span>
-  </div> -->
-  
-  <!-- beginning of the navbar control-->
-  <!--<div ng-controller="navbar">
-  <div> 
-  <span class="ordinary1"></span>
-  </div>
-
-  <div ng-mouseenter="onHover1()"  ng-mouseLeave="onLeave1()">
-  <span class="Meat">Meat </span>
-  <span class="glyphicon glyphicon-chevron-down" id="arrow1-down" ng-show="visibilitydown1"></span>
-  <span class="glyphicon glyphicon-chevron-up" id="arrow1-up" ng-show="visibilityup1"></span>
-  <div class="options"  ng-mouseenter="barEnter1()" ng-mouseLeave="barLeave1()">
-  
-  
-  <span id="chicken" ng-mouseOver="chicken()" ng-mouseLeave="chickenLeave()"> Chicken <span class="glyphicon glyphicon-chevron-  right" id="#right" ng-show="!vischicken"></span></span>
-  <span id="seafood" >Sea Food</span>
-  <span id="mutton"> Mutton </span>
-  <span id="pork"> Pork and Others </span>
-  </div>
-  </div> <!-- ending of first dropdown
-
-  <div>
-  <span class="Imported" ng-mouseOver="onHover2()" ng-mouseLeave="onLeave2()">Imported </span>
-  <span class="glyphicon glyphicon-chevron-down" id="arrow2-down" ng-show="visibilitydown2"></span>
-  <span class="glyphicon glyphicon-chevron-up" id="arrow2-up" ng-show="visibilityup2"></span>
-  </div>
-
-
-  <div>
-  <span class="Household" ng-mouseOver="onHover3()" ng-mouseLeave="onLeave3()">Household </span>
-  <span class="glyphicon glyphicon-chevron-down" id="arrow3-down" ng-show="visibilitydown3"></span>
-  <span class="glyphicon glyphicon-chevron-up" id="arrow3-up" ng-show="visibilityup3"></span>
-  </div>
-
-  <div>
-  <span class="Personal" ng-mouseOver="onHover4()" ng-mouseLeave="onLeave4()">Personal Care </span>
-  <span class="glyphicon glyphicon-chevron-down" id="arrow4-down" ng-show="visibilitydown4"></span>
-  <span class="glyphicon glyphicon-chevron-up" id="arrow4-up" ng-show="visibilityup4"></span>
-  </div>
-
-  <div>
-  <span class="Branded" ng-mouseOver="onHover5()" ng-mouseLeave="onLeave5()">Branded Foods</span>
-  <span class="glyphicon glyphicon-chevron-down" id="arrow5-down" ng-show="visibilitydown5"></span>
-  <span class="glyphicon glyphicon-chevron-up" id="arrow5-up" ng-show="visibilityup5"></span>
-  </div>
-  
-  <div> 
-  <span class="ordinary2"></span>
-  </div>
-
-  
-
-  </div> ending of navbar controller-->
-  <!--hr id="hline2"-->
-  <!--<div > 
-  <span id="hline2"></span>
-  </div>-->
-  <!-- <p id="quick"> Go quickly to </p>
-  <span class="glyphicon glyphicon-arrow-right" id="quick-arrow"></span>
-  <p id="Rice"> Rice </p> -->
-
-  <!--<div ng-controller="slideshow"> <!-- beginning of carousel controller
-  <div>
-  <img src="rice-01.jpg" alt="Kohinoor Rice" ng-class="{'image1':visimg1,'image1-copy':!visimg1}">  
-  <span ng-class="{'rice-jpg':!visimg1,'rice-hover':visimg1}" ng-mouseOver="onHover1()"> Rice</span>
-  
-  <img src="pulses.jpg" alt="What Bullshit!" id="image2" ng-show="visimg2"> 
-  <span ng-class="{'pulse-jpg':!visimg2,'pulse-hover':visimg2}" ng-mouseOver="onHover2()"> Pulses</span>
-  
-  <img src="fish" alt="Something" id="image3" ng-show="visimg3">  
-  <span ng-class="{'fish-jpg':!visimg3,'fish-hover':visimg3}" ng-mouseOver="onHover3()"> Fish</span>
-  
-
-  <img src="interstellar" alt="Interstellar" id="image4" ng-show="visimg4"> 
-  <span ng-class="{'interstellar-jpg':!visimg4,'interstellar-hover':visimg4}" ng-mouseOver="onHover4()"> Interstellar</span>
-  
-  </div>--><!-- ending of slideshow controller-->
-
   <table>
     <tr>
      <td> 
-  <div class="col-md-2">
-    
-  </div>
+ <<div class="col-md-2" style="height:100%;width:18%;padding:5px;">
+ <a href="#"><img src="images/Vertical.jpg"  class="img-responsive" style="height: 90%;
+    width: 120%;padding-top: 161px;"></a>
+</div>
+   <div id="wrapper" style="padding-top: 75px;padding-left:0px;">
 
-    <div class="col-md-8" align="center" ng-controller="tiles" >
-<div class="jumbotron" style="margin-top: 140px;" align="center" id="cat">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" style="padding: 0px;">
+            <ul class="sidebar-nav">
+              <br>
+                <li class="sidebar-brand" >
+                    <h3 style="color: white;padding-top: 10px;">Welcome User</h3>
+                </li>
+                  <hr> 
+                  <br>              
+                <li style="background: rgba(255,255,255,0.2);color:white;">
+                    <a href="index.html"><i class="fa fa-home" id="home-fa" style="color: white;"></i>&nbsp;&nbsp;Home</a>
+                </li>
+                
+                <li >
+                    <a href="Account.html" style="color: white;"><span class="glyphicon glyphicon-user" style="color: white;"></span>&nbsp;&nbsp;My Account</a>
+                </li>
+                
+                <li style="background: rgba(255,255,255,0.2);color:white;">
+                    <a href="Account.html" ><i class="fa fa-inr" style="color: white;"></i>&nbsp;&nbsp;Wallet</a>
+                </li>
+                
+                <li >
+                    <a href="#" style="color: white;"><i class="fa fa-question-circle" id="faq-fa" style="color: white;"></i>&nbsp;&nbsp;Help</a>
+                </li>
+                
+                <li style="background: rgba(255,255,255,0.2);color:white;">
+                    <a href="About.html"><i class="fa fa-question-circle" id="faq-fa" style="color: white;"></i>&nbsp;&nbsp;About Us</a>
+                </li>
+               
+            </ul>
+        </div> 
+  </div>
+<!-- </div> -->
+
+  <div class="col-md-10" align="center" ng-controller="tiles" style="width: 82%;margin-left: 0px;padding-top: 30px;padding-left:0px;">
+  <div id="page-content-wrapper">
+    
+<div class="jumbotron" style="margin-top: 15px;height: 750px;" align="center" id="cat">
 <div class="row " ng-if="check" style="margin-left: 5px;" >
     <div class="col-sm-12 col-xs-8">
     <div id="tile10" class="tile" style="height: 200px;">
        
-           <div class="carousel slide" data-ride="carousel" style="height: 200px;">
+           <div class="carousel slide" data-ride="carousel" style="">
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
@@ -511,6 +318,7 @@
         </div>
          
       </div>
+
   </div>
   
 </div>
@@ -590,13 +398,12 @@
 <div class="row" ng-if="(check)" style="margin-left: 20px;">
 <!-- <button class="btn btn-success" style="background: rgba(0,0,0,0);"><a href="Categories.html" style="color: white;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span></t>&nbsp;&nbsp;Back</a></button>
 <br><br> -->
-<div class="row">
+<!-- <div class="row">
  <div class="col-sm-2 col-xs-4 col-md-3">
       <div id="tile1" class="tile">
         
          <div class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
+                   <div class="carousel-inner">
             <div class="item active">
                <a href="Items.html"><img src="images/Categories/spices1.jpg" class="img-responsive" ng-click="toggle()" /></a>
             </div>
@@ -609,14 +416,15 @@
       </div>
   </div>
   
-</div>
+</div> -->
 
 </div>
 </div>
 </div>
-<div class="col-md-2" >
+<div class="col-md-1" >
     
   </div>    
+</div>
   </td>
   </tr>  
    
@@ -624,7 +432,7 @@
 
 <tr>
   <td>
-  <div class="container-fluid" style="padding-right: 0px;padding-left: 0px;margin-top: 40px;">
+  <div class="container-fluid" style="padding-right: 0px;padding-left: 0px;margin-top: 10px;">
   
   <!-- <p id="pay-options"> Payment Options </p>
   <p id="COD"> Cash On Delivery </p> -->
@@ -632,12 +440,12 @@
   <img src="visa" alt="Payment Mode: Visa" id="visa"> -->
   <div class="Mobile-App" style="background: gainsboro;">
   <h3 id="playstore">Get our App on PlayStore and AppStore!</h3>
-  <img src="images/gplay.jpg" alt="Google Play Store" id="google">
-  <img src="images/Apple-App-store-icon.png" alt="Apple App Store" id="iStore">
+  <a href="#"><img src="images/gplay.jpg" alt="Google Play Store" id="google"></a>
+  <a href="#"><img src="images/Apple-App-store-icon.png" alt="Apple App Store" id="iStore"></a>
   <h3 id="follow"> Follow us on </h3>
-  <img src="images/fb.jpg" alt="Facebook" id="facebook">
-  <img src="images/twitter.png" alt="Twitter" id="twitter">
-  <img src="images/g+.jpg" alt="gplus" id="googleplus">
+  <a href="#"><img src="images/fb.jpg" alt="Facebook" id="facebook"></a>
+  <a href="#"><img src="images/twitter.png" alt="Twitter" id="twitter"></a>
+  <a href="#"><img src="images/g+.jpg" alt="gplus" id="googleplus"></a>
   
   </div>
 
@@ -648,6 +456,8 @@
 </div>
   </div> <!-- ending the my app-->
   <script src="js/frontpage.js"></script>
-  
+
+
+ 
 </body>
 </html>
