@@ -1,7 +1,50 @@
 var app=angular.module('registration', []);
-app.controller('register', function($scope) {
- 
+app.controller('register', function($scope,$http) {
+  $scope.test = {"email": "girish@gmail.com","password": "123","name": "girish","address": "IIT Madras", "telephone": "9444706609"};
+    $scope.email = "girish@gmail.com";
+    $scope.password="123";
+    $scope.uname="girish";
+    $scope.address="IITM";
+    $scope.telephone="9444706609";
+    $scope.add={"hno":"w","street":"w","area":"w","rcomp":"w","landmark":"w","city":"w","pin":"w",};
+    $scope.uname={"first":"h","last":"h",};
+    $scope.sal="Mr.";
+    $scope.user = {"email": "gh","password": "","name": "","address": "", "telephone": "",};
+   
+    $scope.sendPost = function() {
+        // var data = $.param({
+            
+        //         email:$scope.email,
+        //         password:$scope.password,
+        //         name: $scope.uname,
+        //         address:$scope.address,
+        //         telephone:$scope.telephone
+
+            
+        // });
+         $scope.user.address=$scope.add.hno + ", " + $scope.add.street + ", " + $scope.add.area + ", " + $scope.add.rcomp + ", " + $scope.add.landmark + ", " + $scope.add.city + ", " + $scope.add.pin + ".";
+         $scope.user.name=$scope.sal+$scope.uname.first + " " + $scope.uname.last;
+        var req={
+         method: 'POST',
+         url: 'http://grokart.ueuo.com/newUser.php',
+         headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+         data: $.param($scope.user),
+        }
+        
+        //console.log(data);
+        $http(req)
+     .success(
+      function(response){
+        console.log(JSON.stringify(response));
+            console.log("response :"+response.success);
+      })
+     .error(
+      function(response){
+        console.log("error:"+ response.error_message);
+      });
+    }        
 });
+//file:///C:/Users/Girish/Documents/GitHub/E-commerce/fonts/fontawesome/fontawesome-webfont.ttf?v=4.0.3
 app.controller("myCtrl",function($scope,$rootScope)
   {
     $scope.visibility=true;

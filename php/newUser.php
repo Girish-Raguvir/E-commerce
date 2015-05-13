@@ -2,7 +2,7 @@
 	require("inc/db.php");
 	require("inc/utils.php");
 	$json=new stdClass();
-
+    header('Content-Type: text/plain');
 	if(mysql_connect($dbURL, $dbUser, $dbPass)==FALSE)
 	{
 		$json->success="false";
@@ -35,4 +35,6 @@
 
 	end:
 	print(json_encode($json));
+	
+header('Content-Type: text/plain');
 ?>

@@ -64,7 +64,7 @@
   
  
 
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+      <div class="modal fade" ng-controller="login" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -77,11 +77,11 @@
       <div class="col-md-4">
       <div class="form-group">
       <label for="lemail">Email:</label>
-      <input type="email" class="form-control" id="lemail">
+      <input type="email" class="form-control" id="lemail" ng-model="user.email">
       </div>  
       <div class="form-group">
       <label for="lpwd">Password:</label>
-      <input type="password" class="form-control" id="lpwd">
+      <input type="password" class="form-control" id="lpwd" ng-model="user.password">
       </div> 
       
       </form>
@@ -90,7 +90,7 @@
     </div>
       <div class="modal-footer">
         <p align="center">
-        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;">Login</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;" ng-click="userlogin()">Login</button>
         <br><br>
         <a href="#">Forgot password?</a>
       </p>
@@ -176,7 +176,7 @@
   </div>
 </div>
   
-  <table>
+  <table style="height:100%;width:100%;" >
     <tr>
      <td> 
  <<div class="col-md-2" style="height:100%;width:18%;padding:5px;">
@@ -250,18 +250,35 @@
   </div>
 </div>
 <br>
+<div id="container">
+<div id="overlay" ng-hide="!disp" ng-animate="fade">
+  <button type="button" id="back" class="btn btn-success" ng-click="hide()"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> &nbsp;&nbsp;Back</button>
+  <br><br>
+  <div class="col-md-6">
+    <ul  style="list-style-type:none;align:center;height:100%;
+  line-height: 80px;">
+    <li  style="margin-bottom : 0px;"ng-repeat="x in subc" for="{{x.id}}" ng-mouseover="cats(x.id)" ng-mouseleave="cath(x.id)">{{x.name}}<li>
+  </div>
+   <div class="col-md-6" >
+    <ul  style="list-style-type:none;align:center;height:100%;
+  line-height: 80px;" ng-show="cateshow">
+    <li  style="margin-bottom : 0px;"ng-repeat="x in subc" for="{{x.id}}" >{{x.name}}<li>
+ 
+  </div>
+</div>
+<div id="base">
 <div class="row " ng-if="check" style="margin-left: 5px;">
-    <div class="col-sm-2 col-xs-4 col-md-3">
-      <div id="tile1" class="tile">
+    <div class="col-sm-2 col-xs-4 col-md-3" ng-click="show()">
+      <div id="tile1" class="tile" >
         
          <div class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
-          <div class="carousel-inner">
+          <div class="carousel-inner" >
             <div class="item active">
-               <a href="Items.html"><img src="images/Categories/BDE1.jpg" class="img-responsive" ng-click="toggle()" /></a>
+               <img src="images/Categories/BDE1.jpg" class="img-responsive" ng-click="show()" />
             </div>
             <div class="item">
-               <a href="Items.html"><img src="images/Categories/BDE2.jpg" class="img-responsive" ng-click="toggle()" /></a>
+              <img src="images/Categories/BDE2.jpg" class="img-responsive" ng-click="show()"/>
             </div>
           </div>
         </div>
@@ -418,6 +435,8 @@
   
 </div> -->
 
+</div>
+</div>
 </div>
 </div>
 </div>

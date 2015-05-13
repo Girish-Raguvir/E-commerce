@@ -1,9 +1,22 @@
 
 var app=angular.module('items', []);
-app.controller('itemdisplay', function($scope) {
+app.controller('itemdisplay', function($scope,$http) {
 
   $( document ).ready(function() {
      $("#wrapper").toggleClass("toggled");
+     
+        // $http.get("http://grokart.ueuo.com/listCategories.php")
+        // .success(function(response) {
+            
+        //     $scope.name1=response.list;
+            
+        //     console.log("response :"+JSON.stringify(response));
+        // })
+        // .error(function(response, status, headers, config){
+        //   console.log("error:"+ response.error_message);
+        //  });
+            
+
   });
     $scope.names1 = [
         {id:0,qty:1,brand:'Test',name:'Tomatoes',q:0.5,q1:0.5,q2:1,price:80,image:'images/nature.jpg'},

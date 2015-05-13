@@ -177,7 +177,7 @@
             </ul>
         </div> 
   </div>
-  <div class="page-content-wrapper" style="padding-top: 40px;">
+  <div class="page-content-wrapper" style="padding-top: 40px;" >
 <h2>Registration</h2>
 <br>
 Thank you for the interest in registration and membership at ecommerce.com. Please do note that we currently serve the cities of Bangalore,Mumbai,Delhi and Chennai . If you currently live in some other city, please send an email with your current location to customerservice@ecommerce.com. We will write to you when we launch our service in your city.
@@ -198,16 +198,16 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
       <label for="email"><span style="color:red;">*</span> Email Address:</label>
        
-      <input type="email" class="form-control" id="email" placeholder="Enter email">
+      <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="user.email">
       
     </div>
     <div class="form-group">
       <label for="phonenumber"><span class="glyphicon glyphicon-phone"></span> Mobile number:</label>
-      <input type="tel" class="form-control" id="phonenumber" placeholder="Enter mobile number">
+      <input type="tel" class="form-control" id="phonenumber" placeholder="Enter mobile number" ng-model="user.telephone">
     </div>
     <div class="form-group">
       <label for="pwd"><span style="color:red;">*</span> Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" ng-model="user.password">
     </div>
     <div class="form-group">
       <label for="cpwd"><span style="color:red;">*</span> Confirm Password:</label>
@@ -239,7 +239,7 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 <div class="col-md-7">
 <div class="form-group">
 <label for="sel1">Salutation:</label>
-<select class="form-control" id="sel1">
+<select class="form-control" id="sel1" ng-model="sal">
     <option>Mr.</option>
     <option>Mrs.</option>
     <option>Ms.</option>
@@ -251,14 +251,14 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
       <label for="fname"><span style="color:red;">*</span> First name:</label>
        
-      <input type="text" class="form-control" id="fname" placeholder="Enter first name">
+      <input type="text" class="form-control" id="fname" placeholder="Enter first name" ng-model="uname.first">
       
     </div>
     <div class="form-group">
 
       <label for="lname"><span style="color:red;">*</span> Last name:</label>
        
-      <input type="text" class="form-control" id="lname" placeholder="Enter last name">
+      <input type="text" class="form-control" id="lname" placeholder="Enter last name" ng-model="uname.last">
       
     </div>
     <div class="form-group">
@@ -300,40 +300,40 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
       <label for="h"><span style="color:red;">*</span> House no & Details:</label>
        
-      <input type="text" class="form-control" id="h" placeholder="House no & Details">
+      <input type="text" class="form-control" id="h" placeholder="House no & Details" ng-model="add.hno">
       
     </div>
     <div class="form-group">
 
       <label for="s">Street Details:</label>
        
-      <input type="text" class="form-control" id="s" placeholder="Street Details">
+      <input type="text" class="form-control" id="s" placeholder="Street Details" ng-model="add.street">
       
     </div>
     <div class="form-group">
 
       <label for="area"><span style="color:red;">*</span> Area:</label>
        
-      <input type="text" class="form-control" id="area" placeholder="Area">
+      <input type="text" class="form-control" id="area" placeholder="Area" ng-model="add.area">
       
     </div>
 <div class="form-group">
 
       <label for="rc">Residential Complex:</label>
        
-      <input type="text" class="form-control" id="rc" placeholder="Residential Complex">
+      <input type="text" class="form-control" id="rc" placeholder="Residential Complex" ng-model="add.rcomp">
       
     </div>
 <div class="form-group">
 
       <label for="l">Landmark:</label>
        
-      <input type="text" class="form-control" id="l" placeholder="Landmark">
+      <input type="text" class="form-control" id="l" placeholder="Landmark" ng-model="add.landmark">
       
     </div>
 <div class="form-group">
 <label for="sel">City:</label>
-<select class="form-control" id="sel">
+<select class="form-control" id="sel" ng-model="add.city">
     <option>Chennai</option>
     <option>Bangalore</option>
     <option>Mumbai</option>
@@ -344,7 +344,7 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
       <label for="p"><span style="color:red;">*</span> Pin Code:</label>
        
-      <input type="tel" class="form-control" id="p" placeholder="Pincode">
+      <input type="tel" class="form-control" id="p" placeholder="Pincode" ng-model="add.pin">
       
     </div>
     
@@ -370,7 +370,7 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 </div>
 
 <p align="center">
-<button type="submit" class="btn btn-success" align="center">Submit</button>
+<button type="submit" class="btn btn-success" align="center" ng-click="sendPost()">Submit</button>
 </p>
 </div>
 </div>

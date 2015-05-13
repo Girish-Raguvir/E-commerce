@@ -14,6 +14,39 @@ app.controller("nav",function($scope,$rootScope)
     $('#locmodal').modal('show');
 
 });
+});
+  app.controller("login",function($scope,$http,$rootScope)
+  {
+  	$scope.user={"password":"","email":"",};
+   $scope.userlogin=function()
+	{console.log("loginnow");
+		
+		var req = 
+		{  	 method: 'POST',
+			 url: 'http://grokart.ueuo.com/login.php', 
+			 headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+			 data: $.param($scope.user),
+		 } 
+		
+		 $http(req)
+		 .success(
+		 	function(response){
+		 		console.log(JSON.stringify(response));
+            console.log("response :"+response.success);
+            if(response.success=='true'){ 
+           
+            
+			//document.write("You will be redirected to main page in 10 sec.");
+			setTimeout( function(){window.location.assign("./Account.html");}, 2000);
+            }
+		 	})
+		 .error(
+		 	function(response){
+		 		console.log("error:"+ response.error_message);
+		 	});
+		
+	}
+  });
     $(window).scroll(function() {
      
   var navbarColor = "121,147,59";//color attr for rgba
@@ -64,41 +97,8 @@ app.controller("nav",function($scope,$rootScope)
   
   
 });
-});
-	app.controller("cities",function($scope)
-	{
-		/*$scope.city1="Chennai";
-		$scope.city2="Mumbai";
-		$scope.city3="Bangalore";*/
-		$scope.sight1=true;
-		$scope.sight2=true;
-		$scope.sight3=true;
-		
-		$scope.onClick=function()
-		{
-			if($scope.places=='Chennai')
-			{
-				$scope.sight1=false; 
-				$scope.sight2=true;
-				$scope.sight3=true;
-			}
-			if($scope.places=='Mumbai')
-			{
-				$scope.sight1=true; 
-				$scope.sight2=false;
-				$scope.sight3=true;
-			}
-			if($scope.places=='Bangalore')
-			{
-				$scope.sight1=true; 
-				$scope.sight2=true;
-				$scope.sight3=false;
-			}
-			
-			
-		}
-		
-	});
+
+	
 	app.controller("navbar",function($scope)
 	{
 		$scope.visibilitydown1=true;$scope.visibilitydown2=true;$scope.visibilitydown3=true;$scope.visibilitydown4=true; $scope.visibilitydown5=true;
@@ -212,6 +212,26 @@ app.controller("nav",function($scope,$rootScope)
 	
 	app.controller("tiles",function($scope)
 	{
+     $scope.cateshow;
+     $scope.subc=[{id:1,name:"Hello"},{id:2,name:"Bye"},{id:3,name:"See you"}];
+     	$scope.cats=function(id)
+     	{
+     		console.log(id);
+     		$scope.cateshow=true;
+     	}
+     	$scope.cath=function(id)
+     	{
+     		console.log(id);
+     		$scope.cateshow=false;
+     	}
+		$scope.show=function()
+		{
+                $scope.disp=true;
+		}
+		$scope.hide=function()
+		{
+                $scope.disp=false;
+		}
      $( document ).ready(function() {
     $(".tile").height($("#tile1").width());
     $(".carousel").height($("#tile1").width());
