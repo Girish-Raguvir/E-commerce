@@ -1,5 +1,41 @@
 var app=angular.module('account', []);
 app.controller('myaccount', function($scope) {
+  function getsession(cname) {
+    console.log("inside "+cname)
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        console.log(c+ " " + ca.length);
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+  $scope.session="hh";
+  $scope.session=getsession('session');
+ $( document ).ready(function() {
+    
+ function getsession(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+$scope.session=getsession("session");
+  console.log("hello"+$scope.session);
+});
+
+ 
+
  
 });
 app.controller("myCtrl",function($scope,$rootScope)
