@@ -4,20 +4,54 @@ app.controller('itemdisplay', function($scope,$http) {
 
   $( document ).ready(function() {
      $("#wrapper").toggleClass("toggled");
+     function getsession(cname) {
+    console.log("inside "+cname)
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+  
+  $scope.session=getsession('session');
      
-        // $http.get("http://grokart.ueuo.com/listCategories.php")
-        // .success(function(response) {
-            
-        //     $scope.name1=response.list;
-            
-        //     console.log("response :"+JSON.stringify(response));
-        // })
-        // .error(function(response, status, headers, config){
-        //   console.log("error:"+ response.error_message);
-        //  });
+  $scope.data={"session":$scope.session,"ID":2,};
+   
+  console.log("loginnow");
+    
+    var req = 
+    {    method: 'POST',
+       url: 'http://grokart.ueuo.com/catProds.php', 
+       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+       data: $.param($scope.data),
+     } 
+    
+     $http(req)
+     .success(
+      function(response){
+        console.log(JSON.stringify(response));
+            console.log("response :"+response.success);
+            if(response.success=='true'){ 
+           
+               $scope.items=response.items;
+               console.log(JSON.stringify($scope.items));}
+      })
+     .error(
+      function(response){
+        console.log("error:"+ response.error_message);
+      });
+    
+  
             
 
   });
+
     $scope.names1 = [
         {id:0,qty:1,brand:'Test',name:'Tomatoes',q:0.5,q1:0.5,q2:1,price:80,image:'images/nature.jpg'},
         {id:1,qty:1,brand:'Test',name:'Onions',q:0.5,q1:0.5,q2:1,price:50,image:'images/nature.jpg'},
@@ -249,6 +283,42 @@ app.controller("myCtrl",function($scope,$rootScope)
     {
        $("#wrapper").toggleClass("toggled");
        $rootScope.f = !$rootScope.f;    }
+  });
+app.controller("login",function($scope,$http,$rootScope)
+  {
+    $scope.user={"password":"","email":"",};
+   $scope.userlogin=function()
+  {console.log("loginnow");
+    
+    var req = 
+    {    method: 'POST',
+       url: 'http://grokart.ueuo.com/login.php', 
+       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+       data: $.param($scope.user),
+     } 
+    
+     $http(req)
+     .success(
+      function(response){
+        console.log(JSON.stringify(response));
+            console.log("response :"+response.success);
+            if(response.success=='true'){ 
+           
+               var d = new Date();
+               d.setTime(d.getTime() + (30*24*60*60*1000));
+               var expires = "expires="+d.toUTCString();
+               document.cookie = "session" + "=" + response.session + "; " + expires;
+               console.log("hello"+"session" + "=" + response.session + "; " + expires);
+      //document.write("You will be redirected to main page in 10 sec.");
+      setTimeout( function(){window.location.assign("./Account.html");}, 2000);
+            }
+      })
+     .error(
+      function(response){
+        console.log("error:"+ response.error_message);
+      });
+    
+  }
   });
 app.controller("nav",function($scope,$rootScope)
   {$rootScope.f = 0;
