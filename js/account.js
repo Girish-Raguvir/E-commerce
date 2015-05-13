@@ -1,5 +1,68 @@
 var app=angular.module('account', []);
-app.controller('myaccount', function($scope) {
+app.controller('myaccount', function($scope,$http) {
+  function getsession(cname) {
+    console.log("inside "+cname)
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+  
+  $scope.session=getsession('session');
+ var req = 
+    {    method: 'POST',
+       url: 'http://grokart.ueuo.com/userInfo.php', 
+       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+       data: $.param({"session":$scope.session,}),
+     } 
+    $scope.user={"success":"","ID":"","email":"","name":"","address":"","telephone":""};
+     $http(req)
+     .success(
+      function(response){
+        console.log(JSON.stringify(response));
+            console.log("response :"+response.success);
+            if(response.success=='true'){ 
+           
+               $scope.user=response;}
+      })
+     .error(
+      function(response){
+        console.log("error:"+ response.error_message);
+      });
+$scope.useredit=function()
+  {
+    var newuser={"session":$scope.session,"email":$scope.user.email,"name":$scope.user.name,"password":"123","address":$scope.user.address,"telephone":$scope.user.telephone,};
+    var req = 
+    {    method: 'POST',
+       url: 'http://grokart.ueuo.com/editInfo.php', 
+       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+       data: $.param(newuser),
+     } 
+     console.log(newuser);
+     $http(req)
+     .success(
+      function(response){
+        console.log(JSON.stringify(response));
+            console.log("response :"+response.success);
+            if(response.success=='true'){ 
+
+            }
+      })
+     .error(
+      function(response){
+        console.log("error:"+ response.error_message);
+      });
+    
+  }
+ 
+
  
 });
 app.controller("myCtrl",function($scope,$rootScope)

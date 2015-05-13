@@ -35,7 +35,11 @@ app.controller("nav",function($scope,$rootScope)
             console.log("response :"+response.success);
             if(response.success=='true'){ 
            
-            
+               var d = new Date();
+               d.setTime(d.getTime() + (30*24*60*60*1000));
+               var expires = "expires="+d.toUTCString();
+               document.cookie = "session" + "=" + response.session + "; " + expires;
+               console.log("hello"+"session" + "=" + response.session + "; " + expires);
 			//document.write("You will be redirected to main page in 10 sec.");
 			setTimeout( function(){window.location.assign("./Account.html");}, 2000);
             }
@@ -210,10 +214,10 @@ app.controller("nav",function($scope,$rootScope)
 		}
 	});
 	
-	app.controller("tiles",function($scope)
+	app.controller("tiles",function($scope,$http)
 	{
      $scope.cateshow;
-     $scope.subc=[{id:1,name:"Hello"},{id:2,name:"Bye"},{id:3,name:"See you"}];
+     $scope.subc=[{subID:1,name:"Hello"},{subID:2,name:"Bye"},{subID:3,name:"See you"}];
      	$scope.cats=function(id)
      	{
      		console.log(id);
@@ -224,9 +228,18 @@ app.controller("nav",function($scope,$rootScope)
      		console.log(id);
      		$scope.cateshow=false;
      	}
-		$scope.show=function()
+		$scope.show=function(id)
 		{
                 $scope.disp=true;
+                if($scope.name1.success=="true")
+                {var n=$scope.name1.numCategories;
+                 var list=$scope.name1.list;
+                 for(var i=0;i<n;++i)
+                 {
+                 	if(list[i].ID==id){$scope.subc=list[i].subcategories;}
+                 }
+
+                }
 		}
 		$scope.hide=function()
 		{
@@ -249,6 +262,17 @@ app.controller("nav",function($scope,$rootScope)
         $(".carousel").height($("#tile1").width());
         $(".item").height($("#tile1").width());
     });
+      $http.get("http://grokart.ueuo.com/listCategories.php")
+        .success(function(response) {
+            
+            $scope.name1=response;
+            
+            console.log("response :"+JSON.stringify(response));
+        })
+        .error(function(response, status, headers, config){
+          console.log("error:"+ response.error_message);
+         });
+		
 
 });
 $scope.check=true;

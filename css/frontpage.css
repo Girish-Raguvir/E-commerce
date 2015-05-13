@@ -137,10 +137,21 @@ img:hover {
     background: rgb(255,255,255);
 }
 
-
 #tile10{
     background: rgb(0,0,0);
-    height: 200px;
+   
+    
+}
+#tile11{
+    background: rgb(0,0,0);
+    height:100%;
+    vertical-align: middle;
+    
+}
+#tile11:hover{
+    background: rgba(0,0,0,0.5);
+    
+    
 }
 
 a:hover, a:visited, a:link, a:active
