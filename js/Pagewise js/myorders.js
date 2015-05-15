@@ -3,11 +3,11 @@ var app=angular.module('orders', []);
 app.controller('orderdisplay', function($scope) {
     $scope.orders = [
         {ono:123456,s:"IIT-M",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:2000},
-         {ono:123456,s:"IIT-B",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:1000},
-          {ono:123456,s:"IIT-K",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:5000},
-           {ono:123456,s:"IIT-D",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:8000},
-            {ono:123456,s:"IIT-K",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:3000},
-             {ono:123456,s:"IIT-M",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:4000}
+        {ono:123456,s:"IIT-B",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:1000},
+        {ono:123456,s:"IIT-K",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:5000},
+        {ono:123456,s:"IIT-D",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:8000},
+        {ono:123456,s:"IIT-K",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:3000},
+        {ono:123456,s:"IIT-M",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:4000}
         
     ];
     

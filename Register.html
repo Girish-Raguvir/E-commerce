@@ -17,7 +17,7 @@
   <link href="css/simple-sidebar.css" rel="stylesheet">
 </head>
 <body>
-<div class="container-fluid" ng-app="registration" >
+<div class="container-fluid" ng-app="thedreamstop" >
    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;" ng-controller="nav">
       <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
 
@@ -45,20 +45,16 @@
         </div>
         </li>
         </ul>
+       <div ng-controller="log_in_out">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-        <li ><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-         <li ><a href="#" data-toggle="modal" data-target="#locmodal"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li> 
-        <!-- <li>
-        <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;">
-          <option>Chennai</option>
-          <option>Bangalore</option>
-          <option>Mumbai</option>
-          <option>Delhi</option>
-        </select> 
-        
-        </li> -->
+        <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+        <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#locmodal"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
+        <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
+        <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
+       
       </ul>
+    </div>
         </div>
       </div>
     </div>
@@ -374,7 +370,7 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 </p>
 </div>
 </div>
-<script src="js/register.js"></script>
+<script src="js/thedreamstop.js"></script>
 </div>
 </body>
 </html>

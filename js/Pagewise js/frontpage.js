@@ -7,15 +7,8 @@ var app=angular.module("myApp",[]);
        $("#wrapper").toggleClass("toggled");
        $rootScope.f = !$rootScope.f;    }
   });
-app.controller("nav",function($scope,$rootScope)
-  {$rootScope.f = 1;
-  $(document).ready(function () {
 
-    $('#locmodal').modal('show');
-
-});
-});
-  app.controller("login",function($scope,$http,$rootScope)
+	app.controller("login",function($scope,$http,$rootScope)
   {
   	$scope.user={"password":"","email":"",};
    $scope.userlogin=function()
@@ -51,6 +44,14 @@ app.controller("nav",function($scope,$rootScope)
 		
 	}
   });
+app.controller("nav",function($scope,$rootScope)
+  {$rootScope.f = 1;
+  $(document).ready(function () {
+
+    $('#locmodal').modal('show');
+
+});
+  
     $(window).scroll(function() {
      
   var navbarColor = "121,147,59";//color attr for rgba
@@ -101,7 +102,7 @@ app.controller("nav",function($scope,$rootScope)
   
   
 });
-
+});
 	
 	app.controller("navbar",function($scope)
 	{

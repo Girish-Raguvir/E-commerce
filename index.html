@@ -18,7 +18,7 @@
 </head>
 <body>
  
- <div class="container-fluid" ng-app="myApp">
+ <div class="container-fluid" ng-app="thedreamstop">
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;" ng-controller="nav">
       <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
 
@@ -51,13 +51,16 @@
         </li> -->
         
       </ul>
+      <div ng-controller="log_in_out">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-        <li ><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <li ><a href="#" data-toggle="modal" data-target="#locmodal"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
-        
-        </li>
+        <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+        <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#locmodal"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
+        <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
+        <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
+       
       </ul>
+    </div>
         </div><!--/.nav-collapse -->
       </div>
     </div>
@@ -69,7 +72,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Login</h3>
+        <h3 class="modal-title" id="myModalLabel">Login<span ng-if="wuser" style="color:red;font-size:15px;margin-left:30px;vertical-align:middle;">&nbsp;&nbsp;Wrong username or password.Try again.</span></h3>
+
       </div>
       <div class="modal-body">
       <div class="container">
@@ -90,7 +94,7 @@
     </div>
       <div class="modal-footer">
         <p align="center">
-        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;" ng-click="userlogin()">Login</button>
+        <button type="button" class="btn btn-success" style="width:40%;" ng-click="userlogin()">Login</button>
         <br><br>
         <a href="#">Forgot password?</a>
       </p>
@@ -186,11 +190,11 @@
    <div id="wrapper" style="padding-top: 75px;padding-left:0px;">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper" style="padding: 0px;">
+        <div id="sidebar-wrapper" style="padding: 0px;" ng-controller="drawer">
             <ul class="sidebar-nav">
               <br>
                 <li class="sidebar-brand" >
-                    <h3 style="color: white;padding-top: 10px;">Welcome User</h3>
+                    <h3 style="color: white;padding-top: 10px;">Welcome {{username}}</h3>
                 </li>
                   <hr> 
                   <br>              
@@ -483,7 +487,7 @@
 </table>
 </div>
   </div> <!-- ending the my app-->
-  <script src="js/frontpage.js"></script>
+  <script src="js/thedreamstop.js"></script>
 
 
  
