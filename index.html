@@ -77,24 +77,33 @@
       </div>
       <div class="modal-body">
       <div class="container">
-      <form role="form">
+      <form role="form" name="RegForm">
       <div class="col-md-4">
       <div class="form-group">
       <label for="lemail">Email:</label>
-      <input type="email" class="form-control" id="lemail" ng-model="user.email">
+       <input type="email" class="form-control" name=" lemail" id="lemail" ng-model="lemail" required=""/>
+       <div ng-show="RegForm.lemail.$dirty && RegForm.lemail.$invalid" style="color:red;font-weight:bold;">
+      <span ng-show="RegForm.lemail.$error.required">E-Mail is a required field</span>
+      <span ng-show="RegForm.lemail.$error.email" >This is not a valid email.</span>
+    </div>
       </div>  
       <div class="form-group">
       <label for="lpwd">Password:</label>
-      <input type="password" class="form-control" id="lpwd" ng-model="user.password">
+      <input type="password" class="form-control" id="lpwd" name="lpwd" ng-model="lpwd" required=""/>
+       <div ng-show="RegForm.lpwd.$dirty" style="color:red;font-weight:bold;">
+      <span ng-show="RegForm.lpwd.$error.required">Password is a required field</span>
+    </div>
       </div> 
       
       </form>
       </div>
     </div>
     </div>
+      
       <div class="modal-footer">
         <p align="center">
-        <button type="button" class="btn btn-success" style="width:40%;" ng-click="userlogin()">Login</button>
+        <button type="submit" class="btn btn-success" data-dismiss="modal" style="width:40%;" ng-disabled="RegForm.lemail.$dirty && RegForm.lemail.$invalid ||  
+RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
         <br><br>
         <a href="#">Forgot password?</a>
       </p>

@@ -15,8 +15,22 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/about.css">
   <link href="css/simple-sidebar.css" rel="stylesheet">
+  <style type="text/css">
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url('page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+</style>
+
+ 
 </head>
 <body>
+    <div class="loader"></div>
 <div class="container-fluid" ng-app="thedreamstop" >
    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;" ng-controller="nav">
       <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
@@ -49,6 +63,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        
         <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#locmodal"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
         <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
         <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
@@ -67,15 +82,22 @@
       </div>
       <div class="modal-body">
       <div class="container">
-      <form role="form">
+      <form role="form" name="RegForm">
       <div class="col-md-4">
       <div class="form-group">
       <label for="lemail">Email:</label>
-      <input type="email" class="form-control" id="lemail">
+      <input type="email" class="form-control" name=" lemail" id="lemail" ng-model="lemail" required=""/>
+       <div ng-show="RegForm.lemail.$dirty && RegForm.lemail.$invalid" style="color:red;font-weight:bold;">
+      <span ng-show="RegForm.lemail.$error.required">E-Mail is a required field</span>
+      <span ng-show="RegForm.lemail.$error.email" >This is not a valid email.</span>
+    </div>
       </div>  
       <div class="form-group">
       <label for="lpwd">Password:</label>
-      <input type="password" class="form-control" id="lpwd">
+      <input type="password" class="form-control" id="lpwd" name="lpwd" ng-model="lpwd" required=""/>
+       <div ng-show="RegForm.lpwd.$dirty" style="color:red;font-weight:bold;">
+      <span ng-show="RegForm.lpwd.$error.required">Password is a required field</span>
+    </div>
       </div> 
       
       </form>
@@ -85,7 +107,8 @@
       
       <div class="modal-footer">
         <p align="center">
-        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;">Login</button>
+        <button type="submit" class="btn btn-success" data-dismiss="modal" style="width:40%;" ng-disabled="RegForm.lemail.$dirty && RegForm.lemail.$invalid ||  
+RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
         <br><br>
         <a href="#">Forgot password?</a>
       </p>
@@ -188,14 +211,17 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
   <h2>Login Details</h2>
 
-  <form role="form">
+  <form role="form" name="form">
 <div class="col-md-7">
     <div class="form-group">
 
       <label for="email"><span style="color:red;">*</span> Email Address:</label>
        
-      <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="user.email">
-      
+      <input type="email" class="form-control" id="email" name="uEmail" ng-model="user.email" placeholder="Enter Email" required="" />
+     <div ng-show="form.uEmail.$dirty && form.uEmail.$invalid" style="color:red;font-weight:bold;">
+      <span ng-show="form.uEmail.$error.required">E-Mail is a required field</span>
+      <span ng-show="form.uEmail.$error.email" >This is not a valid email.</span>
+    </div>
     </div>
     <div class="form-group">
       <label for="phonenumber"><span class="glyphicon glyphicon-phone"></span> Mobile number:</label>
@@ -203,11 +229,16 @@ Fields marked with <span style="color:red;">*</span> are mandatory
     </div>
     <div class="form-group">
       <label for="pwd"><span style="color:red;">*</span> Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" ng-model="user.password">
+      <input type="password" class="form-control" id="pwd" name="uPass" placeholder="Enter password" ng-model="user.password" required=""/>
+      <div ng-show="form.uPass.$dirty && form.uPass.$invalid" style="color:red;font-weight:bold;">
+      <span ng-show="form.uPass.$error.required">Password is a required field</span>
+      <!--span ng-show="form.uEmail.$error.email" style="color:red;font-weight:bold;">This is not a valid email.</span-->
+    </div>
     </div>
     <div class="form-group">
       <label for="cpwd"><span style="color:red;">*</span> Confirm Password:</label>
-      <input type="password" class="form-control" id="cpwd" placeholder="Confirm password">
+      <input type="password" class="form-control" id="cpwd"  placeholder="Confirm password">
+      
     </div>
     <div class="checkbox">
       <label><input type="checkbox"> Remember me</label>
@@ -231,7 +262,7 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
   <h2>Personal Details</h2>
 <!--<hr>-->
-  <form role="form">
+  <form role="form" name="form2">
 <div class="col-md-7">
 <div class="form-group">
 <label for="sel1">Salutation:</label>
@@ -247,15 +278,17 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
       <label for="fname"><span style="color:red;">*</span> First name:</label>
        
-      <input type="text" class="form-control" id="fname" placeholder="Enter first name" ng-model="uname.first">
-      
+      <input type="text" class="form-control" id="fname" name="ufName" placeholder="Enter first name" ng-model="uname.first" required=""/>
+      <div ng-show="form2.ufName.$dirty && form2.ufName.$invalid" style="color:red;font-weight:bold;">
+      <span ng-show="form2.ufName.$error.required">Please enter your first name</span>
     </div>
     <div class="form-group">
 
       <label for="lname"><span style="color:red;">*</span> Last name:</label>
        
-      <input type="text" class="form-control" id="lname" placeholder="Enter last name" ng-model="uname.last">
-      
+      <input type="text" class="form-control" id="lname" name="ulName" placeholder="Enter last name" ng-model="uname.last" required=""/>
+      <div ng-show="form2.ulName.$dirty && form2.ulName.$invalid" style="color:red;font-weight:bold;">
+      <span ng-show="form2.ulName.$error.required">Please enter your last name</span>
     </div>
     <div class="form-group">
 
@@ -290,14 +323,15 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
   <h2>Address Details</h2>
 <!--<hr>-->
-  <form role="form">
+  <form role="form" name="form3">
 <div class="col-md-7">
     <div class="form-group">
 
       <label for="h"><span style="color:red;">*</span> House no & Details:</label>
        
-      <input type="text" class="form-control" id="h" placeholder="House no & Details" ng-model="add.hno">
-      
+      <input type="text" class="form-control" id="h" name="Hno"placeholder="House no & Details" ng-model="add.hno" required=""/>
+      <div ng-show="form3.Hno.$dirty && form3.Hno.$invalid" style="color:red;font-weight:bold;">
+      <span ng-show="form3.Hno.$error.required">This is a mandatory field</span>
     </div>
     <div class="form-group">
 
@@ -310,8 +344,9 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
       <label for="area"><span style="color:red;">*</span> Area:</label>
        
-      <input type="text" class="form-control" id="area" placeholder="Area" ng-model="add.area">
-      
+      <input type="text" class="form-control" id="area" name="Area" placeholder="Area" ng-model="add.area" required=""/>
+      <div ng-show="form3.Area.$dirty && form3.Area.$invalid" style="color:red;font-weight:bold;">
+      <span ng-show="form3.Area.$error.required">This is a mandatory field</span>
     </div>
 <div class="form-group">
 
@@ -340,8 +375,10 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
       <label for="p"><span style="color:red;">*</span> Pin Code:</label>
        
-      <input type="tel" class="form-control" id="p" placeholder="Pincode" ng-model="add.pin">
-      
+      <input type="tel" class="form-control" id="p" name="pin" placeholder="Pincode" ng-model="add.pin" required=""/>
+      <div ng-show="form3.pin.$dirty && form3.pin.$invalid" style="color:red;font-weight:bold;">
+      <span ng-show="form3.pin.$error.required">This is a mandatory field</span> </div>
+      <span >Please enter your pin-code as a number</span>
     </div>
     
 </div>
@@ -366,11 +403,16 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 </div>
 
 <p align="center">
-<button type="submit" class="btn btn-success" align="center" ng-click="sendPost()">Submit</button>
+<button type="submit" class="btn btn-success" align="center" ng-click="sendPost()" >Submit</button>
 </p>
 </div>
 </div>
 <script src="js/thedreamstop.js"></script>
-</div>
+<script type="text/javascript">
+$(window).load(function() {
+  $(".loader").fadeOut("slow");
+})
+</script>
+
 </body>
 </html>
