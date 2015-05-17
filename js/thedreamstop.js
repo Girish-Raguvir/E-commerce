@@ -515,7 +515,7 @@ app.controller("login",['$scope','$http','$localstorage', function($scope,$http,
             $localstorage.set('username',response.name);
             location.reload();
           }
-            else $scope.wuser=1;
+            else {$scope.wuser=1;console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
           })
           .error(
           function(response)
@@ -524,6 +524,10 @@ app.controller("login",['$scope','$http','$localstorage', function($scope,$http,
           });
   			  //document.write("You will be redirected to main page in 10 sec.");
   			  //setTimeout( function(){window.location.assign("./Account.html");}, 2000);
+        }
+        else
+        {
+          $scope.wuser=1;$scope.user.password="";$scope.user.email="";
         }
 		 	})
 		 .error(
@@ -719,11 +723,13 @@ app.controller("myCtrl",function($scope,$rootScope)
 
 app.controller("nav",function($scope,$rootScope){
 
-$rootScope.f = 0;
-$("#wrapper").toggleClass("toggled");
-
+$rootScope.f = 0; var e=0;
+document.getElementById("wrapper").className="toggled";
+$('.navbar').css({"cursor":"pointer"});
 $(window).scroll(function() {
-     
+  document.getElementById("wrapper").className="toggled";
+
+  console.log(document.getElementById("wrapper").className);
   var navbarColor = "121,147,59";//color attr for rgba
   var smallLogoHeight = 30;
   var bigLogoHeight = 90;
@@ -759,7 +765,10 @@ $(window).scroll(function() {
   if ( ySmall > 1) 
   {
     $('.navbar-inverse').css({"box-shadow": "0 2px 3px rgba(0,0,0," + shadowOpacity + ")"});
-    if($rootScope.f==1){$("#wrapper").toggleClass("toggled");$rootScope.f=0;}
+    //if($rootScope.f==1 || e==1){$("#wrapper").toggleClass("toggled");$rootScope.f=0;e=0;}
+    // else{$("#wrapper").toggleClass("toggled");$rootScope.f=0;}
+    console.log($rootScope.f)
+    //if($("wrapper").className!="toggled")$("#wrapper").toggleClass("toggled");
   } 
   else 
   {

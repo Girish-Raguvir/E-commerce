@@ -31,7 +31,7 @@
           <!-- <span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span> -->
            
   
-         <a class="navbar-brand" href="#" style="padding-left:80px;">E-commerce</a> 
+         <a class="navbar-brand" href="#" style="padding-left:80px;">The Dream Stop</a> 
         </div>
           <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
         <li>
@@ -81,7 +81,7 @@
       <div class="col-md-4">
       <div class="form-group">
       <label for="lemail">Email:</label>
-       <input type="email" class="form-control" name=" lemail" id="lemail" ng-model="lemail" required=""/>
+       <input type="email" class="form-control" name=" lemail" id="lemail"  required="" ng-model="user.email"/>
        <div ng-show="RegForm.lemail.$dirty && RegForm.lemail.$invalid" style="color:red;font-weight:bold;">
       <span ng-show="RegForm.lemail.$error.required">E-Mail is a required field</span>
       <span ng-show="RegForm.lemail.$error.email" >This is not a valid email.</span>
@@ -89,7 +89,7 @@
       </div>  
       <div class="form-group">
       <label for="lpwd">Password:</label>
-      <input type="password" class="form-control" id="lpwd" name="lpwd" ng-model="lpwd" required=""/>
+      <input type="password" class="form-control" id="lpwd" name="lpwd"  required="" ng-model="user.password"/>
        <div ng-show="RegForm.lpwd.$dirty" style="color:red;font-weight:bold;">
       <span ng-show="RegForm.lpwd.$error.required">Password is a required field</span>
     </div>
@@ -102,8 +102,8 @@
       
       <div class="modal-footer">
         <p align="center">
-        <button type="submit" class="btn btn-success" data-dismiss="modal" style="width:40%;" ng-disabled="RegForm.lemail.$dirty && RegForm.lemail.$invalid ||  
-RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
+        <button type="submit" class="btn btn-success"  style="width:40%;" ng-disabled="RegForm.lemail.$dirty && RegForm.lemail.$invalid ||  
+RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</button>
         <br><br>
         <a href="#">Forgot password?</a>
       </p>
@@ -156,7 +156,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
     </div>
   </div>
 </div>
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<!-- <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -187,7 +187,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
       </div>
     </div>
   </div>
-</div>
+</div> -->
   
   <table style="height:100%;width:100%;" >
     <tr>
@@ -480,13 +480,17 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
   <!-- <span id="images/sep1"></span>
   <img src="visa" alt="Payment Mode: Visa" id="visa"> -->
   <div class="Mobile-App" style="background: gainsboro;">
-  <h3 id="playstore">Get our App on PlayStore and AppStore!</h3>
+  <h3 id="playstore">Finish Grocery Shopping on the Go!<br>
+  Download the TheDreamStop Mobile App Now!</h3>
+  <br>
   <a href="#"><img src="images/gplay.jpg" alt="Google Play Store" id="google"></a>
-  <a href="#"><img src="images/Apple-App-store-icon.png" alt="Apple App Store" id="iStore"></a>
+ <!--  <a href="#"><img src="images/Apple-App-store-icon.png" alt="Apple App Store" id="iStore"></a> -->
   <h3 id="follow"> Follow us on </h3>
-  <a href="#"><img src="images/fb.jpg" alt="Facebook" id="facebook"></a>
-  <a href="#"><img src="images/twitter.png" alt="Twitter" id="twitter"></a>
-  <a href="#"><img src="images/g+.jpg" alt="gplus" id="googleplus"></a>
+  <figure class="member-photo"><a href="#"><img src="images/fb.jpg" alt="Facebook" id="facebook"></a></figure>
+  <!-- <figure class="member-photo"><a href="#"><img src="images/twitter.png" alt="Twitter" id="twitter"></a></figure>
+  <figure class="member-photo"><a href="#"><img src="images/g+.jpg" alt="gplus" id="googleplus"></a></figure> -->
+  
+  
   
   </div>
 

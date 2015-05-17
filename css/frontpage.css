@@ -6,10 +6,16 @@
     padding:5px;
 }
 
+body
+{
+overflow-x: hidden;
+}
+
 li:hover{
 cursor: pointer;
 
 }
+
 #back{
 	background:black;width:15%;top:0px;left:0px;position:absolute;
 	border-color: black;
@@ -961,7 +967,7 @@ a:hover, a:visited, a:link, a:active
 	#google,#iStore
 	{
 		position:absolute;
-		top:80px;
+		top:100px;
 		
 		
 	}
@@ -977,23 +983,28 @@ a:hover, a:visited, a:link, a:active
 	}
 	#iStore
 	{
-		left:300px;
+		left:250px;
 	}
 	
 	#follow
 	{
 		position:absolute;
 		top:20px;
-		left:900px;
+		right:250px;
+		font-weight:700;
 	}
 	#facebook,#twitter,#googleplus
 	{
 		position:absolute;
 		
-		top:80px;
+		top:75px;
 		width:100px;
 		height:100px;
 		padding:5px;
+	}
+	#facebook,#twitter,#googleplus,#iStore,#google:hover
+	{
+		opacity: 1;
 	}
 	#facebook
 	{	
@@ -1002,7 +1013,7 @@ a:hover, a:visited, a:link, a:active
 	}
 	#twitter
 	{	
-		top:75px;		
+				
 		width:110px;
 		height:110px;
 		right:160px;
@@ -1012,6 +1023,6 @@ a:hover, a:visited, a:link, a:active
 		right:40px;
 		width:110px;
 		height:110px;
-		top:75px;
+		
 	}
 	
