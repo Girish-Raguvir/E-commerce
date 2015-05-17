@@ -623,10 +623,10 @@ $scope.password="123";
 $scope.uname="girish";
 $scope.address="IITM";
 $scope.telephone="9444706609";
-$scope.add={"hno":"w","street":"w","area":"w","rcomp":"w","landmark":"w","city":"w","pin":"w",};
-$scope.uname={"first":"h","last":"h",};
+$scope.add={"hno":"","street":"","area":"","rcomp":"","landmark":"","city":"","pin":"",};
+$scope.uname={"first":"","last":"",};
 $scope.sal="Mr.";
-$scope.user = {"email": "gh","password": "","name": "","address": "", "telephone": "",};
+$scope.user = {"email": "","password": "","name": "","address": "", "telephone": "",};
    
 $scope.sendPost = function() 
 {
