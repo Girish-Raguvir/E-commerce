@@ -6,18 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js."></script>
-
+<script src="js/thedreamstop.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+  $(".loader").fadeOut("slow");
+})
+</script>
   <link rel="stylesheet" type="text/css" href="css/frontpage.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/about.css">
   <link href="css/simple-sidebar.css" rel="stylesheet">
+
+  <style type="text/css">
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+</style>
 </head>
 <body>
- 
+  <div class="loader"></div>
  <div class="container-fluid" ng-app="thedreamstop">
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;" ng-controller="nav">
       <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
@@ -486,9 +503,8 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   <a href="#"><img src="images/gplay.jpg" alt="Google Play Store" id="google"></a>
  <!--  <a href="#"><img src="images/Apple-App-store-icon.png" alt="Apple App Store" id="iStore"></a> -->
   <h3 id="follow"> Follow us on </h3>
-  <figure class="member-photo"><a href="#"><img src="images/fb.jpg" alt="Facebook" id="facebook"></a></figure>
-  <!-- <figure class="member-photo"><a href="#"><img src="images/twitter.png" alt="Twitter" id="twitter"></a></figure>
-  <figure class="member-photo"><a href="#"><img src="images/g+.jpg" alt="gplus" id="googleplus"></a></figure> -->
+  <figure class="member-photo"><a href="#"><i class="fa fa-facebook-square fa-4x" id="facebook"></i></figure>
+   <figure class="member-photo"><a href="#"><i class="fa fa-twitter-square fa-4x" id="twitter"></i></figure>
   
   
   

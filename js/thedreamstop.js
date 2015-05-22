@@ -630,8 +630,10 @@ $scope.telephone="9444706609";
 $scope.add={"hno":"","street":"","area":"","rcomp":"","landmark":"","city":"","pin":"",};
 $scope.uname={"first":"","last":"",};
 $scope.sal="Mr.";
-$scope.user = {"email": "","password": "","name": "","address": "", "telephone": "",};
-   
+$scope.user = {"email": "","password": "","name": "","address": "", "telephone": "","mobile":"",};
+$scope.vismob=false;
+$scope.vistel=false;
+$scope.vispin=false;
 $scope.sendPost = function() 
 {
   $scope.user.address=$scope.add.hno + ", " + $scope.add.street + ", " + $scope.add.area + ", " + $scope.add.rcomp + ", " + $scope.add.landmark + ", " + $scope.add.city + ", " + $scope.add.pin + ".";
@@ -656,7 +658,46 @@ $scope.sendPost = function()
   {
     console.log("error:"+ response.error_message);
   });
-    }        
+    }     
+    $scope.validation=function()
+    {
+      //checking for mobile phone  
+        if($scope.user.mobile.length==0)
+          {
+            $scope.vismob=false;
+          }
+          else
+          {
+            if(isNaN($scope.user.mobile))
+        {
+           $scope.vismob=true;
+        }
+          }
+      // checking for telephone
+      if($scope.user.telephone.length==0)
+          {
+            $scope.vistel=false;
+          }
+          else
+          {
+            if(isNaN($scope.user.telephone))
+        {
+           $scope.vistel=true;
+        }
+          }   
+          //checking for pin   
+       if($scope.add.pin.length==0)
+          {
+            $scope.vispin=false;
+          }
+          else
+          {
+            if(isNaN($scope.add.pin))
+        {
+           $scope.vispin=true;
+        }
+          }
+    }   
 });
 
 // my orders display
