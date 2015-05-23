@@ -44,6 +44,8 @@ $scope.logout=function()
 }
 
 $scope.username=$localstorage.get('username');
+if($scope.username=="Guest")$localstorage.set('loggedin','false');
+else $localstorage.set('loggedin','true');
 
 }]);
 
