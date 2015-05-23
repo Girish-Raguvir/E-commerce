@@ -17,6 +17,7 @@
 $(window).load(function() {
   $(".loader").fadeOut("slow");
 })
+
 </script>
 
    <link rel="stylesheet" type="text/css" href="css/frontpage.css">
@@ -421,7 +422,7 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 </div>
 
 <p align="center">
-<button type="submit" class="btn btn-success" align="center" ng-click="sendPost()" ng-disabled="form.uEmail.$dirty && form.uEmail.$invalid||form.mobile.$dirty && form.mobile.$invalid||form.uPass.$dirty && form.uPass.$invalid||form2.ufName.$dirty && form2.ufName.$invalid||form2.ulName.$dirty && form2.ulName.$invalid||form2.telno.$dirty && form2.telno.$invalid||form3.Hno.$dirty && form3.Hno.$invalid||form3.Area.$dirty && form3.Area.$invalid||form3.pin.$dirty && form3.pin.$invalid">Submit</button>
+<button type="submit" class="btn btn-success" align="center" ng-click="sendPost()" ng-disabled="(form.uEmail.$pristine || form.uEmail.$invalid)||(form.mobile.$pristine || form.mobile.$invalid)||(form.uPass.$pristine || form.uPass.$invalid)||(form2.ufName.$pristine ||  form2.ufName.$invalid)||(form2.ulName.$pristine || form2.ulName.$invalid)||(form2.telno.$pristine ||  form2.telno.$invalid)||(form3.Hno.$pristine || form3.Hno.$invalid)||(form3.Area.$pristine || form3.Area.$invalid)||(form3.pin.$pristine || form3.pin.$invalid)">Submit</button>
 </p>
 </div>
 </div>
