@@ -117,7 +117,7 @@ app.controller('itemdisplay', function($scope,$http) {
   $( document ).ready(function() 
   {
      
-     $("#wrapper").toggleClass("toggled");
+     //$("#wrapper").toggleClass("toggled");
      function getsession(cname) {
     console.log("inside "+cname)
     var name = cname + "=";
