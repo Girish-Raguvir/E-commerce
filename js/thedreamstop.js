@@ -654,11 +654,25 @@ $scope.sendPost = function()
   {
     console.log(JSON.stringify(response));
     console.log("response :"+response.success);
+    if(response.success=='true')
+      {
+        alert('You have successfully registered with us.Welcome.'+'\n'+'You will now be redirected to your account.');
+        setTimeout( function(){window.location.assign("./Account.html");}, 1000);
+      }
+
+    else
+        {
+          if(response.error=='emailExists')
+            {alert('Sorry.Such an email already exists.Please try again.');$scope.user.email="";}
+          else
+            {alert('Some error has occured.Please try again.');}
+        }
   })
   .error(
   function(response)
   {
     console.log("error:"+ response.error_message);
+    alert('Some error has occured.Please try again.');
   });
     }     
     $scope.validation=function()
