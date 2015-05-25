@@ -143,7 +143,7 @@ app.controller('itemdisplay', function($scope,$http) {
     
     var req = 
     {    method: 'POST',
-       url: 'http://grokart.ueuo.com/catProds.php', 
+       url: 'http://thedreamstop.com/api/catProds.php', 
        headers: { 'Content-Type':'application/x-www-form-urlencoded' },
        data: $.param($scope.data),
      } 
@@ -422,7 +422,7 @@ app.controller("tiles",['$localstorage','$scope','$http',function($localstorage,
       $(".carousel").height($("#tile1").width());
       $(".item").height($("#tile1").width());
     });
-    $http.get("http://grokart.ueuo.com/listCategories.php")
+    $http.get("http://thedreamstop.com/api/listCategories.php")
         .success(function(response) {
             
           $scope.name1=response;
@@ -477,7 +477,7 @@ app.controller("login",['$scope','$http','$localstorage', function($scope,$http,
     $scope.wuser=0;
 		var req = 
 		{  	 method: 'POST',
-			 url: 'http://grokart.ueuo.com/login.php', 
+			 url: 'http://thedreamstop.com/api/login.php', 
 			 headers: { 'Content-Type':'application/x-www-form-urlencoded' },
 			 data: $.param($scope.user),
 		 } 
@@ -499,7 +499,7 @@ app.controller("login",['$scope','$http','$localstorage', function($scope,$http,
           console.log("hello"+"session" + "=" + response.session + "; " + expires);
           var req1 = 
           {  method: 'POST',
-              url: 'http://grokart.ueuo.com/userInfo.php', 
+              url: 'http://thedreamstop.com/api/userInfo.php', 
               headers: { 'Content-Type':'application/x-www-form-urlencoded' },
               data: $.param({"session":response.session,}),
           } 
@@ -565,7 +565,7 @@ function getsession(cname)
 $scope.session=getsession('session');
 var req = 
 { method: 'POST',
-  url: 'http://grokart.ueuo.com/userInfo.php', 
+  url: 'http://thedreamstop.com/api/userInfo.php', 
   headers: { 'Content-Type':'application/x-www-form-urlencoded' },
   data: $.param({"session":$scope.session,}),
 } 
@@ -600,7 +600,7 @@ $scope.useredit=function()
   var newuser={"session":$scope.session,"email":$scope.user.email,"name":$scope.user.name,"password":"123","address":$scope.user.address,"telephone":$scope.user.telephone,};
   var req = 
   { method: 'POST',
-    url: 'http://grokart.ueuo.com/editInfo.php', 
+    url: 'http://thedreamstop.com/api/editInfo.php', 
     headers: { 'Content-Type':'application/x-www-form-urlencoded' },
     data: $.param(newuser),
   } 
@@ -643,7 +643,7 @@ $scope.sendPost = function()
 
   var req=
   { method: 'POST',
-    url: 'http://grokart.ueuo.com/newUser.php',
+    url: 'http://thedreamstop.com/api/newUser.php',
     headers: { 'Content-Type':'application/x-www-form-urlencoded' },
     data: $.param($scope.user),
   }
