@@ -393,32 +393,38 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>  <br><br>
 <div ng-if="(check(x))">
 
 
-<table style="width: 60%;background-color: white; margin: 0px;" id="t02">
+<table style="width: 100%;background-color: white; margin: 0px;table-layout:fixed;" id="t02">
+  <col width="25%" />
+  <col width="25%" />
+  <col width="25%" />
+  <col width="25%" />
+  <col width="25%" />
+  <col width="25%" />
 <tr style="height: 10%">
 
-<td align="center" style="padding: 5px;">
+<td align="center" style="">
 <input type="number" align="right"  min="1" max="10" value="1" id="{{x.id}}" ng-model="names1[$index].qty">
 </td>
-<td style="padding: 10px;"align="center">
+<td style=""align="center">
 <b>{{ x.brand }}</b>
 </td>
-<td style="padding: 10px;" align="center"> 
+<td style="padding-buttom: 10px;" align="center"> 
 <ul class="enlarge">
-<li><img src={{x.image}} alt={{ x.name }} width="80" height="80" /><span><img id="itemimg"src={{x.image}} alt={{ x.name }} /><br />{{x.name}}</span></li>
+<li style="margin-left:-50%;"><img src={{x.image}} alt={{ x.name }} width="80" height="80" /><span><img id="itemimg"src={{x.image}} alt={{ x.name }} /><br />{{x.name}}</span></li>
 
 </ul>
 
 </td>
-<td style="padding: 10px;" align="center">
+<td style="" align="center">
 <div class="desc">{{ x.name }}</div>
 </td>
 
-<td style="padding: 0px;"align="center">
+<td style=""align="center">
 <b>{{ x.q }} kg</b>
 </td>
-<td align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
+<td align="center" style=""><div class="desc">Rs.{{ x.price }}</div></td>
 
-<td align="center" style="padding: 10px;"><button class="btn btn-success" ng-click="add(names1[$index].id,names1[$index].qty,x.name,names1[$index].q*1,x.price*names1[$index].qty)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
+<td align="center" style=""><button class="btn btn-success" ng-click="add(names1[$index].id,names1[$index].qty,x.name,names1[$index].q*1,x.price*names1[$index].qty)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
 </tr>
 </table>
 

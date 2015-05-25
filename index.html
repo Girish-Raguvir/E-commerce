@@ -65,29 +65,39 @@ $(document).ready(function()
  <i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()" ></i>
   </div>
           <div class="navbar-header" >
-          <!-- <span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span> -->
-           
-  
-         <a class="navbar-brand" href="#" style="padding-left:80px;">The Dream Stop</a> 
-        </div>
+            <a class="navbar-brand" href="#" style="padding-left:80px;">The Dream Stop</a> 
+          </div>
           <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
-        <li>
-        <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for a product, category or brand">
-        <span class="input-group-btn" >
-        <button class="btn btn-default" type="button" style="background: #79933b;"><span class="glyphicon glyphicon-search"></span> Submit</button>
-       </span>
-        </div>
-        </li>
-        <!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Offers<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Offer-1</a></li>
-            <li><a href="#">Offer-2</a></li>
-            <li><a href="#">Offer-3</a></li>
+            <li style="width:400px;">
+              <div class="input-group" style="width:400px;">
+                <input type="text" class="form-control" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
+                <span >
+                  <div class="dropdown">
+                    <button class="dropdown-toggle" data-toggle="dropdown" style="background: #79933b;height:34px;width:85px;"><span class="glyphicon glyphicon-search"></span> Submit</button>
+                    <ul class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
+                      <li ng-repeat="x in search">
+                        <table style="width: 97%;background-color: white; margin: 10px;" id="t02">
+                          <tr style="height: 10%">
+                          <td style="padding: 10px;"align="center">
+                          <b>{{ x.brand }}</b>
+                          </td>
+                          <td style="padding: 10px;" align="center">
+                          <div class="desc">{{ x.name }}</div>
+                          </td>
+                          <td style="padding: 0px;"align="center">
+                          <b>{{ x.q }} kg</b>
+                          </td>
+                          <td align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
+                          </tr>
+                        </table>
+                        
+                      </li>
+                    </ul>
+                  </div> 
+                </span>
+              </div>
+            </li>
           </ul>
-        </li> -->
-        
-      </ul>
       <div ng-controller="log_in_out">
       <ul class="nav navbar-nav navbar-right">
         <li><span id="bindElement"></span></li>
