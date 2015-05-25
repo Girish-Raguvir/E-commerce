@@ -38,28 +38,11 @@ app.controller('search',['$scope','$http','$localstorage', function($scope,$http
 
 $scope.search=[{brand:'Sorry.No matches found.',name:'',q:'-1',price:'',}];
 
-  function getsession(cname) 
-{
-  console.log("inside "+cname)
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for(var i=0; i<ca.length; i++) 
-  {
-    var c = ca[i];
-    while (c.charAt(0)==' ') c = c.substring(1);
-    if (c.indexOf(name) == 0) 
-    {
-      return c.substring(name.length, c.length);
-    }
-  }
-    return "";
-}
-  
 $scope.searchdata="";
 
 $scope.searchlist=function(){
   
-  $scope.session=getsession('session');
+  $scope.session=$localstorage.get('session');
 
   // $scope.search=[
   //               {id:0,qty:1,brand:'Test',name:'Tomatoes',q:0.5,q1:0.5,q2:1,price:80,image:'images/nature.jpg'},
@@ -107,7 +90,7 @@ $scope.searchlist=function(){
 
 //toggles diplay of right-end of nav-bar as user logs in and out
 
-app.controller("log_in_out",['$scope','$localstorage',function($scope,$localstorage){
+app.controller("log_in_out",['$scope','$localstorage','$http',function($scope,$localstorage,$http){
 
 $scope.loggedin=function()
 {
@@ -120,10 +103,34 @@ $scope.loggedin=function()
 
 $scope.logout=function()
 {
-  location.reload();
-  setTimeout(function(){},1000);
+  
   $localstorage.set('loggedin','false');
   $localstorage.set('username','Guest');
+  var session=$localstorage.get('session');
+  $scope.data={'session':session};
+  var req = 
+    {    method: 'POST',
+       url: 'http://thedreamstop.com/api/logout.php', 
+       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+       data: $.param($scope.data),
+     } 
+    
+     $http(req)
+     .success(
+     function(response)
+     {
+        console.log(JSON.stringify(response));
+        console.log("response :"+response.success);
+        $localstorage.set('session','');
+        location.reload();
+        setTimeout(function(){},1000);
+      })
+     .error(
+      function(response)
+      {
+        console.log("error:"+ response.error_message);
+        alert('Problem while logging out.Please try again.')
+      });
 
 }
 
@@ -581,6 +588,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
           var expires = "expires="+d.toUTCString();
           document.cookie = "session" + "=" + response.session + "; " + expires;
           console.log("hello"+"session" + "=" + response.session + "; " + expires);
+          $localstorage.set('session',response.session);
           //UserService.putsession(response.session);
           var req1 = 
           {  method: 'POST',
