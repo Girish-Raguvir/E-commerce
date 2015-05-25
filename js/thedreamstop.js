@@ -21,6 +21,90 @@ angular.module('ionic.utils', []).factory('$localstorage', ['$window', function(
           }
 }]);
 
+app.factory('UserService', function() {
+    var userService = {};
+
+    userService.session ="abc";
+    
+    userService.putsession= function (value) {
+
+       userService.session = value;
+    };
+ 
+    return userService;
+});
+
+app.controller('search',['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
+
+$scope.search=[{brand:'Sorry.No matches found.',name:'',q:'-1',price:'',}];
+
+  function getsession(cname) 
+{
+  console.log("inside "+cname)
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0; i<ca.length; i++) 
+  {
+    var c = ca[i];
+    while (c.charAt(0)==' ') c = c.substring(1);
+    if (c.indexOf(name) == 0) 
+    {
+      return c.substring(name.length, c.length);
+    }
+  }
+    return "";
+}
+  
+$scope.searchdata="";
+
+$scope.searchlist=function(){
+  
+  $scope.session=getsession('session');
+
+  // $scope.search=[
+  //               {id:0,qty:1,brand:'Test',name:'Tomatoes',q:0.5,q1:0.5,q2:1,price:80,image:'images/nature.jpg'},
+  //               {id:1,qty:1,brand:'Test',name:'Onions',q:0.5,q1:0.5,q2:1,price:50,image:'images/nature.jpg'},
+  //               {id:2,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'images/nature.jpg'},
+  //               {id:3,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'images/nature.jpg'},
+  //               {id:4,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'images/nature.jpg'},
+  //               {id:5,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'images/nature.jpg'},
+  //               {id:6,qty:1,brand:'Test',name:'Spinach',q:0.5,q1:0.5,q2:1,price:200,image:'images/nature.jpg'}
+  //             ];
+
+  $scope.data={"session":$scope.session,"q":$scope.searchdata,};
+  console.log(JSON.stringify($scope.data));
+  
+    
+    var req = 
+    {    method: 'POST',
+       url: 'http://thedreamstop.com/api/search.php', 
+       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+       data: $.param($scope.data),
+     } 
+    
+     $http(req)
+     .success(
+     function(response)
+     {
+        console.log(JSON.stringify(response));
+        console.log("response :"+response.success);
+        if(response.success=='true')
+        { 
+           //$scope.search=response.items;
+          //console.log(JSON.stringify(response));
+          if(response.numResults!=0)$scope.search=response.results;
+        }
+      })
+     .error(
+      function(response)
+      {
+        console.log("error:"+ response.error_message);
+      });
+
+
+};
+}]);
+
 //toggles diplay of right-end of nav-bar as user logs in and out
 
 app.controller("log_in_out",['$scope','$localstorage',function($scope,$localstorage){
@@ -468,7 +552,7 @@ app.controller("tiles",['$localstorage','$scope','$http',function($localstorage,
 
 //login modal
 
-app.controller("login",['$scope','$http','$localstorage', function($scope,$http,$localstorage,$rootScope) {
+app.controller("login",['$scope','$http','$localstorage','UserService',function($scope,$http,$localstorage,$rootScope,UserService) {
   
   $scope.user={"password":"","email":"",};
   $scope.userlogin=function()
@@ -497,6 +581,7 @@ app.controller("login",['$scope','$http','$localstorage', function($scope,$http,
           var expires = "expires="+d.toUTCString();
           document.cookie = "session" + "=" + response.session + "; " + expires;
           console.log("hello"+"session" + "=" + response.session + "; " + expires);
+          //UserService.putsession(response.session);
           var req1 = 
           {  method: 'POST',
               url: 'http://thedreamstop.com/api/userInfo.php', 
@@ -563,6 +648,7 @@ function getsession(cname)
 }
   
 $scope.session=getsession('session');
+
 var req = 
 { method: 'POST',
   url: 'http://thedreamstop.com/api/userInfo.php', 
@@ -781,15 +867,7 @@ app.controller("myCtrl",function($scope,$rootScope)
 app.controller("nav",function($scope,$rootScope){
 
 $rootScope.f = 0; var e=0;
-$scope.search=[
-                {id:0,qty:1,brand:'Test',name:'Tomatoes',q:0.5,q1:0.5,q2:1,price:80,image:'images/nature.jpg'},
-                {id:1,qty:1,brand:'Test',name:'Onions',q:0.5,q1:0.5,q2:1,price:50,image:'images/nature.jpg'},
-                {id:2,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'images/nature.jpg'},
-                {id:3,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'images/nature.jpg'},
-                {id:4,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'images/nature.jpg'},
-                {id:5,qty:1,brand:'Test',name:'Potatoes',q:0.5,q1:0.5,q2:1,price:100,image:'images/nature.jpg'},
-                {id:6,qty:1,brand:'Test',name:'Spinach',q:0.5,q1:0.5,q2:1,price:200,image:'images/nature.jpg'}
-              ];
+
 document.getElementById("wrapper").className="toggled";
 $('.navbar').css({"cursor":"pointer"});
 $(window).scroll(function() {
