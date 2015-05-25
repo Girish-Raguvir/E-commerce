@@ -20,7 +20,7 @@ $(window).load(function() {
 })
 $(document).ready(function()
 {
-   $('[data-toggle="popover"]').popover({title:"Warning",content:function(){ return $(".content").html();},placement:"auto",html: true});   
+   $('[data-toggle="popover"]').popover({title:"Warning!",content:function(){ return $(".content").html();},placement:"auto",html: true});   
    /*$('#locsub').click(function()
    {
         $('#bindElement').text($('City').val());
@@ -29,7 +29,8 @@ $(document).ready(function()
   function displayVals()
   {
       var cityVal=$('#City').val();
-      $('#bindElement').html("<b> City: </b1> " + cityVal );
+      var area=$('#area').val();
+      $('#bindElement').html("<b> City:&nbsp;</b> " + cityVal +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + area);
       console.log('here');
   }
   $("#locsub").click(displayVals);
@@ -100,7 +101,7 @@ $(document).ready(function()
           </ul>
       <div ng-controller="log_in_out">
       <ul class="nav navbar-nav navbar-right">
-        <li><span id="bindElement"></span></li>
+        <li><a id="location"><span id="bindElement"></span></a></li>
         <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         <li ng-if="!loggedin()"><a href="#" data-toggle="popover" data-container="body" data-contentwrapper=".content"><span class="glyphicon glyphicon-map-marker"></span>Change Location</a></li>
@@ -108,8 +109,11 @@ $(document).ready(function()
         <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
 
        <div class="content" style="display:none;">
-        Clicking this will cause the page to be refreshed leading to loss of saved data.Do you want to proceed? <br> &nbsp; &nbsp; &nbsp; &nbsp;
+        <p align="center">
+        <br>
+        Clicking this will cause the page to be refreshed leading to loss of saved data.Do you want to proceed? <br><br>
         <a href="index.html"<button class="btn btn-primary">Continue </button></a>
+        </p>
        </div>
 
       </ul>
@@ -165,7 +169,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
     </div>
   </div>
 </div>
-<div class="modal fade" id="locmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<div class="modal fade" id="locmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -187,7 +191,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>  
       <div class="form-group">
       <label for="lpwd">Area:</label>
-      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;" id="SubCity">
+      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;" id="area">
           <option>Area1</option>
           <option>Area2</option>
           <option>Area3</option>

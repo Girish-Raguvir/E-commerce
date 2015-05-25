@@ -9,6 +9,12 @@
   
 }
 
+#location:hover
+{
+ color:white;
+ cursor: default;
+}
+
 div.img {
     margin: 1px;
     padding: 10px;
