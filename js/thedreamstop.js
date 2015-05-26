@@ -34,6 +34,8 @@ app.factory('UserService', function() {
     return userService;
 });
 
+//search controller
+
 app.controller('search',['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
 $scope.search=[{brand:'Sorry.No matches found.',name:'',q:'-1',price:'',}];
