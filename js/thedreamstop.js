@@ -109,6 +109,9 @@ $scope.logout=function()
   
   $localstorage.set('loggedin','false');
   $localstorage.set('username','Guest');
+  $localstorage.set('cart','[]');
+  $localstorage.set('tprice',0);
+
   var session=$localstorage.get('session');
   $scope.data={'session':session};
   var req = 
@@ -397,7 +400,7 @@ $scope.values = [
 
 $scope.addeditems=[
     { 
-      id:0,
+      id:-1,
       qty:0 ,
       nam:'-',
       w:0 ,
@@ -408,9 +411,10 @@ $scope.addeditems=[
 $scope.i=-1;
 $scope.titems=0;
 $scope.tprice=0;
+
 //$scope.addeditems.length=0;
 if($localstorage.get('cart')==null)
-$localstorage.set('cart',JSON.stringify($scope.addeditems));
+{$localstorage.set('cart',JSON.stringify($scope.addeditems));$localstorage.set('tprice',$scope.tprice);}
 else
 {
 
@@ -420,13 +424,15 @@ else
     if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
     $scope.addeditems.push(obj[i]);
   }
+  $scope.tprice=$localstorage.get('tprice');
 }
 $scope.add=function(id,qty,name,w,price)
 {
 
 var j=0,f=0;
 //if($scope.i==-1)$scope.addeditems.splice(0,1);
-
+if($scope.addeditems.length!=0)
+if($scope.addeditems[0].id==-1)$scope.addeditems.splice(0,1);
 for(j=0;j<$scope.addeditems.length;j++)
   if($scope.addeditems[j].id==id)
       {$scope.addeditems[j].qty+=qty;$scope.addeditems[j].price+=price;f=1;$scope.titems=$scope.titems+qty;break;}
@@ -437,6 +443,7 @@ if(!f)
   $scope.i++;$scope.titems=$scope.titems+qty;}
   $scope.tprice=$scope.tprice+price;
   $localstorage.set('cart',JSON.stringify($scope.addeditems));
+  $localstorage.set('tprice',$scope.tprice);
 
   };
 
@@ -458,6 +465,7 @@ $scope.remove=function(y)
     else{
     $scope.tprice=$scope.tprice-value.price;}
     $localstorage.set('cart',JSON.stringify($scope.addeditems));
+    $localstorage.set('tprice',$scope.tprice);
 }
 
 $scope.check=function(x)
@@ -476,6 +484,36 @@ if($scope.selected.label=='Price')
 else 
   $scope.s='name';
 }]);
+
+//cart controller
+
+app.controller("cart",['$localstorage','$scope','$http',function($localstorage,$scope,$http)
+  {
+
+    $scope.addeditems=[
+    { 
+      id:0,
+      qty:0 ,
+      nam:'-',
+      w:0 ,
+      price:0 ,
+
+    }];
+    $scope.tprice=$localstorage.get('tprice');$scope.titems=0;
+    if($localstorage.get('cart')==null)
+      $localstorage.set('cart',JSON.stringify($scope.addeditems));
+    else
+    {
+      var obj=JSON.parse($localstorage.get('cart'));$scope.addeditems.splice(0,1);
+      for(var i=0;i<obj.length;i++)
+      {
+        if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
+        $scope.addeditems.push(obj[i]);
+        $scope.titems+=obj[i].qty;
+      }
+    }
+
+  }]);
 
 //controls the tiles used for display of categories in index.html
 

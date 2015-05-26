@@ -75,7 +75,7 @@ $(document).ready(function()
                 <input type="text" class="form-control" ng-model="searchdata" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
                 <span >
                   <div id="searchdiv" class="dropdown">
-                    <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()"style="background: #79933b;height:34px;width:85px;"><span class="glyphicon glyphicon-search"></span> Search</button>
+                    <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()"style="background: #79933b;height:34px;width:85px;"><span class="glyphicon glyphicon-search"></span> Submit</button>
                     <ul class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
                       <li ng-repeat="x in search" ng-click="open()">
                         <table style="width: 100%;background-color: white; margin-top: 10px;" id="t02">
@@ -111,6 +111,7 @@ $(document).ready(function()
         <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         <li ng-if="!loggedin()"><a href="#" data-toggle="popover" data-container="body" data-contentwrapper=".content"><span class="glyphicon glyphicon-map-marker"></span>Change Location</a></li>
         <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
+        <li ng-if="loggedin()"><a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a></li>
         <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
 
        <div class="content" style="display:none;">
@@ -168,6 +169,51 @@ $(document).ready(function()
 RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</button>
         <br><br>
         <a href="#">Forgot password?</a>
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" ng-controller="cart" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+ 
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cart</h3>
+      </div>
+      <div class="modal-body" >
+      <table style="width: 100%;" cellpadding="10" cellspacing="10" >
+<tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
+<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
+    <th style="text-align: center;">Qty</th>
+    <th style="text-align: center;">Name</th>   
+    <th style="text-align: center;">Weight</th>
+    <th style="text-align: center;">Price</th>
+</tr>
+
+<tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
+<td> {{x.qty}} </td>
+<td> {{x.nam}} </td>
+<td> {{x.w}} kg</td>
+<td> Rs.{{x.price}} </td>
+
+</tr>
+<tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
+
+
+</table>
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+        <!--<button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>-->
+        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;">   Proceed <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
+        
+        <br><br>
+        
       </p>
         
       </div>
