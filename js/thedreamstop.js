@@ -408,12 +408,24 @@ $scope.addeditems=[
 $scope.i=-1;
 $scope.titems=0;
 $scope.tprice=0;
+//$scope.addeditems.length=0;
+if($localstorage.get('cart')==null)
+$localstorage.set('cart',JSON.stringify($scope.addeditems));
+else
+{
 
+  var obj=JSON.parse($localstorage.get('cart'));$scope.addeditems.splice(0,1);
+  for(var i=0;i<obj.length;i++)
+  {
+    if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
+    $scope.addeditems.push(obj[i]);
+  }
+}
 $scope.add=function(id,qty,name,w,price)
 {
 
 var j=0,f=0;
-if($scope.i==-1)$scope.addeditems.splice(0,1);
+//if($scope.i==-1)$scope.addeditems.splice(0,1);
 
 for(j=0;j<$scope.addeditems.length;j++)
   if($scope.addeditems[j].id==id)
@@ -424,7 +436,7 @@ if(!f)
   $scope.addeditems.push({ id:$scope.i+1,qty: qty,nam:name ,w: w,price: price});
   $scope.i++;$scope.titems=$scope.titems+qty;}
   $scope.tprice=$scope.tprice+price;
-
+  $localstorage.set('cart',JSON.stringify($scope.addeditems));
 
   };
 
@@ -438,9 +450,14 @@ $scope.remove=function(y)
     
     $scope.i--;
     
-    if($scope.i==-1){$scope.addeditems.push({ id:0,qty: 0,nam:'-' ,w: 0,price: 0});$scope.tprice=0;}
+    if($scope.i==-1)
+    {
+      //$scope.addeditems.push({ id:0,qty: 0,nam:'-' ,w: 0,price: 0});
+      $scope.tprice=0;
+    }
     else{
     $scope.tprice=$scope.tprice-value.price;}
+    $localstorage.set('cart',JSON.stringify($scope.addeditems));
 }
 
 $scope.check=function(x)
