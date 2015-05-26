@@ -39,7 +39,8 @@ app.controller('search',['$scope','$http','$localstorage', function($scope,$http
 $scope.search=[{brand:'Sorry.No matches found.',name:'',q:'-1',price:'',}];
 
 $scope.searchdata="";
-
+$scope.open=function(){setTimeout( function(){document.getElementById("searchdiv").className="dropdown open";}, 20);}
+$scope.val=1;
 $scope.searchlist=function(){
   
   $scope.session=$localstorage.get('session');
@@ -203,7 +204,7 @@ app.controller("navcart",function($scope)
 
 //display of items
 
-app.controller('itemdisplay', function($scope,$http) {
+app.controller('itemdisplay', ['$scope','$localstorage','$http',function($scope,$localstorage,$http){
 
   $( document ).ready(function() 
   {
@@ -421,6 +422,8 @@ if(!f)
   $scope.addeditems.push({ id:$scope.i+1,qty: qty,nam:name ,w: w,price: price});
   $scope.i++;$scope.titems=$scope.titems+qty;}
   $scope.tprice=$scope.tprice+price;
+
+
   };
 
 $scope.remove=function(y)
@@ -453,7 +456,7 @@ if($scope.selected.label=='Price')
   $scope.s='price';
 else 
   $scope.s='name';
-});
+}]);
 
 //controls the tiles used for display of categories in index.html
 

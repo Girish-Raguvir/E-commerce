@@ -18,6 +18,7 @@ $(window).load(function() {
   $(".loader").fadeOut("slow");
   $("#locmodal").modal("show");
 })
+
 $(document).ready(function()
 {
    $('[data-toggle="popover"]').popover({title:"Warning!",content:function(){ return $(".content").html();},placement:"auto",html: true});   
@@ -69,16 +70,19 @@ $(document).ready(function()
             <a class="navbar-brand" href="#" style="padding-left:80px;">The Dream Stop</a> 
           </div>
           <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
-            <li style="width:400px;">
-              <div class="input-group" style="width:400px;" ng-controller="search">
+            <li style="width:450px;">
+              <div class="input-group" style="width:450px;" ng-controller="search">
                 <input type="text" class="form-control" ng-model="searchdata" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
                 <span >
-                  <div class="dropdown">
+                  <div id="searchdiv" class="dropdown">
                     <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()"style="background: #79933b;height:34px;width:85px;"><span class="glyphicon glyphicon-search"></span> Submit</button>
                     <ul class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
-                      <li ng-repeat="x in search">
-                        <table style="width: 97%;background-color: white; margin: 10px;" id="t02">
-                          <tr style="height: 10%">
+                      <li ng-repeat="x in search" ng-click="open()">
+                        <table style="width: 100%;background-color: white; margin-top: 10px;" id="t02">
+                          <tr style="height: 10%;width:100%;" id="searchlist">
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
+                            <input type="number" min="1" max="10" value="1" ng-model="val">
+                          </td>
                           <td style="padding: 10px;"align="center">
                           <b>{{ x.brand }}</b>
                           </td>
@@ -89,6 +93,7 @@ $(document).ready(function()
                           <b>{{ x.q }} kg</b>
                           </td>
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn">ADD</button></td>
                           </tr>
                         </table>
                         
