@@ -424,7 +424,7 @@ else
     if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
     $scope.addeditems.push(obj[i]);
   }
-  $scope.tprice=$localstorage.get('tprice');
+  $scope.tprice=parseInt($localstorage.get('tprice'));
 }
 $scope.add=function(id,qty,name,w,price)
 {
@@ -499,7 +499,7 @@ app.controller("cart",['$localstorage','$scope','$http',function($localstorage,$
       price:0 ,
 
     }];
-    $scope.tprice=$localstorage.get('tprice');$scope.titems=0;
+    $scope.tprice=parseInt($localstorage.get('tprice'));$scope.titems=0;
     if($localstorage.get('cart')==null)
       $localstorage.set('cart',JSON.stringify($scope.addeditems));
     else
