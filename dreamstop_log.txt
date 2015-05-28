@@ -13,3 +13,5 @@ Invalid PID error in edit info?
 Adding cart to server
 
 Order History
+
+Fix bottom bar on every page
