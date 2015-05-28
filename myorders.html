@@ -45,70 +45,121 @@ $(window).load(function() {
         
         <div class="navbar-collapse collapse">
           <div ng-controller="myCtrl" > 
-  <i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()" style="padding-right:10px;"></i>
-
-  
-
+ <i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()" ></i>
   </div>
           <div class="navbar-header" >
-          <!-- <span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span> -->
-           
-  
-         <a class="navbar-brand" href="index.html" style="padding-left:80px;">The Dream Stop</a> 
-        </div>
+            <a class="navbar-brand" href="index.html" style="padding-left:80px;">The Dream Stop</a> 
+          </div>
           <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
-        <li>
-        <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for a product, category or brand">
-        <span class="input-group-btn" >
-        <button class="btn btn-default" type="button" style="background: #79933b;"><span class="glyphicon glyphicon-search"></span> Submit</button>
-       </span>
-        </div>
-        </li>
-        </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-        <li ><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-         <li ><a href="#" data-toggle="modal" data-target="#locmodal"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
-       
-      </ul>
-        </div>
-      </div>
-    </div>
-  
-  <!--<nav class="navbar navbar-inverse" >
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">E-commerce</a>
-    </div>
-    <div>
-      <ul class="nav navbar-nav">
-        <li ><a href="#">Home</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Offers<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Offer-1</a></li>
-            <li><a href="#">Offer-2</a></li>
-            <li><a href="#">Offer-3</a></li>
+            <li style="width:450px;">
+              <div class="input-group" style="width:450px;" ng-controller="search">
+                <input type="text" class="form-control" ng-model="searchdata" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
+                <span >
+                  <div id="searchdiv" class="dropdown">
+                    <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()"style="background: #79933b;height:34px;width:85px;"><span class="glyphicon glyphicon-search"></span> Submit</button>
+                    <ul class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
+                      <li ng-repeat="x in search" ng-click="open()">
+                        <table style="width: 100%;background-color: white; margin-top: 10px;" id="t02">
+                          <tr style="height: 10%;width:100%;" id="searchlist">
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
+                            <input type="number" min="1" max="10" value="1" ng-model="val">
+                          </td>
+                          <td style="padding: 10px;"align="center">
+                          <b>{{ x.brand }}</b>
+                          </td>
+                          <td ng-if="x.q!=-1" style="padding: 10px;" align="center">
+                          <div class="desc">{{ x.name }}</div>
+                          </td>
+                          <td ng-if="x.q!=-1"  style="padding: 0px;"align="center">
+                          <b>{{ x.q }} kg</b>
+                          </td>
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn">ADD</button></td>
+                          </tr>
+                        </table>
+                        
+                      </li>
+                    </ul>
+                  </div> 
+                </span>
+              </div>
+            </li>
           </ul>
-        </li>
-        <li><a href="#">New Arrivals</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+      <div ng-controller="log_in_out">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-        <li ><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-         <li ><a href="#" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-map-marker"></span> Location</a></li>
+        <li><a data-toggle="popover" data-container="body" data-contentwrapper=".content"><span id="bindElement"></span></a></li>
+        <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+        <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
+        <li ng-if="loggedin()"><a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a></li>
+        <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
+        
+
+       <div class="content" style="display:none;">
+        <p align="center" >
+        <br>
+        Changing location will cause the page to be refreshed leading to loss of saved data.Do you want to proceed? <br><br>
+        <button type="submit" class="btn btn-primary" ng-click="refresh()">Continue</button>
+        </p>
+       </div>
 
       </ul>
     </div>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+<div class="modal fade" ng-controller="cart" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+ 
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cart</h3>
+      </div>
+      <div class="modal-body" >
+      <table style="width: 100%;" cellpadding="10" cellspacing="10" >
+<tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
+<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
+    <th style="text-align: center;">Qty</th>
+    <th style="text-align: center;">Name</th>   
+    <th style="text-align: center;">Weight</th>
+    <th style="text-align: center;">Price</th>
+</tr>
+
+<tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
+<td> {{x.qty}} </td>
+<td> {{x.nam}} </td>
+<td> {{x.w}} kg</td>
+<td> Rs.{{x.price}} </td>
+
+</tr>
+<tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
+
+
+</table>
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+        <!--<button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>-->
+        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;">   Proceed <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
+        
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
   </div>
-</nav>-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+</div>
+<div class="modal fade" ng-controller="login" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Login</h3>
+        <h3 class="modal-title" id="myModalLabel">Login<span ng-if="wuser" style="color:red;font-size:15px;margin-left:30px;vertical-align:middle;">&nbsp;&nbsp;Wrong username or password.Try again.</span></h3>
+
       </div>
       <div class="modal-body">
       <div class="container">
@@ -116,11 +167,7 @@ $(window).load(function() {
       <div class="col-md-4">
       <div class="form-group">
       <label for="lemail">Email:</label>
-      <input type="email" class="form-control" id="lemail">
-      </div>  
-      <div class="form-group">
-      <label for="lpwd">Password:</label>
-       <input type="email" class="form-control" name=" lemail" id="lemail" ng-model="lemail" required=""/>
+       <input type="email" class="form-control" name=" lemail" id="lemail"  required="" ng-model="user.email"/>
        <div ng-show="RegForm.lemail.$dirty && RegForm.lemail.$invalid" style="color:red;font-weight:bold;">
       <span ng-show="RegForm.lemail.$error.required">E-Mail is a required field</span>
       <span ng-show="RegForm.lemail.$error.email" >This is not a valid email.</span>
@@ -128,7 +175,7 @@ $(window).load(function() {
       </div>  
       <div class="form-group">
       <label for="lpwd">Password:</label>
-      <input type="password" class="form-control" id="lpwd" name="lpwd" ng-model="lpwd" required=""/>
+      <input type="password" class="form-control" id="lpwd" name="lpwd"  required="" ng-model="user.password"/>
        <div ng-show="RegForm.lpwd.$dirty" style="color:red;font-weight:bold;">
       <span ng-show="RegForm.lpwd.$error.required">Password is a required field</span>
     </div>
@@ -141,8 +188,8 @@ $(window).load(function() {
       
       <div class="modal-footer">
         <p align="center">
-        <button type="submit" class="btn btn-success" data-dismiss="modal" style="width:40%;" ng-disabled="RegForm.lemail.$dirty && RegForm.lemail.$invalid ||  
-RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
+        <button type="submit" class="btn btn-success"  style="width:40%;" ng-disabled="RegForm.lemail.$dirty && RegForm.lemail.$invalid ||  
+RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</button>
         <br><br>
         <a href="#">Forgot password?</a>
       </p>
@@ -150,44 +197,13 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
       </div>
     </div>
   </div>
+
 </div>
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<div class="modal fade" id="locmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Choose Location</h3>
-      </div>
-      <div class="modal-body">
-      <iframe
-    width="100%"
-    height="100%"
-    frameborder="0" style="border:0;padding: 10px;"
-    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwpmNVR7SyjIzeaY8xij4Gq92qo_VpS94
-      &q=Butchart+Gardens+Victoria+BC
-      &attribution_source=Google+Maps+Embed+API
-      &attribution_web_url=http://www.butchartgardens.com/
-      &attribution_ios_deep_link_id=comgooglemaps://?daddr=Butchart+Gardens+Victoria+BC">
-  </iframe>
-    </div>
-    
-      
-      <div class="modal-footer">
-        <p align="center">
-        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;">Submit</button>
-        <br><br>
-        
-      </p>
-        
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="locmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <!--button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button-->
         <h3 class="modal-title" id="myModalLabel">Location</h3>
       </div>
       <div class="modal-body">
@@ -196,16 +212,16 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
       <div class="col-md-4">
       <div class="form-group">
       <label for="lemail">City:</label>
-      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;">
-          <option>Chennai</option>
-          <option>Bangalore</option>
-          <option>Mumbai</option>
-          <option>Delhi</option>
+      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;" id="City">
+          <option >Chennai</option>
+          <option >Bangalore</option>
+          <option >Mumbai</option>
+          <option >Delhi</option>
         </select> 
       </div>  
       <div class="form-group">
       <label for="lpwd">Area:</label>
-      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;">
+      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;" id="area">
           <option>Area1</option>
           <option>Area2</option>
           <option>Area3</option>
@@ -219,13 +235,70 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
     </div>
       <div class="modal-footer">
         <p align="center">
-        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;">Submit</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;" id="locsub">Submit</button>
         
       </p>
         
       </div>
     </div>
   </div>
+  <div class="modal fade" id="detailsmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Delivery Details</h3>
+      </div>
+      <div class="modal-body">
+      <div class="form">
+      <div class="form-group">
+      <input type="text" class="form-control"placeholder="Name"></input>
+      <br>
+      <input type="tel" class="form-control"placeholder="Telephone Number"></input>
+      <br>
+      <input type="text" class="form-control"placeholder="Address"></input>
+      <br>
+      </div>
+      </div>
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+         <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#paymodal"style="width:40%;">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="paymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Payment</h3>
+      </div>
+      <div class="modal-body">
+      
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+         <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back</button>
+        
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 <div class="container-fluid" ng-app="thedreamstop" ng-controller="orderdisplay"  style="padding-top: 140px;" ng-controller="orderdisplay">
 
@@ -247,10 +320,10 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
+            <ul class="sidebar-nav" style="padding: 0px;" ng-controller="drawer">
               <br>
                 <li class="sidebar-brand" >
-                    <h3 style="color: white;padding-top: 10px;">Welcome User</h3>
+                    <h3 style="color: white;padding-top: 10px;">The Dream Stop</h3>
                 </li>
                   <hr> 
                   <br>              
@@ -259,7 +332,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid">Login</button>
                 </li>
                 
                 <li >
-                    <a href="Account.html" style="color: white;"><span class="glyphicon glyphicon-user" style="color: white;"></span>&nbsp;&nbsp;My Account</a>
+                    <a style="color: white;" ng-click="account()"><span class="glyphicon glyphicon-user" style="color: white;"></span>&nbsp;&nbsp;My Account</a>
                 </li>
                 
                 <!-- <li style="background: rgba(255,255,255,0.2);color:white;">
