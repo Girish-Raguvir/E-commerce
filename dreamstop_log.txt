@@ -1,0 +1,15 @@
+Change location->continue not working
+
+coupon code input during payment-Coupon applied message(make appropriate changes)-and wrong code-No such coupon exists error.
+
+Confirm password check
+
+Captcha check
+
+Terms and conditions
+
+Invalid PID error in edit info?
+
+Adding cart to server
+
+Order History
