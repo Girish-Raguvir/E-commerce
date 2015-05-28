@@ -424,7 +424,13 @@ $scope.addeditems=[
 $scope.i=-1;
 $scope.titems=0;
 $scope.tprice=0;
-
+if($localstorage.get('loggedin')=='true')$scope.chkdis=0;
+else $scope.chkdis=1;
+$scope.checkout=function()
+{
+  if($localstorage.get('loggedin')=='true')$("#cartmodal").modal("show");
+  else alert('Sorry! You must be logged in for checking out the cart.');
+}
 //$scope.addeditems.length=0;
 if($localstorage.get('cart')==null)
 {$localstorage.set('cart',JSON.stringify($scope.addeditems));$localstorage.set('tprice',$scope.tprice);}
