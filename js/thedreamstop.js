@@ -624,8 +624,8 @@ app.controller("tiles",['$localstorage','$scope','$http',function($localstorage,
       $( document ).ready(function() {
       var cityVal=$('#City').val();
       var area=$('#area').val();
-      //if(cityVal==null || area==null || cityVal=="" || area=="" )
-      //$("#locmodal").modal('show');
+      if(cityVal==null || area==null || cityVal=="" || area=="" )
+      $("#locmodal").modal('show');
       $(".tile").height($("#tile1").width());
       $(".carousel").height($("#tile1").width());
        $(".item").height($("#tile1").width());
