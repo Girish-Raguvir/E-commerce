@@ -34,12 +34,15 @@ app.factory('UserService', function() {
     return userService;
 });
 
+//search controller
+
 app.controller('search',['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
 $scope.search=[{brand:'Sorry.No matches found.',name:'',q:'-1',price:'',}];
 
 $scope.searchdata="";
-
+$scope.open=function(){setTimeout( function(){document.getElementById("searchdiv").className="dropdown open";}, 20);}
+$scope.val=1;
 $scope.searchlist=function(){
   
   $scope.session=$localstorage.get('session');
@@ -92,6 +95,13 @@ $scope.searchlist=function(){
 
 app.controller("log_in_out",['$scope','$localstorage','$http',function($scope,$localstorage,$http){
 
+$scope.c='kkkss';
+$scope.refresh=function()
+{
+  sessionStorage.clear('location');
+  location.reload();
+  console.log('hello');
+}
 $scope.loggedin=function()
 {
   var t=$localstorage.get('loggedin');
@@ -106,6 +116,9 @@ $scope.logout=function()
   
   $localstorage.set('loggedin','false');
   $localstorage.set('username','Guest');
+  $localstorage.set('cart','[]');
+  $localstorage.set('tprice',0);
+
   var session=$localstorage.get('session');
   $scope.data={'session':session};
   var req = 
@@ -121,9 +134,8 @@ $scope.logout=function()
      {
         console.log(JSON.stringify(response));
         console.log("response :"+response.success);
-        $localstorage.set('session','');
-        location.reload();
-        setTimeout(function(){},1000);
+        $localstorage.clear('session');
+        
       })
      .error(
       function(response)
@@ -131,13 +143,14 @@ $scope.logout=function()
         console.log("error:"+ response.error_message);
         alert('Problem while logging out.Please try again.')
       });
+     window.location.assign("index.html");
+     setTimeout(function(){},1000);
+     }
 
-}
-
-$scope.username=$localstorage.get('username');
-if($scope.username=="Guest")$localstorage.set('loggedin','false');
-else $localstorage.set('loggedin','true');
-
+  $scope.username=$localstorage.get('username');
+  if($scope.username=="Guest")$localstorage.set('loggedin','false');
+  else $localstorage.set('loggedin','true');
+  
 }]);
 
 //display of username of slide-drawer
@@ -145,6 +158,12 @@ else $localstorage.set('loggedin','true');
 app.controller("drawer",['$scope','$localstorage',function($scope,$localstorage)
 {
 	$scope.username=$localstorage.get('username');
+  $scope.account=function()
+  {
+    if($localstorage.get('loggedin')=='true')window.location.assign("./Account.html");
+    else alert('Sorry! You must be logged in to view your account.')
+
+  }
 }]);
 
 //View cart diplay observed during scroll-down in items page
@@ -203,7 +222,7 @@ app.controller("navcart",function($scope)
 
 //display of items
 
-app.controller('itemdisplay', function($scope,$http) {
+app.controller('itemdisplay', ['$scope','$localstorage','$http',function($scope,$localstorage,$http){
 
   $( document ).ready(function() 
   {
@@ -405,7 +424,7 @@ $scope.values = [
 
 $scope.addeditems=[
     { 
-      id:0,
+      id:-1,
       qty:0 ,
       nam:'-',
       w:0 ,
@@ -416,13 +435,34 @@ $scope.addeditems=[
 $scope.i=-1;
 $scope.titems=0;
 $scope.tprice=0;
+if($localstorage.get('loggedin')=='true')$scope.chkdis=0;
+else $scope.chkdis=1;
+$scope.checkout=function()
+{
+  if($localstorage.get('loggedin')=='true')$("#cartmodal").modal("show");
+  else alert('Sorry! You must be logged in for checking out the cart.');
+}
+//$scope.addeditems.length=0;
+if($localstorage.get('cart')==null)
+{$localstorage.set('cart',JSON.stringify($scope.addeditems));$localstorage.set('tprice',$scope.tprice);}
+else
+{
 
+  var obj=JSON.parse($localstorage.get('cart'));$scope.addeditems.splice(0,1);
+  for(var i=0;i<obj.length;i++)
+  {
+    if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
+    $scope.addeditems.push(obj[i]);
+  }
+  $scope.tprice=parseInt($localstorage.get('tprice'));
+}
 $scope.add=function(id,qty,name,w,price)
 {
 
 var j=0,f=0;
-if($scope.i==-1)$scope.addeditems.splice(0,1);
-
+//if($scope.i==-1)$scope.addeditems.splice(0,1);
+if($scope.addeditems.length!=0)
+if($scope.addeditems[0].id==-1)$scope.addeditems.splice(0,1);
 for(j=0;j<$scope.addeditems.length;j++)
   if($scope.addeditems[j].id==id)
       {$scope.addeditems[j].qty+=qty;$scope.addeditems[j].price+=price;f=1;$scope.titems=$scope.titems+qty;break;}
@@ -432,6 +472,9 @@ if(!f)
   $scope.addeditems.push({ id:$scope.i+1,qty: qty,nam:name ,w: w,price: price});
   $scope.i++;$scope.titems=$scope.titems+qty;}
   $scope.tprice=$scope.tprice+price;
+  $localstorage.set('cart',JSON.stringify($scope.addeditems));
+  $localstorage.set('tprice',$scope.tprice);
+
   };
 
 $scope.remove=function(y)
@@ -444,9 +487,15 @@ $scope.remove=function(y)
     
     $scope.i--;
     
-    if($scope.i==-1){$scope.addeditems.push({ id:0,qty: 0,nam:'-' ,w: 0,price: 0});$scope.tprice=0;}
+    if($scope.i==-1)
+    {
+      //$scope.addeditems.push({ id:0,qty: 0,nam:'-' ,w: 0,price: 0});
+      $scope.tprice=0;
+    }
     else{
     $scope.tprice=$scope.tprice-value.price;}
+    $localstorage.set('cart',JSON.stringify($scope.addeditems));
+    $localstorage.set('tprice',$scope.tprice);
 }
 
 $scope.check=function(x)
@@ -464,7 +513,37 @@ if($scope.selected.label=='Price')
   $scope.s='price';
 else 
   $scope.s='name';
-});
+}]);
+
+//cart controller
+
+app.controller("cart",['$localstorage','$scope','$http',function($localstorage,$scope,$http)
+  {
+
+    $scope.addeditems=[
+    { 
+      id:0,
+      qty:0 ,
+      nam:'-',
+      w:0 ,
+      price:0 ,
+
+    }];
+    $scope.tprice=parseInt($localstorage.get('tprice'));$scope.titems=0;
+    if($localstorage.get('cart')==null)
+      $localstorage.set('cart',JSON.stringify($scope.addeditems));
+    else
+    {
+      var obj=JSON.parse($localstorage.get('cart'));$scope.addeditems.splice(0,1);
+      for(var i=0;i<obj.length;i++)
+      {
+        if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
+        $scope.addeditems.push(obj[i]);
+        $scope.titems+=obj[i].qty;
+      }
+    }
+
+  }]);
 
 //controls the tiles used for display of categories in index.html
 
@@ -474,6 +553,7 @@ app.controller("tiles",['$localstorage','$scope','$http',function($localstorage,
     
     $scope.subc=[{subID:1,name:"Hello"},{subID:2,name:"Bye"},{subID:3,name:"See you"}];
     
+
     $scope.cats=function(id)
       {
         console.log(id);
@@ -542,7 +622,10 @@ app.controller("tiles",['$localstorage','$scope','$http',function($localstorage,
     {
       $scope.check=($scope.check);
       $( document ).ready(function() {
-      $("#locmodal").modal('show');
+      var cityVal=$('#City').val();
+      var area=$('#area').val();
+      //if(cityVal==null || area==null || cityVal=="" || area=="" )
+      //$("#locmodal").modal('show');
       $(".tile").height($("#tile1").width());
       $(".carousel").height($("#tile1").width());
        $(".item").height($("#tile1").width());
@@ -681,9 +764,10 @@ function getsession(cname)
   }
     return "";
 }
-  
-$scope.session=getsession('session');
+$scope.edit=0;
 
+//$scope.session=getsession('session');
+$scope.session=$localstorage.get('session');
 var req = 
 { method: 'POST',
   url: 'http://thedreamstop.com/api/userInfo.php', 
@@ -718,6 +802,7 @@ console.log("error:"+ response.error_message);
 
 $scope.useredit=function()
 {
+  $scope.edit=0;
   var newuser={"session":$scope.session,"email":$scope.user.email,"name":$scope.user.name,"password":"123","address":$scope.user.address,"telephone":$scope.user.telephone,};
   var req = 
   { method: 'POST',
@@ -777,6 +862,7 @@ $scope.sendPost = function()
     console.log("response :"+response.success);
     if(response.success=='true')
       {
+        $localstorage.set('session',response.session);
         alert('You have successfully registered with us.Welcome.'+'\n'+'You will now be redirected to your account.');
         setTimeout( function(){window.location.assign("./Account.html");}, 1000);
       }
@@ -903,6 +989,36 @@ app.controller("nav",function($scope,$rootScope){
 
 $rootScope.f = 0; var e=0;
 
+if(sessionStorage.location==null)
+    sessionStorage.location=JSON.stringify({'city':' ','area':' '});
+
+$(window).load(function() 
+  {
+    $(".loader").fadeOut("slow");
+    var loc=JSON.parse(sessionStorage.location);
+    if(loc.city==' ' || loc.area==' ')
+      $("#locmodal").modal("show");
+    else
+      {
+         $('#bindElement').html("<b> City:&nbsp;</b> " + loc.city +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + loc.area);
+      }
+  })
+  
+$(document).ready(function()
+  {
+    $('[data-toggle="popover"]').popover({title:"Change Location?",content:function(){ return $(".content").html();},placement:"auto",html: true});   
+      
+    function displayVals()
+      {
+        var cityVal=$('#City').val();
+        var area=$('#area').val();
+        $('#bindElement').html("<b> City:&nbsp;</b> " + cityVal +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + area);
+        sessionStorage.location=JSON.stringify({'city':cityVal,'area':area});
+        console.log('here');
+      }
+     $("#locsub").click(displayVals);
+    
+  })
 document.getElementById("wrapper").className="toggled";
 $('.navbar').css({"cursor":"pointer"});
 $(window).scroll(function() {
