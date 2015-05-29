@@ -548,7 +548,9 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
     console.log($scope.date);
     $scope.addorder=function()
     {
-     $scope.data={'session':session,'prodArray':{'tprice':$scope.tprice,'titems':$scope.titems,'name':$scope.shipdata.name,'phno':$scope.shipdata.phno,'address':$scope.shipdata.address,'date':date},'itemArray':JSON.stringify($scope.addeditems)};
+     var prodArray=JSON.stringify({'tprice':$scope.tprice,'titems':$scope.titems,'name':$scope.shipdata.name,'phno':$scope.shipdata.phno,'address':$scope.shipdata.address,'date':date}); 
+     var itemArray=JSON.stringify($scope.addeditems);
+     $scope.data={'session':session,'prodArray':prodArray,'itemArray':itemArray};
      console.log(JSON.stringify($scope.data));
       var req = 
         { method: 'POST',
