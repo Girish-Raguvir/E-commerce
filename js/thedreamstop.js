@@ -517,7 +517,7 @@ else
 
 //cart controller
 
-app.controller("cart",['$localstorage','$scope','$http',function($localstorage,$scope,$http)
+app.controller("cart",['$localstorage','$scope','$http','$filter',function($localstorage,$scope,$http,$filter)
   {
 
     $scope.addeditems=[
@@ -542,8 +542,43 @@ app.controller("cart",['$localstorage','$scope','$http',function($localstorage,$
         $scope.titems+=obj[i].qty;
       }
     }
+    $scope.shipdata={'name':'','phno':'','address':'','date':''};
+    var session=$localstorage.get('session');
+    var date= $filter('date')(new Date(),'dd-MM-yyyy');
+    console.log($scope.date);
+    $scope.addorder=function()
+    {
+     $scope.data={'session':session,'prodArray':{'tprice':$scope.tprice,'titems':$scope.titems,'name':$scope.shipdata.name,'phno':$scope.shipdata.phno,'address':$scope.shipdata.address,'date':date},'itemArray':JSON.stringify($scope.addeditems)};
+     console.log(JSON.stringify($scope.data));
+      var req = 
+        { method: 'POST',
+          url: 'http://thedreamstop.com/api/addOrder.php', 
+          headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+          data: $.param($scope.data),
+        } 
+      
 
-  }]);
+      $http(req)
+      .success(
+      function(response){
+      console.log(JSON.stringify(response));
+      console.log("response :"+response.success);
+      if(response.success=='true')
+      { 
+       $('#paymodal').modal('show');
+                  
+      } 
+      else 
+      {
+        alert('Some error has occured.Please try again.')
+      }
+      })
+      .error(
+      function(response){
+      console.log("error:"+ response.error_message);
+      });
+    }  
+ }]);
 
 //controls the tiles used for display of categories in index.html
 
@@ -938,51 +973,110 @@ $scope.sendPost = function()
 
 // my orders display
 
-app.controller('orderdisplay', function($scope) {
+app.controller('orderdisplay', ['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
 $scope.orders = 
 [
-  {ono:123456,s:"IIT-M",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:2000},
-  {ono:123456,s:"IIT-B",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:1000},
-  {ono:123456,s:"IIT-K",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:5000},
-  {ono:123456,s:"IIT-D",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:8000},
-  {ono:123456,s:"IIT-K",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:3000},
-  {ono:123456,s:"IIT-M",desc:"It was vegetables.",dod: "14/4/2015",aod:"Plot no.42,Annai Indira Nagar,Okkiam Thuraipakkam,OMR,Chennai-600096.",p:4000}
+  {'tprice':0,'titems':0,'name':'','phno':'','address':'','date':' ','TID':''},
+  
 ];
-    
+var op=0;
+$scope.open=function(id)
+{
+  console.log(id);
+  $('#'+id).toggleClass("in");op++;
+  if(op%2==1)
+  {
+    var req1=
+    { method: 'POST',
+      url: 'http://thedreamstop.com/api/viewTransaction.php',
+      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+      data: $.param({'session':$localstorage.get('session'),'TID':id}),
+    }
+      
+    $http(req1)
+    .success(
+    function(response)
+    {
+      console.log(JSON.stringify(response));
+      console.log("response :"+response.success);
+      if(response.success=='true')
+        {
+         $scope.items=response.transaction;
+         $scope.status=response.status;
+         console.log(JSON.stringify($scope.items));
+        }
+
+      else
+          {
+            alert('Some error has occured.Please try again.');
+          }
+    })
+    .error(
+    function(response)
+    {
+      console.log("error:"+ response.error_message);
+      alert('Some error has occured.Please try again.');
+    });
+  }
+}
+var req=
+  { method: 'POST',
+    url: 'http://thedreamstop.com/api/orderHistory.php',
+    headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+    data: $.param({'session':$localstorage.get('session')}),
+  }
+        
+  $http(req)
+  .success(
+  function(response)
+  {
+    console.log(JSON.stringify(response));
+    console.log("response :"+response.success);
+    if(response.success=='true')
+      {
+       $scope.orders=response.history;
+       console.log(JSON.stringify($scope.orders));
+      }
+
+    else
+        {
+          alert('Some error has occured.Please try again.');
+        }
+  })
+  .error(
+  function(response)
+  {
+    console.log("error:"+ response.error_message);
+    alert('Some error has occured.Please try again.');
+  });
+
 $scope.values = [
 {
   id: 1,
-  label: 'Price-Lower to Higher',
-  sub: 'p',
+  label: 'Total bill amount-Lower to Higher',
+  sub: 'tprice',
   rev:false
 }, 
 {
   id: 2,
-  label: 'Price-Higher to Lower',
-  sub: 'p',
+  label: 'Total bill amount-Higher to Lower',
+  sub: 'tprice',
   rev:true
   
 },
-{
-  id: 3,
-  label: 'Seller-Alphabetical',
-  sub: 's',
-  rev:false
-  
-}
 ];
 
 $scope.i=-1;
 $scope.selected =$scope.values[0];
-$scope.s='p';
+$scope.s='tprice';
     
 if($scope.selected.label=='Price')
-  $scope.s='p';
+  $scope.s='tprice';
 else 
   $scope.s='s';
 
-});
+}]);
 
 // slide drawer
 

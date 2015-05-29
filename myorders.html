@@ -376,25 +376,46 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <div ng-if="true">
   <br>
 <table style="border-spacing: 5px;
-    border-collapse: separate;">
+    border-collapse: separate;width:100%;" ng-click="open(x.TID)">
 <tr >
-<td colspan="5" valign="top" align="center"style=" border: 1px solid black;background: rgba(121,147,59,0.8);"><h4>Order number: {{x.ono}}</h4></td>
-</tr>
-<tr align="center">
-<th align="center">Seller</th>
-<th align="center">Description</th>
-<th align="center"nowrap>Date of Delivery</th>  
-<th align="center">Address of Delivery</th>
-<th align="center"nowrap>Price amount</th>
+<td colspan="5" valign="bottom" align="center"style=" border: 1px solid black;background: rgba(121,147,59,0.8);"><h4>Order ID: {{x.TID}}</h4></td>
 </tr>
 <tr>
-<td align="center">{{x.s}}</td>
-<td align="center"nowrap>{{x.desc}}</td>
-<td align="center">{{x.dod}}</td>
-<td align="center" nowrap>{{x.aod}}</td>
-<td align="center">Rs.{{x.p}}</td>
+
+<th style="text-align:center;" align="center">Number of items</th>
+<th style="text-align:center;" align="center"nowrap>Price amount</th>
+<th style="text-align:center;" align="center">Address of Delivery</th>
+<th style="text-align:center;" align="center"nowrap>Date of Delivery</th>  
+
 </tr>
+<tr>
+<td align="center">{{x.titems}}</td>
+<td align="center"nowrap>Rs.{{x.tprice}}</td>
+<td align="center">{{x.address}}</td>
+<td align="center" nowrap>{{x.date}}</td>
+</tr>
+
 </table>
+<div id="{{x.TID}}" class="collapse" style="background:white;height:auto;width:100%;padding:20px;" ng-controller="cart">
+<table style="width: 100%;" cellpadding="10" cellspacing="10">
+<!-- <tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr> -->
+<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
+    <th style="text-align: center;">Qty</th>
+    <th style="text-align: center;">Name</th>   
+    <th style="text-align: center;">Weight</th>
+    <th style="text-align: center;">Price</th>
+</tr>
+
+<tr ng-if="tprice!=0" ng-repeat="y in items" style="text-align: center;">
+<td> {{y.qty}} </td>
+<td> {{y.nam}} </td>
+<td> {{y.w}} kg</td>
+<td> Rs.{{y.price}} </td>
+
+</tr>
+<tr ng-if="tprice==0"><h4 align="center">Order Status: {{status}}</h4></tr>
+</table>
+</div>
 <br>
 
 <hr>

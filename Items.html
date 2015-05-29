@@ -154,7 +154,7 @@ $(window).load(function() {
     </div>
   </div>
 </div>
-<div class="modal fade" id="detailsmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<div class="modal fade" id="detailsmodal" ng-controller="cart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -164,11 +164,11 @@ $(window).load(function() {
       <div class="modal-body">
       <div class="form">
       <div class="form-group">
-      <input type="text" class="form-control"placeholder="Name"></input>
+      <input type="text" class="form-control"placeholder="Name" ng-model="shipdata.name"></input>
       <br>
-      <input type="tel" class="form-control"placeholder="Telephone Number"></input>
+      <input type="tel" class="form-control"placeholder="Telephone Number" ng-model="shipdata.phno"></input>
       <br>
-      <input type="text" class="form-control"placeholder="Address"></input>
+      <input type="text" class="form-control"placeholder="Address" ng-model="shipdata.address"></input>
       <br>
       </div>
       </div>
@@ -178,7 +178,7 @@ $(window).load(function() {
       <div class="modal-footer">
         <p align="center">
          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#paymodal"style="width:40%;">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
         <br><br>
         
       </p>
