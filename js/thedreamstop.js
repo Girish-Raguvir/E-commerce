@@ -272,7 +272,18 @@ app.controller('itemdisplay', function($scope,$http) {
         {id:6,qty:1,brand:'Test',name:'Spinach',q:0.5,q1:0.5,q2:1,price:200,image:'images/nature.jpg'}
         
     ];
-    
+    $scope.eggs= [
+    {id:0,qty:1,brand:'Britannia',name:'Country Duck eggs',price:66,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Britannia',name:'Double Yolk eggs',price:40,image:'images/nature.jpg' }
+    ];
+    $scope.bakery= [
+    {id:0,qty:1,brand:'Britannia',name:'Sandwich Bread',q:0.4,q1:0.4,price:28,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Britannia',name:'Chocolate Muffins',q:0.15,q1:0.15,price:40,image:'images/nature.jpg' }
+    ];
+    $scope.bakery= [
+    {id:0,qty:1,brand:'Amul',name:'Butter',q:0.1,q1:0.1,price:37,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Britannia',name:'Pizza Cheese',q:0.2,q1:0.2,price:86,image:'images/nature.jpg' }
+    ];
     $scope.$watchGroup(['check1','check2','check3','check4','check5'], function() 
     {
        changep();
@@ -555,6 +566,22 @@ app.controller("tiles",['$localstorage','$scope','$http',function($localstorage,
       });
     
     }
+    $scope.colbread=false;
+  $scope.colbev=false;
+  $scope.colbrand=false;
+  $scope.colgrocery=false;
+  $scope.colhousehold=false;
+  $scope.colgour=false;
+  $scope.colpc=false;
+  
+  $scope.visbread=function(){$scope.colbread=true;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visbev=function(){console.log('here2');$scope.colbread=false;$scope.colbev=true;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visbrand=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=true;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visgrocery=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=true;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.vishousehold=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=true;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visgour=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=true;$scope.colpc=false;}
+  $scope.vispc=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=true;}
+  
   }]);
 
 //login modal
@@ -881,7 +908,7 @@ $('.navbar').css({"cursor":"pointer"});
 $(window).scroll(function() {
   document.getElementById("wrapper").className="toggled";
 
-  console.log(document.getElementById("wrapper").className);
+  //console.log(document.getElementById("wrapper").className);
   var navbarColor = "121,147,59";//color attr for rgba
   var smallLogoHeight = 30;
   var bigLogoHeight = 90;
@@ -919,7 +946,7 @@ $(window).scroll(function() {
     $('.navbar-inverse').css({"box-shadow": "0 2px 3px rgba(0,0,0," + shadowOpacity + ")"});
     //if($rootScope.f==1 || e==1){$("#wrapper").toggleClass("toggled");$rootScope.f=0;e=0;}
     // else{$("#wrapper").toggleClass("toggled");$rootScope.f=0;}
-    console.log($rootScope.f)
+    //console.log($rootScope.f)
     //if($("wrapper").className!="toggled")$("#wrapper").toggleClass("toggled");
   } 
   else 
@@ -929,3 +956,24 @@ $(window).scroll(function() {
   
 });
 });
+/*app.controller("sub",function($scope)
+{
+  $scope.colbread=false;
+  $scope.colbev=false;
+  $scope.colbrand=false;
+  $scope.colgrocery=false;
+  $scope.colhousehold=false;
+  $scope.colgour=false;
+  $scope.colpc=false;
+  $scope.visbread=function(){$scope.colbread=true;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visbev=function(){console.log('here2');$scope.colbread=false;$scope.colbev=true;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visbrand=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=true;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visgrocery=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=true;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.vishousehold=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=true;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visgour=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=true;$scope.colpc=false;}
+  $scope.vispc=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=true;}
+  
+console.log('here');
+
+
+});*/
