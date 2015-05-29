@@ -424,7 +424,7 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 
       <label for="p"><span style="color:red;">*</span> Pin Code:</label>
        
-      <input class="form-control" id="p" name="pin" placeholder="Pincode" ng-model="add.pin" maxlength="6" required=""/>
+      <input class="form-control" type="number" id="p" name="pin" placeholder="Pincode" ng-model="add.pin" maxlength="6" required=""/>
       <div ng-show="form3.pin.$dirty && form3.pin.$invalid" style="color:red;font-weight:bold;">
       <span ng-show="form3.pin.$error.required">This is a mandatory field</span> 
       <span ng-show="form3.pin.$error.number">Please enter numbers only!</span>

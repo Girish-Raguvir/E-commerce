@@ -9,6 +9,12 @@
   
 }
 
+#telno::-webkit-outer-spin-button , #p::-webkit-outer-spin-button,
+#telno::-webkit-inner-spin-button , #p::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 #searchlist:hover
 {
   background: rgba(0,0,0,0.1);

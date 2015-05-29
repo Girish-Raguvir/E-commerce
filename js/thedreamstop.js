@@ -842,6 +842,19 @@ $scope.user = {"email": "","password": "","name": "","address": "", "telephone":
 $scope.vismob=false;
 $scope.vistel=false;
 $scope.vispin=false;
+
+//disables mouse scroll within input type number
+
+$('form').on('focus', 'input[type=number]', function (e) {
+  $(this).on('mousewheel.disableScroll', function (e) {
+    e.preventDefault()
+  })
+})
+
+$('form').on('blur', 'input[type=number]', function (e) {
+  $(this).off('mousewheel.disableScroll')
+})
+
 $scope.sendPost = function() 
 {
   $scope.user.address=$scope.add.hno + ", " + $scope.add.street + ", " + $scope.add.area + ", " + $scope.add.rcomp + ", " + $scope.add.landmark + ", " + $scope.add.city + ", " + $scope.add.pin + ".";
