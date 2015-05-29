@@ -343,13 +343,14 @@ Fields marked with <span style="color:red;">*</span> are mandatory
     </div> -->
 <div class="form-group">
 
-      <label for="telno"><span class="glyphicon glyphicon-phone-alt"></span> Telephone number:</label>
+      <label for="telno"><span style="color:red;">*</span>&nbsp;<span class="glyphicon glyphicon-phone-alt"></span> Telephone number:</label>
        
-      <input class="form-control" id="telno" placeholder="Telephone number" ng-model="user.telephone" name="telno" maxlength="8">
+      <input type="number"class="form-control" id="telno" placeholder="Telephone number" ng-model="user.telephone" name="telno" maxlength="8" required="">
       <!--span style="color:red;font-weight:bold;" ng-show="vistel">Please enter only numbers!</span-->
       <div ng-show="form2.telno.$dirty && form2.telno.$invalid" style="color:red;font-weight:bold;">
       <span ng-show="form2.telno.$error.maxlength">Number of digits can't be more than 8!Kindly Check!</span> 
       <span ng-show="form2.telno.$error.number">Please enter numbers only!</span> 
+      <span ng-show="form2.telno.$error.required">This is a mandatory field</span>
     </div>
     </div>
     
@@ -453,7 +454,7 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 </div>
 
 <p align="center">
-<button type="submit" class="btn btn-success" align="center" ng-click="sendPost()" ng-disabled="(form.uEmail.$pristine || form.uEmail.$invalid)||(form.mobile.$pristine || form.mobile.$invalid)||(form.uPass.$pristine || form.uPass.$invalid)||(form2.ufName.$pristine ||  form2.ufName.$invalid)||(form2.ulName.$pristine || form2.ulName.$invalid)||(form2.telno.$pristine ||  form2.telno.$invalid)||(form3.Hno.$pristine || form3.Hno.$invalid)||(form3.Area.$pristine || form3.Area.$invalid)||(form3.pin.$pristine || form3.pin.$invalid)">Submit</button>
+<button type="submit" class="btn btn-success" align="center" ng-click="sendPost()" ng-disabled="(form.uEmail.$pristine || form.uEmail.$invalid)||(form.uPass.$pristine || form.uPass.$invalid)||(form2.ufName.$pristine ||  form2.ufName.$invalid)||(form2.ulName.$pristine || form2.ulName.$invalid)||(form2.telno.$pristine ||  form2.telno.$invalid)||(form3.Hno.$pristine || form3.Hno.$invalid)||(form3.Area.$pristine || form3.Area.$invalid)||(form3.pin.$pristine || form3.pin.$invalid)">Submit</button>
 </p>
 </div>
 </div>
