@@ -729,13 +729,32 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
         if(response.success=='true')
         { 
           
-          var d = new Date();
+          var d = new Date();var longi=80.2179,lat=13.0846;
           session=response.session;
           d.setTime(d.getTime() + (30*24*60*60*1000));
           var expires = "expires="+d.toUTCString();
           document.cookie = "session" + "=" + response.session + "; " + expires;
           console.log("hello"+"session" + "=" + response.session + "; " + expires);
           $localstorage.set('session',response.session);
+
+          var geocoder;
+          var loc=JSON.parse(sessionStorage.location);
+          geocoder = new google.maps.Geocoder();
+          var address = loc.city+', '+loc.area;
+          geocoder.geocode( { 'address': address}, function(results, status) 
+          {
+            if (status == google.maps.GeocoderStatus.OK) 
+            {
+              var location = results[0].geometry.location;
+              //lat=location.lat();longi=location.lng();
+              console.log(lat);console.log(longi);
+            } 
+            else 
+            {
+              alert('Some error has occured.Please try again.');
+            }
+          });
+          
           //UserService.putsession(response.session);
           var req1 = 
           {  method: 'POST',
@@ -743,7 +762,30 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
               headers: { 'Content-Type':'application/x-www-form-urlencoded' },
               data: $.param({"session":response.session,}),
           } 
+          var req2 = 
+          {  method: 'POST',
+              url: 'http://thedreamstop.com/api/latlong.php', 
+              headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+              data: $.param({"latitude":lat,"longitude":longi,"session":response.session,}),
+          } 
           //console.log(session);
+          $http(req2)
+          .success(
+          function(response)
+          {
+            console.log(JSON.stringify(response));
+            console.log("response :"+response.name);
+            if(response.success=='true')
+          { 
+           
+          }
+            
+          })
+          .error(
+          function(response)
+          { 
+            console.log("error:"+ response.error_message);
+          });
           $http(req1)
           .success(
           function(response)
@@ -764,6 +806,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
           { 
             console.log("error:"+ response.error_message);
           });
+          
   			  //document.write("You will be redirected to main page in 10 sec.");
   			  //setTimeout( function(){window.location.assign("./Account.html");}, 2000);
         }
