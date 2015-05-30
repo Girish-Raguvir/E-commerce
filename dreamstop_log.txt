@@ -10,10 +10,6 @@ Terms and conditions
 
 Invalid PID error in edit info?
 
-Adding cart to server
-
-Order History
-
 Fix bottom bar on every page
 
 Working of latlong.php->shows insufficient data error?
