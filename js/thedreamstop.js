@@ -21,6 +21,20 @@ angular.module('ionic.utils', []).factory('$localstorage', ['$window', function(
           }
 }]);
 
+app.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+ 
+                event.preventDefault();
+            }
+        });
+    };
+});
+
 app.factory('UserService', function() {
     var userService = {};
 
@@ -40,9 +54,22 @@ app.controller('search',['$scope','$http','$localstorage', function($scope,$http
 
 $scope.search=[{brand:'Sorry.No matches found.',name:'',q:'-1',price:'',}];
 
+// $("#txtSearch").keyup(function (event) 
+// {
+//    if (event.keyCode == 13) 
+//    {
+//       $("#btnsearch").click();
+//     }
+// });
+
 $scope.searchdata="";
 $scope.open=function(){setTimeout( function(){document.getElementById("searchdiv").className="dropdown open";}, 20);}
 $scope.val=1;
+$scope.searchlistent=function()
+{
+  document.getElementById("searchdiv").className="dropdown open";
+  $scope.searchlist();
+}
 $scope.searchlist=function(){
   
   $scope.session=$localstorage.get('session');
@@ -58,7 +85,7 @@ $scope.searchlist=function(){
   //             ];
 
   $scope.data={"session":$scope.session,"q":$scope.searchdata,};
-  console.log(JSON.stringify($scope.data));
+  //console.log(JSON.stringify($scope.data));
   
     
     var req = 
@@ -73,12 +100,13 @@ $scope.searchlist=function(){
      function(response)
      {
         console.log(JSON.stringify(response));
-        console.log("response :"+response.success);
+        //console.log("response :"+response.success);
         if(response.success=='true')
         { 
            //$scope.search=response.items;
           //console.log(JSON.stringify(response));
-          if(response.numResults!=0)$scope.search=response.results;
+          if(response.numResults!=0)$scope.search=response.items;
+          //console.log(JSON.stringify($scope.search));
         }
       })
      .error(
@@ -145,6 +173,7 @@ $scope.logout=function()
       });
      window.location.assign("index.html");
      setTimeout(function(){},1000);
+     $localstorage.set('session','Guest');
      }
 
   $scope.username=$localstorage.get('username');
@@ -890,7 +919,7 @@ $scope.useredit=function()
     headers: { 'Content-Type':'application/x-www-form-urlencoded' },
     data: $.param(newuser),
   } 
-  console.log(newuser);
+  console.log(JSON.stringify(newuser));
   $http(req)
   .success(
   function(response){

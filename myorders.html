@@ -53,7 +53,7 @@ $(window).load(function() {
           <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
             <li style="width:450px;">
               <div class="input-group" style="width:450px;" ng-controller="search">
-                <input type="text" class="form-control" ng-model="searchdata" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
+                <input type="text" ng-enter="searchlistent()" class="form-control" ng-model="searchdata" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
                 <span >
                   <div id="searchdiv" class="dropdown">
                     <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()"style="background: #79933b;height:34px;width:85px;"><span class="glyphicon glyphicon-search"></span> Submit</button>
