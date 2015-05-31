@@ -1,13 +1,13 @@
-Change location->'continue' not working
+-Change location->'continue' not working
 
-coupon code input during payment-Coupon applied message(make appropriate changes)-and wrong code-No such coupon exists error.
+-coupon code input during payment-Coupon applied message(make appropriate changes)-and wrong code-No such coupon exists error.
 
-Captcha check
+-Captcha check
 
-Terms and conditions
+-Terms and conditions
 
-Invalid PID error in edit info?
+-Cart Modal in Items.html doesnot reflect changes unless page is refreshed.
 
-Fix bottom bar on every page
+-Fix bottom bar on every page
 
-Working of latlong.php->shows insufficient data error?
+-Working of latlong.php->shows insufficient data error?
