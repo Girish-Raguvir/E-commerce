@@ -326,7 +326,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
 <td> {{x.qty}} </td>
 <td> {{x.nam}} </td>
-<td> {{x.w}} kg</td>
+<td> {{x.q}} {{x.unit}}</td>
 <td> Rs.{{x.price}} </td>
 
 </tr>
@@ -386,7 +386,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   </div>
 
 <div id="page-content-wrapper" style="margin-top:15px;">
-<table style="width: 107%;table-layout: fixed;white-space: nowrap;overflow: hidden;" id="mt"> 
+<table style="width: 107%;table-layout: fixed;overflow: hidden;" id="mt"> 
 <tr style="padding: 10px;">
 <td style="padding: 5px;width: 13%;overflow: hidden;table-layout: fixed;">
 
@@ -434,43 +434,43 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <hr>
 <br>
 
-<ul  style="list-style-type:none">
-    <li  style="margin-bottom : 0px;"ng-repeat="x in names1|orderBy:selected.sub:selected.rev" for="{{x.id}}">
+<ul  style="list-style-type:none;padding-left:0px;">
+    <li  style="margin-bottom : 0px;"ng-repeat="x in items|orderBy:selected.sub:selected.rev" for="{{x.id}}">
 <div ng-if="(check(x))">
 
 
 <table style="width: 100%;background-color: white; margin: 0px;table-layout:fixed;" id="t02">
   <col width="25%" />
+  
   <col width="25%" />
   <col width="25%" />
   <col width="25%" />
   <col width="25%" />
-  <col width="25%" />
-<tr style="height: 10%">
+<tr style="height: auto;">
 
-<td align="center" style="">
-<input type="number" align="right"  min="1" max="10" value="1" id="{{x.id}}" ng-model="names1[$index].qty">
+<td align="center" style="width:10%;">
+<input type="number" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="items[$index].qty">
 </td>
-<td style=""align="center">
+<!-- <td style=""align="center">
 <b>{{ x.brand }}</b>
-</td>
-<td style="padding-buttom: 10px;" align="center"> 
+</td> -->
+<td style="padding-buttom: 10px;width:30%;" align="center"> 
 <ul class="enlarge">
-<li style="margin-left:-50%;"><img src={{x.image}} alt={{ x.name }} width="80" height="80" /><span><img id="itemimg"src={{x.image}} alt={{ x.name }} /><br />{{x.name}}</span></li>
+<li style="margin-left:-50%;"><img src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=400" alt={{ x.name }} width="80" height="80" /><span><img id="itemimg"src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=200" alt={{ x.name }} /><br />{{x.name}}</span></li>
 
 </ul>
 
 </td>
-<td style="" align="center">
+<td style="word-wrap: break-word;width:30%;" align="center">
 <div class="desc">{{ x.name }}</div>
 </td>
 
-<td style=""align="center">
-<b>{{ x.q }} kg</b>
+<td style="width:10%;"align="center">
+<b>{{ x.q }} {{x.unit}}</b>
 </td>
-<td align="center" style=""><div class="desc">Rs.{{ x.price }}</div></td>
+<td align="center" style="width:10%;"><div class="desc">Rs.{{ x.price }}</div></td>
 
-<td align="center" style=""><button class="btn btn-success" ng-click="add(names1[$index].id,names1[$index].qty,x.name,names1[$index].q*1,x.price*names1[$index].qty)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
+<td align="center" style="width:10%;"><button class="btn btn-success" ng-click="add(items[$index].PID,items[$index].qty,x.name,items[$index].q*1,x.price*items[$index].qty,items[$index].unit)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
 </tr>
 </table>
 
@@ -512,8 +512,9 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 
 <tr ng-repeat="x in addeditems">
 <td> {{x.qty}} </td>
-<td> {{x.nam}} </td>
-<td> {{x.w}} </td>
+<!-- <td style="max-width:150px;"> {{x.nam.substring(0,10)}}.... </td> -->
+<td> {{x.nam}}</td>
+<td> {{x.q}} {{x.unit}}</td>
 <td> {{x.price}} </td>
 <td><button class="btn btn-danger btn-xs" ng-click="remove(x.id)"><span class="glyphicon glyphicon-trash" ng-click="remove(x.id)"></span></button></td>
 </tr>

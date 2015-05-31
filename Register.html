@@ -281,10 +281,8 @@ Fields marked with <span style="color:red;">*</span> are mandatory
     </div>
     <div class="form-group">
       <label for="cpwd"><span style="color:red;">*</span> Confirm Password:</label>
-      <input type="password" class="form-control" id="cpwd"  placeholder="Confirm password" ng-model="cpass" name="cpass">
-      <div ng-show="form.cpass.$dirty" style="color:red;font-weight:bold;">
-      <span ng-show="!(user.password==cpass)">Entered password does not match with above</span>
-      </div>
+      <input type="password" class="form-control" id="cpwd"  placeholder="Confirm password">
+      
     </div>
     <!-- <div class="checkbox">
       <label><input type="checkbox"> Remember me</label>
@@ -456,7 +454,7 @@ Fields marked with <span style="color:red;">*</span> are mandatory
 </div>
 
 <p align="center">
-<button type="submit" class="btn btn-success" align="center" ng-click="sendPost()" ng-disabled="(form.uEmail.$pristine || form.uEmail.$invalid)||(form.uPass.$pristine || form.uPass.$invalid)||(form2.ufName.$pristine ||  form2.ufName.$invalid)||(form2.ulName.$pristine || form2.ulName.$invalid)||(form2.telno.$pristine ||  form2.telno.$invalid)||(form3.Hno.$pristine || form3.Hno.$invalid)||(form3.Area.$pristine || form3.Area.$invalid)||(form3.pin.$pristine || form3.pin.$invalid)||(user.password!=cpass)">Submit</button>
+<button type="submit" class="btn btn-success" align="center" ng-click="sendPost()" ng-disabled="(form.uEmail.$pristine || form.uEmail.$invalid)||(form.uPass.$pristine || form.uPass.$invalid)||(form2.ufName.$pristine ||  form2.ufName.$invalid)||(form2.ulName.$pristine || form2.ulName.$invalid)||(form2.telno.$pristine ||  form2.telno.$invalid)||(form3.Hno.$pristine || form3.Hno.$invalid)||(form3.Area.$pristine || form3.Area.$invalid)||(form3.pin.$pristine || form3.pin.$invalid)">Submit</button>
 </p>
 </div>
 </div>

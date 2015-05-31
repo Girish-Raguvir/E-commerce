@@ -144,8 +144,8 @@ $scope.logout=function()
   
   $localstorage.set('loggedin','false');
   $localstorage.set('username','Guest');
-  $localstorage.set('cart','[]');
-  $localstorage.set('tprice',0);
+  sessionStorage.cart='[]';
+  sessionStorage.tprice=0;
 
   var session=$localstorage.get('session');
   $scope.data={'session':session};
@@ -276,7 +276,7 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http',function($scope,
   
   $scope.session=getsession('session');
      
-  $scope.data={"session":$scope.session,"ID":2,};
+  $scope.data={"session":$scope.session,"ID":3,};
    
   
     
@@ -358,32 +358,32 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http',function($scope,
       $scope.minq[i]=0;
      }
     if($scope.check6==true)
-    {$scope.maxq[0]=0.499;
+    {$scope.maxq[0]=499;
      $scope.minq[0]=0; 
     
     }
     if($scope.check7==true)
     {
-      $scope.maxq[1]=0.999;
-      $scope.minq[1]=0.5;
+      $scope.maxq[1]=999;
+      $scope.minq[1]=500;
     
     }
     if($scope.check8==true)
     {
-     $scope.maxq[2]=1.999;
-      $scope.minq[2]=1;
+     $scope.maxq[2]=1999;
+      $scope.minq[2]=1000;
     
     }
     if($scope.check9==true)
     {
-      $scope.maxq[3]=2.999;
-    $scope.minq[3]=2;
+      $scope.maxq[3]=2999;
+    $scope.minq[3]=2000;
    
     }
     if($scope.check10==true)
     {
       $scope.maxq[4]=20000;
-      $scope.minq[4]=3;
+      $scope.minq[4]=3000;
    
     }
     }
@@ -456,7 +456,8 @@ $scope.addeditems=[
       id:-1,
       qty:0 ,
       nam:'-',
-      w:0 ,
+      q:0 ,
+      unit:'gm',
       price:0 ,
 
     }];
@@ -464,6 +465,7 @@ $scope.addeditems=[
 $scope.i=-1;
 $scope.titems=0;
 $scope.tprice=0;
+
 if($localstorage.get('loggedin')=='true')$scope.chkdis=0;
 else $scope.chkdis=1;
 $scope.checkout=function()
@@ -472,20 +474,20 @@ $scope.checkout=function()
   else alert('Sorry! You must be logged in for checking out the cart.');
 }
 //$scope.addeditems.length=0;
-if($localstorage.get('cart')==null)
-{$localstorage.set('cart',JSON.stringify($scope.addeditems));$localstorage.set('tprice',$scope.tprice);}
+if(sessionStorage.cart==null || sessionStorage.tprice==null)
+{sessionStorage.cart='[]';sessionStorage.tprice=0;}
 else
 {
 
-  var obj=JSON.parse($localstorage.get('cart'));$scope.addeditems.splice(0,1);
+  var obj=JSON.parse(sessionStorage.cart);$scope.addeditems.splice(0,1);
   for(var i=0;i<obj.length;i++)
   {
     if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
     $scope.addeditems.push(obj[i]);
   }
-  $scope.tprice=parseInt($localstorage.get('tprice'));
+  $scope.tprice=parseInt(sessionStorage.tprice);
 }
-$scope.add=function(id,qty,name,w,price)
+$scope.add=function(id,qty,name,w,price,u)
 {
 
 var j=0,f=0;
@@ -498,11 +500,13 @@ for(j=0;j<$scope.addeditems.length;j++)
 
 if(!f)
   {
-  $scope.addeditems.push({ id:$scope.i+1,qty: qty,nam:name ,w: w,price: price});
+  $scope.addeditems.push({ id:id,qty: qty,nam:name ,q: w,unit: u,price: price});
   $scope.i++;$scope.titems=$scope.titems+qty;}
   $scope.tprice=$scope.tprice+price;
-  $localstorage.set('cart',JSON.stringify($scope.addeditems));
-  $localstorage.set('tprice',$scope.tprice);
+  //$localstorage.set('cart',JSON.stringify($scope.addeditems));
+  sessionStorage.cart=JSON.stringify($scope.addeditems);
+  sessionStorage.tprice=$scope.tprice;
+  //$localstorage.set('tprice',$scope.tprice);
 
   };
 
@@ -523,8 +527,10 @@ $scope.remove=function(y)
     }
     else{
     $scope.tprice=$scope.tprice-value.price;}
-    $localstorage.set('cart',JSON.stringify($scope.addeditems));
-    $localstorage.set('tprice',$scope.tprice);
+    // $localstorage.set('cart',JSON.stringify($scope.addeditems));
+    // $localstorage.set('tprice',$scope.tprice);
+    sessionStorage.cart=JSON.stringify($scope.addeditems);
+    sessionStorage.tprice=$scope.tprice;
 }
 
 $scope.check=function(x)
@@ -558,12 +564,13 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
       price:0 ,
 
     }];
-    $scope.tprice=parseInt($localstorage.get('tprice'));$scope.titems=0;
-    if($localstorage.get('cart')==null)
-      $localstorage.set('cart',JSON.stringify($scope.addeditems));
+    $scope.tprice=parseInt(sessionStorage.tprice);$scope.titems=0;
+
+    if(sessionStorage.cart==null)
+      {sessionStorage.cart='[]';}
     else
     {
-      var obj=JSON.parse($localstorage.get('cart'));$scope.addeditems.splice(0,1);
+      var obj=JSON.parse(sessionStorage.cart);$scope.addeditems.splice(0,1);
       for(var i=0;i<obj.length;i++)
       {
         if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
