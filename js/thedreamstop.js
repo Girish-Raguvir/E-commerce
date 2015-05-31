@@ -799,7 +799,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             if (status == google.maps.GeocoderStatus.OK) 
             {
               var location = results[0].geometry.location;
-              //lat=location.lat();longi=location.lng();
+              lat=location.lat()*3.14/180;longi=location.lng()*3.14/180;
               console.log(lat);console.log(longi);
             } 
             else 
@@ -850,7 +850,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             $scope.wuser=0; 
             $localstorage.set('loggedin','true');  
             $localstorage.set('username',response.name);
-            location.reload();
+            //location.reload();
           }
             else {$scope.wuser=1;console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
           })

@@ -10,4 +10,4 @@
 
 -Fix bottom bar on every page
 
--Working of latlong.php->shows insufficient data error?
+-Displaying area based on city
