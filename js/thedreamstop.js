@@ -48,6 +48,23 @@ app.factory('UserService', function() {
     return userService;
 });
 
+app.factory('category', function() {
+ var id=0;
+ function set(catid) {
+   sessionStorage.catid=catid;
+ }
+ function get() {
+  catid=sessionStorage.catid;  
+  return catid;
+ }
+
+return {
+  set:set,
+  get:get
+}
+
+});
+
 //search controller
 
 app.controller('search',['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
@@ -251,7 +268,7 @@ app.controller("navcart",function($scope)
 
 //display of items
 
-app.controller('itemdisplay', ['$scope','$localstorage','$http',function($scope,$localstorage,$http){
+app.controller('itemdisplay', ['$scope','$localstorage','$http','category',function($scope,$localstorage,$http,category){
 
   $( document ).ready(function() 
   {
@@ -275,9 +292,9 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http',function($scope,
   }
   
   $scope.session=getsession('session');
-     
-  $scope.data={"session":$scope.session,"ID":3,};
-   
+  console.log(category.get());
+  $scope.data={"session":$scope.session,"ID":category.get(),};
+  console.log('chchch'+JSON.stringify($scope.data));
   
     
     var req = 
@@ -470,6 +487,7 @@ if($localstorage.get('loggedin')=='true')$scope.chkdis=0;
 else $scope.chkdis=1;
 $scope.checkout=function()
 {
+
   if($localstorage.get('loggedin')=='true')$("#cartmodal").modal("show");
   else alert('Sorry! You must be logged in for checking out the cart.');
 }
@@ -515,18 +533,17 @@ $scope.remove=function(y)
     for(p=0;p<$scope.addeditems.length;p++)
     {
       if($scope.addeditems[p].id==y)
-       { $scope.titems=$scope.titems-$scope.addeditems[p].qty;value=$scope.addeditems.splice(p,1)[0];}
+       { 
+        $scope.titems=$scope.titems-1;
+        $scope.addeditems[p].qty--;
+        var g=$scope.addeditems[p].price/($scope.addeditems[p].qty+1);
+        $scope.addeditems[p].price-=g;
+        $scope.tprice-=g;
+        if($scope.addeditems[p].qty==0){value=$scope.addeditems.splice(p,1)[0];$scope.i--;}}
     }
     
-    $scope.i--;
     
-    if($scope.i==-1)
-    {
-      //$scope.addeditems.push({ id:0,qty: 0,nam:'-' ,w: 0,price: 0});
-      $scope.tprice=0;
-    }
-    else{
-    $scope.tprice=$scope.tprice-value.price;}
+    //$scope.tprice=$scope.tprice-(value.price/(value.qty+1));}
     // $localstorage.set('cart',JSON.stringify($scope.addeditems));
     // $localstorage.set('tprice',$scope.tprice);
     sessionStorage.cart=JSON.stringify($scope.addeditems);
@@ -581,7 +598,7 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
     $scope.shipdata={'name':'','phno':'','address':'','date':''};
     var session=$localstorage.get('session');
     var date= $filter('date')(new Date(),'dd-MM-yyyy');
-    console.log($scope.date);
+    console.log('hello'+$scope.date);
     $scope.addorder=function()
     {
      var prodArray=JSON.stringify({'tprice':$scope.tprice,'titems':$scope.titems,'name':$scope.shipdata.name,'phno':$scope.shipdata.phno,'address':$scope.shipdata.address,'date':date}); 
@@ -620,7 +637,7 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
 
 //controls the tiles used for display of categories in index.html
 
-app.controller("tiles",['$localstorage','$scope','$http',function($localstorage,$scope,$http)
+app.controller("tiles",['$localstorage','$scope','$http','category',function($localstorage,$scope,$http,category)
   {
     $scope.cateshow;
     
@@ -730,13 +747,13 @@ app.controller("tiles",['$localstorage','$scope','$http',function($localstorage,
   $scope.colgour=false;
   $scope.colpc=false;
   
-  $scope.visbread=function(){$scope.colbread=true;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
-  $scope.visbev=function(){console.log('here2');$scope.colbread=false;$scope.colbev=true;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
-  $scope.visbrand=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=true;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
-  $scope.visgrocery=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=true;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
-  $scope.vishousehold=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=true;$scope.colgour=false;$scope.colpc=false;}
-  $scope.visgour=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=true;$scope.colpc=false;}
-  $scope.vispc=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=true;}
+  $scope.visbread=function(){category.set(5);console.log(category.get());$scope.colbread=true;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visbev=function(){category.set(4);console.log('here2');$scope.colbread=false;$scope.colbev=true;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visbrand=function(){category.set(2);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=true;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visgrocery=function(){category.set(3);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=true;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.vishousehold=function(){category.set(1);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=true;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visgour=function(){category.set(6);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=true;$scope.colpc=false;}
+  $scope.vispc=function(){category.set(7);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=true;}
   
   }]);
 

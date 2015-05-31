@@ -130,7 +130,7 @@ $(window).load(function() {
 <tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
 <td> {{x.qty}} </td>
 <td> {{x.nam}} </td>
-<td> {{x.w}} kg</td>
+<td> {{x.q}} {{x.unit}}</td>
 <td> Rs.{{x.price}} </td>
 
 </tr>
@@ -305,51 +305,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 
 <div  style="animation-name: animation;animation-duration: 4s;
     animation-iteration-count: infinite;padding-top:10px;" ng-controller="itemdisplay">
-<div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
- 
-  <div class="modal-dialog" >
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Cart</h3>
-      </div>
-      <div class="modal-body" >
-      <table style="width: 100%;" cellpadding="10" cellspacing="10" >
-<tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
-<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
-    <th style="text-align: center;">Qty</th>
-    <th style="text-align: center;">Name</th>   
-    <th style="text-align: center;">Weight</th>
-    <th style="text-align: center;">Price</th>
-</tr>
 
-<tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
-<td> {{x.qty}} </td>
-<td> {{x.nam}} </td>
-<td> {{x.q}} {{x.unit}}</td>
-<td> Rs.{{x.price}} </td>
-
-</tr>
-<tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
-
-
-</table>
-    </div>
-    
-      
-      <div class="modal-footer">
-        <p align="center">
-        <!--<button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>-->
-        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;">   Proceed <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
-        
-        <br><br>
-        
-      </p>
-        
-      </div>
-    </div>
-  </div>
-</div>
 <div id="wrapper" style="padding-top: 90px;padding-left:0px;">
 
         <!-- Sidebar -->
@@ -516,7 +472,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <td> {{x.nam}}</td>
 <td> {{x.q}} {{x.unit}}</td>
 <td> {{x.price}} </td>
-<td><button class="btn btn-danger btn-xs" ng-click="remove(x.id)"><span class="glyphicon glyphicon-trash" ng-click="remove(x.id)"></span></button></td>
+<td><button class="btn btn-danger btn-xs" ng-click="remove(x.id)"><span class="glyphicon glyphicon-trash"></span></button></td>
 </tr>
 
 
