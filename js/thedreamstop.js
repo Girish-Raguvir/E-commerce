@@ -322,8 +322,8 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http','category',funct
         console.log("error:"+ response.error_message);
       });
     
+
   
-            
 
   });
 
