@@ -19,7 +19,9 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/about.css">
   <link href="css/simple-sidebar.css" rel="stylesheet">
+<script type="text/javascript">
 
+</script>
   <style type="text/css">
 .loader {
   position: fixed;
@@ -102,7 +104,7 @@
         <br>
 
         Changing location will cause the page to be refreshed leading to loss of saved data.Do you want to proceed? <br><br>
-        <button type="submit" class="btn btn-primary" ng-click="refresh()">Continue</button>
+        <button type="button" class="btn btn-primary" ng-click="refresh()">Continue</button>
 
         </p>
        </div>
@@ -276,23 +278,40 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       <div class="col-md-4">
       <div class="form-group">
       <label for="lemail">City:</label>
-      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;" id="City">
+      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;" id="City" >
           <option >Chennai</option>
           <option >Bangalore</option>
           <option >Mumbai</option>
-          <option >Delhi</option>
+          
         </select> 
       </div>  
-      <div class="form-group">
+      <div class="form-group" id="area1">
       <label for="lpwd">Area:</label>
-      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;" id="area">
+      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="a">
           <option>Annanagar</option>
           <option>Adyar</option>
           <option>Mylapore</option>
           <option>Guindy</option>
         </select> 
       </div> 
-      
+      <div class="form-group" id="area2">
+      <label for="lpwd">Area:</label>
+      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="b">
+          <option>A1</option>
+          <option>A2</option>
+          <option>A3</option>
+          <option>A4</option>
+        </select> 
+      </div> 
+      <div class="form-group" id="area3">
+      <label for="lpwd">Area:</label>
+      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="c">
+          <option>Bandra</option>
+          <option>Worli</option>
+          <option>Thane</option>
+          <option>Matunga</option>
+        </select> 
+      </div> 
       </form>
       </div>
     </div>

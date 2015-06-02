@@ -8,6 +8,3 @@
 
 -Cart Modal in Items.html doesnot reflect changes unless page is refreshed.
 
--Fix bottom bar on every page
-
--Displaying area based on city

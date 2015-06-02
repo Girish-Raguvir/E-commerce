@@ -141,11 +141,17 @@ $scope.searchlist=function(){
 app.controller("log_in_out",['$scope','$localstorage','$http',function($scope,$localstorage,$http){
 
 $scope.c='kkkss';
+$scope.ctr=0;
+//console.log($scope.ctr);
+console.log(sessionStorage.length);
 $scope.refresh=function()
 {
-  sessionStorage.clear('location');
-  location.reload();
-  console.log('hello');
+  //sessionStorage.clear('location');
+  delete sessionStorage.location;
+  window.location.href='index.html';
+  console.log('hello @ refresh');
+  
+  console.log($scope.ctr);
 }
 $scope.loggedin=function()
 {
@@ -598,7 +604,7 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
     $scope.shipdata={'name':'','phno':'','address':'','date':''};
     var session=$localstorage.get('session');
     var date= $filter('date')(new Date(),'dd-MM-yyyy');
-    console.log('hello'+$scope.date);
+    //console.log('hello'+$scope.date);
     $scope.addorder=function()
     {
      var prodArray=JSON.stringify({'tprice':$scope.tprice,'titems':$scope.titems,'name':$scope.shipdata.name,'phno':$scope.shipdata.phno,'address':$scope.shipdata.address,'date':date}); 
@@ -1200,30 +1206,82 @@ if(sessionStorage.location==null)
 $(window).load(function() 
   {
     $(".loader").fadeOut("slow");
+    
+  });
+  
+$(document).ready(function()
+  { 
+    $('[data-toggle="popover"]').popover({title:"Change Location?",content:function(){ return $(".content").html();},placement:"auto",html: true});   
+      $('#area1').show();
+       $('#area2').hide();
+        $('#area3').hide();
+      $("#City").change(function()
+     {  var cityVal=$('#City option:selected').text();
+     /*console.log(cityVal);
+     console.log(cityVal.localeCompare('Chennai'));
+     console.log($scope.visarea);*/
+        if(!cityVal.localeCompare('Chennai'))
+        {
+            $('#area1').show();
+            $('#area2').hide();
+            $('#area3').hide();
+        }
+        else if(!cityVal.localeCompare('Bangalore')) 
+        {
+            $('#area1').hide();
+            $('#area2').show();
+            $('#area3').hide();
+        }
+        else if(!cityVal.localeCompare('Mumbai')) 
+        {
+            $('#area1').hide();
+            $('#area2').hide();
+            $('#area3').show();
+        }
+     });
+    function displayVals()
+      { 
+        var cityVal=$('#City').val();
+        var area1=$('#a').val();
+        var area2=$('#b').val();
+        var area3=$('#c').val();
+       
+          if(!cityVal.localeCompare('Chennai'))
+        {
+          $('#bindElement').html("<b> City:&nbsp;</b> " + cityVal +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + area1);
+           sessionStorage.location=JSON.stringify({'city':cityVal,'area':area1}); 
+           console.log('enters chennai');
+           console.log(area1);
+        }
+       else if(!cityVal.localeCompare('Bangalore')) 
+        {
+          $('#bindElement').html("<b> City:&nbsp;</b> " + cityVal +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + area2);
+           sessionStorage.location=JSON.stringify({'city':cityVal,'area':area2}); 
+           console.log('enters Bangalore');
+           console.log(area2);
+        }
+      else if(!cityVal.localeCompare('Mumbai')) 
+        {
+          $('#bindElement').html("<b> City:&nbsp;</b> " + cityVal +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + area3);
+           sessionStorage.location=JSON.stringify({'city':cityVal,'area':area3}); 
+           console.log('enters Mumbai');
+           console.log(area3);
+        }
+        
+        //console.log('here');
+      }
+     $("#locsub").click(displayVals);
+     
     var loc=JSON.parse(sessionStorage.location);
+    
+    
     if(loc.city==' ' || loc.area==' ')
       $("#locmodal").modal("show");
     else
       {
          $('#bindElement').html("<b> City:&nbsp;</b> " + loc.city +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + loc.area);
       }
-  })
-  
-$(document).ready(function()
-  {
-    $('[data-toggle="popover"]').popover({title:"Change Location?",content:function(){ return $(".content").html();},placement:"auto",html: true});   
-      
-    function displayVals()
-      {
-        var cityVal=$('#City').val();
-        var area=$('#area').val();
-        $('#bindElement').html("<b> City:&nbsp;</b> " + cityVal +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + area);
-        sessionStorage.location=JSON.stringify({'city':cityVal,'area':area});
-        console.log('here');
-      }
-     $("#locsub").click(displayVals);
-    
-  })
+  });
 document.getElementById("wrapper").className="toggled";
 $('.navbar').css({"cursor":"pointer"});
 $(window).scroll(function() {
