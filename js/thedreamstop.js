@@ -69,7 +69,7 @@ return {
 
 app.controller('search',['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
-$scope.search=[{brand:'Sorry.No matches found.',name:'',q:'-1',price:'',}];
+$scope.search=[{name:'Sorry.No matches found.',q:'-1',price:'',}];
 
 // $("#txtSearch").keyup(function (event) 
 // {
@@ -78,6 +78,65 @@ $scope.search=[{brand:'Sorry.No matches found.',name:'',q:'-1',price:'',}];
 //       $("#btnsearch").click();
 //     }
 // });
+$scope.addeditems=[
+    { 
+      id:-1,
+      qty:0 ,
+      nam:'-',
+      q:0 ,
+      unit:'gm',
+      price:0 ,
+
+    }];
+
+$scope.i=-1;
+$scope.titems=0;
+$scope.tprice=0;
+
+if(sessionStorage.cart==null || sessionStorage.tprice==null)
+  {sessionStorage.cart='[]';sessionStorage.tprice=0;}
+  else
+  {
+
+    var obj=JSON.parse(sessionStorage.cart);
+    //$scope.addeditems.splice(0,1);
+    for(var i=0;i<obj.length;i++)
+    {
+      if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
+      $scope.addeditems.push(obj[i]);
+    }
+    $scope.tprice=parseInt(sessionStorage.tprice);
+  }
+$scope.loggedout=function()
+{
+  if($localstorage.loggedin=='false')return true;
+  else return false;
+};
+$scope.add=function(id,qty,name,w,price,u)
+{
+  
+
+  var j=0,f=0;
+
+  if($scope.addeditems.length!=0)
+  if($scope.addeditems[0].id==-1)$scope.addeditems.splice(0,1);
+
+  for(j=0;j<$scope.addeditems.length;j++)
+    if($scope.addeditems[j].id==id)
+      {
+        $scope.addeditems[j].qty+=qty;$scope.addeditems[j].price+=price;f=1;$scope.titems=$scope.titems+qty;break;
+      }
+
+  if(!f)
+    {
+      $scope.addeditems.push({ id:id,qty: qty,nam:name ,q: w,unit: u,price: price});
+      $scope.i++;$scope.titems=$scope.titems+qty;
+    }
+    $scope.tprice=$scope.tprice+price;
+    sessionStorage.cart=JSON.stringify($scope.addeditems);
+    sessionStorage.tprice=$scope.tprice;
+  
+};
 
 $scope.searchdata="";
 $scope.open=function(){setTimeout( function(){document.getElementById("searchdiv").className="dropdown open";}, 20);}
@@ -122,7 +181,8 @@ $scope.searchlist=function(){
         { 
            //$scope.search=response.items;
           //console.log(JSON.stringify(response));
-          if(response.numResults!=0)$scope.search=response.items;
+          if(response.numResults!=0){$scope.search=response.items;console.log('yes');}
+
           //console.log(JSON.stringify($scope.search));
         }
       })
@@ -856,7 +916,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             $scope.wuser=0; 
             $localstorage.set('loggedin','true');  
             $localstorage.set('username',response.name);
-            //location.reload();
+            location.reload();
           }
             else {$scope.wuser=1;console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
           })

@@ -69,19 +69,16 @@ $(window).load(function() {
                         <table style="width: 100%;background-color: white; margin-top: 10px;" id="t02">
                           <tr style="height: 10%;width:100%;" id="searchlist">
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
-                            <input type="number" min="1" max="10" value="1" ng-model="val">
+                            <input type="number" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
                           </td>
-                          <td style="padding: 10px;"align="center">
-                          <b>{{ x.brand }}</b>
-                          </td>
-                          <td ng-if="x.q!=-1" style="padding: 10px;" align="center">
+                          <td style="padding: 10px;" align="center">
                           <div class="desc">{{ x.name }}</div>
                           </td>
                           <td ng-if="x.q!=-1"  style="padding: 0px;"align="center">
-                          <b>{{ x.q }} kg</b>
+                          <b>{{ x.q }} {{x.unit}}</b>
                           </td>
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
-                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn">ADD</button></td>
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td>
                           </tr>
                         </table>
                         
@@ -98,7 +95,7 @@ $(window).load(function() {
         <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
-        <li ng-if="loggedin()"><a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a></li>
+        <!-- <li ng-if="loggedin()"><a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a></li> -->
         <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
         
 
@@ -267,7 +264,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <!--button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button-->
+        
         <h3 class="modal-title" id="myModalLabel">Location</h3>
       </div>
       <div class="modal-body">
@@ -453,7 +450,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
           <!-- <span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span> -->
            
   
-         <a class="navbar-brand" href="index.html" style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 1;"></span>&nbsp; &nbsp; View Cart</a> 
+         <a class="navbar-brand" style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 1;"></span>&nbsp; &nbsp; View Cart</a> 
         </div>
          
         </div>

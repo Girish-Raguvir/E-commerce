@@ -89,18 +89,19 @@ $(document).ready(function()
                     <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()"style="background: #79933b;height:34px;width:85px;"><span class="glyphicon glyphicon-search"></span> Submit</button>
                     <ul class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
                       <li ng-repeat="x in search">
-                        <table style="width: 97%;background-color: white; margin: 10px;" id="t02">
-                          <tr style="height: 10%">
-                          <td style="padding: 10px;"align="center">
-                          <b>{{ x.brand }}</b>
+                        <table style="width: 100%;background-color: white; margin-top: 10px;" id="t02">
+                          <tr style="height: 10%;width:100%;" id="searchlist">
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
+                            <input type="number" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
                           </td>
-                          <td ng-if="x.q!=-1" style="padding: 10px;" align="center">
+                          <td style="padding: 10px;" align="center">
                           <div class="desc">{{ x.name }}</div>
                           </td>
                           <td ng-if="x.q!=-1"  style="padding: 0px;"align="center">
-                          <b>{{ x.q }} kg</b>
+                          <b>{{ x.q }} {{x.unit}}</b>
                           </td>
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()"  ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td>
                           </tr>
                         </table>
                         

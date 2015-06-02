@@ -66,19 +66,16 @@
                         <table style="width: 100%;background-color: white; margin-top: 10px;" id="t02">
                           <tr style="height: 10%;width:100%;" id="searchlist">
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
-                            <input type="number" min="1" max="10" value="1" ng-model="val">
+                            <input type="number" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
                           </td>
-                          <td style="padding: 10px;"align="center">
-                          <b>{{ x.brand }}</b>
-                          </td>
-                          <td ng-if="x.q!=-1" style="padding: 10px;" align="center">
+                          <td style="padding: 10px;" align="center">
                           <div class="desc">{{ x.name }}</div>
                           </td>
                           <td ng-if="x.q!=-1"  style="padding: 0px;"align="center">
-                          <b>{{ x.q }} kg</b>
+                          <b>{{ x.q }} {{x.unit}}</b>
                           </td>
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
-                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn">ADD</button></td>
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td>
                           </tr>
                         </table>
                         
@@ -184,7 +181,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
 <td> {{x.qty}} </td>
 <td> {{x.nam}} </td>
-<td> {{x.w}} kg</td>
+<td> {{ x.q }} {{x.unit}}</td>
 <td> Rs.{{x.price}} </td>
 
 </tr>
