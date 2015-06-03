@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Dream Stop</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/frontpage.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/about.css">
+
+<style type="text/css">
+/* Custom Styles */
+
+body {
+
+  background: #FFF;
+  margin: 0px;
+  height: 100%;
+  
+}
+
+/* Tab Navigation */
+#dummyParent > #tabs {
+  margin: 0;
+  padding: 0;
+  border: 0;    
+}
+#dummyParent > #tabs > li > a {
+  background: #FFF;
+  color: #222;
+  width: 200px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 0;
+  box-shadow: inset 0 -8px 7px -9px rgba(0,0,0,.4),-2px -2px 5px -2px rgba(0,0,0,.4);
+}
+#dummyParent > #tabs > li.active > a,
+#dummyParent > #tabs > li.active > a:hover,
+#dummyParent > #tabs > li.active > a:focus{
+  background: #FFF;
+  color: rgba(121,147,59,0.8);
+  font-size: 16px;
+  box-shadow: inset 0 0 0 0 rgba(0,0,0,.4),-2px -3px 5px -2px rgba(0,0,0,.4);
+}
+.container {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Tab Content */
+.tab-pane {
+  background: transparent;
+  border-radius: 0;
+  padding: 10px;
+  height: auto;
+  box-shadow: 0 0 4px rgba(0,0,0,.4);
+}
+
+.fixed {
+  position: fixed;
+}
+.bs-docs-sidebar {
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.bs-docs-sidebar .nav>li>a {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #999;
+  padding: 4px 20px;
+}
+.bs-docs-sidebar .nav>li>a:hover, 
+.bs-docs-sidebar .nav>li>a:focus {
+  padding-left: 19px;             /*indent from left */
+  color: rgba(121,147,59,1);      /*highlight color */
+  text-decoration: none;          /*turn off underline */
+  background-color: transparent;  /*turn off selection color */
+  border-left: 1px solid #563d7c; /*add left cursor */
+}
+
+.bs-docs-sidebar .nav>.active>a, 
+.bs-docs-sidebar .nav>.active:hover>a,
+.bs-docs-sidebar .nav>.active:focus>a {
+  padding-left: 18px;
+  font-weight: 700;
+  color: #563d7c;
+  background-color: transparent;
+  border-left: 2px solid #563d7c;
+}
+.bs-docs-sidebar .nav .nav {
+  display: none;            /*hide nested list */
+}
+.bs-docs-sidebar .nav > .active > ul {
+  display: block;           /*show list when active */
+  padding-bottom: 10px;     /*add a little buffer */
+}
+.bs-docs-sidebar .nav .nav>li>a {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 30px;
+  font-size: 12px;
+  font-weight: 400;
+}
+.bs-docs-sidebar .nav .nav>li>a:hover,
+.bs-docs-sidebar .nav .nav>li>a:focus {
+  padding-left: 29px;
+}
+.bs-docs-sidebar .nav .nav>.active>a,
+.bs-docs-sidebar .nav .nav>.active:hover>a,
+.bs-docs-sidebar .nav .nav>.active:focus>a {
+  font-weight: 500;
+  padding-left: 28px;
+}
+.group {
+  color: #777;
+}
+.group > h3 {
+  color: #000;
+}
+.group > h4 {
+  color: #333;
+}
+#side.nav-tabs {
+	width: 140px;
+	margin-top: 20px;
+	border-radius: 4px;
+	border: 1px solid #ddd;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+}
+#side.nav-tabs li {
+	margin: 0;
+	border-top: 1px solid #ddd;
+}
+#side.nav-tabs li:first-child {
+	border-top: none;
+}
+#side.nav-tabs li a {
+	margin: 0;
+	padding: 8px 16px;
+	border-radius: 0;
+}
+#side.nav-tabs li.active a, #side.nav-tabs li.active a:hover {
+	color: #fff;
+	background: #0088cc;
+	border: 1px solid #0088cc;
+    cursor: pointer;
+}
+#side.nav-tabs li:first-child a {
+	border-radius: 4px 4px 0 0;
+}
+#side.nav-tabs li:last-child a {
+	border-radius: 0 0 4px 4px;
+}
+#side.nav-tabs.affix {
+	top: 30px; 
+}
+input[type="radio"]
+{
+  margin:30px;
+}
+#order:hover
+{
+  background: rgba(121,147,59,1);
+}
+</style>
+
+</head>
+
+<body data-spy="scroll" data-target="#myScrollspy" ng-app="thedreamstop" >
+
+<div class="navbar navbar-inverse" role="navigation" style="height:100px;">
+
+  <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
+
+    <div class="navbar-collapse collapse">
+
+      <div class="navbar-header" >
+
+        <a class="navbar-brand" href="vendor.html" style="padding-left:20px;">The Dream Stop</a> 
+      </div>
+
+          
+      <div>
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <li><a data-toggle="popover" data-container="body" data-contentwrapper=".content"><span id="bindElement"></span></a></li>
+          <!-- <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li> -->
+          <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
+          <li ng-if="loggedin()"><a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a></li>
+          <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="dummyParent">
+
+    <ul id="tabs" class="nav nav-tabs" role="tablist">
+
+      <li class="active">
+        <a href="#orders" role="tab" data-toggle="tab">
+          Orders Received
+        </a>
+      </li>
+
+      <li>
+        <a href="#details" role="tab" data-toggle="tab">
+          Profile
+        </a>
+      </li>
+
+      <li>
+        <a href="#TC" role="tab" data-toggle="tab">
+        Terms and Conditions
+        </a>
+      </li>
+
+    </ul>
+
+</div>
+
+<!-- Tab panes -->
+
+<div class="tab-content">
+
+  <div class="tab-pane fade active in" id="orders" ng-controller="vendororders">
+
+    <div class="jumbotron" style="">
+
+      <div class="col-md-8">
+      <h2>Orders Received</h2>
+      </div>
+
+        <!-- <div class="col-md-4" style="float:right|bottom;">
+        <select class="form-control" style="float:right;"  ng-options="option.label for option in values" ng-model="selected">
+        </select>
+        </div> -->
+
+      <br><br><br><hr><br>
+
+      <ul  style="list-style-type:none">
+
+        <li  style="margin-bottom : 0px;margin-right:20px;"ng-repeat="x in orders|orderBy:selected.sub:selected.rev">
+
+        <div>
+
+          <br>
+
+          <table style="border-spacing: 0px;border-collapse: collapse;width:100%;table-layout:fixed;">
+            <tr style="background: rgba(121,147,59,0.8);cursor:default;">
+            <td style="padding-left:20px;cursor:pointer;" ng-click="open(x.TID)" id="order"><b>Order ID: {{x.TID}}</b></td>
+            <td style="padding-left:20px;"><b>Current Status: {{status}}</b></td>
+            <td colspan="2" style="padding-left:20px;">
+              <form>
+                <input type="radio" name="status" value="Received" ng-model="status" checked="checked"><b>Received</b>
+                <input type="radio" name="status" value="Packing" ng-model="status"><b>Packing</b>
+                <input type="radio" name="status" value="Transporting" ng-model="status"><b>Transporting</b>
+                <input type="radio" name="status" value="Delivered" ng-model="status"><b>Delivered</b>
+              </form>
+            </td>
+            </tr>
+            <tr style="padding:20px;height:60px;">
+            <th style="text-align:center;" align="center">Number of items</th>
+            <th style="text-align:center;" align="center"nowrap>Price amount</th>
+            <th style="text-align:center;" align="center">Address of Delivery</th>
+            <th style="text-align:center;" align="center"nowrap>Date of Delivery</th>  
+            </tr>
+            <tr>
+            <td align="center">{{x.titems}}</td>
+            <td align="center"nowrap>Rs.{{x.tprice}}</td>
+            <td align="center">{{x.address}}</td>
+            <td align="center" nowrap>{{x.date}}</td>
+            </tr>
+          </table>
+
+          <div id="{{x.TID}}" class="collapse" style="background:white;height:auto;width:100%;padding:20px;margin-top:30px;" ng-controller="cart">
+
+            <div style="font-weight: bold;line-height: 40px">
+            Name: {{x.name}}
+            <br>
+            Phone number: {{x.phno}}
+            <br>
+            Address: {{x.address}}
+            <br>
+            Email id: -
+            <br>
+            <p align="center" style="font-size: 31px;">CART</p>
+            
+            </div>
+
+            <table style="width: 100%;line-height: 30px;margin-top:30px;" cellpadding="10" cellspacing="10">
+
+            <!-- <tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr> -->
+            
+              <tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
+                <th style="text-align: center;">Qty</th>
+                <th style="text-align: center;">Name</th>   
+                <th style="text-align: center;">Weight</th>
+                <th style="text-align: center;">Price</th>
+              </tr>
+
+              <tr ng-if="tprice!=0" ng-repeat="y in items" style="text-align: center;">
+                <td> {{y.qty}} </td>
+                <td> {{y.nam}} </td>
+                <td> {{y.q}} {{y.unit}}</td>
+                <td> Rs.{{y.price}} </td>
+              </tr>
+           
+            </table>
+
+          </div>
+
+          <br>
+
+          <hr>
+
+        </div>
+
+        </li>
+
+        </ul>
+
+      </div>
+
+  </div>
+
+  <div class="tab-pane fade" id="TC" >
+    <div class="container">
+
+        <div class="jumbotron">
+
+          <h2>Terms and Conditions</h2>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-3" id="myScrollspy">
+
+                <ul id="side"class="nav nav-tabs nav-stacked affix-top" data-spy="affix" data-offset-top="125">
+                    
+                    <li class="active"><a href="#section-1">Section One</a></li>
+                    <li><a href="#section-2">Section Two</a></li>
+                    <li><a href="#section-3">Section Three</a></li>
+                    <li data-toggle="collapse" data-target="#demo"><a href="#section-4">Section Four</a></li>
+
+                    <div style="list-style-type:none;padding:5px;" id="demo" class="collapse in">
+                    <li style="padding:5px;"><a id="sub" href="#section-4-1" style="text-decoration: none;">Section 4.1</a></li>
+                    <li style="padding:5px;"><a id="sub" href="#section-4-2" style="text-decoration: none;">Section 4.2</a></li>
+                    </div>
+                    
+                    <li><a href="#section-5">Section Five</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-xs-9" id="content">
+                
+            </div>
+
+        </div>
+
+    </div>
+
+  </div>
+
+  <div class="tab-pane fade" id="details">
+
+    <div class="jumbotron col-xs-12">
+      <h3 class="text-center">Profile</h3>
+    </div>
+
+    <div class="col-xs-12">
+
+      <div class="whitebox top-banner card col-xs-6 col-xs-offset-3">
+
+        <h2 align="center" style="padding-left: 13%;">Thank you for being a part of us.</h2>
+         <br> 
+
+        <form class="form-horizontal" role="form">
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Shop</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="phno">Owner</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="phno" >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="area">Area</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="area" >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="phno">Phone</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="phno" >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="address">Address</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="address" >
+            </div>
+          </div>
+
+          <div class="form-group" style="text-align: center;">        
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Change</button>
+            </div>
+          </div>
+
+        </form>
+        
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="js/thedreamstop.js"></script>
+
+</body>
+
+</html>                                		

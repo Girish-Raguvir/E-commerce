@@ -1242,6 +1242,56 @@ else
 
 }]);
 
+app.controller("vendororders",['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
+
+$scope.values = [
+{
+  id: 1,
+  label: 'Total bill amount-Lower to Higher',
+  sub: 'tprice',
+  rev:false
+}, 
+{
+  id: 2,
+  label: 'Total bill amount-Higher to Lower',
+  sub: 'tprice',
+  rev:true
+  
+},
+];
+
+$scope.i=-1;
+$scope.selected =$scope.values[0];
+$scope.s='tprice';
+    
+if($scope.selected.label=='Price')
+  $scope.s='tprice';
+else 
+  $scope.s='s';
+
+$scope.orders = 
+[
+  {'tprice':800,'titems':4,'name':'Girish','phno':'45761226','address':'#10,Adyar,Chennai','date':'4/6/2015','TID':'1'},
+  {'tprice':1200,'titems':6,'name':'Rohit','phno':'42861223','address':'#13,Mylapore,Chennai','date':'5/6/2015','TID':'2'},
+  {'tprice':300,'titems':2,'name':'Anurag','phno':'42811322','address':'#11,Adyar,Chennai','date':'4/6/2015','TID':'3'},
+  {'tprice':1000,'titems':5,'name':'Sugan','phno':'42261226','address':'#10,Adyar,Chennai','date':'5/6/2015','TID':'4'},
+];
+$scope.status="Received";
+
+var op=0;
+$scope.items=[{nam:'test1',qty:1,q:1,unit:'kg',price:100},{nam:'test2',qty:5,q:1,unit:'kg',price:400},{nam:'test3',qty:3,q:2,unit:'kg',price:200}];
+$scope.open=function(id)
+{
+  console.log(id);
+  $('#'+id).toggleClass("in");op++;
+  if(op%2==1)
+  {
+    
+  }
+}
+
+}]);
+
 // slide drawer
 
 app.controller("myCtrl",function($scope,$rootScope)
