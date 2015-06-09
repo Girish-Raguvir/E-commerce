@@ -1,5 +1,5 @@
 
-var app=angular.module('thedreamstop', ['ionic.utils']);
+var app=angular.module('thedreamstop', ['ionic.utils','ngAnimate']);
 
 //custom-factory for local-storage in the web browser
 
