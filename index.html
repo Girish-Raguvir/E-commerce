@@ -20,6 +20,82 @@
   <link rel="stylesheet" type="text/css" href="css/about.css">
   <link href="css/simple-sidebar.css" rel="stylesheet">
 <script type="text/javascript">
+$(document).ready(function()
+{
+  if(typeof(Storage)!=="undefined")
+{
+  $('#tile1').on('click',function()
+  {
+    sessionStorage.bread=true;
+    sessionStorage.bev=false;
+    sessionStorage.brand=false;
+    sessionStorage.Grocery=false;
+    sessionStorage.household=false;
+    sessionStorage.gour=false;
+    sessionStorage.pc=false;
+  });
+  $('#tile2').on('click',function()
+  {
+    sessionStorage.bread=false;
+    sessionStorage.bev=true;
+    sessionStorage.brand=false;
+    sessionStorage.Grocery=false;
+    sessionStorage.household=false;
+    sessionStorage.gour=false;
+    sessionStorage.pc=false;
+  });
+  $('#tile3').on('click',function()
+  {
+    sessionStorage.bread=false;
+    sessionStorage.bev=false;
+    sessionStorage.brand=true;
+    sessionStorage.Grocery=false;
+    sessionStorage.household=false;
+    sessionStorage.gour=false;
+    sessionStorage.pc=false;
+  });
+  $('#tile5').on('click',function()
+  {
+    sessionStorage.bread=false;
+    sessionStorage.bev=false;
+    sessionStorage.brand=false;
+    sessionStorage.Grocery=true;
+    sessionStorage.household=false;
+    sessionStorage.gour=false;
+    sessionStorage.pc=false;
+  });
+  $('#tile6').on('click',function()
+  {
+    sessionStorage.bread=false;
+    sessionStorage.bev=false;
+    sessionStorage.brand=false;
+    sessionStorage.Grocery=false;
+    sessionStorage.household=true;
+    sessionStorage.gour=false;
+    sessionStorage.pc=false;
+  });
+  $('#tile7').on('click',function()
+  {
+    sessionStorage.bread=false;
+    sessionStorage.bev=false;
+    sessionStorage.brand=false;
+    sessionStorage.Grocery=false;
+    sessionStorage.household=false;
+    sessionStorage.gour=true;
+    sessionStorage.pc=false;
+  });
+  $('#tile8').on('click',function()
+  {
+    sessionStorage.bread=false;
+    sessionStorage.bev=false;
+    sessionStorage.brand=false;
+    sessionStorage.Grocery=false;
+    sessionStorage.household=false;
+    sessionStorage.gour=false;
+    sessionStorage.pc=true;
+  });
+}
+});
 
 </script>
   <style type="text/css">
@@ -36,7 +112,6 @@
 {
   text-align: center;
   color:red;
-
 }
 </style>
 </head>
@@ -66,7 +141,7 @@
                         <table style="width: 100%;background-color: white; margin-top: 10px;" id="t02">
                           <tr style="height: 10%;width:100%;" id="searchlist">
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
-                            <input type="number" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
+                           <input type="number" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
                           </td>
                           <td style="padding: 10px;" align="center">
                           <div class="desc">{{ x.name }}</div>
@@ -88,22 +163,23 @@
           </ul>
       <div ng-controller="log_in_out">
       <ul class="nav navbar-nav navbar-right">
-        <li><a data-toggle="popover" data-container="body" data-contentwrapper=".content"><span id="bindElement"></span></a></li>
+        <li><a tabindex="0" data-toggle="popover" role="button" data-container="body" data-contentwrapper=".content" ><span id="bindElement"></span></a></li>
         <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
         <li ng-if="loggedin()"><a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a></li>
         <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
         
-
+      <!--/div>
+      <div ng-controller="nav"-->
        <div class="content" style="display:none;">
         <p align="center" >
         <br>
 
         Changing location will cause the page to be refreshed leading to loss of saved data.Do you want to proceed? <br><br>
-        <button type="button" class="btn btn-primary" ng-click="refresh()">Continue</button>
-
+        <button type="button" class="btn btn-primary" id="continue" >Continue</button>
         </p>
+        
        </div>
 
       </ul>
@@ -477,51 +553,52 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div-->
 <div id="base">
 <div class="row " ng-if="check" style="margin-left: 5px;">
-    <div class="col-sm-2 col-xs-4 col-md-3" ng-click="show(1)">
+    <a href="subcategory1.html"><div class="col-sm-2 col-xs-4 col-md-3">
       <div id="tile1" class="tile" >
         
          <div class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner" >
             <div class="item active">
-               <a href="Items.html"><img src="images/Categories/BDE1.jpg" class="img-responsive" ng-click="visbread()"/></a>
+               <img src="images/Categories/BDE1.jpg" class="img-responsive" >
             </div>
             <div class="item">
-              <a href="Items.html"><img src="images/Categories/BDE2.jpg" class="img-responsive"ng-click="visbread()"/></a>
+              <img src="images/Categories/BDE2.jpg" class="img-responsive" >
             </div>
           </div>
         </div>
          
       </div>
-  </div>
-  <div class="col-sm-2 col-xs-4 col-md-3" ng-click="show(1)">
+  </div></a>
+
+  <a href="subcategory1.html#beveragecollapse"><div class="col-sm-2 col-xs-4 col-md-3" ng-click="visbev()">
       <div id="tile2" class="tile">
         
          <div class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <a href="Items.html"><img src="images/Categories/bev1.jpg" class="img-responsive" ng-click="visbev()"/></a>
+               <img src="images/Categories/bev1.jpg" class="img-responsive" >
             </div>
             <div class="item">
-               <a href="Items.html"><img src="images/Categories/bev2.jpg" class="img-responsive" ng-click="visbev()"/></a>
+               <img src="images/Categories/bev2.jpg" class="img-responsive" >
             </div>
           </div>
         </div>
          
       </div>
-  </div>
-  <div class="col-sm-2 col-xs-4 col-md-3" ng-click="show(2)">
+  </div></a>
+  <div class="col-sm-2 col-xs-4 col-md-3" ng-click="visbrand()">
       <div id="tile3" class="tile">
         
          <div class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <a href="Items.html"><img src="images/Categories/Brd_foods1.jpg" class="img-responsive" ng-click="visbrand()" /></a>
+               <a href="subcategory1.html"><img src="images/Categories/Brd_foods1.jpg" class="img-responsive"  ></a>
             </div>
             <div class="item">
-               <a href="Items.html"><img src="images/Categories/Brd_foods2.jpg" class="img-responsive" ng-click="visbrand()" /></a>
+               <a href="subcategory1.html"><img src="images/Categories/Brd_foods2.jpg" class="img-responsive" ></a>
             </div>
           </div>
         </div>
@@ -551,67 +628,67 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <br>
 <div class="row " ng-if="check" style="margin-left: 5px;">
     <div class="col-sm-2 col-xs-4 col-md-3">
-      <div id="tile5" class="tile" ng-click="show(3)">
+      <div id="tile5" class="tile" ng-click="visgrocery()">
         
          <div class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-              <a href="Items.html" ><img src="images/Categories/GS1.jpg" class="img-responsive" ng-click="visgrocery()" /></a>
+              <a href="subcategory1.html" ><img src="images/Categories/GS1.jpg" class="img-responsive"></a>
             </div>
             <div class="item">
-              <a href="Items.html" ><img src="images/Categories/GS2.jpg" class="img-responsive" ng-click="visgrocery()" /></a>
+              <a href="subcategory1.html" ><img src="images/Categories/GS2.jpg" class="img-responsive" ></a>
             </div>
           </div>
         </div>
          
       </div>
   </div>
-  <div class="col-sm-2 col-xs-4 col-md-3" ng-click="show(1)">
+  <div class="col-sm-2 col-xs-4 col-md-3" ng-click="vishousehold()">
       <div id="tile6" class="tile">
         
          <div class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-             <a href="Items.html"><img src="images/Categories/H1.jpg" class="img-responsive" ng-click="vishousehold()" /></a> 
+             <a href="subcategory1.html"><img src="images/Categories/H1.jpg" class="img-responsive"  ></a> 
             </div>
             <div class="item">
-            <a href="Items.html"><img src="images/Categories/H2.jpg" class="img-responsive" ng-click="vishousehold()" /></a>
+            <a href="subcategory1.html"><img src="images/Categories/H2.jpg" class="img-responsive" ></a>
             </div>
           </div>
         </div>
          
       </div>
   </div>
-  <div class="col-sm-2 col-xs-4 col-md-3" ng-click="show(1)">
+  <div class="col-sm-2 col-xs-4 col-md-3" ng-click="visgour()"/>
       <div id="tile7" class="tile">
         
          <div class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-              <a href="Items.html"><img src="images/Categories/IG1.jpg" class="img-responsive" ng-click="visgour()"/></a> 
+              <a href="subcategory1.html"><img src="images/Categories/IG1.jpg" class="img-responsive" ></a> 
             </div>
             <div class="item">
-             <a href="Items.html"><img src="images/Categories/IG2.jpg" class="img-responsive" ng-click="visgour()"/></a> 
+             <a href="subcategory1.html"><img src="images/Categories/IG2.jpg" class="img-responsive" ></a> 
             </div>
           </div>
         </div>
          
       </div>
   </div>
-    <div class="col-sm-2 col-xs-4 col-md-3" ng-click="show(1)">
+    <div class="col-sm-2 col-xs-4 col-md-3" ng-click="vispc()">
       <div id="tile8" class="tile">
         
          <div class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-             <a href="Items.html"><img src="images/Categories/PC1.jpg" class="img-responsive" ng-click="vispc()"/></a>
+             <a href="subcategory1.html"><img src="images/Categories/PC1.jpg" class="img-responsive" ></a>
             </div>
             <div class="item">
-             <a href="Items.html"><img src="images/Categories/PC2.jpg" class="img-responsive" ng-click="vispc()"/></a>
+             <a href="subcategory1.html"><img src="images/Categories/PC2.jpg" class="img-responsive" ></a>
             </div>
           </div>
         </div>

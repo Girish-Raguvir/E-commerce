@@ -18,12 +18,47 @@
 <script type="text/javascript">
 $(window).load(function() {
   $(".loader").fadeOut("slow");
-})
+});
+  $(document).ready(function()
+  {
+      var bdefirst=sessionStorage.getItem('bdefirst');
+      var bdesecond=sessionStorage.getItem('bdesecond');
+      var bdethird=sessionStorage.getItem('bdethird');
+      var beveragesfirst=sessionStorage.getItem('beveragesfirst');
+      var beveragessecond=sessionStorage.getItem('beveragessecond');
+      var brandedfirst=sessionStorage.getItem('brandedfirst');
+      var groceryfirst=sessionStorage.getItem('groceryfirst');
+      var grocerysecond=sessionStorage.getItem('grocerysecond');
+      var householdfirst=sessionStorage.getItem('householdfirst');
+      var householdsecond=sessionStorage.getItem('householdsecond');
+      var householdthird=sessionStorage.getItem('householdthird');
+      var gourfirst=sessionStorage.getItem('gourfirst');
+      var goursecond=sessionStorage.getItem('goursecond');
+      var gourthird=sessionStorage.getItem('gourthird');
+      var pcfirst=sessionStorage.getItem('pcfirst');
+      var pcsecond=sessionStorage.getItem('pcsecond');
+      console.log(bdefirst,bdefirst.localeCompare('true'),typeof bdefirst);
+      if(!bdefirst.localeCompare('true'))
+      {
+        $("#bdefirst").show();
+        $("#bdesecond,#bdethird").hide();
+      }
+      if(!bdesecond.localeCompare('true'))
+      {
+        $("#bdesecond").show();
+        $("#bdefirst,#bdethird").hide();
+      }
+      if(!bdethird.localeCompare('true'))
+      {
+        $("#bdethird").show();
+        $("#bdesecond,#bdefirst").hide();
+      }
+  });
 </script>
 
    <link rel="stylesheet" type="text/css" href="css/frontpage.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="css/anim.css">
+  <link rel="stylesheet" type="text/css" href="css/anim.css">   
   <link rel="stylesheet" type="text/css" href="css/animation.css">
   <link rel="stylesheet" type="text/css" href="css/about.css">
   <link href="css/simple-sidebar.css" rel="stylesheet">
@@ -73,7 +108,7 @@ $(window).load(function() {
                         <table style="width: 100%;background-color: white; margin-top: 10px;" id="t02">
                           <tr style="height: 10%;width:100%;" id="searchlist">
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
-                            <input type="number" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
+                             <input type="number" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
                           </td>
                           <td style="padding: 10px;" align="center">
                           <div class="desc">{{ x.name }}</div>
@@ -99,7 +134,7 @@ $(window).load(function() {
         <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
-        <!-- <li ng-if="loggedin()"><a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a></li> -->
+        <!--li ng-if="loggedin()"><a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a></li-->
         <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
         
 
@@ -139,7 +174,6 @@ $(window).load(function() {
 <td> {{x.nam}} </td>
 <td> {{x.q}} {{x.unit}}</td>
 <td> Rs.{{x.price}} </td>
-
 </tr>
 <tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
 
@@ -268,7 +302,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        
+        <!--button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button-->
         <h3 class="modal-title" id="myModalLabel">Location</h3>
       </div>
       <div class="modal-body">
@@ -310,7 +344,8 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div>
 
 
-<div  style="padding-top:10px;" ng-controller="itemdisplay">
+<div  style="animation-name: animation;animation-duration: 4s;
+    animation-iteration-count: infinite;padding-top:10px;" ng-controller="itemdisplay">
 
 <div id="wrapper" style="padding-top: 90px;padding-left:0px;">
 
@@ -381,7 +416,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <div class="jumbotron" style="background:#FFFFFF">
 
 <div class="col-md-8">
-<h3 >Item Name</h3>
+<h3>Item Name</h3>
 </div>
 
 <div class="col-md-4" style="float:right|bottom;">
@@ -396,9 +431,14 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <hr>
 <br>
 
+<!-- toggling item visibility-->
+
+<div id="bdefirst">
+
+
 <ul  style="list-style-type:none;padding-left:0px;">
-    <li  style="margin-bottom : 0px;"ng-repeat="x in names1|orderBy:selected.sub:selected.rev" for="{{x.id}}" class="slideDown">
-<div ng-if="(check(x))" class="animate">
+    <li  style="margin-bottom : 0px;"ng-repeat="x in bakery|orderBy:selected.sub:selected.rev" for="{{x.id}}"  >
+<div ng-if="(check(x))">
 
 
 <table style="width: 100%;background-color: white; margin: 0px;table-layout:fixed;" id="t02">
@@ -411,7 +451,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <tr style="height: auto;">
 
 <td align="center" style="width:10%;">
-<input type="number" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="items[$index].qty">
+<input type="number" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="bakery[$index].qty">
 </td>
 <!-- <td style=""align="center">
 <b>{{ x.brand }}</b>
@@ -432,7 +472,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </td>
 <td align="center" style="width:10%;"><div class="desc">Rs.{{ x.price }}</div></td>
 
-<td align="center" style="width:10%;"><button class="btn btn-success" ng-click="add(items[$index].PID,items[$index].qty,x.name,items[$index].q*1,x.price*items[$index].qty,items[$index].unit)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
+<td align="center" style="width:10%;"><button class="btn btn-success" ng-click="add(bakery[$index].PID,bakery[$index].qty,x.name,bakery[$index].q*1,x.price*bakery[$index].qty,bakery[$index].unit)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
 </tr>
 </table>
 
@@ -443,6 +483,121 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </li>
 
 </ul>
+
+</div>
+
+<!-- /*******************************************************************************/-->
+<div id="bdesecond">
+
+
+<ul  style="list-style-type:none;padding-left:0px;">
+    <li  style="margin-bottom : 0px;"ng-repeat="x in eggs|orderBy:selected.sub:selected.rev" for="{{x.id}}"  >
+<div ng-if="(check(x))">
+
+
+<table style="width: 100%;background-color: white; margin: 0px;table-layout:fixed;" id="t02">
+  <col width="25%" />
+  
+  <col width="25%" />
+  <col width="25%" />
+  <col width="25%" />
+  <col width="25%" />
+<tr style="height: auto;">
+
+<td align="center" style="width:10%;">
+<input type="number" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="eggs[$index].qty">
+</td>
+<!-- <td style=""align="center">
+<b>{{ x.brand }}</b>
+</td> -->
+<td style="padding-buttom: 10px;width:30%;" align="center"> 
+<ul class="enlarge">
+<li style="margin-left:-50%;"><img src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=400" alt={{ x.name }} width="80" height="80" /><span><img id="itemimg"src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=200" alt={{ x.name }} /><br />{{x.name}}</span></li>
+
+</ul>
+
+</td>
+<td style="word-wrap: break-word;width:30%;" align="center">
+<div class="desc">{{ x.name }}</div>
+</td>
+
+<td style="width:10%;"align="center">
+<b>{{ x.q }} {{x.unit}}</b>
+</td>
+<td align="center" style="width:10%;"><div class="desc">Rs.{{ x.price }}</div></td>
+
+<td align="center" style="width:10%;"><button class="btn btn-success" ng-click="add(eggs[$index].PID,eggs[$index].qty,x.name,eggs[$index].q*1,x.price*eggs[$index].qty,eggs[$index].unit)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
+</tr>
+</table>
+
+
+<hr>
+</div>
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- /****************************************************************************************/-->
+
+
+<div id="bdethird">
+
+
+<ul  style="list-style-type:none;padding-left:0px;">
+    <li  style="margin-bottom : 0px;"ng-repeat="x in dairy|orderBy:selected.sub:selected.rev" for="{{x.id}}" >
+<div ng-if="(check(x))">
+
+
+<table style="width: 100%;background-color: white; margin: 0px;table-layout:fixed;" id="t02">
+  <col width="25%" />
+  
+  <col width="25%" />
+  <col width="25%" />
+  <col width="25%" />
+  <col width="25%" />
+<tr style="height: auto;">
+
+<td align="center" style="width:10%;">
+<input type="number" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="dairy[$index].qty">
+</td>
+<!-- <td style=""align="center">
+<b>{{ x.brand }}</b>
+</td> -->
+<td style="padding-buttom: 10px;width:30%;" align="center"> 
+<ul class="enlarge">
+<li style="margin-left:-50%;"><img src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=400" alt={{ x.name }} width="80" height="80" /><span><img id="itemimg"src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=200" alt={{ x.name }} /><br />{{x.name}}</span></li>
+
+</ul>
+
+</td>
+<td style="word-wrap: break-word;width:30%;" align="center">
+<div class="desc">{{ x.name }}</div>
+</td>
+
+<td style="width:10%;"align="center">
+<b>{{ x.q }} {{x.unit}}</b>
+</td>
+<td align="center" style="width:10%;"><div class="desc">Rs.{{ x.price }}</div></td>
+
+<td align="center" style="width:10%;"><button class="btn btn-success" ng-click="add(dairy[$index].PID,dairy[$index].qty,x.name,dairy[$index].q*1,x.price*dairy[$index].qty,dairy[$index].unit)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
+</tr>
+</table>
+
+
+<hr>
+</div>
+
+</li>
+
+</ul>
+
+</div>
+<!-- end of item toggling -->
+
+
 </div>
 </td>
 <td style="padding: 3px;margin: 0px;width: 28%; ">
@@ -453,7 +608,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
           <!-- <span class="glyphicon glyphicon-arrow-right" id="sidebar" ng-click="onClick()"></span> -->
            
   
-         <a class="navbar-brand" style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 1;"></span>&nbsp; &nbsp; View Cart</a> 
+         <a class="navbar-brand" href="index.html" style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 1;"></span>&nbsp; &nbsp; View Cart</a> 
         </div>
          
         </div>
@@ -472,7 +627,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
     <th>Price</th>
 </tr>
 
-<tr ng-repeat="x in addeditems" class="animate">
+<tr ng-repeat="x in addeditems">
 <td> {{x.qty}} </td>
 <!-- <td style="max-width:150px;"> {{x.nam.substring(0,10)}}.... </td> -->
 <td> {{x.nam}}</td>
@@ -491,11 +646,9 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </tr>
 
 </table>
-
-
-
-</div>
-<div class="container-fluid" style="position:absolute;right:0px;width:100%;margin-top:80px;">
+<tr>
+  <td>
+  <div class="container-fluid" style="position:absolute;right:0px;width:100%;margin-top:80px;">
   <div class="Mobile-App" style="background: gainsboro;">
   <h3 id="playstore">Finish Grocery Shopping on the Go!<br>
   Download the TheDreamStop Mobile App Now!</h3>
@@ -511,6 +664,10 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   </div>
 
   </div>   
+</td>
+</tr>
+
+</div>
 </div>
 <script src="js/thedreamstop.js"></script>
 <script type="text/javascript">

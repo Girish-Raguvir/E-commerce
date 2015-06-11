@@ -16,7 +16,7 @@ angular.module('ionic.utils', []).factory('$localstorage', ['$window', function(
             },
             clear:function(key)
             {
-    	         delete $window.localStorage[key];
+               delete $window.localStorage[key];
             },
           }
 }]);
@@ -69,7 +69,7 @@ return {
 
 app.controller('search',['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
-$scope.search=[{name:'Sorry.No matches found.',q:'-1',price:'',}];
+$$scope.search=[{name:'Sorry.No matches found.',q:'-1',price:'',}];
 
 // $("#txtSearch").keyup(function (event) 
 // {
@@ -78,66 +78,57 @@ $scope.search=[{name:'Sorry.No matches found.',q:'-1',price:'',}];
 //       $("#btnsearch").click();
 //     }
 // });
-$scope.addeditems=[
-    { 
-      id:-1,
-      qty:0 ,
-      nam:'-',
-      q:0 ,
-      unit:'gm',
-      price:0 ,
-
-    }];
-
-$scope.i=-1;
-$scope.titems=0;
-$scope.tprice=0;
-
-if(sessionStorage.cart==null || sessionStorage.tprice==null)
-  {sessionStorage.cart='[]';sessionStorage.tprice=0;}
-  else
-  {
-
-    var obj=JSON.parse(sessionStorage.cart);
-    //$scope.addeditems.splice(0,1);
-    for(var i=0;i<obj.length;i++)
-    {
-      if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
-      $scope.addeditems.push(obj[i]);
-    }
-    $scope.tprice=parseInt(sessionStorage.tprice);
-  }
-$scope.loggedout=function()
-{
-  if($localstorage.loggedin=='false')return true;
-  else return false;
+$scope.addeditems=[   
+    {     
+      id:-1,    
+      qty:0 ,   
+      nam:'-',    
+      q:0 ,   
+      unit:'gm',    
+      price:0 ,   
+    }];   
+$scope.i=-1;    
+$scope.titems=0;    
+$scope.tprice=0;    
+if(sessionStorage.cart==null || sessionStorage.tprice==null)    
+  {sessionStorage.cart='[]';sessionStorage.tprice=0;}   
+  else    
+  {   
+    var obj=JSON.parse(sessionStorage.cart);    
+    //$scope.addeditems.splice(0,1);    
+    for(var i=0;i<obj.length;i++)   
+    {   
+      if(obj[i].nam=='-')$scope.addeditems.splice(0,1);   
+      $scope.addeditems.push(obj[i]);   
+    }   
+    $scope.tprice=parseInt(sessionStorage.tprice);    
+  }   
+$scope.loggedout=function()   
+{   
+  if($localstorage.loggedin=='false')return true;   
+  else return false;    
+};    
+$scope.add=function(id,qty,name,w,price,u)    
+{   
+      
+  var j=0,f=0;    
+  if($scope.addeditems.length!=0)   
+  if($scope.addeditems[0].id==-1)$scope.addeditems.splice(0,1);   
+  for(j=0;j<$scope.addeditems.length;j++)   
+    if($scope.addeditems[j].id==id)   
+      {   
+        $scope.addeditems[j].qty+=qty;$scope.addeditems[j].price+=price;f=1;$scope.titems=$scope.titems+qty;break;    
+      }   
+  if(!f)    
+    {   
+      $scope.addeditems.push({ id:id,qty: qty,nam:name ,q: w,unit: u,price: price});    
+      $scope.i++;$scope.titems=$scope.titems+qty;   
+    }   
+    $scope.tprice=$scope.tprice+price;    
+    sessionStorage.cart=JSON.stringify($scope.addeditems);    
+    sessionStorage.tprice=$scope.tprice;    
+      
 };
-$scope.add=function(id,qty,name,w,price,u)
-{
-  
-
-  var j=0,f=0;
-
-  if($scope.addeditems.length!=0)
-  if($scope.addeditems[0].id==-1)$scope.addeditems.splice(0,1);
-
-  for(j=0;j<$scope.addeditems.length;j++)
-    if($scope.addeditems[j].id==id)
-      {
-        $scope.addeditems[j].qty+=qty;$scope.addeditems[j].price+=price;f=1;$scope.titems=$scope.titems+qty;break;
-      }
-
-  if(!f)
-    {
-      $scope.addeditems.push({ id:id,qty: qty,nam:name ,q: w,unit: u,price: price});
-      $scope.i++;$scope.titems=$scope.titems+qty;
-    }
-    $scope.tprice=$scope.tprice+price;
-    sessionStorage.cart=JSON.stringify($scope.addeditems);
-    sessionStorage.tprice=$scope.tprice;
-  
-};
-
 $scope.searchdata="";
 $scope.open=function(){setTimeout( function(){document.getElementById("searchdiv").className="dropdown open";}, 20);}
 $scope.val=1;
@@ -182,7 +173,6 @@ $scope.searchlist=function(){
            //$scope.search=response.items;
           //console.log(JSON.stringify(response));
           if(response.numResults!=0){$scope.search=response.items;console.log('yes');}
-
           //console.log(JSON.stringify($scope.search));
         }
       })
@@ -204,15 +194,20 @@ $scope.c='kkkss';
 $scope.ctr=0;
 //console.log($scope.ctr);
 console.log(sessionStorage.length);
-$scope.refresh=function()
+$(document).ready(function()
 {
-  //sessionStorage.clear('location');
-  delete sessionStorage.location;
-  window.location.href='index.html';
-  console.log('hello @ refresh');
+  $('#bindElement').popover({title:"Change Location?",content:function()
+    { 
+      return $(".content").html();},placement:"auto",html: true
+    }).parent().on('click','#continue',function()
+    {
+      sessionStorage.clear('location');
+      window.location.href='index.html';
+      //console.log('hello @ refresh');
+    });
+    
+});
   
-  console.log($scope.ctr);
-}
 $scope.loggedin=function()
 {
   var t=$localstorage.get('loggedin');
@@ -269,7 +264,7 @@ $scope.logout=function()
 
 app.controller("drawer",['$scope','$localstorage',function($scope,$localstorage)
 {
-	$scope.username=$localstorage.get('username');
+  $scope.username=$localstorage.get('username');
   $scope.account=function()
   {
     if($localstorage.get('loggedin')=='true')window.location.assign("./Account.html");
@@ -411,10 +406,106 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http','category',funct
     {id:0,qty:1,brand:'Britannia',name:'Sandwich Bread',q:0.4,q1:0.4,price:28,image:'images/nature.jpg' },
     {id:1,qty:1,brand:'Britannia',name:'Chocolate Muffins',q:0.15,q1:0.15,price:40,image:'images/nature.jpg' }
     ];
-    $scope.bakery= [
+    $scope.dairy= [
     {id:0,qty:1,brand:'Amul',name:'Butter',q:0.1,q1:0.1,price:37,image:'images/nature.jpg' },
     {id:1,qty:1,brand:'Britannia',name:'Pizza Cheese',q:0.2,q1:0.2,price:86,image:'images/nature.jpg' }
     ];
+     $scope.energy_drink= [
+    {id:0,qty:1,brand:'Red Bull',name:'Drinking Can',q:0.25,q1:0.25,price:95,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Gatorade',name:'Sports Drink-Lemon',q:0.5,q1:0.5,price:40,image:'images/nature.jpg' }
+    ];
+    $scope.soft_drink= [
+    {id:0,qty:1,brand:'Coke',name:'Tin',q:0.35,q1:0.35,price:30,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Sprite',name:'Pet Bottle',q:0.6,q1:0.6,price:34,image:'images/nature.jpg' },
+    {id:2,qty:1,brand:'Pepsi',name:'Diet Can',q:0.25,q1:0.25,price:25,image:'images/nature.jpg' }
+    ];
+    $scope.biscuits= [
+    {id:0,qty:1,brand:'Britannia',name:'50-50',q:0.1,q1:0.1,price:10,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Britannia',name:'Bourbon',q:0.075,q1:0.075,price:10,image:'images/nature.jpg' }
+    ];
+    $scope.oils= [
+    {id:0,qty:1,brand:'Sundrop',name:'Gold Lite',q:0.1,q1:0.1,price:125,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Saffola',name:'Gold Oil',q:0.2,q1:0.2,price:392,image:'images/nature.jpg' }
+    ];
+    $scope.pulses= [
+    {id:0,qty:1,brand:'',name:'Moong Dal',q:0.1,q1:0.1,price:125,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'',name:'Urad Dal',q:0.1,q1:0.1,price:119,image:'images/nature.jpg' },
+    {id:2,qty:1,brand:'',name:'Channa Dal',q:0.1,q1:0.1,price:70,image:'images/nature.jpg' }
+    ];
+    $scope.kitchen_dining= [
+    {id:0,qty:1,brand:'Arcada',name:'Pizza Cutter',q:0.0,q1:0.0,price:190,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Nirsota',name:'Vegetable Knife',q:0.0,q1:0.0,price:60,image:'images/nature.jpg' }
+    ];
+    $scope.detergents= [
+    {id:0,qty:1,brand:'Comfort',name:'Fabric Conditioner',q:0.8,q1:0.8,price:170,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Surf Excel',name:'Blue Washing Powder',q:1.0,q1:1.0,price:185,image:'images/nature.jpg' }
+    ];
+    $scope.plasticware= [
+    {id:0,qty:1,brand:'Hanbao',name:'Dustbin',q:0.0,q1:0.0,price:270,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Prince Ware',name:'Laundry Basket',q:0.0,q1:0.0,price:600,image:'images/nature.jpg' }
+    ];
+    $scope.impsnacks= [
+    {id:0,qty:1,brand:'Royal Dansk',name:'Choco Chip Cookies',q:0.4,q1:0.4,price:150,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Mister',name:'Potato Rice Crisps',q:0.13,q1:0.13,price:30,image:'images/nature.jpg' },
+    {id:2,qty:1,brand:'Unknown',name:'Tortilla Chipps',q:0.04,q1:0.04,price:270,image:'images/nature.jpg' }
+    ];
+    $scope.impbeverages= [
+    {id:0,qty:1,brand:'Valentino',name:'Cock Tail Fruit',q:0.75,q1:0.75,price:270,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Carl Jung Selection',name:'Red De-Alcoholised Wine',q:0.75,q1:0.75,price:475,image:'images/nature.jpg' }
+    ];
+    $scope.choc_confec= [
+    {id:0,qty:1,brand:'Simkins',name:'Travel Sweets',q:0.2,q1:0.2,price:225,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Sapphire',name:'Almonds',q:0.175,q1:0.175,price:325,image:'images/nature.jpg' },
+    {id:2,qty:1,brand:'Heart Beat',name:'Love Candy',q:0.15,q1:0.15,price:40,image:'images/nature.jpg' }
+    ];
+    $scope.babyproducts= [
+    {id:0,qty:1,brand:'Cerelac',name:'Apple and Wheat',q:0.3,q1:0.3,price:150,image:'images/nature.jpg' },
+    {id:1,qty:1,brand:'Cerelac',name:'Multigrain',q:0.350,q1:0.350,price:182,image:'images/nature.jpg' },
+    {id:2,qty:1,brand:'Huggies',name:'Large Diapers',q:0.15,q1:0.15,price:28,image:'images/nature.jpg' },
+    {id:3,qty:1,brand:'Johnson and Johnson',name:'Baby Soap',q:0.025,q1:0.025,price:10,image:'images/nature.jpg' }
+    ];
+    $scope.deos_perfumes= [
+    {id:0,qty:1,brand:'axe',name:'Body Spray',q:0.15,q1:0.15,price:170,image:'images/nature.jpg' }
+    ];
+
+
+
+  var bdefirst=sessionStorage.getItem('bdefirst');
+  var bdesecond=sessionStorage.getItem('bdesecond');
+  var bdethird=sessionStorage.getItem('bdethird'); 
+  var beveragesfirst=sessionStorage.getItem('beveragesfirst');
+  var beveragessecond=sessionStorage.getItem('beveragessecond');
+  var brandedfirst=sessionStorage.getItem('brandedfirst');
+  var groceryfirst=sessionStorage.getItem('groceryfirst');
+  var grocerysecond=sessionStorage.getItem('grocerysecond');
+  var householdfirst=sessionStorage.getItem('householdfirst');
+  var householdsecond=sessionStorage.getItem('householdsecond');
+  var householdthird=sessionStorage.getItem('householdthird');
+  var gourfirst=sessionStorage.getItem('gourfirst');
+  var goursecond=sessionStorage.getItem('goursecond');
+  var gourthird=sessionStorage.getItem('gourthird');
+  var pcfirst=sessionStorage.getItem('pcfirst');
+  var pcsecond=sessionStorage.getItem('pcsecond');
+  //console.log(bdefirstchild,typeof bdefirstchild);
+  //var visibility;
+  if(!bdefirst.localeCompare('true')) { $scope.visibility='bakery';}
+  if(!bdesecond.localeCompare('true')) { $scope.visibility='eggs';}
+  if(!bdethird.localeCompare('true')) { $scope.visibility='dairy';}
+  if(!beveragesfirst.localeCompare('true')) { $scope.visibility='energy_drink';}
+  if(!beveragessecond.localeCompare('true')) { $scope.visibility='soft_drink';}
+  if(!brandedfirst.localeCompare('true')) { $scope.visibility='biscuits';}
+  if(!groceryfirst.localeCompare('true')) { $scope.visibility='oils';}
+  if(!grocerysecond.localeCompare('true')) { $scope.visibility='pulses';}
+  if(!householdfirst.localeCompare('true')) { $scope.visibility='kitchen_dining';}
+  if(!householdsecond.localeCompare('true')) { $scope.visibility='detergents';}
+  if(!householdthird.localeCompare('true')) { $scope.visibility='plasticware';}
+  if(!gourfirst.localeCompare('true')) { $scope.visibility='impsnacks';}
+  if(!goursecond.localeCompare('true')) { $scope.visibility='impbeverages';}
+  if(!gourthird.localeCompare('true')) { $scope.visibility='choc_confec';}
+  if(!pcfirst.localeCompare('true')) { $scope.visibility='babyproducts';}
+  if(!pcsecond.localeCompare('true')) { $scope.visibility='deos_perfumes';}
+
+
     $scope.$watchGroup(['check1','check2','check3','check4','check5'], function() 
     {
        changep();
@@ -637,7 +728,7 @@ else
 
 app.controller("cart",['$localstorage','$scope','$http','$filter',function($localstorage,$scope,$http,$filter)
   {
-
+    
     $scope.addeditems=[
     { 
       id:0,
@@ -648,10 +739,14 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
 
     }];
     $scope.tprice=parseInt(sessionStorage.tprice);$scope.titems=0;
-
+    console.log('enter cart');
     if(sessionStorage.cart==null)
-      {sessionStorage.cart='[]';}
-    else
+      {
+        sessionStorage.cart='[]';
+        console.log('enter cart if');
+        
+      }
+    else if(sessionStorage.cart!=null)
     {
       var obj=JSON.parse(sessionStorage.cart);$scope.addeditems.splice(0,1);
       for(var i=0;i<obj.length;i++)
@@ -659,7 +754,10 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
         if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
         $scope.addeditems.push(obj[i]);
         $scope.titems+=obj[i].qty;
+        
       }
+      console.log('enter cart else');
+      
     }
     $scope.shipdata={'name':'','phno':'','address':'','date':''};
     var session=$localstorage.get('session');
@@ -712,12 +810,12 @@ app.controller("tiles",['$localstorage','$scope','$http','category',function($lo
 
     $scope.cats=function(id)
       {
-        console.log(id);
+        //console.log(id);
         $scope.cateshow=true;
       }
       $scope.cath=function(id)
       {
-        console.log(id);
+        //console.log(id);
         $scope.cateshow=false;
       }
 
@@ -805,7 +903,7 @@ app.controller("tiles",['$localstorage','$scope','$http','category',function($lo
       });
     
     }
-    $scope.colbread=false;
+  /*$scope.colbread=false;
   $scope.colbev=false;
   $scope.colbrand=false;
   $scope.colgrocery=false;
@@ -813,13 +911,15 @@ app.controller("tiles",['$localstorage','$scope','$http','category',function($lo
   $scope.colgour=false;
   $scope.colpc=false;
   
-  $scope.visbread=function(){category.set(5);console.log(category.get());$scope.colbread=true;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visbread=function(){category.set(5);console.log('entering visbread');$scope.colbread=true;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
   $scope.visbev=function(){category.set(4);console.log('here2');$scope.colbread=false;$scope.colbev=true;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
   $scope.visbrand=function(){category.set(2);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=true;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
   $scope.visgrocery=function(){category.set(3);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=true;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
   $scope.vishousehold=function(){category.set(1);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=true;$scope.colgour=false;$scope.colpc=false;}
   $scope.visgour=function(){category.set(6);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=true;$scope.colpc=false;}
   $scope.vispc=function(){category.set(7);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=true;}
+  */
+  
   
   }]);
 
@@ -829,21 +929,21 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
   
   $scope.user={"password":"","email":"",};
   $scope.userlogin=function()
-	{
+  {
     console.log("loginnow");
     $scope.wuser=0;
-		var req = 
-		{  	 method: 'POST',
-			 url: 'http://thedreamstop.com/api/login.php', 
-			 headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-			 data: $.param($scope.user),
-		 } 
-		 
-		 $http(req)
-		 .success(
-		 	function(response)
+    var req = 
+    {    method: 'POST',
+       url: 'http://thedreamstop.com/api/login.php', 
+       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+       data: $.param($scope.user),
+     } 
+     
+     $http(req)
+     .success(
+      function(response)
       {
-		 		console.log(JSON.stringify(response));
+        console.log(JSON.stringify(response));
         console.log("response :"+response.success);
         if(response.success=='true')
         { 
@@ -916,7 +1016,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             $scope.wuser=0; 
             $localstorage.set('loggedin','true');  
             $localstorage.set('username',response.name);
-            location.reload();
+            //location.reload();
           }
             else {$scope.wuser=1;console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
           })
@@ -926,23 +1026,23 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             console.log("error:"+ response.error_message);
           });
           
-  			  //document.write("You will be redirected to main page in 10 sec.");
-  			  //setTimeout( function(){window.location.assign("./Account.html");}, 2000);
+          //document.write("You will be redirected to main page in 10 sec.");
+          //setTimeout( function(){window.location.assign("./Account.html");}, 2000);
         }
         else
         {
           $scope.wuser=1;$scope.user.password="";$scope.user.email="";
         }
-		 	})
-		 .error(
-		 	function(response)
+      })
+     .error(
+      function(response)
       {
-		 		console.log("error:"+ response.error_message);
-		 	});
-		
+        console.log("error:"+ response.error_message);
+      });
+    
     //console.log(session);
    
-	}
+  }
   }]);
 
 // main for account.html
@@ -987,7 +1087,7 @@ if(response.success=='true')
   {
   $localstorage.set('username',$scope.user.name);
   }
-       			
+            
 } 
 else 
 {
@@ -1242,56 +1342,6 @@ else
 
 }]);
 
-app.controller("vendororders",['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
-
-$scope.values = [
-{
-  id: 1,
-  label: 'Total bill amount-Lower to Higher',
-  sub: 'tprice',
-  rev:false
-}, 
-{
-  id: 2,
-  label: 'Total bill amount-Higher to Lower',
-  sub: 'tprice',
-  rev:true
-  
-},
-];
-
-$scope.i=-1;
-$scope.selected =$scope.values[0];
-$scope.s='tprice';
-    
-if($scope.selected.label=='Price')
-  $scope.s='tprice';
-else 
-  $scope.s='s';
-
-$scope.orders = 
-[
-  {'tprice':800,'titems':4,'name':'Girish','phno':'45761226','address':'#10,Adyar,Chennai','date':'4/6/2015','TID':'1'},
-  {'tprice':1200,'titems':6,'name':'Rohit','phno':'42861223','address':'#13,Mylapore,Chennai','date':'5/6/2015','TID':'2'},
-  {'tprice':300,'titems':2,'name':'Anurag','phno':'42811322','address':'#11,Adyar,Chennai','date':'4/6/2015','TID':'3'},
-  {'tprice':1000,'titems':5,'name':'Sugan','phno':'42261226','address':'#10,Adyar,Chennai','date':'5/6/2015','TID':'4'},
-];
-$scope.status="Received";
-
-var op=0;
-$scope.items=[{nam:'test1',qty:1,q:1,unit:'kg',price:100},{nam:'test2',qty:5,q:1,unit:'kg',price:400},{nam:'test3',qty:3,q:2,unit:'kg',price:200}];
-$scope.open=function(id)
-{
-  console.log(id);
-  $('#'+id).toggleClass("in");op++;
-  if(op%2==1)
-  {
-    
-  }
-}
-
-}]);
-
 // slide drawer
 
 app.controller("myCtrl",function($scope,$rootScope)
@@ -1321,7 +1371,7 @@ $(window).load(function()
   
 $(document).ready(function()
   { 
-    $('[data-toggle="popover"]').popover({title:"Change Location?",content:function(){ return $(".content").html();},placement:"auto",html: true});   
+    
       $('#area1').show();
        $('#area2').hide();
         $('#area3').hide();
