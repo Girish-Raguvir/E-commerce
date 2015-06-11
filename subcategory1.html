@@ -611,26 +611,27 @@ $(document).ready(function()
             <a class="navbar-brand" href="index.html" style="padding-left:80px;">The Dream Stop</a> 
           </div>
           <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
-            <li style="width:400px;">
-              <div class="input-group" style="width:400px;" ng-controller="search">
-                <input type="text" class="form-control" ng-model="searchdata" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
+            <li style="width:450px;">
+              <div class="input-group" style="width:450px;" ng-controller="search">
+                <input type="text" ng-enter="searchlistent()" class="form-control" ng-model="searchdata" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
                 <span >
-                  <div class="dropdown">
+                  <div id="searchdiv" class="dropdown">
                     <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()"style="background: #79933b;height:34px;width:85px;"><span class="glyphicon glyphicon-search"></span> Submit</button>
                     <ul class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
-                      <li ng-repeat="x in search">
-                        <table style="width: 97%;background-color: white; margin: 10px;" id="t02">
-                          <tr style="height: 10%">
-                          <td style="padding: 10px;"align="center">
-                          <b>{{ x.brand }}</b>
+                      <li ng-repeat="x in search" ng-click="open()">
+                        <table style="width: 100%;background-color: white; margin-top: 10px;" id="t02">
+                          <tr style="height: 10%;width:100%;" id="searchlist">
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
+                            <input type="number" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
                           </td>
-                          <td ng-if="x.q!=-1" style="padding: 10px;" align="center">
+                          <td style="padding: 10px;" align="center">
                           <div class="desc">{{ x.name }}</div>
                           </td>
                           <td ng-if="x.q!=-1"  style="padding: 0px;"align="center">
-                          <b>{{ x.q }} kg</b>
+                          <b>{{ x.q }} {{x.unit}}</b>
                           </td>
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td>
                           </tr>
                         </table>
                         
@@ -643,21 +644,20 @@ $(document).ready(function()
           </ul>
       <div ng-controller="log_in_out">
       <ul class="nav navbar-nav navbar-right">
-        <li><a tabindex="0" data-toggle="popover" role="button" data-container="body" data-contentwrapper=".content" ><span id="bindElement"></span></a></li>
+        <li><a data-toggle="popover" data-container="body" data-contentwrapper=".content"><span id="bindElement"></span></a></li>
         <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <!--li ng-if="!loggedin()"><a href="#" data-toggle="popover" data-container="body" data-contentwrapper=".content" data-trigger="focus"><span class="glyphicon glyphicon-map-marker"></span>Change Location</a></li-->
         <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
+        <li ng-if="loggedin()"><a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a></li>
         <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
+        
 
        <div class="content" style="display:none;">
         <p align="center" >
         <br>
-
         Changing location will cause the page to be refreshed leading to loss of saved data.Do you want to proceed? <br><br>
-        <button type="button" class="btn btn-primary" id="continue" >Continue</button>
+        <button type="submit" class="btn btn-primary" ng-click="refresh()">Continue</button>
         </p>
-        
        </div>
 
       </ul>
@@ -665,10 +665,52 @@ $(document).ready(function()
         </div><!--/.nav-collapse -->
       </div>
     </div>
-  
-  
+<div class="modal fade" ng-controller="cart" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+ 
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Cart</h3>
+      </div>
+      <div class="modal-body" >
+      <table style="width: 100%;" cellpadding="10" cellspacing="10" >
+<tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
+<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
+    <th style="text-align: center;">Qty</th>
+    <th style="text-align: center;">Name</th>   
+    <th style="text-align: center;">Weight</th>
+    <th style="text-align: center;">Price</th>
+</tr>
 
-      <div class="modal fade" ng-controller="login" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
+<td> {{x.qty}} </td>
+<td> {{x.nam}} </td>
+<td> {{x.w}} kg</td>
+<td> Rs.{{x.price}} </td>
+
+</tr>
+<tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
+
+
+</table>
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+        <!--<button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>-->
+        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;">   Proceed <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
+        
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" ng-controller="login" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -712,6 +754,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
     </div>
   </div>
+
 </div>
 <div class="modal fade" id="locmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
@@ -756,6 +799,63 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
     </div>
   </div>
+  <div class="modal fade" id="detailsmodal" ng-controller="cart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Delivery Details</h3>
+      </div>
+      <div class="modal-body">
+      <div class="form">
+      <div class="form-group">
+      <input type="text" class="form-control"placeholder="Name" ng-model="shipdata.name"></input>
+      <br>
+      <input type="tel" class="form-control"placeholder="Telephone Number" ng-model="shipdata.phno"></input>
+      <br>
+      <input type="text" class="form-control"placeholder="Address" ng-model="shipdata.address"></input>
+      <br>
+      </div>
+      </div>
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+         <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="paymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Payment</h3>
+      </div>
+      <div class="modal-body">
+      
+    </div>
+    
+      
+      <div class="modal-footer">
+        <p align="center">
+         <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back</button>
+        
+        <br><br>
+        
+      </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 <!-- <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
