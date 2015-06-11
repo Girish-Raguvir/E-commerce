@@ -1,5 +1,5 @@
 
-var app=angular.module('thedreamstop', ['ionic.utils','ngAnimate']);
+var app=angular.module('thedreamstop', ['ionic.utils']);
 
 //custom-factory for local-storage in the web browser
 
@@ -69,7 +69,7 @@ return {
 
 app.controller('search',['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
-$$scope.search=[{name:'Sorry.No matches found.',q:'-1',price:'',}];
+$scope.search=[{name:'Sorry.No matches found.',q:'-1',price:'',}];
 
 // $("#txtSearch").keyup(function (event) 
 // {

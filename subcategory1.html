@@ -184,7 +184,7 @@ $(document).ready(function()
   });
   $("[data-target=#beverages]").click(function()
   {
-    $("#beverages").slideDown();
+    //$("#beverages").slideDown();
     $("#breadimg").hide();
     $("#bevimg").show();
     $("#brandimg").hide();
@@ -196,7 +196,7 @@ $(document).ready(function()
   });
   $("[data-target=#branded]").click(function()
   {
-    $("#branded").slideDown();
+    //$("#branded").slideDown();
     $("#breadimg").hide();
     $("#bevimg").hide();
     $("#brandimg").show();
@@ -208,7 +208,7 @@ $(document).ready(function()
   });
   $("[data-target=#grocery]").click(function()
   {
-    $("#grocery").slideDown();
+    //$("#grocery").slideDown();
     $("#breadimg").hide();
     $("#bevimg").hide();
     $("#brandimg").hide();
@@ -220,7 +220,7 @@ $(document).ready(function()
   });
   $("[data-target=#household]").click(function()
   {
-    $("#household").slideDown();
+    //$("#household").slideDown();
     $("#breadimg").hide();
     $("#bevimg").hide();
     $("#brandimg").hide();
@@ -232,7 +232,7 @@ $(document).ready(function()
   });
   $("[data-target=#gour]").click(function()
   {
-    $("#gour").slideDown();
+    //$("#gour").slideDown();
     $("#breadimg").hide();
     $("#bevimg").hide();
     $("#brandimg").hide();
@@ -244,7 +244,7 @@ $(document).ready(function()
   });
   $("[data-target=#pc]").click(function()
   {
-    $("#pc").slideDown();
+    //$("#pc").slideDown();
     $("#breadimg").hide();
     $("#bevimg").hide();
     $("#brandimg").hide();
@@ -834,11 +834,11 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 
 <!-- beginning of collapsible sidebar -->
 <div ng-controller="tiles">
-<div class="container" data-role="page" id="breadcollapse" >
-  <div class="jumbotron" style="position:relative;width:400px;">
+<div class="container" data-role="page" id="breadcollapse" style="margin-left:0px;padding-left: 0px;">
+  <div class="jumbotron" style="position:relative;width:300px;padding-left:20px;padding-right:20px;">
 
-    <h3> Main Categories </h3> 
-    <hr>
+    <h3 style="text-align: center;"> Main Categories </h3> 
+    <br>
     <span data-toggle="collapse" data-target="#bde" ><i class="fa" ng-class="{'fa-plus-square':!colbread,'fa-minus-square':colbread}" style="float:left;margin-right:5px;"></i><h4>Bread Dairy and Eggs</h4></span>
       <!--span data-toggle="collapse" data-target="#bde" > </span--> 
     <div id="bde" class="collapse in">
@@ -851,7 +851,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </ul>
     </div>
   
-    <span data-toggle="collapse" data-target="#beverages" ><i class="fa" ng-class="{'fa-plus-square':!colbev,'fa-minus-square':colbev}" style="float:left;margin-right:5px;"></i><h4>Beverages</h4></span>
+    <span data-toggle="collapse" data-target="#beverages" ><i class="fa" ng-class="{'fa-plus-square':!colbev,'fa-minus-square':colbev}" style="float:left;margin-right:5px;"></i><h4>Beverages</h4>
      
       <div id="beverages" class="collapse">
       <ul>
@@ -860,6 +860,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
         
       </ul>
     </div>
+    </span>
     <span data-toggle="collapse" data-target="#branded" ><i class="fa" ng-class="{'fa-plus-square':!colbrand,'fa-minus-square':colbrand}" style="float:left;margin-right:5px;"></i><h4>Branded Foods</h4></span>
       
       <div id="branded" class="collapse" >
@@ -904,14 +905,14 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   </div>
 </div>
 
-<div class="container" data-role="page" id="beveragecollapse" >
+<!-- <div class="container" data-role="page" id="beveragecollapse" >
   <div class="jumbotron" style="position:relative;width:400px;">
 
     <h3> Main Categories </h3> 
     <hr>
     <span data-toggle="collapse" data-target="#bde" ><i class="fa" ng-class="{'fa-plus-square':!colbread,'fa-minus-square':colbread}" style="float:left;margin-right:5px;"></i><h4>Bread Dairy and Eggs</h4></span>
       <!--span data-toggle="collapse" data-target="#bde" > </span--> 
-    <div id="bde" class="collapse">
+   <!--  <div id="bde" class="collapse">
       
       <ul>
         <a href="items.html" id="bdefirstchild"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp; Bakery Products</li></span></a>
@@ -1322,7 +1323,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </ul>
     </div>
   </div>
-</div>
+</div> --> -->
 
 
 <!--div class="row" style="position:absolute;left:40%;top:200px;z-index:1">
@@ -1376,7 +1377,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   </di>
 </div-->
 
-<div class="row" style="position:absolute;left:40%;top:200px;z-index:1" id="breadimg">
+<div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="breadimg">
   <a href="items.html"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/bakery.jpg" alt="Bread" >
