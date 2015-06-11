@@ -10,50 +10,52 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js."></script>
-  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  
+  
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-animate.js"></script>
+  
+ 
 
    <script src="js/thedreamstop.js"></script>
 <script type="text/javascript">
 $(window).load(function() {
   $(".loader").fadeOut("slow");
 });
-  $(document).ready(function()
-  {
-      var bdefirst=sessionStorage.getItem('bdefirst');
-      var bdesecond=sessionStorage.getItem('bdesecond');
-      var bdethird=sessionStorage.getItem('bdethird');
-      var beveragesfirst=sessionStorage.getItem('beveragesfirst');
-      var beveragessecond=sessionStorage.getItem('beveragessecond');
-      var brandedfirst=sessionStorage.getItem('brandedfirst');
-      var groceryfirst=sessionStorage.getItem('groceryfirst');
-      var grocerysecond=sessionStorage.getItem('grocerysecond');
-      var householdfirst=sessionStorage.getItem('householdfirst');
-      var householdsecond=sessionStorage.getItem('householdsecond');
-      var householdthird=sessionStorage.getItem('householdthird');
-      var gourfirst=sessionStorage.getItem('gourfirst');
-      var goursecond=sessionStorage.getItem('goursecond');
-      var gourthird=sessionStorage.getItem('gourthird');
-      var pcfirst=sessionStorage.getItem('pcfirst');
-      var pcsecond=sessionStorage.getItem('pcsecond');
-      console.log(bdefirst,bdefirst.localeCompare('true'),typeof bdefirst);
-      if(!bdefirst.localeCompare('true'))
-      {
-        $("#bdefirst").show();
-        $("#bdesecond,#bdethird").hide();
-      }
-      if(!bdesecond.localeCompare('true'))
-      {
-        $("#bdesecond").show();
-        $("#bdefirst,#bdethird").hide();
-      }
-      if(!bdethird.localeCompare('true'))
-      {
-        $("#bdethird").show();
-        $("#bdesecond,#bdefirst").hide();
-      }
-  });
+  // $(document).ready(function()
+  // {
+  //     var bdefirst=sessionStorage.getItem('bdefirst');
+  //     var bdesecond=sessionStorage.getItem('bdesecond');
+  //     var bdethird=sessionStorage.getItem('bdethird');
+  //     var beveragesfirst=sessionStorage.getItem('beveragesfirst');
+  //     var beveragessecond=sessionStorage.getItem('beveragessecond');
+  //     var brandedfirst=sessionStorage.getItem('brandedfirst');
+  //     var groceryfirst=sessionStorage.getItem('groceryfirst');
+  //     var grocerysecond=sessionStorage.getItem('grocerysecond');
+  //     var householdfirst=sessionStorage.getItem('householdfirst');
+  //     var householdsecond=sessionStorage.getItem('householdsecond');
+  //     var householdthird=sessionStorage.getItem('householdthird');
+  //     var gourfirst=sessionStorage.getItem('gourfirst');
+  //     var goursecond=sessionStorage.getItem('goursecond');
+  //     var gourthird=sessionStorage.getItem('gourthird');
+  //     var pcfirst=sessionStorage.getItem('pcfirst');
+  //     var pcsecond=sessionStorage.getItem('pcsecond');
+  //     console.log(bdefirst,bdefirst.localeCompare('true'),typeof bdefirst);
+  //     if(!bdefirst.localeCompare('true'))
+  //     {
+  //       $("#bdefirst").show();
+  //       $("#bdesecond,#bdethird").hide();
+  //     }
+  //     if(!bdesecond.localeCompare('true'))
+  //     {
+  //       $("#bdesecond").show();
+  //       $("#bdefirst,#bdethird").hide();
+  //     }
+  //     if(!bdethird.localeCompare('true'))
+  //     {
+  //       $("#bdethird").show();
+  //       $("#bdesecond,#bdefirst").hide();
+  //     }
+  // });
 </script>
 
    <link rel="stylesheet" type="text/css" href="css/frontpage.css">
@@ -344,8 +346,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div>
 
 
-<div  style="animation-name: animation;animation-duration: 4s;
-    animation-iteration-count: infinite;padding-top:10px;" ng-controller="itemdisplay">
+<div  style="padding-top:10px;" ng-controller="itemdisplay">
 
 <div id="wrapper" style="padding-top: 90px;padding-left:0px;">
 
@@ -433,12 +434,12 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 
 <!-- toggling item visibility-->
 
-<div id="bdefirst">
+<div>
 
 
 <ul  style="list-style-type:none;padding-left:0px;">
-    <li  style="margin-bottom : 0px;"ng-repeat="x in bakery|orderBy:selected.sub:selected.rev" for="{{x.id}}"  >
-<div ng-if="(check(x))">
+    <li  style="margin-bottom : 0px;"ng-repeat="x in names1|orderBy:selected.sub:selected.rev" for="{{x.id}}"  >
+<div ng-if="(check(x))" class="animate">
 
 
 <table style="width: 100%;background-color: white; margin: 0px;table-layout:fixed;" id="t02">
@@ -451,7 +452,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <tr style="height: auto;">
 
 <td align="center" style="width:10%;">
-<input type="number" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="bakery[$index].qty">
+<input type="number" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="items[$index].qty">
 </td>
 <!-- <td style=""align="center">
 <b>{{ x.brand }}</b>
@@ -472,7 +473,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </td>
 <td align="center" style="width:10%;"><div class="desc">Rs.{{ x.price }}</div></td>
 
-<td align="center" style="width:10%;"><button class="btn btn-success" ng-click="add(bakery[$index].PID,bakery[$index].qty,x.name,bakery[$index].q*1,x.price*bakery[$index].qty,bakery[$index].unit)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
+<td align="center" style="width:10%;"><button class="btn btn-success" ng-click="add(items[$index].PID,items[$index].qty,x.name,items[$index].q*1,x.price*items[$index].qty,items[$index].unit)"><span class="glyphicon glyphicon-plus"></span> Add</button></td>
 </tr>
 </table>
 
@@ -487,7 +488,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div>
 
 <!-- /*******************************************************************************/-->
-<div id="bdesecond">
+<!-- <div id="bdesecond">
 
 
 <ul  style="list-style-type:none;padding-left:0px;">
@@ -507,9 +508,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <td align="center" style="width:10%;">
 <input type="number" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="eggs[$index].qty">
 </td>
-<!-- <td style=""align="center">
-<b>{{ x.brand }}</b>
-</td> -->
+
 <td style="padding-buttom: 10px;width:30%;" align="center"> 
 <ul class="enlarge">
 <li style="margin-left:-50%;"><img src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=400" alt={{ x.name }} width="80" height="80" /><span><img id="itemimg"src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=200" alt={{ x.name }} /><br />{{x.name}}</span></li>
@@ -538,12 +537,12 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 
 </ul>
 
-</div>
-
-<!-- /****************************************************************************************/-->
+</div> -->
 
 
-<div id="bdethird">
+
+
+<!-- <div id="bdethird">
 
 
 <ul  style="list-style-type:none;padding-left:0px;">
@@ -563,9 +562,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <td align="center" style="width:10%;">
 <input type="number" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="dairy[$index].qty">
 </td>
-<!-- <td style=""align="center">
-<b>{{ x.brand }}</b>
-</td> -->
+
 <td style="padding-buttom: 10px;width:30%;" align="center"> 
 <ul class="enlarge">
 <li style="margin-left:-50%;"><img src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=400" alt={{ x.name }} width="80" height="80" /><span><img id="itemimg"src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=200" alt={{ x.name }} /><br />{{x.name}}</span></li>
@@ -594,7 +591,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 
 </ul>
 
-</div>
+</div> -->
 <!-- end of item toggling -->
 
 
@@ -646,9 +643,10 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </tr>
 
 </table>
-<tr>
-  <td>
-  <div class="container-fluid" style="position:absolute;right:0px;width:100%;margin-top:80px;">
+
+
+</div>
+<div class="container-fluid" style="position:absolute;right:0px;width:100%;margin-top:80px;">
   <div class="Mobile-App" style="background: gainsboro;">
   <h3 id="playstore">Finish Grocery Shopping on the Go!<br>
   Download the TheDreamStop Mobile App Now!</h3>
@@ -663,11 +661,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   
   </div>
 
-  </div>   
-</td>
-</tr>
-
-</div>
+  </div> 
 </div>
 <script src="js/thedreamstop.js"></script>
 <script type="text/javascript">

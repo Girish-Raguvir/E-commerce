@@ -1,5 +1,5 @@
 
-var app=angular.module('thedreamstop', ['ionic.utils']);
+var app=angular.module('thedreamstop', ['ionic.utils','ngAnimate']);
 
 //custom-factory for local-storage in the web browser
 
@@ -470,40 +470,40 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http','category',funct
 
 
 
-  var bdefirst=sessionStorage.getItem('bdefirst');
-  var bdesecond=sessionStorage.getItem('bdesecond');
-  var bdethird=sessionStorage.getItem('bdethird'); 
-  var beveragesfirst=sessionStorage.getItem('beveragesfirst');
-  var beveragessecond=sessionStorage.getItem('beveragessecond');
-  var brandedfirst=sessionStorage.getItem('brandedfirst');
-  var groceryfirst=sessionStorage.getItem('groceryfirst');
-  var grocerysecond=sessionStorage.getItem('grocerysecond');
-  var householdfirst=sessionStorage.getItem('householdfirst');
-  var householdsecond=sessionStorage.getItem('householdsecond');
-  var householdthird=sessionStorage.getItem('householdthird');
-  var gourfirst=sessionStorage.getItem('gourfirst');
-  var goursecond=sessionStorage.getItem('goursecond');
-  var gourthird=sessionStorage.getItem('gourthird');
-  var pcfirst=sessionStorage.getItem('pcfirst');
-  var pcsecond=sessionStorage.getItem('pcsecond');
-  //console.log(bdefirstchild,typeof bdefirstchild);
-  //var visibility;
-  if(!bdefirst.localeCompare('true')) { $scope.visibility='bakery';}
-  if(!bdesecond.localeCompare('true')) { $scope.visibility='eggs';}
-  if(!bdethird.localeCompare('true')) { $scope.visibility='dairy';}
-  if(!beveragesfirst.localeCompare('true')) { $scope.visibility='energy_drink';}
-  if(!beveragessecond.localeCompare('true')) { $scope.visibility='soft_drink';}
-  if(!brandedfirst.localeCompare('true')) { $scope.visibility='biscuits';}
-  if(!groceryfirst.localeCompare('true')) { $scope.visibility='oils';}
-  if(!grocerysecond.localeCompare('true')) { $scope.visibility='pulses';}
-  if(!householdfirst.localeCompare('true')) { $scope.visibility='kitchen_dining';}
-  if(!householdsecond.localeCompare('true')) { $scope.visibility='detergents';}
-  if(!householdthird.localeCompare('true')) { $scope.visibility='plasticware';}
-  if(!gourfirst.localeCompare('true')) { $scope.visibility='impsnacks';}
-  if(!goursecond.localeCompare('true')) { $scope.visibility='impbeverages';}
-  if(!gourthird.localeCompare('true')) { $scope.visibility='choc_confec';}
-  if(!pcfirst.localeCompare('true')) { $scope.visibility='babyproducts';}
-  if(!pcsecond.localeCompare('true')) { $scope.visibility='deos_perfumes';}
+  // var bdefirst=sessionStorage.getItem('bdefirst');
+  // var bdesecond=sessionStorage.getItem('bdesecond');
+  // var bdethird=sessionStorage.getItem('bdethird'); 
+  // var beveragesfirst=sessionStorage.getItem('beveragesfirst');
+  // var beveragessecond=sessionStorage.getItem('beveragessecond');
+  // var brandedfirst=sessionStorage.getItem('brandedfirst');
+  // var groceryfirst=sessionStorage.getItem('groceryfirst');
+  // var grocerysecond=sessionStorage.getItem('grocerysecond');
+  // var householdfirst=sessionStorage.getItem('householdfirst');
+  // var householdsecond=sessionStorage.getItem('householdsecond');
+  // var householdthird=sessionStorage.getItem('householdthird');
+  // var gourfirst=sessionStorage.getItem('gourfirst');
+  // var goursecond=sessionStorage.getItem('goursecond');
+  // var gourthird=sessionStorage.getItem('gourthird');
+  // var pcfirst=sessionStorage.getItem('pcfirst');
+  // var pcsecond=sessionStorage.getItem('pcsecond');
+  // //console.log(bdefirstchild,typeof bdefirstchild);
+  // //var visibility;
+  // if(!bdefirst.localeCompare('true')) { $scope.visibility='bakery';}
+  // if(!bdesecond.localeCompare('true')) { $scope.visibility='eggs';}
+  // if(!bdethird.localeCompare('true')) { $scope.visibility='dairy';}
+  // if(!beveragesfirst.localeCompare('true')) { $scope.visibility='energy_drink';}
+  // if(!beveragessecond.localeCompare('true')) { $scope.visibility='soft_drink';}
+  // if(!brandedfirst.localeCompare('true')) { $scope.visibility='biscuits';}
+  // if(!groceryfirst.localeCompare('true')) { $scope.visibility='oils';}
+  // if(!grocerysecond.localeCompare('true')) { $scope.visibility='pulses';}
+  // if(!householdfirst.localeCompare('true')) { $scope.visibility='kitchen_dining';}
+  // if(!householdsecond.localeCompare('true')) { $scope.visibility='detergents';}
+  // if(!householdthird.localeCompare('true')) { $scope.visibility='plasticware';}
+  // if(!gourfirst.localeCompare('true')) { $scope.visibility='impsnacks';}
+  // if(!goursecond.localeCompare('true')) { $scope.visibility='impbeverages';}
+  // if(!gourthird.localeCompare('true')) { $scope.visibility='choc_confec';}
+  // if(!pcfirst.localeCompare('true')) { $scope.visibility='babyproducts';}
+  // if(!pcsecond.localeCompare('true')) { $scope.visibility='deos_perfumes';}
 
 
     $scope.$watchGroup(['check1','check2','check3','check4','check5'], function() 
