@@ -105,7 +105,7 @@ if(sessionStorage.cart==null || sessionStorage.tprice==null)
   }   
 $scope.loggedout=function()   
 {   
-  if($localstorage.loggedin=='false')return true;   
+  if($localstorage.get("loggedin")=='false')return true;   
   else return false;    
 };    
 $scope.add=function(id,qty,name,w,price,u)    
@@ -152,7 +152,7 @@ $scope.searchlist=function(){
   //             ];
 
   $scope.data={"session":$scope.session,"q":$scope.searchdata,};
-  //console.log(JSON.stringify($scope.data));
+  console.log(JSON.stringify($scope.data));
   
     
     var req = 
@@ -207,12 +207,19 @@ $(document).ready(function()
     });
     
 });
-  
+if($localstorage.get("loggedin")==null || $localstorage.get("username")==null || sessionStorage.cart==null || sessionStorage.tprice==null)
+{
+  $localstorage.set('loggedin','false');
+  $localstorage.set('username','Guest');
+  $localstorage.set('session','Guest');
+  sessionStorage.cart='[]';
+  sessionStorage.tprice=0;
+}
 $scope.loggedin=function()
 {
   var t=$localstorage.get('loggedin');
   if(t=='true')
-  return true;
+  {$scope.username=$localstorage.get('username');return true;}
   else 
   return false;
 }
@@ -255,6 +262,7 @@ $scope.logout=function()
      }
 
   $scope.username=$localstorage.get('username');
+
   if($scope.username=="Guest")$localstorage.set('loggedin','false');
   else $localstorage.set('loggedin','true');
   
@@ -1016,7 +1024,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             $scope.wuser=0; 
             $localstorage.set('loggedin','true');  
             $localstorage.set('username',response.name);
-            //location.reload();
+            location.reload();
           }
             else {$scope.wuser=1;console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
           })
@@ -1075,29 +1083,33 @@ var req =
 } 
     
 $scope.user={"success":"","ID":"","email":"","name":"","address":"","telephone":""};
-$http(req)
-.success(
-function(response){
-console.log(JSON.stringify(response));
-console.log("response :"+response.success);
-if(response.success=='true')
-{ 
-  $scope.user=response;
-  if(typeof(Storage) !== "undefined") 
+
+
+  $http(req)
+  .success(
+  function(response){
+  console.log(JSON.stringify(response));
+  console.log("response :"+response.success);
+  if(response.success=='true')
+  { 
+    $scope.user=response;
+    if(typeof(Storage) !== "undefined") 
+    {
+    $localstorage.set('username',$scope.user.name);
+    $localstorage.set('loggedin','true');
+    
+    }
+              
+  } 
+  else 
   {
-  $localstorage.set('username',$scope.user.name);
+    console.log("Sorry, your browser does not support web storage...");
   }
-            
-} 
-else 
-{
-  console.log("Sorry, your browser does not support web storage...");
-}
-})
-.error(
-function(response){
-console.log("error:"+ response.error_message);
-});
+  })
+  .error(
+  function(response){
+  console.log("error:"+ response.error_message);
+  });
 
 $scope.useredit=function()
 {
@@ -1126,7 +1138,7 @@ $scope.useredit=function()
 
 // main controller for register.html
 
-app.controller('register', function($scope,$http) {
+app.controller('register', ['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
 $scope.test = {"email": "girish@gmail.com","password": "123","name": "girish","address": "IIT Madras", "telephone": "9444706609"};
 $scope.email = "girish@gmail.com";
@@ -1134,7 +1146,7 @@ $scope.password="123";
 $scope.uname="girish";
 $scope.address="IITM";
 $scope.telephone="9444706609";
-$scope.add={"hno":"","street":"","area":"","rcomp":"","landmark":"","city":"","pin":"",};
+$scope.add={"hno":"","street":"","area":"","rcomp":"","landmark":"","city":"Chennai","pin":"",};
 $scope.uname={"first":"","last":"",};
 $scope.sal="Mr.";
 $scope.user = {"email": "","password": "","name": "","address": "", "telephone": "","mobile":"",};
@@ -1158,7 +1170,7 @@ $scope.sendPost = function()
 {
   $scope.user.address=$scope.add.hno + ", " + $scope.add.street + ", " + $scope.add.area + ", " + $scope.add.rcomp + ", " + $scope.add.landmark + ", " + $scope.add.city + ", " + $scope.add.pin + ".";
   $scope.user.name=$scope.sal+$scope.uname.first + " " + $scope.uname.last;
-
+  document.getElementById('regsubmit').disabled=true;
   var req=
   { method: 'POST',
     url: 'http://thedreamstop.com/api/newUser.php',
@@ -1233,7 +1245,7 @@ $scope.sendPost = function()
         }
           }
     }   
-});
+}]);
 
 // my orders display
 
@@ -1356,7 +1368,7 @@ app.controller("myCtrl",function($scope,$rootScope)
 
 //navigation bar
 
-app.controller("nav",function($scope,$rootScope){
+app.controller("nav", ['$scope','$http','$localstorage','$rootScope', function($scope,$http,$localstorage,$rootScope) {
 
 $rootScope.f = 0; var e=0;
 
@@ -1372,14 +1384,56 @@ $(window).load(function()
 $(document).ready(function()
   { 
     
+      
+      $scope.cities=["Chennai","Bangalore","Mumbai"];
+      $scope.areas=[];
+      
+      for(var i=0;i<$scope.cities.length;i++)
+      {
+        var req=
+        { method: 'POST',
+          url: 'http://thedreamstop.com/api/locList.php',
+          headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+          data: $.param({'city':$scope.cities[i]}),
+        }
+              
+        $http(req)
+        .success(
+        function(response)
+        {
+          //console.log(JSON.stringify(response));
+          //console.log("response :"+response.success);
+          if(response.success=='true')
+            {
+             if(response.list!=null)
+             $scope.areas.push(response.list);
+             else $scope.areas.push(["Sorry.Service to this city is under development."])
+            }
+
+          else
+              {
+                alert('Some error has occured.Please try again.');
+              }
+        })
+        .error(
+        function(response)
+        {
+          console.log("error:"+ response.error_message);
+          alert('Some error has occured.Please try again.');
+        });
+      }
+      //console.log($scope.areas);
       $('#area1').show();
        $('#area2').hide();
-        $('#area3').hide();
+      $('#area3').hide();
       $("#City").change(function()
      {  var cityVal=$('#City option:selected').text();
+        var i,r;
+
      /*console.log(cityVal);
      console.log(cityVal.localeCompare('Chennai'));
      console.log($scope.visarea);*/
+
         if(!cityVal.localeCompare('Chennai'))
         {
             $('#area1').show();
@@ -1388,17 +1442,23 @@ $(document).ready(function()
         }
         else if(!cityVal.localeCompare('Bangalore')) 
         {
-            $('#area1').hide();
+            
             $('#area2').show();
+            $('#area1').hide();
             $('#area3').hide();
         }
         else if(!cityVal.localeCompare('Mumbai')) 
         {
+            
+            $('#area3').show();
             $('#area1').hide();
             $('#area2').hide();
-            $('#area3').show();
+            
         }
+        
+        
      });
+   
     function displayVals()
       { 
         var cityVal=$('#City').val();
@@ -1494,7 +1554,7 @@ $(window).scroll(function() {
   }
   
 });
-});
+}]);
 /*app.controller("sub",function($scope)
 {
   $scope.colbread=false;
