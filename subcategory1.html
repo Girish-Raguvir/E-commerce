@@ -12,7 +12,7 @@
   <!--script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script-->
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js."></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js"></script>
   <!--script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"-->
 <script src="js/thedreamstop.js"></script>
@@ -21,6 +21,22 @@ $(window).load(function() {
   $(".loader").fadeOut("slow");
   //$("#locmodal").modal("show");
 });
+function showimages(cat)
+  {
+     var a=["branded","beverage","grocery","household","gourmet","personal","bread"];
+     var s;
+     
+     for(s in a)
+     {//console.log(a[s]);
+      if(a[s].localeCompare(cat)==0){$("#"+a[s]+"img").show();}
+      else 
+      {
+        $("#"+a[s]+"img").hide();
+       // $("#"+a[s]).toggleClass("in");
+       $("#"+a[s]).attr("class","collapse");
+      }
+     }
+  }
 $(document).ready(function()
 {
    /*$('[data-toggle="popover"]').popover({title:"Warning!",content:function(){ return $(".content").html();},placement:"auto",html: true});   */
@@ -47,112 +63,30 @@ $(document).ready(function()
   var category=sessionStorage.getItem("category");
   if(category==null)
     window.location.href="index.html";
-  if(!category.localeCompare("bread"))
+  else
   {
-    $("#beverages,#branded,#grocery,#household,#gour,#pc,#bevimg,#brandimg,#groceryimg,#householdimg,#gourmetimg,#pcimg").hide();
-    $("#bde,#breadimg").show();
-    console.log('entering bread');
-  }
-  else if(!category.localeCompare("beverage"))
-  {
-    $("#bde,#branded,#grocery,#household,#gour,#pc,#breadimg,#brandimg,#groceryimg,#householdimg,#gourmetimg,#pcimg").hide();
-    $("#beverages,#bevimg").show();
-    console.log('entering bev');
-  }
-  else if(!category.localeCompare("branded"))
-  {
-    $("#bde,#beverages,#grocery,#household,#gour,#pc,#bevimg,#breaddimg,#groceryimg,#householdimg,#gourmetimg,#pcimg").hide();
-    $("#branded,#brandimg").show();
-    console.log('entering brand');
-  }
-  else if(!category.localeCompare("grocery"))
-  {
-    $("#bde,#branded,#beverages,#household,#gour,#pc,#bevimg,#breaddimg,#brandimg,#householdimg,#gourmetimg,#pcimg").hide();;
-    $("#grocery,#groceryimg").show();
-    console.log('entering grocery');
-  }
-  else if(!category.localeCompare("household"))
-  {
-    $("#bde,#branded,#grocery,#beverages,#gour,#pc,#bevimg,#breaddimg,#groceryimg,#brandimg,#gourmetimg,#pcimg").hide();
-    $("#household,#householdimg").show();
-    console.log('entering household');
-  }
-  else if(!category.localeCompare("gourmet"))
-  {
-    $("#bde,#branded,#grocery,#household,#beverages,#pc,#bevimg,#breaddimg,#groceryimg,#householdimg,#brandimg,#pcimg").hide();
-    $("#gour,#gourmetimg").show();
-    console.log('entering gourmet');
-  }
-  else if(!category.localeCompare("personal"))
-  {
-    $("#bde,#branded,#grocery,#household,#gour,#beverages,#bevimg,#breaddimg,#groceryimg,#householdimg,#gourmetimg,#brandimg").hide();
-    $("#pc,#pcimg").show();
-    console.log('entering pc');
-    console.log(category.localeCompare("personal"));
+    //$("#"+category+"img").show();
+    showimages(category+"img")
+    $("#"+category).toggleClass("in");
   }
   
-  $(".bde").click(function()
-  {
-    $("#bde").slideDown("slow");
-    $("#brandimg,#bevimg,#groceryimg,#householdimg,#gourmetimg,#pcimg").hide();
-    $("#breadimg").show();
-  });
-  $(".beverages").click(function()
-  {
-    $("#beverages").slideDown("slow");
-    $("#brandimg,#breadimg,#groceryimg,#householdimg,#gourmetimg,#pcimg").hide();
-    $("#bevimg").show();
-    //window.alert('entering bev');
-  });
-  $(".branded").click(function()
-  {
-    $("#branded").slideDown("slow");
-    $("#bevimg,#breadimg,#groceryimg,#householdimg,#gourmetimg,#pcimg").hide();
-    $("#brandimg").show();
-    //window.alert('entering brand');
-  });
-  $(".grocery").click(function()
-  {
-    $("#grocery").slideDown("slow");
-    $("#bevimg,#brandimg,#breadimg,#householdimg,#gourmetimg,#pcimg").hide();
-    $("#groceryimg").show();
-  });
-  $(".household").click(function()
-  {
-    $("#household").slideDown("slow");
-    $("#bevimg,#brandimg,#groceryimg,#breadimg,#gourmetimg,#pcimg").hide();
-    $("#householdimg").show();
-  });
-  $(".gour").click(function()
-  {
-    $("#gour").slideDown("slow");
-    $("#bevimg,#brandimg,#groceryimg,#householdimg,#breadimg,#pcimg").hide();
-    $("#gourmetimg").show();
-  });
-  $(".pc").click(function()
-  {
-    $("#pc").slideDown("slow");
-    $("#bevimg,#brandimg,#groceryimg,#householdimg,#gourmetimg,#pcimg").hide();
-    $("#pcimg").show();
-  });
-  
-  $("#bde ul a:nth-child(1)").click(function()
+  $("#bread ul a:nth-child(1)").click(function()
   {
     sessionStorage.subcategory="bakery";
   });
-  $("#bde ul a:nth-child(2)").click(function()
+  $("#bread ul a:nth-child(2)").click(function()
   {
     sessionStorage.subcategory="eggs";
   });
-  $("#bde ul a:nth-child(3)").click(function()
+  $("#bread ul a:nth-child(3)").click(function()
   {
     sessionStorage.subcategory="dairy";
   });
-  $("#beverages ul a:nth-child(1)").click(function()
+  $("#beverage ul a:nth-child(1)").click(function()
   {
     sessionStorage.subcategory="energy_drinks";
   });
-  $("#beverages ul a:nth-child(2)").click(function()
+  $("#beverage ul a:nth-child(2)").click(function()
   {
     sessionStorage.subcategory="soft_drinks";
   });
@@ -180,23 +114,23 @@ $(document).ready(function()
   {
     sessionStorage.subcategory="plasticware";
   });
-  $("#gour ul a:nth-child(1)").click(function()
+  $("#gourmet ul a:nth-child(1)").click(function()
   {
     sessionStorage.subcategory="imp_snacks";
   });
-  $("#gour ul a:nth-child(2)").click(function()
+  $("#gourmet ul a:nth-child(2)").click(function()
   {
     sessionStorage.subcategory="imp_beverages";
   });
-  $("#gour ul a:nth-child(3)").click(function()
+  $("#gouret ul a:nth-child(3)").click(function()
   {
     sessionStorage.subcategory="choc_confec";
   });
-  $("#pc ul a:nth-child(1)").click(function()
+  $("#personal ul a:nth-child(1)").click(function()
   {
     sessionStorage.subcategory="baby_pro";
   });
-  $("#pc ul a:nth-child(2)").click(function()
+  $("#personal ul a:nth-child(2)").click(function()
   {
     sessionStorage.subcategory="deos_perfumes";
   });
@@ -216,11 +150,19 @@ $(document).ready(function()
     cursor:pointer;
     
   }
+  h4
+  {
+    cursor:pointer;
+  }
+  .fa
+  {
+    cursor:pointer;
+  }
   .popover-title
-{
+  {
   text-align: center;
   color:red;
-}
+  }
   ul
   {
     list-style-type: none;
@@ -584,71 +526,69 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 
     <h3 style="text-align: center;"> Main Categories </h3> 
     <br>
-    <span  class="bde" ><i class="fa" ng-class="{'fa-plus-square':!colbread,'fa-minus-square':colbread}" style="float:left;margin-right:5px;"></i><h4>Bread Dairy and Eggs</h4>
-      <!--span  data-target="#bde" > </span--> 
-    <div id="bde" >
+    <span data-toggle="collapse" data-target="#bread" onclick="showimages('bread')"><i class="fa" ng-class="{'fa-plus-square':!colbread,'fa-minus-square':colbread}" style="float:left;margin-right:5px;"></i><h4>Bread Dairy and Eggs</h4></span>
+      <!--span data-toggle="collapse" data-target="#bde" > </span--> 
+    <div id="bread" class="collapse">
       
       <ul>
-        <a href="items.html" ><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp; Bakery Products</li></span></a>
+        <a href="items.html" id="bdefirstchild"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp; Bakery Products</li></span></a>
         <a href="items.html"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp;Eggs</li></span></a>
         <a href="items.html"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp;Dairy</li></span></a>
         
       </ul>
     </div>
-  </span>
-    <span  class="beverages" ><i class="fa" ng-class="{'fa-plus-square':!colbev,'fa-minus-square':colbev}" style="float:left;margin-right:5px;"></i><h4>Beverages</h4>
-     <div id="beverages" >
+  
+    <span data-toggle="collapse" data-target="#beverage" onclick="showimages('beverage')"><i class="fa" ng-class="{'fa-plus-square':!colbev,'fa-minus-square':colbev}" style="float:left;margin-right:5px;"></i><h4>Beverages</h4>
+     
+      <div id="beverage" class="collapse">
       <ul>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;EnergyDrinks</li></span></a>
         <a href="items.html"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp; Soft Drinks</li></span></a>
-    </ul>
+        
+      </ul>
     </div>
     </span>
-    <span  class="branded" ><i class="fa" ng-class="{'fa-plus-square':!colbrand,'fa-minus-square':colbrand}" style="float:left;margin-right:5px;"></i><h4>Branded Foods</h4>
-      <div id="branded"  >
+    <span data-toggle="collapse" data-target="#branded" onclick="showimages('branded')"><i class="fa" ng-class="{'fa-plus-square':!colbrand,'fa-minus-square':colbrand}" style="float:left;margin-right:5px;"></i><h4>Branded Foods</h4></span>
+      
+      <div id="branded" class="collapse" >
       <ul>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Biscuits</li></span></a>
         </ul>
     </div>
-    </span>
-    <span  class="grocery" ><i class="fa " ng-class="{'fa-plus-square':!colgrocery,'fa-minus-square':colgrocery}" style="float:left;margin-right:5px;"></i><h4>Grocery and Staples</h4>
+    <span data-toggle="collapse" data-target="#grocery" onclick="showimages('grocery')"><i class="fa " ng-class="{'fa-plus-square':!colgrocery,'fa-minus-square':colgrocery}" style="float:left;margin-right:5px;"></i><h4>Grocery and Staples</h4></span>
       
-      <div id="grocery"  >
+      <div id="grocery" class="collapse" >
       <ul>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Oil</li></span></a>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Dals and Pulses</li></span></a>
       </ul>
     </div>
-    </span>
-    <span  class="household"  ><i class="fa" ng-class="{'fa-plus-square':!colhousehold,'fa-minus-square':colhousehold}" style="float:left;margin-right:5px;"></i><h4>Household</h4> 
+    <span data-toggle="collapse" data-target="#household" onclick="showimages('household')"><i class="fa" ng-class="{'fa-plus-square':!colhousehold,'fa-minus-square':colhousehold}" style="float:left;margin-right:5px;"></i><h4>Household</h4> </span>
       
-      <div id="household"  >
+      <div id="household" class="collapse" >
       <ul>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Kitchen and Dining</li></span></a>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Detergents</li></span></a>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Plastic</li></span></a>
       </ul>
     </div>
-    </span>
-    <span class="gour"><i class="fa" ng-class="{'fa-plus-square':!colgour,'fa-minus-square':colgour}" style="float:left;margin-right:5px;"></i><h4>Imported and Gourmet</h4>
+    <span data-toggle="collapse" data-target="#gourmet" onclick="showimages('gourmet')"><i class="fa" ng-class="{'fa-plus-square':!colgour,'fa-minus-square':colgour}" style="float:left;margin-right:5px;"></i><h4>Imported and Gourmet</h4></span>
      
-      <div id="gour"  >
+      <div id="gourmet" class="collapse" >
       <ul>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Snacks</li></span></a>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Beverages</li></span></a>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Chocolates</li></span></a>
       </ul>
     </div>
-    </span>
-    <span  class="pc" ><i class="fa" ng-class="{'fa-plus-square':!colpc,'fa-minus-square':colpc}" style="float:left;margin-right:5px;"></i><h4>Personal Care</h4>
+    <span data-toggle="collapse" data-target="#personal" onclick="showimages('personal')"><i class="fa" ng-class="{'fa-plus-square':!colpc,'fa-minus-square':colpc}" style="float:left;margin-right:5px;"></i><h4>Personal Care</h4></span>
       
-      <div id="pc"  >
+      <div id="personal" class="collapse" >
       <ul>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Baby Products</li></span></a>
         <a href="items.html"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Deos and Perfumes</li></span></a>
       </ul>
     </div>
-    </span>
   </div>
 </div>
 
@@ -682,7 +622,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   </div></a>
 </div>
   
-<div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="bevimg">
+<div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="beverageimg">
  <a href="items.html"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/energy-drinks.PNG" alt="Energy Drinks" class="img-responsive">
@@ -701,7 +641,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   </div>
 </div></a>
 
- <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="brandimg">
+ <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="brandedimg">
 <a href="items.html"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/Biscuits.PNG" alt="Biscuits" class="img-responsive">
@@ -785,7 +725,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   </div></a>
 </div>
 
-<div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="pcimg">
+<div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="personalimg">
 <a href="items.html"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/baby.PNG" alt="Baby Products" class="img-responsive">
@@ -826,7 +766,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </table>
 
 </div>
-<div class="container-fluid" style="position:absolute;right:0px;width:100%;margin-top:0px;">
+<div class="container-fluid" style="position:absolute;right:0px;width:100%;margin-top:40px;">
   <div class="Mobile-App" style="background: gainsboro;">
   <h3 id="playstore">Finish Grocery Shopping on the Go!<br>
   Download the TheDreamStop Mobile App Now!</h3>
