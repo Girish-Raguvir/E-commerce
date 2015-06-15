@@ -19,15 +19,42 @@
 
 <style type="text/css">
 /* Custom Styles */
-
+html,body{
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
+html {
+    /* To make use of full height of page*/
+    min-height: 100%;
+    margin: 0;
+    background: rgba(0,0,0,0.6);
+}
+body {
+    min-height: 100%;
+    margin: 0;
+}
 body {
 
   /*//background: #FFF;*/
   margin: 0px;
   height: 100%;
   color: #fff;
-  background: url(../E-commerce/images/intro-bg.jpg) no-repeat bottom center scroll;
+  /*background: url(../E-commerce/images/intro-bg-2.jpg) no-repeat center scroll;*/
+  background: url(./images/intro-bg-3.jpg) bottom center scroll;
+  background-repeat:repeat-y;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
+/*html { 
+  background: url(./images/intro-bg-2.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}*/
 h2
 {
   color: white;
@@ -245,11 +272,11 @@ input[type="radio"]
         </a>
       </li>
 
-      <li>
+      <!-- <li>
         <a href="#TC" role="tab" data-toggle="tab">
         Terms and Conditions
         </a>
-      </li>
+      </li> -->
 
     </ul>
 
@@ -403,17 +430,13 @@ input[type="radio"]
 
   <div class="tab-pane fade" id="details">
 
-    <div class="jumbotron col-xs-12">
-      <h3 class="text-center">Profile</h3>
+    <div class="jumbotron col-xs-12" style="background:rgba(0,0,0,0.8);">
+      <h3 class="text-center" style="color:white;">Profile</h3>
     </div>
 
     <div class="col-xs-12">
 
-      <div class="whitebox top-banner card col-xs-6 col-xs-offset-3">
-
-        <h2 align="center" style="padding-left: 13%;">Thank you for being a part of us.</h2>
-         <br> 
-
+      <div class="whitebox top-banner card col-xs-6 col-xs-offset-3" style="margin-left: 22%;">
         <form class="form-horizontal" role="form">
 
           <div class="form-group">
@@ -441,13 +464,6 @@ input[type="radio"]
             <label class="control-label col-sm-2" for="phno">Phone</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="phno" >
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="address">Address</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="address" >
             </div>
           </div>
 
