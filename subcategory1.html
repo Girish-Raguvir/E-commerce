@@ -28,7 +28,7 @@ function showimages(cat)
      
      for(s in a)
      {//console.log(a[s]);
-      if(a[s].localeCompare(cat)==0){$("#"+a[s]+"img").show();}
+      if(a[s].localeCompare(cat)==0){$("#"+a[s]+"img").show();if($("#"+a[s]).attr("class").localeCompare("collapse in")==0)$("#"+a[s]+"img").hide();}
       else 
       {
         $("#"+a[s]+"img").hide();
@@ -66,7 +66,7 @@ $(document).ready(function()
   else
   {
     //$("#"+category+"img").show();
-    showimages(category+"img")
+    showimages(category)
     $("#"+category).toggleClass("in");
   }
   
