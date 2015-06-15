@@ -26,73 +26,31 @@ $(document).ready(function()
 {
   $('#tile1').on('click',function()
   {
-    sessionStorage.bread=true;
-    sessionStorage.bev=false;
-    sessionStorage.brand=false;
-    sessionStorage.Grocery=false;
-    sessionStorage.household=false;
-    sessionStorage.gour=false;
-    sessionStorage.pc=false;
+    sessionStorage.category="bread";
   });
   $('#tile2').on('click',function()
   {
-    sessionStorage.bread=false;
-    sessionStorage.bev=true;
-    sessionStorage.brand=false;
-    sessionStorage.Grocery=false;
-    sessionStorage.household=false;
-    sessionStorage.gour=false;
-    sessionStorage.pc=false;
+   sessionStorage.category="beverage";
   });
   $('#tile3').on('click',function()
   {
-    sessionStorage.bread=false;
-    sessionStorage.bev=false;
-    sessionStorage.brand=true;
-    sessionStorage.Grocery=false;
-    sessionStorage.household=false;
-    sessionStorage.gour=false;
-    sessionStorage.pc=false;
+   sessionStorage.category="branded";
   });
   $('#tile5').on('click',function()
   {
-    sessionStorage.bread=false;
-    sessionStorage.bev=false;
-    sessionStorage.brand=false;
-    sessionStorage.Grocery=true;
-    sessionStorage.household=false;
-    sessionStorage.gour=false;
-    sessionStorage.pc=false;
+   sessionStorage.category="grocery";
   });
   $('#tile6').on('click',function()
   {
-    sessionStorage.bread=false;
-    sessionStorage.bev=false;
-    sessionStorage.brand=false;
-    sessionStorage.Grocery=false;
-    sessionStorage.household=true;
-    sessionStorage.gour=false;
-    sessionStorage.pc=false;
+   sessionStorage.category="household";
   });
   $('#tile7').on('click',function()
   {
-    sessionStorage.bread=false;
-    sessionStorage.bev=false;
-    sessionStorage.brand=false;
-    sessionStorage.Grocery=false;
-    sessionStorage.household=false;
-    sessionStorage.gour=true;
-    sessionStorage.pc=false;
+    sessionStorage.category="gourmet";
   });
   $('#tile8').on('click',function()
   {
-    sessionStorage.bread=false;
-    sessionStorage.bev=false;
-    sessionStorage.brand=false;
-    sessionStorage.Grocery=false;
-    sessionStorage.household=false;
-    sessionStorage.gour=false;
-    sessionStorage.pc=true;
+    sessionStorage.category="personal";
   });
 }
 });
@@ -358,14 +316,12 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       <div class="form-group" id="area1">
       <label for="lpwd">Area:</label>
       <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="a">
-          <option ng-repeat="x in areas[0]" value="{{x}}">{{x}}</option>
-        </select> 
+           <option ng-repeat="x in areas[0]" value="{{x}}">{{x}}</option>
       </div> 
       <div class="form-group" id="area2">
       <label for="lpwd">Area:</label>
       <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="b">
           <option ng-repeat="x in areas[1]">{{x}}</option>
-        </select> 
       </div> 
       <div class="form-group" id="area3">
       <label for="lpwd">Area:</label>

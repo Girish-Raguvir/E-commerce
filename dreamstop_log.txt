@@ -1,4 +1,4 @@
--Change location->'continue' not working
+
 
 -coupon code input during payment-Coupon applied message(make appropriate changes)-and wrong code-No such coupon exists error.
 
