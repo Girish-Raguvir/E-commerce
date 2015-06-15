@@ -65,10 +65,70 @@ return {
 
 });
 
+//vendor login
+app.controller("vendorlogin",['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
+
+$scope.vname="";$scope.vpass="";
+$scope.login=function()
+{
+  sessionStorage.vname=$scope.vname;
+  sessionStorage.vpass=$scope.vpass;
+  window.location.assign("./vendor.html");
+  
+  //console.log($scope.vname+$scope.vpass);
+
+}
+
+
+}]);
+
 //vendor dashboard
 
 app.controller("vendororders",['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
+var pass=sessionStorage.vpass;
+var name=sessionStorage.vname;
+$scope.logout=function()
+{
+  sessionStorage.vpass=null;
+  sessionStorage.vname=null;
+  window.location.assign("./vendorindex.html");
+}
+$scope.username="";
+if(pass==null || name==null){}
+  //window.location.assign("./vendorindex.html");
+else
+{
+
+  $scope.username=name;
+
+  var req = 
+      {    method: 'POST',
+         url: 'http://thedreamstop.com/api/dashboard.php', 
+         headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+         data: $.param({"username":name,"password":pass}),
+       } 
+      
+       $http(req)
+       .success(
+       function(response)
+       {
+          console.log(JSON.stringify(response));
+          //console.log("response :"+response.success);
+          if(response.success=='true')
+          { 
+             $scope.orders=response.orders;
+            //console.log(JSON.stringify(response));
+            //if(response.numResults!=0){$scope.search=response.items;console.log('yes');}
+            //console.log(JSON.stringify($scope.search));
+          }
+        })
+       .error(
+        function(response)
+        {
+          console.log("error:"+ response.error_message);
+        });
+}
 $scope.values = [
 {
   id: 1,
@@ -94,13 +154,13 @@ if($scope.selected.label=='Price')
 else 
   $scope.s='s';
 
-$scope.orders = 
-[
-  {'tprice':800,'titems':4,'name':'Girish','phno':'45761226','address':'#10,Adyar,Chennai','date':'4/6/2015','TID':'1'},
-  {'tprice':1200,'titems':6,'name':'Rohit','phno':'42861223','address':'#13,Mylapore,Chennai','date':'5/6/2015','TID':'2'},
-  {'tprice':300,'titems':2,'name':'Anurag','phno':'42811322','address':'#11,Adyar,Chennai','date':'4/6/2015','TID':'3'},
-  {'tprice':1000,'titems':5,'name':'Sugan','phno':'42261226','address':'#10,Adyar,Chennai','date':'5/6/2015','TID':'4'},
-];
+// $scope.orders = 
+// [
+//   {'tprice':800,'titems':4,'name':'Girish','phno':'45761226','address':'#10,Adyar,Chennai','date':'4/6/2015','TID':'1'},
+//   {'tprice':1200,'titems':6,'name':'Rohit','phno':'42861223','address':'#13,Mylapore,Chennai','date':'5/6/2015','TID':'2'},
+//   {'tprice':300,'titems':2,'name':'Anurag','phno':'42811322','address':'#11,Adyar,Chennai','date':'4/6/2015','TID':'3'},
+//   {'tprice':1000,'titems':5,'name':'Sugan','phno':'42261226','address':'#10,Adyar,Chennai','date':'5/6/2015','TID':'4'},
+// ];
 $scope.status="Received";
 
 var op=0;

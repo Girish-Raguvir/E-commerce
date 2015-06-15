@@ -22,34 +22,41 @@
 
 body {
 
-  background: #FFF;
+  /*//background: #FFF;*/
   margin: 0px;
   height: 100%;
-  
+  color: #fff;
+  background: url(../E-commerce/images/intro-bg.jpg) no-repeat bottom center scroll;
 }
-
+h2
+{
+  color: white;
+}
 /* Tab Navigation */
 #dummyParent > #tabs {
   margin: 0;
   padding: 0;
-  border: 0;    
+  border: 0; 
+
 }
 #dummyParent > #tabs > li > a {
-  background: #FFF;
-  color: #222;
+  
+  color: #fff;
   width: 200px;
   font-size: 16px;
   text-align: center;
   border-radius: 0;
   box-shadow: inset 0 -8px 7px -9px rgba(0,0,0,.4),-2px -2px 5px -2px rgba(0,0,0,.4);
+  background: rgba(0,0,0,0.9);
 }
 #dummyParent > #tabs > li.active > a,
 #dummyParent > #tabs > li.active > a:hover,
 #dummyParent > #tabs > li.active > a:focus{
-  background: #FFF;
-  color: rgba(121,147,59,0.8);
+  color: #FFF;
+  background: #27003d;
   font-size: 16px;
   box-shadow: inset 0 0 0 0 rgba(0,0,0,.4),-2px -3px 5px -2px rgba(0,0,0,.4);
+  border-color: #27003d;
 }
 .container {
   width: 100%;
@@ -86,10 +93,10 @@ body {
 .bs-docs-sidebar .nav>li>a:hover, 
 .bs-docs-sidebar .nav>li>a:focus {
   padding-left: 19px;             /*indent from left */
-  color: rgba(121,147,59,1);      /*highlight color */
+  color: #27003d ;     /*highlight color */
   text-decoration: none;          /*turn off underline */
   background-color: transparent;  /*turn off selection color */
-  border-left: 1px solid #563d7c; /*add left cursor */
+  border-left: 1px solid #27003d; /*add left cursor */
 }
 
 .bs-docs-sidebar .nav>.active>a, 
@@ -97,9 +104,9 @@ body {
 .bs-docs-sidebar .nav>.active:focus>a {
   padding-left: 18px;
   font-weight: 700;
-  color: #563d7c;
+  color: #27003d;
   background-color: transparent;
-  border-left: 2px solid #563d7c;
+  border-left: 2px solid #27003d;
 }
 .bs-docs-sidebar .nav .nav {
   display: none;            /*hide nested list */
@@ -174,7 +181,16 @@ input[type="radio"]
 }
 #order:hover
 {
-  background: rgba(121,147,59,1);
+  background: #27003d;
+}
+#name:hover
+{
+  color:white!important;
+  font-weight: 300!important;
+}
+ a:focus,a:hover {
+  font-weight: bolder!important;
+  color: white!important;
 }
 </style>
 
@@ -182,7 +198,7 @@ input[type="radio"]
 
 <body data-spy="scroll" data-target="#myScrollspy" ng-app="thedreamstop" >
 
-<div class="navbar navbar-inverse" role="navigation" style="height:100px;">
+<div class="navbar navbar-inverse" role="navigation" style="height:100px;background:#27003d;">
 
   <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
 
@@ -190,20 +206,18 @@ input[type="radio"]
 
       <div class="navbar-header" >
 
-        <a class="navbar-brand" href="vendor.html" style="padding-left:20px;">The Dream Stop</a> 
+        <a href="vendorindex.html"class="navbar-brand" href="vendor.html" style="padding-left:20px;">The Dream Stop</a> 
       </div>
 
           
-      <div>
+      <div ng-controller="vendororders">
 
         <ul class="nav navbar-nav navbar-right">
 
-          <li><a data-toggle="popover" data-container="body" data-contentwrapper=".content"><span id="bindElement"></span></a></li>
-          <!-- <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li> -->
-          <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
-          <li ng-if="loggedin()"><a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a></li>
-          <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
+          
+          <li ><a id="name">Welcome &nbsp;<b>{{username}}</b></a></li>
+          
+          <li ng-click="logout()"><a href="#">Logout</a></li>
 
         </ul>
 
@@ -215,7 +229,7 @@ input[type="radio"]
 
 </div>
 
-<div id="dummyParent">
+<div id="dummyParent" >
 
     <ul id="tabs" class="nav nav-tabs" role="tablist">
 
@@ -247,7 +261,7 @@ input[type="radio"]
 
   <div class="tab-pane fade active in" id="orders" ng-controller="vendororders">
 
-    <div class="jumbotron" style="">
+    <div class="jumbotron" style="background:rgba(0,0,0,0.9);">
 
       <div class="col-md-8">
       <h2>Orders Received</h2>
@@ -269,15 +283,15 @@ input[type="radio"]
           <br>
 
           <table style="border-spacing: 0px;border-collapse: collapse;width:100%;table-layout:fixed;">
-            <tr style="background: rgba(121,147,59,0.8);cursor:default;">
+            <tr style="background: #523263;cursor:default;">
             <td style="padding-left:20px;cursor:pointer;" ng-click="open(x.TID)" id="order"><b>Order ID: {{x.TID}}</b></td>
-            <td style="padding-left:20px;"><b>Current Status: {{status}}</b></td>
+            <td style="padding-left:20px;"><b>Current Status: {{x.status}}</b></td>
             <td colspan="2" style="padding-left:20px;">
               <form>
-                <input type="radio" name="status" value="Received" ng-model="status" checked="checked"><b>Received</b>
-                <input type="radio" name="status" value="Packing" ng-model="status"><b>Packing</b>
-                <input type="radio" name="status" value="Transporting" ng-model="status"><b>Transporting</b>
-                <input type="radio" name="status" value="Delivered" ng-model="status"><b>Delivered</b>
+                <input type="radio" name="status" value="received" ng-model="x.status" checked="checked"><b>Received</b>
+                <input type="radio" name="status" value="packing" ng-model="x.status"><b>Packing</b>
+                <input type="radio" name="status" value="transporting" ng-model="x.status"><b>Transporting</b>
+                <input type="radio" name="status" value="delivered" ng-model="x.status"><b>Delivered</b>
               </form>
             </td>
             </tr>
@@ -288,25 +302,25 @@ input[type="radio"]
             <th style="text-align:center;" align="center"nowrap>Date of Delivery</th>  
             </tr>
             <tr>
-            <td align="center">{{x.titems}}</td>
-            <td align="center"nowrap>Rs.{{x.tprice}}</td>
-            <td align="center">{{x.address}}</td>
-            <td align="center" nowrap>{{x.date}}</td>
+            <td align="center">{{x.itemArray.titems}}</td>
+            <td align="center"nowrap>Rs.{{x.itemArray.tprice}}</td>
+            <td align="center">{{x.itemArray.address}}</td>
+            <td align="center" nowrap>{{x.itemArray.date}}</td>
             </tr>
           </table>
 
-          <div id="{{x.TID}}" class="collapse" style="background:white;height:auto;width:100%;padding:20px;margin-top:30px;" ng-controller="cart">
+          <div id="{{x.TID}}" class="collapse" style="background:rgba(0,0,0,0.8);height:auto;width:100%;padding:20px;margin-top:30px;" ng-controller="cart">
 
             <div style="font-weight: bold;line-height: 40px">
-            Name: {{x.name}}
+            Name: {{x.itemArray.name}}
             <br>
-            Phone number: {{x.phno}}
+            Phone number: {{x.itemArray.phno}}
             <br>
-            Address: {{x.address}}
+            Address: {{x.itemArray.address}}
             <br>
             Email id: -
             <br>
-            <p align="center" style="font-size: 31px;">CART</p>
+            <hr>
             
             </div>
 
@@ -321,7 +335,7 @@ input[type="radio"]
                 <th style="text-align: center;">Price</th>
               </tr>
 
-              <tr ng-if="tprice!=0" ng-repeat="y in items" style="text-align: center;">
+              <tr ng-if="tprice!=0" ng-repeat="y in x.prodArray" style="text-align: center;">
                 <td> {{y.qty}} </td>
                 <td> {{y.nam}} </td>
                 <td> {{y.q}} {{y.unit}}</td>
