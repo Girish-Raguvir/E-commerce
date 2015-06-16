@@ -314,17 +314,19 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </select> 
       </div>  
       <div class="form-group" id="area1">
-      <label for="lpwd">Area:</label>
+      <label>Area:</label>
       <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="a">
-           <option ng-repeat="x in areas[0]" value="{{x}}">{{x}}</option>
+           <option ng-repeat="x in areas[0]">{{x}}</option>
+      </select>
       </div> 
       <div class="form-group" id="area2">
-      <label for="lpwd">Area:</label>
+      <label >Area:</label>
       <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="b">
           <option ng-repeat="x in areas[1]">{{x}}</option>
+      </select>
       </div> 
       <div class="form-group" id="area3">
-      <label for="lpwd">Area:</label>
+      <label>Area:</label>
       <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="c">
           <option ng-repeat="x in areas[2]">{{x}}</option>
         </select> 
