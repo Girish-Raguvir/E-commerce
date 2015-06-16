@@ -95,8 +95,8 @@ $scope.logout=function()
   window.location.assign("./vendorindex.html");
 }
 $scope.username="";
-if(pass==null || name==null){}
-  //window.location.assign("./vendorindex.html");
+if(pass==null || name==null)
+  window.location.assign("./vendorindex.html");
 else
 {
 
