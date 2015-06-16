@@ -438,7 +438,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 
 
 <ul  style="list-style-type:none;padding-left:0px;">
-    <li  style="margin-bottom : 0px;"ng-repeat="x in names1|orderBy:selected.sub:selected.rev" for="{{x.id}}"  >
+    <li  style="margin-bottom : 0px;"ng-repeat="x in items|orderBy:selected.sub:selected.rev" for="{{x.id}}"  >
 <div ng-if="(check(x))" class="animate">
 
 

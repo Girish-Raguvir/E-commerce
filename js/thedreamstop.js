@@ -51,10 +51,10 @@ app.factory('UserService', function() {
 app.factory('category', function() {
  var id=0;
  function set(catid) {
-   sessionStorage.catid=catid;
+   sessionStorage.category=catid;
  }
  function get() {
-  catid=sessionStorage.catid;  
+  catid=sessionStorage.category;  
   return catid;
  }
 
@@ -473,7 +473,7 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http','category',funct
   
   $scope.session=getsession('session');
   console.log(category.get());
-  $scope.data={"session":$scope.session,"ID":category.get(),};
+  $scope.data={"session":$scope.session,"ID":category.get(),"subID":sessionStorage.sub};
   console.log('chchch'+JSON.stringify($scope.data));
   
     
@@ -1135,7 +1135,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             $scope.wuser=0; 
             $localstorage.set('loggedin','true');  
             $localstorage.set('username',response.name);
-            location.reload();
+            //location.reload();
           }
             else {$scope.wuser=1;console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
           })
@@ -1282,13 +1282,31 @@ $scope.sendPost = function()
   $scope.user.address=$scope.add.hno + ", " + $scope.add.street + ", " + $scope.add.area + ", " + $scope.add.rcomp + ", " + $scope.add.landmark + ", " + $scope.add.city + ", " + $scope.add.pin + ".";
   $scope.user.name=$scope.sal+$scope.uname.first + " " + $scope.uname.last;
   document.getElementById('regsubmit').disabled=true;
+  var lat,longi;
+  var geocoder;
+          var loc=JSON.parse(sessionStorage.location);
+          geocoder = new google.maps.Geocoder();
+          var address = loc.city+', '+loc.area;
+          geocoder.geocode( { 'address': address}, function(results, status) 
+          {
+            if (status == google.maps.GeocoderStatus.OK) 
+            {
+              var location = results[0].geometry.location;
+              lat=location.lat()*3.14/180;longi=location.lng()*3.14/180;
+              console.log(lat);console.log(longi);
+            } 
+            else 
+            {
+              alert('Some error has occured.Please try again.');
+            }
+          });
   var req=
   { method: 'POST',
     url: 'http://thedreamstop.com/api/newUser.php',
     headers: { 'Content-Type':'application/x-www-form-urlencoded' },
     data: $.param($scope.user),
   }
-        
+  
   $http(req)
   .success(
   function(response)
@@ -1298,6 +1316,30 @@ $scope.sendPost = function()
     if(response.success=='true')
       {
         $localstorage.set('session',response.session);
+        var req2 = 
+          {  method: 'POST',
+              url: 'http://thedreamstop.com/api/latlong.php', 
+              headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+              data: $.param({"latitude":lat,"longitude":longi,"session":response.session,}),
+          } 
+          //console.log(session);
+          $http(req2)
+          .success(
+          function(response)
+          {
+            console.log(JSON.stringify(response));
+            console.log("response :"+response.name);
+            if(response.success=='true')
+          { 
+           
+          }
+            
+          })
+          .error(
+          function(response)
+          { 
+            console.log("error:"+ response.error_message);
+          });     
         alert('You have successfully registered with us.Welcome.'+'\n'+'You will now be redirected to your account.');
         setTimeout( function(){window.location.assign("./Account.html");}, 1000);
       }
