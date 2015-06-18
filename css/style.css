@@ -15,6 +15,11 @@
     margin: 0;
 }
 
+.nav p
+{
+  color:#000;
+}
+
 #subcat
 {
   position:relative;
