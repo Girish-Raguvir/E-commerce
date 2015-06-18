@@ -21,20 +21,41 @@
 $(window).load(function() {
   $(".loader").fadeOut("slow");
 });
-  $(document).ready(function()
- {
-  var subcategory=sessionStorage.getItem("subcategory");
-  var category=sessionStorage.getItem("category");
-  if(category==null||subcategory==null)
-    window.location.href="index.html";
-  else
-  {
-    console.log(category,subcategory,typeof category,typeof subcategory);
-  document.getElementById("category").innerHTML=category;
-  document.getElementById("subcategory").innerHTML=subcategory;
-  }
-  
- });
+  // $(document).ready(function()
+  // {
+  //     var bdefirst=sessionStorage.getItem('bdefirst');
+  //     var bdesecond=sessionStorage.getItem('bdesecond');
+  //     var bdethird=sessionStorage.getItem('bdethird');
+  //     var beveragesfirst=sessionStorage.getItem('beveragesfirst');
+  //     var beveragessecond=sessionStorage.getItem('beveragessecond');
+  //     var brandedfirst=sessionStorage.getItem('brandedfirst');
+  //     var groceryfirst=sessionStorage.getItem('groceryfirst');
+  //     var grocerysecond=sessionStorage.getItem('grocerysecond');
+  //     var householdfirst=sessionStorage.getItem('householdfirst');
+  //     var householdsecond=sessionStorage.getItem('householdsecond');
+  //     var householdthird=sessionStorage.getItem('householdthird');
+  //     var gourfirst=sessionStorage.getItem('gourfirst');
+  //     var goursecond=sessionStorage.getItem('goursecond');
+  //     var gourthird=sessionStorage.getItem('gourthird');
+  //     var pcfirst=sessionStorage.getItem('pcfirst');
+  //     var pcsecond=sessionStorage.getItem('pcsecond');
+  //     console.log(bdefirst,bdefirst.localeCompare('true'),typeof bdefirst);
+  //     if(!bdefirst.localeCompare('true'))
+  //     {
+  //       $("#bdefirst").show();
+  //       $("#bdesecond,#bdethird").hide();
+  //     }
+  //     if(!bdesecond.localeCompare('true'))
+  //     {
+  //       $("#bdesecond").show();
+  //       $("#bdefirst,#bdethird").hide();
+  //     }
+  //     if(!bdethird.localeCompare('true'))
+  //     {
+  //       $("#bdethird").show();
+  //       $("#bdesecond,#bdefirst").hide();
+  //     }
+  // });
 </script>
 
    <link rel="stylesheet" type="text/css" href="css/frontpage.css">
@@ -59,23 +80,11 @@ $(window).load(function() {
   color:red;
 
 }
-a
-{
-  cursor:pointer;
-  color:black;
-}
-a:hover
-{
-  color:#27003d;
-}
 </style>
 
  
 </head>
 <body>
-  <div style="position:absolute;top:100px;left:250px;">
-    <p> <a href="index.html"> Home </a>&nbsp; <i class="fa fa-hand-o-right"></i> &nbsp; <a id="category" href="subcategory1.html"></a> &nbsp;<i class="fa fa-hand-o-right"></i> &nbsp;<a id="subcategory" href="subcategory1.html"></a></p>
-  </div>
     <div class="loader"></div>
   <div ng-app="thedreamstop">
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;" ng-controller="nav">
@@ -123,7 +132,7 @@ a:hover
           </ul>
       <div ng-controller="log_in_out">
       <ul class="nav navbar-nav navbar-right">
-       <li><a tabindex="0" data-toggle="popover" role="button" data-container="body" data-contentwrapper=".content" style="color:black;"><span id="bindElement"></span></a></li>
+        <li><a data-toggle="popover" data-container="body" data-contentwrapper=".content"><span id="bindElement"></span></a></li>
         <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
@@ -132,7 +141,7 @@ a:hover
         
 
        <div class="content" style="display:none;">
-        <p align="center">
+        <p align="center" >
         <br>
         Changing location will cause the page to be refreshed leading to loss of saved data.Do you want to proceed? <br><br>
         <button type="submit" class="btn btn-primary" ng-click="refresh()">Continue</button>

@@ -1658,7 +1658,7 @@ $(document).ready(function()
       $("#locmodal").modal("show");
     else
       {
-         $('#bindElement').html("<b> City:&nbsp;</b> " + loc.city +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + loc.area).css("color","white");
+         $('#bindElement').html("<b> City:&nbsp;</b> " + loc.city +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + loc.area);
       }
   });
 document.getElementById("wrapper").className="toggled";
