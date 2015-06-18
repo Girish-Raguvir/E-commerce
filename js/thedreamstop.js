@@ -1411,10 +1411,17 @@ $scope.sendPost = function()
 
 app.controller('orderdisplay', ['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
+// $scope.orders = 
+// [
+//   {'tprice':0,'titems':0,'name':'','phno':'','address':'','date':' ','TID':''},
+  
+// ];
 $scope.orders = 
 [
-  {'tprice':0,'titems':0,'name':'','phno':'','address':'','date':' ','TID':''},
-  
+  {'tprice':800,'titems':4,'name':'Girish','phno':'45761226','address':'#10,Adyar,Chennai','date':'4/6/2015','TID':'1'},
+  {'tprice':1200,'titems':6,'name':'Rohit','phno':'42861223','address':'#13,Mylapore,Chennai','date':'5/6/2015','TID':'2'},
+  {'tprice':300,'titems':2,'name':'Anurag','phno':'42811322','address':'#11,Adyar,Chennai','date':'4/6/2015','TID':'3'},
+  {'tprice':1000,'titems':5,'name':'Sugan','phno':'42261226','address':'#10,Adyar,Chennai','date':'5/6/2015','TID':'4'},
 ];
 var op=0;
 $scope.open=function(id)
@@ -1471,7 +1478,7 @@ var req=
     console.log("response :"+response.success);
     if(response.success=='true')
       {
-       $scope.orders=response.history;
+       //$scope.orders=response.history;
        console.log(JSON.stringify($scope.orders));
       }
 
