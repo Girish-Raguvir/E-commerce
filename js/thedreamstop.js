@@ -199,10 +199,10 @@ $scope.addeditems=[
       price:0 ,   
     }];   
 $scope.i=-1;    
-$scope.titems=0;    
+$scope.titems=4;    
 $scope.tprice=0;    
 if(sessionStorage.cart==null || sessionStorage.tprice==null)    
-  {sessionStorage.cart='[]';sessionStorage.tprice=0;}   
+  {sessionStorage.cart='[]';sessionStorage.tprice=0;sessionStorage.titems=0;}   
   else    
   {   
     var obj=JSON.parse(sessionStorage.cart);    
@@ -212,7 +212,8 @@ if(sessionStorage.cart==null || sessionStorage.tprice==null)
       if(obj[i].nam=='-')$scope.addeditems.splice(0,1);   
       $scope.addeditems.push(obj[i]);   
     }   
-    $scope.tprice=parseInt(sessionStorage.tprice);    
+    $scope.tprice=parseInt(sessionStorage.tprice);  
+    $scope.titems=parseInt(sessionStorage.titems);   
   }   
 $scope.loggedout=function()   
 {   
@@ -238,7 +239,7 @@ $scope.add=function(id,qty,name,w,price,u)
     $scope.tprice=$scope.tprice+price;    
     sessionStorage.cart=JSON.stringify($scope.addeditems);    
     sessionStorage.tprice=$scope.tprice;    
-      
+    sessionStorage.titems=$scope.titems;  
 };
 $scope.searchdata="";
 $scope.open=function(){setTimeout( function(){document.getElementById("searchdiv").className="dropdown open";}, 20);}
@@ -304,6 +305,7 @@ app.controller("log_in_out",['$scope','$localstorage','$http',function($scope,$l
 $scope.c='kkkss';
 $scope.ctr=0;
 //console.log($scope.ctr);
+// $scope.titems=sessionStorage.titems;
 console.log(sessionStorage.length);
 $(document).ready(function()
 {
@@ -325,6 +327,7 @@ if($localstorage.get("loggedin")==null || $localstorage.get("username")==null ||
   $localstorage.set('session','Guest');
   sessionStorage.cart='[]';
   sessionStorage.tprice=0;
+  sessionStorage.titems=0;
 }
 $scope.loggedin=function()
 {
@@ -342,6 +345,7 @@ $scope.logout=function()
   $localstorage.set('username','Guest');
   sessionStorage.cart='[]';
   sessionStorage.tprice=0;
+  sessionStorage.titems=0;
 
   var session=$localstorage.get('session');
   $scope.data={'session':session};
@@ -474,6 +478,7 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http','category',funct
   $scope.session=getsession('session');
   console.log(category.get());
   $scope.data={"session":$scope.session,"ID":category.get(),"subID":sessionStorage.sub};
+  //$scope.data={"session":$scope.session,"ID":category.get()};
   console.log('chchch'+JSON.stringify($scope.data));
   
     
@@ -769,7 +774,7 @@ $scope.checkout=function()
 }
 //$scope.addeditems.length=0;
 if(sessionStorage.cart==null || sessionStorage.tprice==null)
-{sessionStorage.cart='[]';sessionStorage.tprice=0;}
+{sessionStorage.cart='[]';sessionStorage.tprice=0;sessionStorage.titems=0;}
 else
 {
 
@@ -800,6 +805,7 @@ if(!f)
   //$localstorage.set('cart',JSON.stringify($scope.addeditems));
   sessionStorage.cart=JSON.stringify($scope.addeditems);
   sessionStorage.tprice=$scope.tprice;
+  sessionStorage.titems=$scope.titems;
   //$localstorage.set('tprice',$scope.tprice);
 
   };
@@ -824,6 +830,7 @@ $scope.remove=function(y)
     // $localstorage.set('tprice',$scope.tprice);
     sessionStorage.cart=JSON.stringify($scope.addeditems);
     sessionStorage.tprice=$scope.tprice;
+    sessionStorage.titems=$scope.titems;
 }
 
 $scope.check=function(x)
@@ -876,7 +883,7 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
         
       }
       console.log('enter cart else');
-      
+      sessionStorage.titems=$scope.titems;
     }
     $scope.shipdata={'name':'','phno':'','address':'','date':''};
     var session=$localstorage.get('session');
@@ -1085,7 +1092,31 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             {
               var location = results[0].geometry.location;
               lat=location.lat()*3.14/180;longi=location.lng()*3.14/180;
-              console.log(lat);console.log(longi);
+              var req2 = 
+              {  method: 'POST',
+                  url: 'http://thedreamstop.com/api/latlong.php', 
+                  headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+                  data: $.param({"latitude":lat,"longitude":longi,"session":response.session,}),
+              } 
+              //console.log(session);
+              $http(req2)
+              .success(
+              function(response)
+              {
+                console.log(JSON.stringify(response));
+                console.log("response :"+response.name);
+                if(response.success=='true')
+              { 
+               
+              }
+                
+              })
+              .error(
+              function(response)
+              { 
+                console.log("error:"+ response.error_message);
+              });
+              //console.log(lat);console.log(longi);
             } 
             else 
             {
@@ -1100,30 +1131,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
               headers: { 'Content-Type':'application/x-www-form-urlencoded' },
               data: $.param({"session":response.session,}),
           } 
-          var req2 = 
-          {  method: 'POST',
-              url: 'http://thedreamstop.com/api/latlong.php', 
-              headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-              data: $.param({"latitude":lat,"longitude":longi,"session":response.session,}),
-          } 
-          //console.log(session);
-          $http(req2)
-          .success(
-          function(response)
-          {
-            console.log(JSON.stringify(response));
-            console.log("response :"+response.name);
-            if(response.success=='true')
-          { 
-           
-          }
-            
-          })
-          .error(
-          function(response)
-          { 
-            console.log("error:"+ response.error_message);
-          });
+          
           $http(req1)
           .success(
           function(response)
@@ -1135,6 +1143,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             $scope.wuser=0; 
             $localstorage.set('loggedin','true');  
             $localstorage.set('username',response.name);
+
             //location.reload();
           }
             else {$scope.wuser=1;console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
@@ -1146,7 +1155,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
           });
           
           //document.write("You will be redirected to main page in 10 sec.");
-          //setTimeout( function(){window.location.assign("./Account.html");}, 2000);
+          setTimeout( function(){window.location.assign("./Account.html");}, 2000);
         }
         else
         {
@@ -1282,24 +1291,6 @@ $scope.sendPost = function()
   $scope.user.address=$scope.add.hno + ", " + $scope.add.street + ", " + $scope.add.area + ", " + $scope.add.rcomp + ", " + $scope.add.landmark + ", " + $scope.add.city + ", " + $scope.add.pin + ".";
   $scope.user.name=$scope.sal+$scope.uname.first + " " + $scope.uname.last;
   document.getElementById('regsubmit').disabled=true;
-  var lat,longi;
-  var geocoder;
-          var loc=JSON.parse(sessionStorage.location);
-          geocoder = new google.maps.Geocoder();
-          var address = loc.city+', '+loc.area;
-          geocoder.geocode( { 'address': address}, function(results, status) 
-          {
-            if (status == google.maps.GeocoderStatus.OK) 
-            {
-              var location = results[0].geometry.location;
-              lat=location.lat()*3.14/180;longi=location.lng()*3.14/180;
-              console.log(lat);console.log(longi);
-            } 
-            else 
-            {
-              alert('Some error has occured.Please try again.');
-            }
-          });
   var req=
   { method: 'POST',
     url: 'http://thedreamstop.com/api/newUser.php',
@@ -1316,13 +1307,23 @@ $scope.sendPost = function()
     if(response.success=='true')
       {
         $localstorage.set('session',response.session);
-        var req2 = 
+        var geocoder,lat,longi;
+        var loc=JSON.parse(sessionStorage.location);
+        geocoder = new google.maps.Geocoder();
+        var address = loc.city+', '+loc.area;
+        geocoder.geocode( { 'address': address}, function(results, status) 
+        {
+        if (status == google.maps.GeocoderStatus.OK) 
+        {
+          var location = results[0].geometry.location;
+          lat=location.lat()*3.14/180;longi=location.lng()*3.14/180;
+          console.log(lat);console.log(longi);
+          var req2 = 
           {  method: 'POST',
               url: 'http://thedreamstop.com/api/latlong.php', 
               headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-              data: $.param({"latitude":lat,"longitude":longi,"session":response.session,}),
+              data: $.param({"latitude":lat,"longitude":longi,"session":$localstorage.get("session")}),
           } 
-          //console.log(session);
           $http(req2)
           .success(
           function(response)
@@ -1339,7 +1340,13 @@ $scope.sendPost = function()
           function(response)
           { 
             console.log("error:"+ response.error_message);
-          });     
+          });
+        } 
+        else 
+        {
+          alert('Some error has occured.Please try again.');
+        }
+        });
         alert('You have successfully registered with us.Welcome.'+'\n'+'You will now be redirected to your account.');
         setTimeout( function(){window.location.assign("./Account.html");}, 1000);
       }
@@ -1617,7 +1624,14 @@ $(document).ready(function()
         
         
      });
-   
+
+    if(loc.city==' ' || loc.area==' ')
+      $("#locmodal").modal("show");
+    else
+      {
+         $('#bindElement').html("<b> City:&nbsp;</b> " + loc.city +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + loc.area);
+      }
+  });
     function displayVals()
       { 
         var cityVal=$('#City').val();
@@ -1646,7 +1660,49 @@ $(document).ready(function()
            console.log('enters Mumbai');
            console.log(area3);
         }
-        
+        if($localstorage.get("session")!=null || $localstorage.get("session").localeCompare("Guest")!=0)
+        {
+          var geocoder,lat,longi;
+          var loc=JSON.parse(sessionStorage.location);
+          geocoder = new google.maps.Geocoder();
+          var address = loc.city+', '+loc.area;
+          geocoder.geocode( { 'address': address}, function(results, status) 
+          {
+          if (status == google.maps.GeocoderStatus.OK) 
+          {
+            var location = results[0].geometry.location;
+            lat=location.lat()*3.14/180;longi=location.lng()*3.14/180;
+            console.log(lat);console.log(longi);
+            var req2 = 
+            {  method: 'POST',
+                url: 'http://thedreamstop.com/api/latlong.php', 
+                headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+                data: $.param({"latitude":lat,"longitude":longi,"session":$localstorage.get("session")}),
+            } 
+            $http(req2)
+            .success(
+            function(response)
+            {
+              console.log(JSON.stringify(response));
+              console.log("response :"+response.name);
+              if(response.success=='true')
+            { 
+             
+            }
+              
+            })
+            .error(
+            function(response)
+            { 
+              console.log("error:"+ response.error_message);
+            });
+              } 
+              else 
+              {
+                alert('Some error has occured.Please try again.');
+              }
+          });
+        }
         //console.log('here');
       }
      $("#locsub").click(displayVals);
@@ -1654,13 +1710,7 @@ $(document).ready(function()
     var loc=JSON.parse(sessionStorage.location);
     
     
-    if(loc.city==' ' || loc.area==' ')
-      $("#locmodal").modal("show");
-    else
-      {
-         $('#bindElement').html("<b> City:&nbsp;</b> " + loc.city +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + loc.area);
-      }
-  });
+   
 document.getElementById("wrapper").className="toggled";
 $('.navbar').css({"cursor":"pointer"});
 $(window).scroll(function() {
