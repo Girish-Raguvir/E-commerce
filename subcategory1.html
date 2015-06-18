@@ -28,13 +28,16 @@ function showimages(cat)
      
      for(s in a)
      {//console.log(a[s]);
-      if(a[s].localeCompare(cat)==0){$("#"+a[s]+"img").show();sessionStorage.category=parseInt(s)+1;if($("#"+a[s]).attr("class").localeCompare("collapse in")==0)$("#"+a[s]+"img").hide();}
+      if(a[s].localeCompare(cat)==0){$("#"+a[s]+"img").show();
+      document.getElementById("category").innerHTML= $('#'+a[s]).parent().find("h4").text();
+      sessionStorage.category=parseInt(s)+1;if($("#"+a[s]).attr("class").localeCompare("collapse in")==0)$("#"+a[s]+"img").hide();}
       else 
       {
         $("#"+a[s]+"img").hide();
        // $("#"+a[s]).toggleClass("in");
        $("#"+a[s]).attr("class","collapse");
       }
+
      }
   }
   function sub(subID)
@@ -471,11 +474,11 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 <!-- beginning of collapsible sidebar -->
 <div ng-controller="tiles">
 <div class="container" data-role="page" id="breadcollapse" style="margin-left:0px;padding-left: 0px;">
-  <div class="jumbotron" style="position:relative;width:300px;padding-left:20px;padding-right:20px;">
+  <div class="jumbotron" id="subcat">
 
     <h3 style="text-align: center;"> Main Categories </h3> 
     <br>
-    <span data-toggle="collapse" data-target="#bread" onclick="showimages('bread')"><i class="fa" ng-class="{'fa-plus-square':!colbread,'fa-minus-square':colbread}" style="float:left;margin-right:5px;"></i><h4>Bread Dairy and Eggs</h4></span>
+    <span data-toggle="collapse" data-target="#bread" onclick="showimages('bread')"><i class="fa" ng-class="{'fa-plus-square':!colbread,'fa-minus-square':colbread}" style="float:left;margin-right:5px;"></i><h4>Bread Dairy and Eggs</h4>
       <!--span data-toggle="collapse" data-target="#bde" > </span--> 
     <div id="bread" class="collapse">
       
@@ -486,6 +489,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
         
       </ul>
     </div>
+    </span>
   
     <span data-toggle="collapse" data-target="#beverage" onclick="showimages('beverage')"><i class="fa" ng-class="{'fa-plus-square':!colbev,'fa-minus-square':colbev}" style="float:left;margin-right:5px;"></i><h4>Beverages</h4>
      
@@ -497,14 +501,15 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </ul>
     </div>
     </span>
-    <span data-toggle="collapse" data-target="#branded" onclick="showimages('branded')"><i class="fa" ng-class="{'fa-plus-square':!colbrand,'fa-minus-square':colbrand}" style="float:left;margin-right:5px;"></i><h4>Branded Foods</h4></span>
+    <span data-toggle="collapse" data-target="#branded" onclick="showimages('branded')"><i class="fa" ng-class="{'fa-plus-square':!colbrand,'fa-minus-square':colbrand}" style="float:left;margin-right:5px;"></i><h4>Branded Foods</h4>
       
       <div id="branded" class="collapse" >
       <ul>
         <a href="items.html" onclick="sub(1)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Biscuits</li></span></a>
         </ul>
     </div>
-    <span data-toggle="collapse" data-target="#grocery" onclick="showimages('grocery')"><i class="fa " ng-class="{'fa-plus-square':!colgrocery,'fa-minus-square':colgrocery}" style="float:left;margin-right:5px;"></i><h4>Grocery and Staples</h4></span>
+    </span>
+    <span data-toggle="collapse" data-target="#grocery" onclick="showimages('grocery')"><i class="fa " ng-class="{'fa-plus-square':!colgrocery,'fa-minus-square':colgrocery}" style="float:left;margin-right:5px;"></i><h4>Grocery and Staples</h4>
       
       <div id="grocery" class="collapse" >
       <ul>
@@ -512,7 +517,8 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
         <a href="items.html" onclick="sub(2)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Dals and Pulses</li></span></a>
       </ul>
     </div>
-    <span data-toggle="collapse" data-target="#household" onclick="showimages('household')"><i class="fa" ng-class="{'fa-plus-square':!colhousehold,'fa-minus-square':colhousehold}" style="float:left;margin-right:5px;"></i><h4>Household</h4> </span>
+    </span>
+    <span data-toggle="collapse" data-target="#household" onclick="showimages('household')"><i class="fa" ng-class="{'fa-plus-square':!colhousehold,'fa-minus-square':colhousehold}" style="float:left;margin-right:5px;"></i><h4>Household</h4> 
       
       <div id="household" class="collapse" >
       <ul>
@@ -521,7 +527,8 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
         <a href="items.html" onclick="sub(3)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Plastic</li></span></a>
       </ul>
     </div>
-    <span data-toggle="collapse" data-target="#gourmet" onclick="showimages('gourmet')"><i class="fa" ng-class="{'fa-plus-square':!colgour,'fa-minus-square':colgour}" style="float:left;margin-right:5px;"></i><h4>Imported and Gourmet</h4></span>
+    </span>
+    <span data-toggle="collapse" data-target="#gourmet" onclick="showimages('gourmet')"><i class="fa" ng-class="{'fa-plus-square':!colgour,'fa-minus-square':colgour}" style="float:left;margin-right:5px;"></i><h4>Imported and Gourmet</h4>
      
       <div id="gourmet" class="collapse" >
       <ul>
@@ -530,7 +537,8 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
         <a href="items.html" onclick="sub(3)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Chocolates</li></span></a>
       </ul>
     </div>
-    <span data-toggle="collapse" data-target="#personal" onclick="showimages('personal')"><i class="fa" ng-class="{'fa-plus-square':!colpc,'fa-minus-square':colpc}" style="float:left;margin-right:5px;"></i><h4>Personal Care</h4></span>
+    </span>
+    <span data-toggle="collapse" data-target="#personal" onclick="showimages('personal')"><i class="fa" ng-class="{'fa-plus-square':!colpc,'fa-minus-square':colpc}" style="float:left;margin-right:5px;"></i><h4>Personal Care</h4>
       
       <div id="personal" class="collapse" >
       <ul>
@@ -538,6 +546,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
         <a href="items.html" onclick="sub(2)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Deos and Perfumes</li></span></a>
       </ul>
     </div>
+    </span>
   </div>
 </div>
 
@@ -715,8 +724,8 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </table>
 
 </div>
-<div class="container-fluid" style="position:absolute;right:0px;width:100%;margin-top:40px;">
-  <div class="Mobile-App" style="background: gainsboro;">
+<div class="container-fluid" style="position:absolute;right:0px;width:100%;margin-top:40px;" >
+  <div class="Mobile-App" id="bottom">
   <h3 id="playstore">Finish Grocery Shopping on the Go!<br>
   Download the TheDreamStop Mobile App Now!</h3>
   <br>
