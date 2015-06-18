@@ -28,7 +28,7 @@ function showimages(cat)
      
      for(s in a)
      {//console.log(a[s]);
-      if(a[s].localeCompare(cat)==0){$("#"+a[s]+"img").show();sessionStorage.category=cat;if($("#"+a[s]).attr("class").localeCompare("collapse in")==0)$("#"+a[s]+"img").hide();}
+      if(a[s].localeCompare(cat)==0){$("#"+a[s]+"img").show();sessionStorage.category=parseInt(s)+1;if($("#"+a[s]).attr("class").localeCompare("collapse in")==0)$("#"+a[s]+"img").hide();}
       else 
       {
         $("#"+a[s]+"img").hide();
@@ -53,16 +53,28 @@ $(document).ready(function()
       console.log('here');
   }
   $("#locsub").click(displayVals);
+  //displayVals();
+  /*var bread=sessionStorage.getItem('bread');
+  var bev=sessionStorage.getItem('bev');
+  var brand=sessionStorage.getItem('brand');
+  var grocery=sessionStorage.getItem('Grocery');
+  var household=sessionStorage.getItem('household');
+  var gourmet=sessionStorage.getItem('gour');
+  var personalcare=sessionStorage.getItem('pc');
+  //console.log(bread,bev,bread.localeCompare('true'),bev.localeCompare('true'));*/
+
+  //if (bev===true) {console.log('no problem with if ;')};
   
   var category=sessionStorage.getItem("category");
   if(category==null)
     window.location.href="index.html";
   else
   {
-    document.getElementById("category").innerHTML=category;
-    console.log(category);
-    showimages(category)
-    $("#"+category).toggleClass("in");
+    //$("#"+category+"img").show();
+    var a=["personal","branded","grocery","beverage","bread","gourmet","household"];
+    document.getElementById("category").innerHTML=sessionStorage.catname;
+    showimages(a[parseInt(category)-1]);
+    $("#"+a[parseInt(category)-1]).toggleClass("in");
   }
   
   
@@ -117,8 +129,8 @@ $(document).ready(function()
   </style>
   </head>
   <body> 
-    <div style="position:absolute;top:120px;left:350px;">
-      <span> <a href="index.html">Home&nbsp;</a><i class="fa fa-hand-o-right"></i>&nbsp;<a href="subcategory1.html" id="category"></a></span>
+<div style="position:absolute;top:120px;left:350px;">
+      <span> <a href="index.html">Home&nbsp;</a><i class="fa fa-arrow-right"></i>&nbsp;<a href="subcategory1.html" id="category"></a></span>
 
     </div>
     <div class="loader"></div>
@@ -132,7 +144,7 @@ $(document).ready(function()
  <i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()" ></i>
   </div>
           <div class="navbar-header" >
-            <a class="navbar-brand" href="index.html" style="padding-left:80px;">The Dream Stop</a> 
+            <a class="navbar-brand" href="index.html" style="padding-left:80px;">The DreamStop</a> 
           </div>
           <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
             <li style="width:450px;">
@@ -140,10 +152,10 @@ $(document).ready(function()
                 <input type="text" ng-enter="searchlistent()" class="form-control" ng-model="searchdata" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
                 <span >
                   <div id="searchdiv" class="dropdown">
-                    <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()"style="background: #D4CCD8;height:34px;width:85px;"><span class="glyphicon glyphicon-search"></span> Submit</button>
-                    <ul class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
+                    <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()" id="subsearch" ><span class="glyphicon glyphicon-search"></span> Submit</button>
+                    <ul id="results" class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
                       <li ng-repeat="x in search" ng-click="open()">
-                        <table style="width: 100%;background-color: white; margin-top: 10px;" id="t02">
+                        <table id="t02">
                           <tr style="height: 10%;width:100%;" id="searchlist">
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
                             <input type="number" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
@@ -428,7 +440,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
             <ul class="sidebar-nav">
               <br>
                 <li class="sidebar-brand" >
-                    <h3 style="color: white;padding-top: 10px;">Welcome {{username}}</h3>
+                    <h3 style="color: white;padding-top: 10px;">The DreamStop</h3>
                 </li>
                   <hr> 
                   <br>              
@@ -468,9 +480,9 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
     <div id="bread" class="collapse">
       
       <ul>
-        <a href="items.html" onclick="sub('Bakery Products')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp; Bakery Products</li></span></a>
-        <a href="items.html" onclick="sub('Eggs')"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp;Eggs</li></span></a>
-        <a href="items.html" onclick="sub('Dairy Products')"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp;Dairy</li></span></a>
+        <a href="items.html" onclick="sub(1)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp; Bakery Products</li></span></a>
+        <a href="items.html" onclick="sub(1)"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp;Eggs</li></span></a>
+        <a href="items.html" onclick="sub(2)"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp;Dairy</li></span></a>
         
       </ul>
     </div>
@@ -479,8 +491,8 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
      
       <div id="beverage" class="collapse">
       <ul>
-        <a href="items.html" onclick="sub('Energy Drinks')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Energy Drinks</li></span></a>
-        <a href="items.html" onclick="sub('Soft Drinks')"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp; Soft Drinks</li></span></a>
+        <a href="items.html" onclick="sub(1)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;EnergyDrinks</li></span></a>
+        <a href="items.html" onclick="sub(2)"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp; Soft Drinks</li></span></a>
         
       </ul>
     </div>
@@ -489,41 +501,41 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       
       <div id="branded" class="collapse" >
       <ul>
-        <a href="items.html" onclick="sub('Biscuits')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Biscuits</li></span></a>
+        <a href="items.html" onclick="sub(1)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Biscuits</li></span></a>
         </ul>
     </div>
     <span data-toggle="collapse" data-target="#grocery" onclick="showimages('grocery')"><i class="fa " ng-class="{'fa-plus-square':!colgrocery,'fa-minus-square':colgrocery}" style="float:left;margin-right:5px;"></i><h4>Grocery and Staples</h4></span>
       
       <div id="grocery" class="collapse" >
       <ul>
-        <a href="items.html" onclick="sub('Oils')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Oil</li></span></a>
-        <a href="items.html" onclick="sub('Dals and Pulses')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Dals and Pulses</li></span></a>
+        <a href="items.html" onclick="sub(1)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Oil</li></span></a>
+        <a href="items.html" onclick="sub(2)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Dals and Pulses</li></span></a>
       </ul>
     </div>
     <span data-toggle="collapse" data-target="#household" onclick="showimages('household')"><i class="fa" ng-class="{'fa-plus-square':!colhousehold,'fa-minus-square':colhousehold}" style="float:left;margin-right:5px;"></i><h4>Household</h4> </span>
       
       <div id="household" class="collapse" >
       <ul>
-        <a href="items.html" onclick="sub('Kitchen and Dining')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Kitchen and Dining</li></span></a>
-        <a href="items.html" onclick="sub('Detergents')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Detergents</li></span></a>
-        <a href="items.html" onclick="sub('Plastic')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Plastic</li></span></a>
+        <a href="items.html" onclick="sub(1)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Kitchen and Dining</li></span></a>
+        <a href="items.html" onclick="sub(2)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Detergents</li></span></a>
+        <a href="items.html" onclick="sub(3)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Plastic</li></span></a>
       </ul>
     </div>
     <span data-toggle="collapse" data-target="#gourmet" onclick="showimages('gourmet')"><i class="fa" ng-class="{'fa-plus-square':!colgour,'fa-minus-square':colgour}" style="float:left;margin-right:5px;"></i><h4>Imported and Gourmet</h4></span>
      
       <div id="gourmet" class="collapse" >
       <ul>
-        <a href="items.html" onclick="sub('Imported Snacks')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Snacks</li></span></a>
-        <a href="items.html" onclick="sub('Imported Beverages')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Beverages</li></span></a>
-        <a href="items.html" onclick="sub('Chocolates')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Chocolates</li></span></a>
+        <a href="items.html" onclick="sub(1)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Snacks</li></span></a>
+        <a href="items.html" onclick="sub(2)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Beverages</li></span></a>
+        <a href="items.html" onclick="sub(3)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Chocolates</li></span></a>
       </ul>
     </div>
     <span data-toggle="collapse" data-target="#personal" onclick="showimages('personal')"><i class="fa" ng-class="{'fa-plus-square':!colpc,'fa-minus-square':colpc}" style="float:left;margin-right:5px;"></i><h4>Personal Care</h4></span>
       
       <div id="personal" class="collapse" >
       <ul>
-        <a href="items.html" onclick="sub('Baby Products')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Baby Products</li></span></a>
-        <a href="items.html" onclick="sub('Deos and Perfumes')"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Deos and Perfumes</li></span></a>
+        <a href="items.html" onclick="sub(1)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Baby Products</li></span></a>
+        <a href="items.html" onclick="sub(2)"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Deos and Perfumes</li></span></a>
       </ul>
     </div>
   </div>
@@ -531,7 +543,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 
 
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="breadimg">
-  <a href="items.html" onclick="sub('Bakery Products')"><div class="col-sm-6 col-md-4" >
+  <a href="items.html" onclick="sub(1)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/bakery.jpg" alt="Bread" class="img-responsive">
       <div class="caption" >
@@ -541,7 +553,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   </div>
 </a>
 
- <a href="items.html" onclick="sub('Dairy Products')"><div class="col-sm-6 col-md-4" >
+ <a href="items.html" onclick="sub(2)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail" style="margin-right:30px;">
     <img src="images/Subcategory/dairy-products.jpg" alt="Dairy Products" class="img-responsive">
       <div class="caption" >
@@ -549,7 +561,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
     </div>
   </div> </a>
-   <a href="items.html" onclick="sub('Eggs')"><div class="col-sm-6 col-md-4" >
+   <a href="items.html" onclick="sub(3)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/eggs.jpg" alt="Eggs" class="img-responsive">
       <div class="caption" >
@@ -560,7 +572,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div>
   
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="beverageimg">
- <a href="items.html" onclick="sub('Energy Drinks')"><div class="col-sm-6 col-md-4" >
+ <a href="items.html" onclick="sub(1)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/energy-drinks.PNG" alt="Energy Drinks" class="img-responsive">
       <div class="caption" >
@@ -568,7 +580,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
     </div>
   </div></a>
- <a href="items.html" onclick="sub('Soft Drinks')"><div class="col-sm-6 col-md-4" >
+ <a href="items.html" onclick="sub(2)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/soft-drinks.PNG" alt="Soft Drinks" class="img-responsive">
       <div class="caption" >
@@ -579,7 +591,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div></a>
 
  <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="brandedimg">
-<a href="items.html" onclick="sub('Biscuits')"><div class="col-sm-6 col-md-4" >
+<a href="items.html" onclick="sub(1)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/Biscuits.PNG" alt="Biscuits" class="img-responsive">
       <div class="caption" >
@@ -590,7 +602,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div>
 
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="groceryimg">
-<a href="items.html" onclick="sub('Oils')"><div class="col-sm-6 col-md-4" >
+<a href="items.html" onclick="sub(1)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/oils.PNG" alt="Oils" class="img-responsive">
       <div class="caption" >
@@ -598,7 +610,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
     </div>
   </div></a>
-<a href="items.html" onclick="sub('Dals and Pulses')"><div class="col-sm-6 col-md-4" >
+<a href="items.html" onclick="sub(2)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/pulses.PNG" alt="pulses" class="img-responsive">
       <div class="caption" >
@@ -609,7 +621,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div>
 
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="householdimg"> 
-<a href="items.html" onclick="sub('Cutlery')"><div class="col-sm-6 col-md-4" >
+<a href="items.html" onclick="sub(1)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/kitchen.PNG" alt="Kitchen Dining" class="img-responsive">
       <div class="caption" >
@@ -617,7 +629,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
     </div>
   </div></a>
-<a href="items.html" onclick="sub('Detergents')"><div class="col-sm-6 col-md-4" >
+<a href="items.html" onclick="sub(2)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/detergents.PNG" alt="Detergents" class="img-responsive">
       <div class="caption" >
@@ -625,7 +637,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
     </div>
   </div></a>
-  <a href="items.html" onclick="sub('Plasticware')"><div class="col-sm-6 col-md-4" >
+  <a href="items.html" onclick="sub(3)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/plasticware.PNG" alt="Plasticware" class="img-responsive">
       <div class="caption" >
@@ -636,7 +648,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div>
 
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="gourmetimg">
-<a href="items.html" onclick="sub('Imported Snacks')"><div class="col-sm-6 col-md-4" >
+<a href="items.html" onclick="sub(1)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/imported-Snacks.PNG" alt="Imported Snacks" class="img-responsive">
       <div class="caption" >
@@ -644,7 +656,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
     </div>
   </div></a>
-<a href="items.html" onclick="sub('Imported Beverages')"><div class="col-sm-6 col-md-4" >
+<a href="items.html" onclick="sub(2)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/imported-beverages.PNG" alt="Imported Beverages" class="img-responsive">
       <div class="caption" >
@@ -652,7 +664,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
     </div>
   </div></a>
-  <a href="items.html" onclick="sub('Chocolates')"><div class="col-sm-6 col-md-4" >
+  <a href="items.html" onclick="sub(3)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/confectionery.PNG" alt="Chocolates" class="img-responsive">
       <div class="caption" >
@@ -663,7 +675,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div>
 
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="personalimg">
-<a href="items.html" onclick="sub('Baby Products')"><div class="col-sm-6 col-md-4" >
+<a href="items.html" onclick="sub(1)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/baby.PNG" alt="Baby Products" class="img-responsive">
       <div class="caption" >
@@ -671,7 +683,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
     </div>
   </div></a>
-<a href="items.html" onclick="sub('Deos and Perfumes')"><div class="col-sm-6 col-md-4" >
+<a href="items.html" onclick="sub(2)"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/deos.PNG" alt="Deos and Perfumes" class="img-responsive">
       <div class="caption" >
