@@ -344,11 +344,9 @@ a:hover, a:visited, a:link, a:active
 		top:17px;
 		left:7px;
 		/*z-index:1;*/
+		color:white;
 	}
-	#sidebar:hover
-	{
-		color:#000000;
-	}
+	
 
 	/* Here begins the animation for text in the side bar*/
 	
@@ -1008,7 +1006,7 @@ a:hover, a:visited, a:link, a:active
 	}
 	#facebook
 	{	
-		color:rgba(121,147,59,0.9);
+		color:#27003d;
 		right:280px;
 	}
 	#facebook:hover
@@ -1017,7 +1015,7 @@ a:hover, a:visited, a:link, a:active
 	}
 	#twitter
 	{	
-		color:rgba(121,147,59,0.9);
+		color:#27003d;
 		width:110px;
 		height:110px;
 		right:200px;

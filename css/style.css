@@ -222,7 +222,7 @@ background-size: cover;
 .navbar-inverse {
    
   border-bottom: none;
-   background: rgba(121,147,59,0.9);
+   background: rgb(39,0,61);
 }
 .navbar-inverse .navbar-toggle {
   border: 1px solid #000000;
@@ -232,10 +232,10 @@ background-size: cover;
   color: white;
 }
 .navbar-inverse .navbar-header .navbar-brand:hover {
-  color: black;
+  color: white;
 }
 .navbar-inverse .navbar-header:hover{
-  color:black;
+  color:white;
 }
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
    border-color: transparent;
@@ -249,6 +249,6 @@ color: white;
 
 }
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-color: black;
+color: white;
 
 }

@@ -401,7 +401,7 @@ app.controller("drawer",['$scope','$localstorage',function($scope,$localstorage)
 app.controller("navcart",function($scope)
   {
     $(window).scroll(function() {
-  var navbarColor = "121,147,59";
+  var navbarColor = "39,0,61";
 
   if($(window).scrollTop() ==0) $('#cartnav').css({"opacity": 0});
   else $('#cartnav').css({"opacity": 1});
@@ -434,7 +434,7 @@ app.controller("navcart",function($scope)
   $('#cartnav').css({"background": navBackColor});}
   else
   {
-    $('#cartnav').css({"background":"rgba(121,147,59,0.8)"});
+    $('#cartnav').css({"background":"rgb(39,0,61)"});
   }
   
   var shadowOpacity = navOpacity * 0.4;
@@ -1717,7 +1717,7 @@ $(window).scroll(function() {
   document.getElementById("wrapper").className="toggled";
 
   //console.log(document.getElementById("wrapper").className);
-  var navbarColor = "121,147,59";//color attr for rgba
+  var navbarColor = "39,0,61";//color attr for rgba
   var smallLogoHeight = 30;
   var bigLogoHeight = 90;
   var navbarHeight = $('.navbar-inverse').height(); 
@@ -1745,7 +1745,7 @@ $(window).scroll(function() {
   }
   else
   {
-    $('.navbar-inverse').css({"background":"rgba(121,147,59,0.8)"});
+    $('.navbar-inverse').css({"background":"rgb(39,0,61)"});
   }
   
   var shadowOpacity = navOpacity * 0.4;
