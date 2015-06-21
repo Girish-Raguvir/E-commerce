@@ -1,90 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Grocery Store</title>
+  <title>The DreamStop</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <!--link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <!--script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script-->
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
-<script src="js/thedreamstop.js"></script>
+  <script src="js/thedreamstop.js"></script>
 
   <link rel="stylesheet" type="text/css" href="css/frontpage.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/about.css">
   <link href="css/simple-sidebar.css" rel="stylesheet">
 
-
-<script type="text/javascript">
-$(document).ready(function()
-{
-  if(typeof(Storage)!=="undefined")
-{
-  $('#tile1').on('click',function()
-  {
-    sessionStorage.category=5;
-    sessionStorage.catname="Bread,Diary & Eggs";
-  });
-  $('#tile2').on('click',function()
-  {
-   sessionStorage.category=4;
-   sessionStorage.catname="Beverages";
-  });
-  $('#tile3').on('click',function()
-  {
-   sessionStorage.category=2;
-   sessionStorage.catname="Branded Foods";
-  });
-  $('#tile5').on('click',function()
-  {
-   sessionStorage.category=3;
-   sessionStorage.catname="Grocery & Staples";
-  });
-  $('#tile6').on('click',function()
-  {
-   sessionStorage.category=7;
-   sessionStorage.catname="HouseHold";
-  });
-  $('#tile7').on('click',function()
-  {
-    sessionStorage.category=6;
-    sessionStorage.catname="Imported and Gourmet";
-  });
-  $('#tile8').on('click',function()
-  {
-    sessionStorage.category=1;
-    sessionStorage.catname="Personal Care";
-  });
-}
-});
-
-</script>
-  
 </head>
+
 <body>
-  <div class="loader"></div>
- <div class="container-fluid" ng-app="thedreamstop">
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;" ng-controller="nav">
-      <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
+  <div class="loader"></div> <!-- page loading animation -->
+
+<div class="container-fluid" ng-app="thedreamstop"> <!-- beginning of ng-app-->
+
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height:100px;" ng-controller="nav">
+
+    <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
 
         
-        <div class="navbar-collapse collapse">
-          <div ng-controller="myCtrl" > 
- <i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()" ></i>
-  </div>
-          <div class="navbar-header" >
-            <a class="navbar-brand" href="index.html" style="padding-left:80px;">The DreamStop</a> 
-          </div>
-          <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
-            <li style="width:450px;">
-              <div class="input-group" style="width:450px;" ng-controller="search">
-                <input type="text" ng-enter="searchlistent()" class="form-control" ng-model="searchdata" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
+      <div class="navbar-collapse collapse">
+
+        <div ng-controller="myCtrl" > <!-- side menu bar-->
+          <i class="fa fa-lg fa-bars menu-button" id="sidebar" ng-click="onClick()" ></i>
+        </div>
+
+        <div class="navbar-header" > <!-- logo -->
+          <a class="navbar-brand" href="index.html" style="padding-left:80px;" title="Click this to go home!">The DreamStop</a> 
+        </div>
+
+        <!-- beginning of search box -->
+
+        <ul class="nav navbar-nav" style="width: 30%;margin-top:10px;margin-left: 40px;">
+          <li style="width:450px;">
+            <div class="input-group" style="width:450px;" ng-controller="search">
+              <input type="text" ng-enter="searchlistent()" class="form-control" ng-model="searchdata" placeholder="Search for a product, category or brand" style="width:280px;margin:0px;">
                 <span >
                   <div id="searchdiv" class="dropdown">
                     <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()" id="subsearch" ><span class="glyphicon glyphicon-search"></span> Submit</button>
@@ -110,90 +71,93 @@ $(document).ready(function()
                     </ul>
                   </div> 
                 </span>
-              </div>
-            </li>
-          </ul>
+
+            </div>
+          </li>
+        </ul>
+
+        <!-- end of displaying search results on entering queries -->
+
+        <!-- remaining navbar -->
+
       <div ng-controller="log_in_out">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a tabindex="0" data-toggle="popover" role="button" data-container="body" data-contentwrapper=".content" ><span id="bindElement"></span></a></li>
-        <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-        <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a tabindex="0" data-toggle="popover" role="button" data-container="body" data-contentwrapper=".content" ><span id="bindElement"></span></a></li>
+          <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+          <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
         
-        <li ng-if="loggedin()" id="notification_li" ng-controller="search">
-        <span id="notification_count" ng-bind="titems"></span>
-        <a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a>
-        </li>
-        <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
+          <li ng-if="loggedin()" id="notification_li" ng-controller="search">
+            <span id="notification_count" ng-bind="titems"></span>
+            <a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a>
+          </li>
+          <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
         
-      <!--/div>
-      <div ng-controller="nav"-->
-       <div class="content" style="display:none;">
-        <p align="center" >
-        <br>
-
-        Changing location will cause the page to be refreshed leading to loss of saved data.Do you want to proceed? <br><br>
-        <button type="button" class="btn btn-primary" id="continue" >Continue</button>
-        </p>
-        
-       </div>
-
-      </ul>
-    </div>
-        </div><!--/.nav-collapse -->
+          <div class="content" style="display:none;">
+           <p align="center"><br>
+             Changing location will cause the page to be refreshed leading to loss of saved data.Do you want to proceed? <br><br>
+             <button type="button" class="btn btn-primary" id="continue" >Continue</button>
+           </p>
+          </div>
+        </ul>
       </div>
-    </div>
-  
-  
 
-      <div class="modal fade" ng-controller="login" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+      <!-- end of navbar -->
+
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+  
+  <!-- beginning of login modal -->
+
+<div class="modal fade" ng-controller="login" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h3 class="modal-title" id="myModalLabel">Login<span ng-if="wuser" style="color:red;font-size:15px;margin-left:30px;vertical-align:middle;">&nbsp;&nbsp;Wrong username or password.Try again.</span></h3>
+      </div>
 
-      </div>
       <div class="modal-body">
-      <div class="container">
-      <form role="form" name="RegForm">
-      <div class="col-md-4">
-      <div class="form-group">
-      <label for="lemail">Email:</label>
-       <input type="email" class="form-control" name=" lemail" id="lemail"  required="" ng-model="user.email"/>
-       <div ng-show="RegForm.lemail.$dirty && RegForm.lemail.$invalid" style="color:red;font-weight:bold;">
-      <span ng-show="RegForm.lemail.$error.required">E-Mail is a required field</span>
-      <span ng-show="RegForm.lemail.$error.email" >This is not a valid email.</span>
-    </div>
-      </div>  
-      <div class="form-group">
-      <label for="lpwd">Password:</label>
-      <input type="password" class="form-control" id="lpwd" name="lpwd"  required="" ng-model="user.password"/>
-       <div ng-show="RegForm.lpwd.$dirty" style="color:red;font-weight:bold;">
-      <span ng-show="RegForm.lpwd.$error.required">Password is a required field</span>
-    </div>
-      </div> 
-      
-      </form>
+        <div class="container">
+          <form role="form" name="RegForm">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="lemail">Email:</label>
+                <input type="email" class="form-control" name=" lemail" id="lemail"  required="" ng-model="user.email"/>
+                <div ng-show="RegForm.lemail.$dirty && RegForm.lemail.$invalid" style="color:red;font-weight:bold;">
+                  <span ng-show="RegForm.lemail.$error.required">E-Mail is a required field</span>
+                  <span ng-show="RegForm.lemail.$error.email" >This is not a valid email.</span>
+                </div>
+              </div>  
+
+              <div class="form-group">
+                <label for="lpwd">Password:</label>
+                <input type="password" class="form-control" id="lpwd" name="lpwd"  required="" ng-model="user.password"/>
+                <div ng-show="RegForm.lpwd.$dirty" style="color:red;font-weight:bold;">
+                  <span ng-show="RegForm.lpwd.$error.required">Password is a required field</span>
+                </div>
+              </div> 
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-    </div>
+    
       
-      <div class="modal-footer">
-        <p align="center">
-        <button type="submit" class="btn btn-success"  style="width:40%;" ng-disabled="RegForm.lemail.$dirty && RegForm.lemail.$invalid ||  
-RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</button>
-        <br><br>
+    <div class="modal-footer">
+      <p align="center">
+        <button type="submit" class="btn btn-success"  style="width:40%;" ng-disabled="RegForm.lemail.$dirty && RegForm.lemail.$invalid ||RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</button> <br><br>
         <a href="#">Forgot password?</a>
       </p>
-        
-      </div>
     </div>
   </div>
-
 </div>
+</div>
+  <!-- end of login modal -->
+
+<!-- beginning of cart -->
+<!-- items listing -->
 <div class="modal fade" ng-controller="cart" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
- 
   <div class="modal-dialog" >
     <div class="modal-content">
       <div class="modal-header">
@@ -202,41 +166,36 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
       </div>
       <div class="modal-body" >
       <table style="width: 100%;" cellpadding="10" cellspacing="10" >
-<tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
-<tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
-    <th style="text-align: center;">Qty</th>
-    <th style="text-align: center;">Name</th>   
-    <th style="text-align: center;">Weight</th>
-    <th style="text-align: center;">Price</th>
-</tr>
+        <tr ng-if="tprice!=0"style="padding: 10px;" align="center"><h4><b>Total bill : Rs. {{tprice}}</b></h4></tr>
+        <tr ng-if="tprice!=0" style="padding: 10px;" align="center" style="text-align: center;background:white;float: none;">
+          <th style="text-align: center;">Qty</th>
+          <th style="text-align: center;">Name</th>   
+          <th style="text-align: center;">Weight</th>
+          <th style="text-align: center;">Price</th>
+        </tr>
 
-<tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
-<td> {{x.qty}} </td>
-<td> {{x.nam}} </td>
-<td> {{ x.q }} {{x.unit}}</td>
-<td> Rs.{{x.price}} </td>
+        <tr ng-if="tprice!=0" ng-repeat="x in addeditems" style="text-align: center;">
+          <td> {{x.qty}} </td>
+          <td> {{x.nam}} </td>
+          <td> {{ x.q }} {{x.unit}}</td>
+          <td> Rs.{{x.price}} </td>
+        </tr>
 
-</tr>
-<tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
-
-
-</table>
-    </div>
+        <tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
+      </table>
+      </div>
     
-      
       <div class="modal-footer">
         <p align="center">
-        <!--<button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>-->
-        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;">   Proceed <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
-        
-        <br><br>
-        
-      </p>
-        
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;">Proceed <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button> <br><br>
+        </p> 
       </div>
     </div>
   </div>
 </div>
+<!-- items listing over -->
+<!-- proceeding to delivery -->
+
 <div class="modal fade" id="detailsmodal" ng-controller="cart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -245,31 +204,29 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
         <h3 class="modal-title" id="myModalLabel">Delivery Details</h3>
       </div>
       <div class="modal-body">
-      <div class="form">
-      <div class="form-group">
-      <input type="text" class="form-control"placeholder="Name" ng-model="shipdata.name"></input>
-      <br>
-      <input type="tel" class="form-control"placeholder="Telephone Number" ng-model="shipdata.phno"></input>
-      <br>
-      <input type="text" class="form-control"placeholder="Address" ng-model="shipdata.address"></input>
-      <br>
+        <div class="form">
+          <div class="form-group">
+            <input type="text" class="form-control"placeholder="Name" ng-model="shipdata.name"></input><br>
+            <input type="tel" class="form-control"placeholder="Telephone Number" ng-model="shipdata.phno"></input><br>
+            <input type="text" class="form-control"placeholder="Address" ng-model="shipdata.address"></input><br>
+          </div>
+        </div>
       </div>
-      </div>
-    </div>
-    
-      
       <div class="modal-footer">
         <p align="center">
-         <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>   Back</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span></button>
-        <br><br>
-        
-      </p>
-        
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;">
+          <span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back
+          </button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span>
+          </button><br><br>
+        </p>
       </div>
     </div>
   </div>
 </div>
+<!-- ending delivery -->
+
+<!-- beginning pay -->
 <div class="modal fade" id="paymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -278,111 +235,77 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
         <h3 class="modal-title" id="myModalLabel">Payment</h3>
       </div>
       <div class="modal-body">
-      
-    </div>
+      </div>
     
-      
       <div class="modal-footer">
         <p align="center">
-         <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back</button>
-        
-        <br><br>
-        
-      </p>
-        
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back</button><br><br>
+        </p>
       </div>
     </div>
   </div>
 </div>
+<!-- ending pay -->
+
+<!-- ending cart  modal-->
+
+<!-- beginning location modal -->
+
 <div class="modal fade" ng-controller="nav" id="locmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="" data-keyboard="false" data-backdrop="static" ng-if="!loggedin()">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <!--button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button-->
         <h3 class="modal-title" id="myModalLabel">Location</h3>
       </div>
       <div class="modal-body">
-      <div class="container">
-      <form role="form">
-      <div class="col-md-4">
-      <div class="form-group">
-      <label for="lemail">City:</label>
-      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;" id="City" >
-          <option ng-repeat="x in cities">{{x}}</option>
-      </select> 
-      </div>  
-      <div class="form-group" id="area1">
-      <label>Area:</label>
-      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="a">
-           <option ng-repeat="x in areas[0]">{{x}}</option>
-      </select>
-      </div> 
-      <div class="form-group" id="area2">
-      <label >Area:</label>
-      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="b">
-          <option ng-repeat="x in areas[1]">{{x}}</option>
-      </select>
-      </div> 
-      <div class="form-group" id="area3">
-      <label>Area:</label>
-      <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="c">
+        <div class="container">
+          <form role="form">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="lemail">City:</label>
+                <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;" id="City" >
+                  <option ng-repeat="x in cities">{{x}}</option>
+                </select> 
+              </div>  
+            <div class="form-group" id="area1">
+              <label>Area:</label>
+              <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="a">
+                <option ng-repeat="x in areas[0]">{{x}}</option>
+              </select>
+            </div> 
+          <div class="form-group" id="area2">
+           <label >Area:</label>
+           <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="b">
+            <option ng-repeat="x in areas[1]">{{x}}</option>
+           </select>
+          </div> 
+
+          <div class="form-group" id="area3">
+          <label>Area:</label>
+          <select class="form-control" style="vertical-align: middle;padding-top: 5px;margin-top: 8px;margin-right: 30px;"  id="c">
           <option ng-repeat="x in areas[2]">{{x}}</option>
-        </select> 
-      </div> 
-      </form>
+          </select> 
+          </div> 
+        </form>
       </div>
     </div>
-    </div>
-      <div class="modal-footer">
-        <p align="center">
-        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;" id="locsub">Submit</button>
-        
+  </div>
+    <div class="modal-footer">
+      <p align="center">
+      <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;" id="locsub">Submit</button>
       </p>
-        
-      </div>
     </div>
   </div>
 </div>
-<!-- <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Choose Location</h3>
-      </div>
-      <div class="modal-body">
-      <iframe
-    width="100%"
-    height="100%"
-    frameborder="0" style="border:0;padding: 10px;"
-    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwpmNVR7SyjIzeaY8xij4Gq92qo_VpS94
-      &q=Butchart+Gardens+Victoria+BC
-      &attribution_source=Google+Maps+Embed+API
-      &attribution_web_url=http://www.butchartgardens.com/
-      &attribution_ios_deep_link_id=comgooglemaps://?daddr=Butchart+Gardens+Victoria+BC">
-  </iframe>
-    </div>
-    
-      
-      <div class="modal-footer">
-        <p align="center">
-        <button type="button" class="btn btn-success" data-dismiss="modal" style="width:40%;">Submit</button>
-        <br><br>
-        
-      </p>
-        
-      </div>
-    </div>
-  </div>
-</div> -->
-  
+</div>
+
+<!-- ending location modal --> 
+
+<!-- sidebar content -->
   <table style="height:100%;width:100%;" >
     <tr>
      <td> 
- <!-- <div class="col-md-2" style="height:100%;width:18%;padding:5px;">
- <a href="#"><img src="images/Vertical.jpg"  class="img-responsive" style="height: 90%;
-    width: 120%;padding-top: 161px;"></a>
-</div> -->
+ 
    <div id="wrapper" style="padding-top: 100px;padding-left:0px;">
 
         <!-- Sidebar -->
@@ -402,22 +325,21 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
                     <a style="color: white;" ng-click="account()"><span class="glyphicon glyphicon-user" style="color: white;"></span>&nbsp;&nbsp;My Account</a>
                 </li>
                 
-                <!-- <li style="background: rgba(255,255,255,0.2);color:white;">
-                    <a href="Account.html" ><i class="fa fa-inr" style="color: white;"></i>&nbsp;&nbsp;Wallet</a>
-                </li>
-                
-                <li >
-                    <a href="#" style="color: white;"><i class="fa fa-question-circle" id="faq-fa" style="color: white;"></i>&nbsp;&nbsp;Help</a>
-                </li> -->
-                
                 <li style="background: rgba(255,255,255,0.2);color:white;">
-                    <a href="About.html"><i class="fa fa-question-circle" id="faq-fa" style="color: white;"></i>&nbsp;&nbsp;About Us</a>
+                    <a href="About.html"><span class="glyphicon glyphicon-info-sign" style="color:white"></span>&nbsp;&nbsp;About Us</a>
                 </li>
                
+               <li >
+                    <a style="color: white;" href="FAQ.html"><span class="glyphicon glyphicon-question-sign" style="color: white;"></span>&nbsp;&nbsp;FAQ</a>
+                </li>
+
             </ul>
         </div> 
+        <!-- ending of sidebar -->
   </div>
-<!-- </div> -->
+</td>
+</tr>
+</table>
 
   <div class="col-md-12" align="center" ng-controller="tiles" style="width: 82%;margin-left: 10%;padding-top: 70px;padding-left:0px;">
   <div id="page-content-wrapper">
@@ -481,20 +403,7 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
 </div>
 <br>
 <div id="container" style="height:600px;">
-<!--div id="overlay" ng-hide="!disp" ng-animate="fade">
-  <button type="button" id="back" class="btn btn-success" ng-click="hide()"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> &nbsp;&nbsp;Back</button>
-  <br><br>
-  <
 
-    <a href="Items.html"><div class="col-sm-2 col-xs-4 col-md-3" ng-repeat="x in subc" for="{{x.id}}" style="margin-top: 5px;height:80%;">
-      <div id="tile11" class="tile" style="padding-top:55%;">
-        
-         <h2 style="color:white;">{{x.name}}</h2>
-         
-      </div>
-  </div></a>
-
-</div-->
 <div id="base">
 <div class="row " ng-if="check" style="margin-left: 5px;">
     <a href="subcategory1.html"><div class="col-sm-2 col-xs-4 col-md-3">
@@ -653,34 +562,26 @@ RegForm.lpwd.$dirty && RegForm.lpwd.$invalid" ng-click="userlogin()">Login</butt
   </td>
   </tr>  
    
-
+<!-- beginning of bottom part -->
 
 <tr>
   <td>
   <div class="container-fluid" style="padding-right: 0px;padding-left: 0px;margin-top: 10px;" >
-  
-  <!-- <p id="pay-options"> Payment Options </p>
-  <p id="COD"> Cash On Delivery </p> -->
-  <!-- <span id="images/sep1"></span>
-  <img src="visa" alt="Payment Mode: Visa" id="visa"> -->
-  <div class="Mobile-App" id="bottom">
-  <h3 id="playstore">Finish Grocery Shopping on the Go!<br>
-  Download the TheDreamStop Mobile App Now!</h3>
-  <br>
-  <a href="#"><img src="images/gplay.jpg" alt="Google Play Store" id="google"></a>
- <!--  <a href="#"><img src="images/Apple-App-store-icon.png" alt="Apple App Store" id="iStore"></a> -->
-  <h3 id="follow"> Follow us on </h3>
-  <figure class="member-photo"><a href="#"><i class="fa fa-facebook-square fa-4x" id="facebook"></i></figure>
-   <figure class="member-photo"><a href="#"><i class="fa fa-twitter-square fa-4x" id="twitter"></i></figure>
-  
-  
-  
-  </div>
-
+    <div class="Mobile-App" id="bottom">
+      <h3 id="playstore">Finish Grocery Shopping on the Go!<br>
+      Download the TheDreamStop Mobile App Now!</h3><br>
+      <a href="#"><img src="images/gplay.jpg" alt="Google Play Store" id="google"></a>
+      <h3 id="follow"> Follow us on </h3>
+      <figure class="member-photo"><a href="#"><i class="fa fa-facebook-square fa-4x" id="facebook"></i></figure>
+      <figure class="member-photo"><a href="#"><i class="fa fa-twitter-square fa-4x" id="twitter"></i></figure>
+    </div>
   </div>   
-</td>
+  </td>
 </tr>
 </table>
+
+<!-- end of bottom part -->
+
 </div>
   </div> <!-- ending the my app-->
   <script src="js/thedreamstop.js"></script>

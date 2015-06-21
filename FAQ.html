@@ -3,27 +3,25 @@
 <head>
   <title>The DreamStop</title>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js"></script>
-
-   <script src="js/thedreamstop.js"></script>
-<script type="text/javascript">
-$(window).load(function() {
-  $(".loader").fadeOut("slow");
-})
-</script>
-
-   <link rel="stylesheet" type="text/css" href="css/frontpage.css">
+  
+  <script src="js/thedreamstop.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/frontpage.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/about.css">
   <link href="css/simple-sidebar.css" rel="stylesheet">
-  <style type="text/css">
-.loader {
+  
+<style type="text/css">
+  .loader {
   position: fixed;
   left: 0px;
   top: 0px;
@@ -31,13 +29,13 @@ $(window).load(function() {
   height: 100%;
   z-index: 9999;
   background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
-}
+} 
 </style>
-
- 
 </head>
+
 <body>
-      <div class="loader"></div> <!-- page loading animation -->
+
+<div class="loader"></div> <!-- page loading animation -->
 
 <div class="container-fluid" ng-app="thedreamstop"> <!-- beginning of ng-app-->
 
@@ -158,7 +156,7 @@ $(window).load(function() {
           </form>
         </div>
       </div>
-    </div>
+    
       
     <div class="modal-footer">
       <p align="center">
@@ -168,7 +166,7 @@ $(window).load(function() {
     </div>
   </div>
 </div>
-
+</div>
   <!-- end of login modal -->
 
 <!-- beginning of cart -->
@@ -357,106 +355,53 @@ $(window).load(function() {
 </tr>
 </table>
 
+  <div style="margin-top:20px" align="center">
+    <h1>FAQ Page</h1>
+  </div>
 
-  <div id="page-content-wrapper">
-  <section id="section-about" class="section appear clearfix" style="  padding-top: 20px;margin-left: 35px;">
-    <div class="container">
+  <div class="container" id="faq">
+    <div class="jumbotron" style="background-color:rgba(255,255,255,0.8)" style="padding-left:20px;padding-right:20px">
+      <div id="about_site" >
+        <h3 style="margin-bottom:30px;">About The DreamStop</h3>
+       <span data-toggle="collapse" data-target="#about_site_q1"><h4>1.&nbsp;What is The DreamStop?</h4></span>
+        <div id="about_site_q1" class="collapse" style="margin-right:550px">Thedreamstop is a mobile grocery application that makes your shopping experience easier and hassle-free were we create the best online buying experience for you by brining you the best offers and products from trusted local stores. We know how big a pain grocery shopping can be, and how we all dislike going to the store now the products you orders are delivered in less than 6 hours, you pay only when you are satisfied with the product ordered and a no question asked return policy. Isn’t it great!!!!</div><br>
 
-        <div class="row mar-bot40">
-          <div class="col-md-offset-3 col-md-6">
-            <div class="section-header">
-              <h2 class="section-heading animated" data-animation="bounceInUp">Our Team</h2>
-              <p>Students of IIT Madras.</p>
-            </div>
-          </div>
-        </div>
+        <span data-toggle="collapse" data-target="#about_site_q2"><h4>2.&nbsp;What are our service areas?</h4></span>
+        <div id="about_site_q2" class="collapse" style="margin-right:550px">We serve in Nagpur & Chennai. Follow us on Facebook & Twitter to be updated about our services.</div><br>
+      </div>
+      
+      <div id="order_payment_delivery">
+        <h3 style="margin-bottom:30px;"> Order,Payment and Delivery</h3>
+        <span data-toggle="collapse" data-target="#order_payment_delivery_q1"><h4>1.&nbsp;What is the minimum order value?</h4></span>
+        <div id="order_payment_delivery_q1" class="collapse">There is no minimum order value.</div><br>
 
-          <div class="row align-center mar-bot40">
-            <div class="col-md-3">
-              <div class="team-member">
-                <figure class="member-photo"><img src="images/fb.jpg" alt="" /></figure>
-                <div class="team-detail">
-                  <h4>Rohit</h4>
-                  <span>Founder</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="team-member">
-                <figure class="member-photo"><img src="images/fb.jpg" alt="" /></figure>
-                <div class="team-detail">
-                  <h4>Anurag</h4>
-                  <span>CTO</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="team-member">
-                <figure class="member-photo"><img src="images/Team/Girish.jpg" alt="" /></figure>
-                <div class="team-detail">
-                  <h4>Girish Raguvir J</h4>
-                  <span>Web Design and Development</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="team-member">
-                <figure class="member-photo"><img src="images/Team/Anirudh.jpg" alt="" /></figure>
-                <div class="team-detail">
-                <h4>Anirudh R</h4>
-                  <span>Web Design and Development</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <span data-toggle="collapse" data-target="#order_payment_delivery_q2"><h4>2.&nbsp;Can I change the delivery address of my order?</h4></span>
+        <div id="order_payment_delivery_q2" class="collapse" style="margin-right:550px">You cannot change the delivery address once the order is placed. You can cancel the previous order and place a new one.</div><br>
 
-          <div class="row align-center mar-bot40">
-            <div class="col-md-3">
-              <div class="team-member">
-                <figure class="member-photo"><img src="images/Team/Adhityaa.jpg" alt="" /></figure>
-                <div class="team-detail">
-                  <h4>Adhityaa Chandrasekar</h4>
-                  <span>Web Development</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="team-member">
-                <figure class="member-photo"><img src="images/fb.jpg" alt="" /></figure>
-                <div class="team-detail">
-                <h4>Arun</h4>
-                  <span>Web Development</span>
-                </div>
-              </div>
-            </div>
-            
-            
-            <div class="col-md-3">
-              <div class="team-member">
-                <figure class="member-photo"><img src="images/Team/SK.jpg" alt="" /></figure>
-                <div class="team-detail">
-                  <h4>Sri Krishna</h4>
-                  <span>App Development</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="team-member">
-                <figure class="member-photo"><img src="images/Team/Sugan.jpg" alt="" /></figure>
-                <div class="team-detail">
-                  <h4>Sugan Prabu</h4>
-                  <span>App Development</span>
-                </div>
-              </div>
-            </div>
-          </div>  
-        </div>
-      </section>
+       <span data-toggle="collapse" data-target="#order_payment_delivery_q3"><h4>3.&nbsp;How should the payment be done?</h4></span>
+        <div id="order_payment_delivery_q3" class="collapse" style="margin-right:550px">Right now we only accept payments via 'Cash on Delivery', but soon we will make other methods available (Credit/Debit Card on Delivery, online payment).You can download our android application from the <a href="#" target="_blank"><b>Google Playstore</b></a></div><br>
+
+        <span data-toggle="collapse" data-target="#order_payment_delivery_q4"><h4>4.&nbsp;Are there any Delivery Costs?</h4></span>
+        <div id="order_payment_delivery_q4" class="collapse" style="margin-right:550px">We deem to provide great service, and good things always come with a cost (and they should). Only here in our case it’s quite minimal. Free delivery on orders above Rs 250. Rs 50 for orders 
+        below that.</div><br>
+
+        <span data-toggle="collapse" data-target="#order_payment_delivery_q5"><h4>5.&nbsp;How fast can you deliver?</h4></span>
+        <div id="order_payment_delivery_q5" class="collapse" style="margin-right:550px">Keeping the fast paced lives today and emergencies in mind, we wish to deliver your order ASAP. In our case the maximum time limit would be 2 hours, but we would want to reach your doorstep sooner.</div><br>
+
+        <span data-toggle="collapse" data-target="#order_payment_delivery_q6"><h4>6.&nbsp;What if I want to cancel my order?</h4></span>
+        <div id="order_payment_delivery_q6" class="collapse" style="margin-right:550px">You can cancel your order any time before the order is out for delivery.</div><br>
+
+        <span data-toggle="collapse" data-target="#order_payment_delivery_q7"><h4>7.&nbsp;I want to reschedule my order what should I do?</h4></span>
+        <div id="order_payment_delivery_q7" class="collapse" style="margin-right:550px">At the moment you cannot reschedule your order once it’s placed. You can cancel your existing order and place a new order with the required delivery time.</div><br>
+
+        <span data-toggle="collapse" data-target="#order_payment_delivery_q8"><h4>8.&nbsp;What if I have some complaint regarding my order?</h4></span>
+        <div id="order_payment_delivery_q8" class="collapse" style="margin-right:550px">You can contact us within 24 hrs from the time of order delivery, if you have any.</div><br>
+
+        <span data-toggle="collapse" data-target="#order_payment_delivery_q9"><h4>9.&nbsp;I had an issue with your service, who do I get in touch with?</h4></span>
+        <div id="order_payment_delivery_q9" class="collapse" style="margin-right:550px">We take pride not only in our service but also of the fact that we can make our customers happy and satisfied. We will revert back almost instantly and resolve the issue in the least possible time. </div><br>
+      </div>
     </div>
-  </td>
-</tr>  
-</table>
-</div>
+  </div>
 <!-- beginning of bottom part -->
 
 <tr>
@@ -476,7 +421,17 @@ $(window).load(function() {
 </table>
 
 <!-- end of bottom part -->
-</div> <!-- ending the my app-->
-  
+
+<div id="founder_video1" style="position:absolute;top:200px;right:200px;">
+  <h3>Founder Speak</h3>
+  <iframe src="http://www.youtube.com/embed/UF8uR6Z6KLc" width="400" height="350" frameborder="0"></iframe>
+</div>
+
+<div id="founder_video2" style="position:absolute;top:650px;right:200px">
+  <h3>CTO Speak</h3>
+  <iframe src="http://www.youtube.com/embed/jpOqMQABNRw" width="400" height="350" frameborder="0"></iframe>
+</div>
+
+</div> <!-- terminating ng-app="the dream stop" -->
 </body>
 </html>

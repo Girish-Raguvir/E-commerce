@@ -1031,4 +1031,16 @@ a:hover, a:visited, a:link, a:active
 		height:110px;
 		
 	}
-	
+	  #faq>.jumbotron>div:nth-child(n)>span
+{
+  
+  cursor:pointer;
+}
+  #founder_video1
+{
+  margin-bottom: 30px;
+}
+.bde,.beverages,.branded,.grocery,.household,.gour,.pc
+  {
+    cursor: pointer;
+  }

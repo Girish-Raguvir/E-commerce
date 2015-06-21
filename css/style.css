@@ -331,3 +331,21 @@ color: white;
 color: white;
 
 }
+a
+{
+  color: black;
+  cursor:pointer;
+}
+a:hover,a:active
+{
+  color:#27003d;
+  font-weight: bold;
+}
+.popover-title
+  {
+  text-align: center;
+  color:red;
+  }.fa
+  {
+    cursor:pointer;
+  }

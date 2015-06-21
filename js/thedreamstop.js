@@ -1771,24 +1771,49 @@ $(window).scroll(function() {
   
 });
 }]);
-/*app.controller("sub",function($scope)
+$(document).ready(function()
 {
-  $scope.colbread=false;
-  $scope.colbev=false;
-  $scope.colbrand=false;
-  $scope.colgrocery=false;
-  $scope.colhousehold=false;
-  $scope.colgour=false;
-  $scope.colpc=false;
-  $scope.visbread=function(){$scope.colbread=true;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
-  $scope.visbev=function(){console.log('here2');$scope.colbread=false;$scope.colbev=true;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
-  $scope.visbrand=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=true;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
-  $scope.visgrocery=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=true;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
-  $scope.vishousehold=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=true;$scope.colgour=false;$scope.colpc=false;}
-  $scope.visgour=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=true;$scope.colpc=false;}
-  $scope.vispc=function(){$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=true;}
+  if(typeof(Storage)!=="undefined")
+{
+  $('#tile1').on('click',function()
+  {
+    sessionStorage.category=5;
+    sessionStorage.catname="Bread,Diary & Eggs";
+  });
+  $('#tile2').on('click',function()
+  {
+   sessionStorage.category=4;
+   sessionStorage.catname="Beverages";
+  });
+  $('#tile3').on('click',function()
+  {
+   sessionStorage.category=2;
+   sessionStorage.catname="Branded Foods";
+  });
+  $('#tile5').on('click',function()
+  {
+   sessionStorage.category=3;
+   sessionStorage.catname="Grocery & Staples";
+  });
+  $('#tile6').on('click',function()
+  {
+   sessionStorage.category=7;
+   sessionStorage.catname="HouseHold";
+  });
+  $('#tile7').on('click',function()
+  {
+    sessionStorage.category=6;
+    sessionStorage.catname="Imported and Gourmet";
+  });
+  $('#tile8').on('click',function()
+  {
+    sessionStorage.category=1;
+    sessionStorage.catname="Personal Care";
+  });
+}
+});
+
+$(window).load(function() {
+  $(".loader").fadeOut("slow");
   
-console.log('here');
-
-
-});*/
+});
