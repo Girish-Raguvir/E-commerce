@@ -341,13 +341,13 @@
 </tr>
 </table>
 
-  <div class="col-md-12" align="center" ng-controller="tiles" style="width: 82%;margin-left: 10%;padding-top: 70px;padding-left:0px;">
+  <div class="col-md-12" align="center" ng-controller="tiles" style="width: 82%;height:75%;margin-left: 10%;padding-top: 70px;padding-left:0px;">
   <div id="page-content-wrapper">
     
-<div class="jumbotron" style="margin-top: -30px;height: 820px;" align="center" id="cat">
-<div class="row " ng-if="check" style="margin-left: 5px;height:200px;" >
-    <div class="col-sm-12 col-xs-8" style="height: 200px;">
-    <div id="tile10" class="tile" style="height: 200px;color:white;">
+<div class="jumbotron" style="margin-top: -30px;height:100%;" align="center" id="cat">
+<div class="row " ng-if="check" style="margin-left: 2%;" >
+    <div class="col-sm-12 col-xs-8" style="height: 50%px;">
+    <div id="tile10" class="tile" style="height: 100%;color:white;">
        
            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="">
             <ol class="carousel-indicators">
@@ -402,45 +402,44 @@
   </div>
 </div>
 <br>
-<div id="container" style="height:600px;">
 
-<div id="base">
-<div class="row " ng-if="check" style="margin-left: 5px;">
-    <a href="subcategory1.html"><div class="col-sm-2 col-xs-4 col-md-3">
+
+<div class="row " ng-if="check" style="margin-left: 2%;">
+   <div class="col-sm-2 col-xs-4 col-md-3">
       <div id="tile1" class="tile" >
         
          <div class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner" >
             <div class="item active">
-               <img src="images/Categories/BDE1.jpg" class="img-responsive" >
+                <a href="subcategory1.html"><img src="images/Categories/BDE1.jpg" class="img-responsive" ></a>
             </div>
             <div class="item">
-              <img src="images/Categories/BDE2.jpg" class="img-responsive" >
+               <a href="subcategory1.html"><img src="images/Categories/BDE2.jpg" class="img-responsive" ></a>
             </div>
           </div>
         </div>
          
       </div>
-  </div></a>
+  </div>
 
-  <a href="subcategory1.html#beveragecollapse"><div class="col-sm-2 col-xs-4 col-md-3" ng-click="visbev()">
+  <div class="col-sm-2 col-xs-4 col-md-3" ng-click="visbev()">
       <div id="tile2" class="tile">
         
          <div class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-               <img src="images/Categories/bev1.jpg" class="img-responsive" >
+               <a href="subcategory1.html#beveragecollapse"><img src="images/Categories/bev1.jpg" class="img-responsive" ></a>
             </div>
             <div class="item">
-               <img src="images/Categories/bev2.jpg" class="img-responsive" >
+               <a href="subcategory1.html#beveragecollapse"><img src="images/Categories/bev2.jpg" class="img-responsive" ></a>
             </div>
           </div>
         </div>
          
       </div>
-  </div></a>
+  </div>
   <div class="col-sm-2 col-xs-4 col-md-3" ng-click="visbrand()">
       <div id="tile3" class="tile">
         
@@ -479,7 +478,7 @@
   
 </div>
 <br>
-<div class="row " ng-if="check" style="margin-left: 5px;">
+<div class="row " ng-if="check" style="margin-left:2%;">
     <div class="col-sm-2 col-xs-4 col-md-3">
       <div id="tile5" class="tile" ng-click="visgrocery()">
         
@@ -549,24 +548,16 @@
       </div>
   </div>
   
-</div>
+
 <br>
-
-</div>
 </div>
 
 </div>
 </div>
-    
 
-  </td>
-  </tr>  
-   
+</div>
 <!-- beginning of bottom part -->
-
-<tr>
-  <td>
-  <div class="container-fluid" style="padding-right: 0px;padding-left: 0px;margin-top: 10px;" >
+  <div style="padding-right: 0px;padding-left: 0px;width:100%;position:absolute;top:260%;" >
     <div class="Mobile-App" id="bottom">
       <h3 id="playstore">Finish Grocery Shopping on the Go!<br>
       Download the TheDreamStop Mobile App Now!</h3><br>
@@ -576,17 +567,9 @@
       <figure class="member-photo"><a href="#"><i class="fa fa-twitter-square fa-4x" id="twitter"></i></figure>
     </div>
   </div>   
-  </td>
-</tr>
-</table>
+<!-- end of bottom part -->  
 
-<!-- end of bottom part -->
-
-</div>
-  </div> <!-- ending the my app-->
-  <script src="js/thedreamstop.js"></script>
-
-
- 
+</div> <!-- ending the my app-->
+<script src="js/thedreamstop.js"></script>
 </body>
 </html>
