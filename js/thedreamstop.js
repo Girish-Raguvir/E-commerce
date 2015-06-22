@@ -65,48 +65,55 @@ return {
 
 });
 
-//vendor login
-app.controller("vendorlogin",['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
+// //vendor login
+// app.controller("vendorlogin",['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
-$scope.vname="";$scope.vpass="";
-$scope.login=function()
-{
-  sessionStorage.vname=$scope.vname;
-  sessionStorage.vpass=$scope.vpass;
-  window.location.assign("./vendor.html");
-  
-  //console.log($scope.vname+$scope.vpass);
+// $scope.vname="";$scope.vpass="";
+// $scope.err=0;
+// $scope.login=function()
+// {
+//   if($scope.vname!="" && $scope.vpass!="")
+//   {
+//     sessionStorage.vname=$scope.vname;
+//     sessionStorage.vpass=$scope.vpass;
+//     window.location.assign("./vendor.html");
+//   }
+//   else
+//     $scope.err=1;
+//   //console.log($scope.vname+$scope.vpass);
+// }
 
-}
 
-
-}]);
+// }]);
 
 //vendor dashboard
 
-app.controller("vendororders",['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
+app.controller("vendor",['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 
-var pass=sessionStorage.vpass;
-var name=sessionStorage.vname;
-$scope.logout=function()
+
+
+$scope.vname="";$scope.vpass="";
+$scope.err=0;$scope.log=1;
+$scope.username=sessionStorage.vname;
+$scope.chk=function()
 {
-  sessionStorage.vpass=null;
-  sessionStorage.vname=null;
-  window.location.assign("./vendorindex.html");
+  if($scope.vname.length>0 || $scope.vpass.length>0){$scope.err=0;$scope.log=1;}
+  
 }
-$scope.username="";
-if(pass==null || name==null)
-  window.location.assign("./vendorindex.html");
-else
+$scope.login=function()
 {
+  if($scope.vname!="" && $scope.vpass!="")
+  {
+    sessionStorage.vname=$scope.vname;
+    //sessionStorage.vpass=$scope.vpass;
+    $scope.err=0;
+    //$scope.username=name;
 
-  $scope.username=name;
-
-  var req = 
+    var req = 
       {    method: 'POST',
          url: 'http://thedreamstop.com/api/dashboard.php', 
          headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-         data: $.param({"username":name,"password":pass}),
+         data: $.param({"username":$scope.vname,"password":$scope.vpass}),
        } 
       
        $http(req)
@@ -118,9 +125,17 @@ else
           if(response.success=='true')
           { 
              $scope.orders=response.orders;
+
+             window.location.assign("./vendor.html");
             //console.log(JSON.stringify(response));
             //if(response.numResults!=0){$scope.search=response.items;console.log('yes');}
             //console.log(JSON.stringify($scope.search));
+          }
+          else
+          {
+            $scope.log=0;
+            $scope.vname="";
+            $scope.vpass="";
           }
         })
        .error(
@@ -128,7 +143,18 @@ else
         {
           console.log("error:"+ response.error_message);
         });
+  }
+  else
+    $scope.err=1;
+  //console.log($scope.vname+$scope.vpass);
 }
+$scope.logout=function()
+{
+  sessionStorage.vpass=null;
+  sessionStorage.vname=null;
+  window.location.assign("./vendorindex.html");
+}
+
 $scope.values = [
 {
   id: 1,
