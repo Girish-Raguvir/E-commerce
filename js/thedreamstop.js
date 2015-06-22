@@ -893,12 +893,44 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
       price:0 ,
 
     }];
+    $scope.shipdata={'name':'','phno':'','address':'','date':''};
+    $scope.session=$localstorage.get('session');
+    var req = 
+    { method: 'POST',
+      url: 'http://thedreamstop.com/api/userInfo.php', 
+      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+      data: $.param({"session":$scope.session,}),
+    } 
+        
+    $scope.user={"success":"","ID":"","email":"","name":"","address":"","telephone":""};
+
+
+      $http(req)
+      .success(
+      function(response){
+      console.log(JSON.stringify(response));
+      console.log("response :"+response.success);
+      if(response.success=='true')
+      { 
+        $scope.shipdata.name=response.name;
+        $scope.shipdata.phno=response.telephone;
+        $scope.shipdata.address=response.address;        
+      } 
+      else 
+      {
+        console.log("Sorry, your browser does not support web storage...");
+      }
+      })
+      .error(
+      function(response){
+      console.log("error:"+ response.error_message);
+      });
     $scope.tprice=parseInt(sessionStorage.tprice);$scope.titems=0;
-    console.log('enter cart');
+    
     if(sessionStorage.cart==null)
       {
         sessionStorage.cart='[]';
-        console.log('enter cart if');
+        
         
       }
     else if(sessionStorage.cart!=null)
@@ -911,10 +943,10 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
         $scope.titems+=obj[i].qty;
         
       }
-      console.log('enter cart else');
+     
       sessionStorage.titems=$scope.titems;
     }
-    $scope.shipdata={'name':'','phno':'','address':'','date':''};
+    
     var session=$localstorage.get('session');
     var date= $filter('date')(new Date(),'dd-MM-yyyy');
     //console.log('hello'+$scope.date);

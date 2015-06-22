@@ -178,7 +178,7 @@ img:hover
 
 <!-- beginning of cart -->
 <!-- items listing -->
-<div class="modal fade" ng-controller="cart" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div class="modal fade" ng-controller="itemdisplay" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog" >
     <div class="modal-content">
       <div class="modal-header">
@@ -200,9 +200,10 @@ img:hover
           <td> {{x.nam}} </td>
           <td> {{ x.q }} {{x.unit}}</td>
           <td> Rs.{{x.price}} </td>
+          <td><button class="btn btn-xs" ng-click="remove(x.id)" ><span class="glyphicon glyphicon-trash"></span></button></td>
         </tr>
 
-        <tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
+        <tr ng-if="tprice!=0"><h3 align="center">{{titems}} items in cart</h3></tr>
       </table>
       </div>
     
