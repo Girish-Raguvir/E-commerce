@@ -176,6 +176,27 @@ $scope.open=function(id)
 }
 
 }]);
+
+// payment controller
+
+app.controller('pay',['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
+
+$scope.clearall=function()
+{
+  sessionStorage.removeItem('cart');
+  sessionStorage.removeItem('category');
+  sessionStorage.removeItem('catname');
+  sessionStorage.removeItem('sub');
+  sessionStorage.removeItem('subcategory');
+  sessionStorage.removeItem('titems');
+  sessionStorage.removeItem('tprice');
+  window.location.assign('./index.html');
+}
+
+}]);
+
+
+
 //search controller
 
 app.controller('search',['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
@@ -213,7 +234,8 @@ if(sessionStorage.cart==null || sessionStorage.tprice==null)
       $scope.addeditems.push(obj[i]);   
     }   
     $scope.tprice=parseInt(sessionStorage.tprice);  
-    $scope.titems=parseInt(sessionStorage.titems);   
+    $scope.titems=parseInt(sessionStorage.titems);
+    $('#notification_count').html(sessionStorage.titems);   
   }   
 $scope.loggedout=function()   
 {   
@@ -240,6 +262,7 @@ $scope.add=function(id,qty,name,w,price,u)
     sessionStorage.cart=JSON.stringify($scope.addeditems);    
     sessionStorage.tprice=$scope.tprice;    
     sessionStorage.titems=$scope.titems;  
+    $('#notification_count').html(sessionStorage.titems);
 };
 $scope.searchdata="";
 $scope.open=function(){setTimeout( function(){document.getElementById("searchdiv").className="dropdown open";}, 20);}
@@ -784,7 +807,9 @@ else
     if(obj[i].nam=='-')$scope.addeditems.splice(0,1);
     $scope.addeditems.push(obj[i]);
   }
-  $scope.tprice=parseInt(sessionStorage.tprice);
+  $scope.tprice=parseInt(sessionStorage.tprice);$scope.titems=parseInt(sessionStorage.titems);
+  $('#notification_count').html(sessionStorage.titems);
+  
 }
 $scope.add=function(id,qty,name,w,price,u)
 {
@@ -806,7 +831,9 @@ if(!f)
   sessionStorage.cart=JSON.stringify($scope.addeditems);
   sessionStorage.tprice=$scope.tprice;
   sessionStorage.titems=$scope.titems;
+  $('#notification_count').html(sessionStorage.titems);
   //$localstorage.set('tprice',$scope.tprice);
+  
 
   };
 
@@ -831,6 +858,8 @@ $scope.remove=function(y)
     sessionStorage.cart=JSON.stringify($scope.addeditems);
     sessionStorage.tprice=$scope.tprice;
     sessionStorage.titems=$scope.titems;
+    $('#notification_count').html(sessionStorage.titems);
+    
 }
 
 $scope.check=function(x)
@@ -1144,7 +1173,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             $localstorage.set('loggedin','true');  
             $localstorage.set('username',response.name);
 
-            //location.reload();
+            location.reload();
           }
             else {$scope.wuser=1;console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
           })
@@ -1155,7 +1184,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
           });
           
           //document.write("You will be redirected to main page in 10 sec.");
-          setTimeout( function(){window.location.assign("./Account.html");}, 2000);
+          //setTimeout( function(){window.location.assign("./Account.html");}, 2000);
         }
         else
         {
@@ -1416,13 +1445,13 @@ app.controller('orderdisplay', ['$scope','$http','$localstorage', function($scop
 //   {'tprice':0,'titems':0,'name':'','phno':'','address':'','date':' ','TID':''},
   
 // ];
-$scope.orders = 
-[
-  {'tprice':800,'titems':4,'name':'Girish','phno':'45761226','address':'#10,Adyar,Chennai','date':'4/6/2015','TID':'1'},
-  {'tprice':1200,'titems':6,'name':'Rohit','phno':'42861223','address':'#13,Mylapore,Chennai','date':'5/6/2015','TID':'2'},
-  {'tprice':300,'titems':2,'name':'Anurag','phno':'42811322','address':'#11,Adyar,Chennai','date':'4/6/2015','TID':'3'},
-  {'tprice':1000,'titems':5,'name':'Sugan','phno':'42261226','address':'#10,Adyar,Chennai','date':'5/6/2015','TID':'4'},
-];
+// $scope.orders = 
+// [
+//   {'tprice':800,'titems':4,'name':'Girish','phno':'45761226','address':'#10,Adyar,Chennai','date':'4/6/2015','TID':'1'},
+//   {'tprice':1200,'titems':6,'name':'Rohit','phno':'42861223','address':'#13,Mylapore,Chennai','date':'5/6/2015','TID':'2'},
+//   {'tprice':300,'titems':2,'name':'Anurag','phno':'42811322','address':'#11,Adyar,Chennai','date':'4/6/2015','TID':'3'},
+//   {'tprice':1000,'titems':5,'name':'Sugan','phno':'42261226','address':'#10,Adyar,Chennai','date':'5/6/2015','TID':'4'},
+// ];
 var op=0;
 $scope.open=function(id)
 {
@@ -1478,7 +1507,7 @@ var req=
     console.log("response :"+response.success);
     if(response.success=='true')
       {
-       //$scope.orders=response.history;
+       $scope.orders=response.history;
        console.log(JSON.stringify($scope.orders));
       }
 

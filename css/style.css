@@ -15,6 +15,11 @@
     margin: 0;
 }
 
+.item
+{
+  height: auto!important;
+}
+
 .nav p
 {
   color:#000;

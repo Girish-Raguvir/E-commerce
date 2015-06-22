@@ -248,7 +248,7 @@ img:hover
 <!-- ending delivery -->
 
 <!-- beginning pay -->
-<div class="modal fade" id="paymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -256,11 +256,13 @@ img:hover
         <h3 class="modal-title" id="myModalLabel">Payment</h3>
       </div>
       <div class="modal-body">
+        <p><h4>Your order has been successfully placed.Please pay the bill amount on delivery.</h4></p>
+        <p><h5>Hoping to see you again soon.Have a nice day.</h5></p>
       </div>
-    
+      
       <div class="modal-footer">
         <p align="center">
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back</button><br><br>
+          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>Close</button><br><br>
         </p>
       </div>
     </div>

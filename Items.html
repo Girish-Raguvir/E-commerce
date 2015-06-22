@@ -45,6 +45,8 @@
         document.getElementById("subcategory").innerHTML=subcategory;
         document.getElementById("category").innerHTML=sessionStorage.getItem("catname");
       });
+
+    
   </script>
 
 </head>
@@ -121,8 +123,8 @@
           <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
         
-          <li ng-if="loggedin()" id="notification_li" ng-controller="search">
-            <span id="notification_count" ng-bind="titems"></span>
+          <li ng-if="loggedin()" id="notification_li" ng-controller="itemdisplay">
+            <span id="notification_count"></span>
             <a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a>
           </li>
           <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
@@ -191,7 +193,7 @@
 
 <!-- beginning of cart -->
 <!-- items listing -->
-<div class="modal fade" ng-controller="cart" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div class="modal fade" ng-controller="itemdisplay" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog" >
     <div class="modal-content">
       <div class="modal-header">
@@ -213,9 +215,10 @@
           <td> {{x.nam}} </td>
           <td> {{ x.q }} {{x.unit}}</td>
           <td> Rs.{{x.price}} </td>
+          <td><button class="btn btn-xs" ng-click="remove(x.id)" ><span class="glyphicon glyphicon-trash"></span></button></td>
         </tr>
 
-        <tr ng-if="tprice==0"><h3 align="center">{{titems}} items in cart</h3></tr>
+        <tr ng-if="tprice!=0"><h3 align="center">{{titems}} items in cart</h3></tr>
       </table>
       </div>
     
@@ -261,7 +264,7 @@
 <!-- ending delivery -->
 
 <!-- beginning pay -->
-<div class="modal fade" id="paymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -269,11 +272,13 @@
         <h3 class="modal-title" id="myModalLabel">Payment</h3>
       </div>
       <div class="modal-body">
+        <p><h4>Your order has been successfully placed.Please pay the bill amount on delivery.</h4></p>
+        <p><h5>Hoping to see you again soon.Have a nice day.</h5></p>
       </div>
-    
+      
       <div class="modal-footer">
         <p align="center">
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back</button><br><br>
+          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>Close</button><br><br>
         </p>
       </div>
     </div>
@@ -377,7 +382,7 @@
 
 <!-- end of navbar -->
 <!-- side filter bar -->
-<div id="page-content-wrapper" style="margin-top:15px;">
+<div id="page-content-wrapper" style="margin-top:15px;" ng-controller="itemdisplay">
   <table style="width: 107%;table-layout: fixed;overflow: hidden;" id="mt"> 
     <tr style="padding: 10px;">
       <td style="padding: 5px;width: 13%;overflow: hidden;table-layout: fixed;">
@@ -416,7 +421,7 @@
     <select class="form-control" style="float:right;"  ng-options="option.label for option in values" ng-model="selected">
     </select>
   </div><br><br><br><hr><br>
-  </div>
+ 
 
 <div>
   <ul  style="list-style-type:none;padding-left:0px;">
@@ -454,6 +459,7 @@
   </div>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </td>

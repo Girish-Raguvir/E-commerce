@@ -239,7 +239,7 @@
 <!-- ending delivery -->
 
 <!-- beginning pay -->
-<div class="modal fade" id="paymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -247,11 +247,13 @@
         <h3 class="modal-title" id="myModalLabel">Payment</h3>
       </div>
       <div class="modal-body">
+        <p><h4>Your order has been successfully placed.Please pay the bill amount on delivery.</h4></p>
+        <p><h5>Hoping to see you again soon.Have a nice day.</h5></p>
       </div>
-    
+      
       <div class="modal-footer">
         <p align="center">
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#detailsmodal"style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back</button><br><br>
+          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>Close</button><br><br>
         </p>
       </div>
     </div>
@@ -352,7 +354,20 @@
 </td>
 </tr>
 </table>
-<div class="col-md-9" style="padding-top:20px;">
+<div class="col-md-2" align="center">
+
+      <ul class="nav nav-pills nav-stacked" style="padding-top: 50px;padding-left: 5px;width: 100%;vertical-align: top;">
+        <h2 >My Account</h2>
+        <hr>
+        <a style="padding: 5px;"><h5 style="color:white;background:#27003d;height:50px;padding-top:15px;">Personal Details</h5></a>
+        
+        <a href="myorders.html"><h5>My Orders</h5></a>
+        
+        
+      </ul>
+  
+</div>
+<div class="col-md-9" style="padding-top:20px;" ng-controller="myaccount">
   <div id="page-content-wrapper">
 <div class="jumbotron" style="background-color:rgba(0,0,0,0.9);color:white;">
 <div class="container">
