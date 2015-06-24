@@ -172,7 +172,7 @@ $(document).ready(function()
 
       <div ng-controller="log_in_out">
         <ul class="nav navbar-nav navbar-right">
-          <li><a tabindex="0" data-toggle="popover" role="button" data-container="body" data-contentwrapper=".content" ><span id="bindElement"></span></a></li>
+          <li><a tabindex="0" data-toggle="popover" data-trigger="click focus"><span id="bindElement"></span></a></li>
           <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
           <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>

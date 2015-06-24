@@ -14,7 +14,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-animate.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.js"></script>
   <script src="js/thedreamstop.js"></script>
   
   <link rel="stylesheet" type="text/css" href="css/frontpage.css">
@@ -118,7 +118,7 @@
 
       <div ng-controller="log_in_out">
         <ul class="nav navbar-nav navbar-right">
-          <li><a tabindex="0" data-toggle="popover" role="button" data-container="body" data-contentwrapper=".content" ><span id="bindElement"></span></a></li>
+          <li><a tabindex="0" data-toggle="popover" data-trigger="click focus"><span id="bindElement"></span></a></li>
           <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
           <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
@@ -241,20 +241,57 @@
         <h3 class="modal-title" id="myModalLabel">Delivery Details</h3>
       </div>
       <div class="modal-body">
-        <div class="form">
+        <form role="form" name="delivery">
+          
           <div class="form-group">
-            <input type="text" class="form-control"placeholder="Name" ng-model="shipdata.name"></input><br>
-            <input type="tel" class="form-control"placeholder="Telephone Number" ng-model="shipdata.phno"></input><br>
-            <input type="text" class="form-control"placeholder="Address" ng-model="shipdata.address"></input><br>
-          </div>
-        </div>
+            <input type="text" class="form-control" placeholder="Name" name="name" id="name" ng-model="shipdata.name" required=""></input><br>
+            <div ng-show="delivery.name.$dirty && delivery.name.$invalid" style="color:red;font-weight:bold;margin-bottom:10px;">
+                  <span ng-show="delivery.name.$error.required">Name is a required field</span>
+                  
+             </div>
+           </div>
+           <div class="form-group">
+            <input type="number" class="form-control" placeholder="Telephone Number" name="phno" id="phno" ng-model="shipdata.phno" minlength="8" maxlength="10" required=""></input><br>
+            <div ng-show="delivery.phno.$dirty && delivery.phno.$invalid" style="color:red;font-weight:bold; margin-bottom:10px;">
+                  <span ng-show="delivery.phno.$error.required">Telephone is a required field</span>
+                  <span ng-show="delivery.phno.$error.number" >Please enter only numbers</span>
+                  <span ng-show="delivery.phno.$error.maxlength">Number of digits can't be more than 10!Kindly Check!</span>
+                  <!--span ng-show="delivery.phno.$error.minlength">Number of digits can't be less than 8!Kindly Check!</span-->
+             </div>
+             </div>
+            <input type="text" class="form-control" placeholder="Address" ng-model="shipdata.address"></input><br>
+          
+        
+        </form>
+        <!--div class="container">
+          <form role="form" name="RegForm">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="lemail">Email:</label>
+                <input type="email" ng-enter="userlogin()" class="form-control" name=" lemail" id="lemail"  required="" ng-model="user.email"/>
+                <div ng-show="RegForm.lemail.$dirty && RegForm.lemail.$invalid" style="color:red;font-weight:bold;">
+                  <span ng-show="RegForm.lemail.$error.required">E-Mail is a required field</span>
+                  <span ng-show="RegForm.lemail.$error.email" >This is not a valid email.</span>
+                </div>
+              </div>  
+
+              <div class="form-group">
+                <label for="lpwd">Password:</label>
+                <input type="password" ng-enter="userlogin()" class="form-control" id="lpwd" name="lpwd"  required="" ng-model="user.password"/>
+                <div ng-show="RegForm.lpwd.$dirty" style="color:red;font-weight:bold;">
+                  <span ng-show="RegForm.lpwd.$error.required">Password is a required field</span>
+                </div>
+              </div> 
+            </div>
+          </form>
+        </div-->
       </div>
       <div class="modal-footer">
         <p align="center">
           <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;">
           <span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back
           </button>
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span>
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;" ng-disabled="delivery.name.$dirty&&delivery.name.$invalid||delivery.phno.$dirty&&delivery.phno.$invalid">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span>
           </button><br><br>
         </p>
       </div>

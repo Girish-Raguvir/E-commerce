@@ -346,6 +346,19 @@ a:hover,a:active
   color:#27003d;
   font-weight: bold;
 }
+#bindElement
+{
+  color:white;
+  
+}
+span#bindElement:hover
+{
+  font-weight: bold;
+}
+a[data-toggle="popover"]
+{
+  color:black;
+}
 .popover-title
   {
   text-align: center;
@@ -353,4 +366,9 @@ a:hover,a:active
   }.fa
   {
     cursor:pointer;
+  }
+  .btn-success:disabled
+  {
+    background-color: #27003d;
+    border:#27003d;
   }

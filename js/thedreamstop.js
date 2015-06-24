@@ -358,7 +358,7 @@ $scope.ctr=0;
 console.log(sessionStorage.length);
 $(document).ready(function()
 {
-  $('#bindElement').popover({title:"Change Location?",content:function()
+  $('[data-toggle="popover"]').popover({title:"Change Location?",content:function()
     { 
       return $(".content").html();},placement:"auto",html: true
     }).parent().on('click','#continue',function()
