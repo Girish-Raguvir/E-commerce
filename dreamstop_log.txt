@@ -4,19 +4,9 @@
 
 -Captcha check
 
-
-
 -Cart Modal in Items.html doesnot reflect changes unless page is refreshed.
 
-
-
-TO ANIRUDH
-
-
-
-
-
-I am somehow not able to dynamically update the content of the modal.It's kind of a big problem for the cart modal.We have to update it simultaneously.Currently,refreshing the page only updates it.That should not be the case.
+-Somehow not able to dynamically update the content of the modal.It's kind of a big problem for the cart modal.We have to update it simultaneously.Currently,refreshing the page only updates it.That should not be the case.
 
 
 
