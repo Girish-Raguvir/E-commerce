@@ -23,6 +23,9 @@
 
 <script src="js/thedreamstop.js"></script>
 <script type="text/javascript">
+sessionStorage.removeItem('pid');
+</script>
+<script type="text/javascript">
 function showimages(cat)
   {
      var a=["personal","branded","grocery","beverage","bread","gourmet","household"];
@@ -140,11 +143,14 @@ $(document).ready(function()
                   <div id="searchdiv" class="dropdown">
                     <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()" id="subsearch" ><span class="glyphicon glyphicon-search"></span> Submit</button>
                     <ul id="results" class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
-                      <li ng-repeat="x in search" ng-click="open()">
+                      <li ng-repeat="x in search" ng-click="open(search[$index].catID,search[$index].subCatID,search[$index].PID)">
                         <table  id="t02">
                           <tr style="height: 10%;width:100%;" id="searchlist">
-                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
+                          <!-- <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
                            <input type="number" style="color:black;" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
+                          </td> -->
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
+                           <img src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=400" alt={{ x.name }} width="80" height="80" />
                           </td>
                           <td style="padding: 10px;" align="center">
                           <div class="desc">{{ x.name }}</div>
@@ -153,13 +159,13 @@ $(document).ready(function()
                           <b>{{ x.q }} {{x.unit}}</b>
                           </td>
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
-                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td>
+                          <!-- <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td> -->
                           </tr>
                         </table>
                         
                       </li>
                     </ul>
-                  </div> 
+                  </div>
                 </span>
 
             </div>
@@ -173,14 +179,13 @@ $(document).ready(function()
       <div ng-controller="log_in_out">
         <ul class="nav navbar-nav navbar-right">
           <li><a tabindex="0" data-toggle="popover" data-trigger="click focus"><span id="bindElement"></span></a></li>
-          <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-          <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
-        
           <li ng-if="loggedin()" id="notification_li" ng-controller="search">
             <span id="notification_count" ng-bind="titems"></span>
             <a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a>
           </li>
+          <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+          <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
           <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
         
           <div class="content" style="display:none;">
@@ -318,21 +323,22 @@ $(document).ready(function()
 <!-- ending delivery -->
 
 <!-- beginning pay -->
-<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Payment</h3>
+        <h3 class="modal-title" id="myModalLabel">The DreamStop</h3>
       </div>
       <div class="modal-body">
-        <p><h4>Your order has been successfully placed.Please pay the bill amount on delivery.</h4></p>
+        <p><h4>Your order has been successfully placed.</h4></p><p><h4>Please pay the bill amount on delivery.</h4></p>
+        <p><h5>The order ID for future reference is <b><span id="orderid"></span></b>.You can view it in the the list of your orders in your account page.</h5></p>
         <p><h5>Hoping to see you again soon.Have a nice day.</h5></p>
       </div>
       
       <div class="modal-footer">
         <p align="center">
-          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>Close</button><br><br>
+          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="fa fa-times-circle" style="float: left;"></span>Close</button><br><br>
         </p>
       </div>
     </div>
@@ -479,6 +485,7 @@ $(document).ready(function()
       <ul>
         <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Oils'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Oil</li></span></a>
         <a href="items.html" onclick="sub(2);sessionStorage.subcategory='Dals and Pulses'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Dals and Pulses</li></span></a>
+        <a href="items.html" onclick="sub(3);sessionStorage.subcategory='Rice & Rice Products'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Rice & Rice Products</li></span></a>
       </ul>
     </div>
     </span>
@@ -498,7 +505,7 @@ $(document).ready(function()
       <ul>
         <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Imported Snacks'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Snacks</li></span></a>
         <a href="items.html" onclick="sub(2);sessionStorage.subcategory='Imported Beverages'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Beverages</li></span></a>
-        <a href="items.html" onclick="sub(3);sessionStorage.subcategory='Chocolates'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Chocolates</li></span></a>
+        <a href="items.html" onclick="sub(3);sessionStorage.subcategory='Chocolates & Confectionaries'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Chocolates & Confectionaries</li></span></a>
       </ul>
     </div>
     </span>
@@ -594,8 +601,16 @@ $(document).ready(function()
       </div>
     </div>
   </div></a>
-</div>
 
+<a href="items.html" onclick="sub(3);sessionStorage.subcategory='Rice & Rice Products'"><div class="col-sm-6 col-md-4" >
+    <div class="thumbnail">
+    <img src="images/Subcategory/rice.jpg" alt="rice products" class="img-responsive">
+      <div class="caption" >
+        <h3 style="text-align:center">Rice & Rice Products</h3>
+      </div>
+    </div>
+  </div></a>
+</div>
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="householdimg"> 
 <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Kitchen and Dining'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
