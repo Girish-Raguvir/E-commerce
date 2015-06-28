@@ -291,7 +291,18 @@ $scope.add=function(id,qty,name,w,price,u)
     $('#notification_count').html(sessionStorage.titems);
 };
 $scope.searchdata="";
-$scope.open=function(){setTimeout( function(){document.getElementById("searchdiv").className="dropdown open";}, 20);}
+$scope.open=function(catid,subid,pid)
+{
+  var a=["Personal Care","Branded Foods","Grocery and Staples","Beverage","Bread, Diary and Eggs","Imported and Gourmet","Household"];
+  var b=[["Baby Products","Deos and Perfumes",""],["Biscuits"],["Oil","Dals and Pulses","Rice & Rice Products"],["Energy Drinks","Soft Drinks"],["Bakery Products","Eggs","Diary Products"],["Imported Snacks","Imported Beverages","Chocolates and Confectionaries"],["Kitchen and Dining","Detergents","Platicware"]];
+  sessionStorage.category=catid;sessionStorage.sub=subid;
+  sessionStorage.pid=pid;
+  console.log(a[parseInt(catid)]);
+  sessionStorage.catname=a[parseInt(catid)-1];
+  sessionStorage.subcategory=b[parseInt(catid)-1][parseInt(subid)-1];
+  window.location.assign('./Items.html');
+  //setTimeout( function(){document.getElementById("searchdiv").className="dropdown open";}, 20);
+}
 $scope.val=1;
 $scope.searchlistent=function()
 {
@@ -523,10 +534,17 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http','category',funct
     }
     return "";
   }
-  
+  $scope.closesearch=function()
+  {
+    sessionStorage.removeItem('pid');
+    location.reload();
+  }
+  $scope.title="Items";
   $scope.session=getsession('session');
   console.log(category.get());
   $scope.data={"session":$scope.session,"ID":category.get(),"subID":sessionStorage.sub};
+  if(sessionStorage.pid!=null)
+     {$scope.data={"session":$scope.session,"ID":category.get(),"subID":sessionStorage.sub,"PID":sessionStorage.pid};$scope.title="Search Results";}
   //$scope.data={"session":$scope.session,"ID":category.get()};
   console.log('chchch'+JSON.stringify($scope.data));
   
@@ -818,7 +836,7 @@ else $scope.chkdis=1;
 $scope.checkout=function()
 {
 
-  if($localstorage.get('loggedin')=='true')$("#cartmodal").modal("show");
+  if($localstorage.get('loggedin')=='true'){$("#detailsmodal").modal("show");}
   else alert('Sorry! You must be logged in for checking out the cart.');
 }
 //$scope.addeditems.length=0;
@@ -997,8 +1015,9 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
       console.log("response :"+response.success);
       if(response.success=='true')
       { 
-       $('#paymodal').modal('show');
-                  
+        $('#paymodal').modal('show');
+        document.getElementById("orderid").innerHTML = response.TID;
+       
       } 
       else 
       {
