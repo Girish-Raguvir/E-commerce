@@ -15,6 +15,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
   <script src="js/thedreamstop.js"></script>
   
   <link rel="stylesheet" type="text/css" href="css/frontpage.css">
@@ -35,6 +36,20 @@
     z-index: 9999;
     background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
       }
+ 
+    .popover {
+        
+        width: 400px;
+        max-width: 400px;
+        max-height: 500px;
+        overflow-y: scroll; 
+    }
+    .popover-title
+    {
+      color: #27003d;
+      font-size: 1.3em;
+    }
+
   </style>
 
   <script type="text/javascript">
@@ -44,10 +59,29 @@
         var subcategory=sessionStorage.getItem("subcategory");
         document.getElementById("subcategory").innerHTML=subcategory;
         document.getElementById("category").innerHTML=sessionStorage.getItem("catname");
-      });
+       
+        $(".numbersOnly").on('change', function() {
+          // Remove invalid characters
+          console.log('asas');
+          var sanitized = $(this).val().replace(/[^0-9.]/g, '');
+          sanitized = sanitized.replace(/\.(?=.*\.)/, '');
+          // Update value
+          $(this).val(sanitized);
+        });
 
-    
-  </script>
+        $('#cartpop').popover({ 
+          html : true,
+          content: function() {
+          return $('#cartshow').html();
+          }
+          }).parent().on('click','#checkout',function()
+              {
+                  $('#chkoutreal').get(0).click();
+                  //console.log('hello @ refresh');
+              });
+          });
+     
+   </script>
 
 </head>
 
@@ -86,11 +120,14 @@
                   <div id="searchdiv" class="dropdown">
                     <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()" id="subsearch" ><span class="glyphicon glyphicon-search"></span> Submit</button>
                     <ul id="results" class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
-                      <li ng-repeat="x in search" ng-click="open()">
+                      <li ng-repeat="x in search" ng-click="open(search[$index].catID,search[$index].subCatID,search[$index].PID)">
                         <table  id="t02">
                           <tr style="height: 10%;width:100%;" id="searchlist">
-                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
+                          <!-- <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
                            <input type="number" style="color:black;" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
+                          </td> -->
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
+                           <img src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=400" alt={{ x.name }} width="80" height="80" />
                           </td>
                           <td style="padding: 10px;" align="center">
                           <div class="desc">{{ x.name }}</div>
@@ -99,7 +136,7 @@
                           <b>{{ x.q }} {{x.unit}}</b>
                           </td>
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
-                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td>
+                          <!-- <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td> -->
                           </tr>
                         </table>
                         
@@ -118,15 +155,17 @@
 
       <div ng-controller="log_in_out">
         <ul class="nav navbar-nav navbar-right">
-          <li><a tabindex="0" data-toggle="popover" data-trigger="click focus"><span id="bindElement"></span></a></li>
+          
+          <li><a tabindex="0" data-toggle="popover" data-trigger="focus"><span id="bindElement"></span></a></li>
+          <li ng-if="loggedin()" id="notification_li" ng-controller="itemdisplay">
+            <span id="notification_count"></span>
+            <a style="align: center;" id="cartpop" tabindex="0" data-placement='bottom'  data-trigger="click focus" title="The DreamStop" href='#'><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a>
+          </li>
           <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
           <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
         
-          <li ng-if="loggedin()" id="notification_li" ng-controller="itemdisplay">
-            <span id="notification_count"></span>
-            <a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a>
-          </li>
+          
           <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
         
           <div class="content" style="display:none;">
@@ -193,7 +232,7 @@
 
 <!-- beginning of cart -->
 <!-- items listing -->
-<div class="modal fade" ng-controller="itemdisplay" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<!-- <div class="modal fade" ng-controller="itemdisplay" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog" >
     <div class="modal-content">
       <div class="modal-header">
@@ -229,7 +268,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- items listing over -->
 <!-- proceeding to delivery -->
 
@@ -251,7 +290,7 @@
              </div>
            </div>
            <div class="form-group">
-            <input type="number" class="form-control" placeholder="Telephone Number" name="phno" id="phno" ng-model="shipdata.phno" minlength="8" maxlength="10" required=""></input><br>
+            <input class="form-control" placeholder="Telephone Number" name="phno" id="phno" ng-model="shipdata.phno" minlength="8" maxlength="10" required=""></input><br>
             <div ng-show="delivery.phno.$dirty && delivery.phno.$invalid" style="color:red;font-weight:bold; margin-bottom:10px;">
                   <span ng-show="delivery.phno.$error.required">Telephone is a required field</span>
                   <span ng-show="delivery.phno.$error.number" >Please enter only numbers</span>
@@ -288,10 +327,10 @@
       </div>
       <div class="modal-footer">
         <p align="center">
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;">
+          <!-- <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;">
           <span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back
-          </button>
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;" ng-disabled="delivery.name.$dirty&&delivery.name.$invalid||delivery.phno.$dirty&&delivery.phno.$invalid">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span>
+          </button> -->
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;" ng-disabled="delivery.name.$dirty&&delivery.name.$invalid||delivery.phno.$dirty&&delivery.phno.$invalid">Confirm Order<span class="glyphicon glyphicon-arrow-right" style="float: right;"></span>
           </button><br><br>
         </p>
       </div>
@@ -301,21 +340,22 @@
 <!-- ending delivery -->
 
 <!-- beginning pay -->
-<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Payment</h3>
+        <h3 class="modal-title" id="myModalLabel">The DreamStop</h3>
       </div>
       <div class="modal-body">
-        <p><h4>Your order has been successfully placed.Please pay the bill amount on delivery.</h4></p>
+        <p><h4>Your order has been successfully placed.</h4></p><p><h4>Please pay the bill amount on delivery.</h4></p>
+        <p><h5>The order ID for future reference is <b><span id="orderid"></span></b>.You can view it in the the list of your orders in your account page.</h5></p>
         <p><h5>Hoping to see you again soon.Have a nice day.</h5></p>
       </div>
       
       <div class="modal-footer">
         <p align="center">
-          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>Close</button><br><br>
+          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="fa fa-times-circle" style="float: left;"></span>Close</button><br><br>
         </p>
       </div>
     </div>
@@ -451,7 +491,7 @@
 <td style="width: 65%;table-layout: fixed;">
   <div class="jumbotron" style="background:#FFFFFF">
     <div class="col-md-8">
-      <h3>Item Name</h3>
+      <h3>{{title}}&nbsp;<span><i class="fa fa-times-circle" ng-show="title=='Search Results'"ng-click="closesearch()"></i></span></h3>
     </div>
 
   <div class="col-md-4" style="float:right|bottom;">
@@ -463,7 +503,8 @@
 <div>
   <ul  style="list-style-type:none;padding-left:0px;">
     <li  style="margin-bottom : 0px;"ng-repeat="x in items|orderBy:selected.sub:selected.rev" for="{{x.id}}"  >
-      <div ng-if="(check(x))" class="animate">
+     <!--  <div ng-if="(check(x))" class="animate"> -->
+      <div ng-if="(check(x))">
         <table style="width: 100%;background-color: white; margin: 0px;table-layout:fixed;" id="t02">
           <col width="25%" />
           <col width="25%" />
@@ -473,7 +514,7 @@
         <tr style="height: auto;">
 
           <td align="center" style="width:10%;">
-            <input type="number" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="items[$index].qty">
+            <input type="number" class="numbersOnly" align="right"  min="1" max="10" value="1" id="{{x.PID}}" ng-model="items[$index].qty">
           </td>
 
           <td style="padding-buttom: 10px;width:30%;" align="center"> 
@@ -504,20 +545,20 @@
 <!-- end of item display -->
 
 <td style="padding: 3px;margin: 0px;width: 28%; ">
-  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="opacity:0;height:50px;margin-top: 50px;width:26%;margin-left: 73.7%;z-index: 1;" id="cartnav"ng-controller="navcart">
+  <!-- <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="opacity:0;height:50px;margin-top: 50px;width:26%;margin-left: 73.7%;z-index: 1;" id="cartnav"ng-controller="navcart">
       <div class="container-fluid" style="position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);line-height:100%;padding-right: 25px;padding-left:15px;" >
 
         <div class="navbar-header" >
           
            
   
-         <a class="navbar-brand" href="index.html" style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 1;"></span>&nbsp; &nbsp; View Cart</a> 
+         <a class="navbar-brand" style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 1;"></span>&nbsp; &nbsp; View Cart</a> 
         </div>
          
         </div>
-      </div>
-    </div>
-<div class="jumbotron" style="padding: 5px;width:100%;background: #E0D8E0;table-layout: fixed;z-index: -2;">
+      </div> -->
+    
+<div class="jumbotron" style="padding: 5px;width:100%;background: #E0D8E0;table-layout: fixed;z-index: -2;" >
  
 <h2>SHOPPING CART</h2>
 <hr>
@@ -542,7 +583,32 @@
 
 
 </table>
-<p align="center" ><button class="btn btn-success btn-md" ng-click="checkout()" align="center" style="margin: 10px;"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 0;"></span> Check out.</button></p>
+<p align="center" ><button id="chkoutreal"class="btn btn-success btn-md" ng-click="checkout()" align="center" style="margin: 10px;"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 0;"></span> Check out</button></p>
+</div>
+<div class="jumbotron" style="padding: 5px;width:100%;background: #E0D8E0;table-layout: fixed;z-index: -2;" id="cartshow" ng-hide="1">
+<br>
+<table style="width: 100%;" id="t01">
+<tr style="padding: 10px;" align="center"><h4><b>Total bill amount: Rs. {{tprice}}</b></h4></tr>
+<tr style="padding: 10px;" align="center"><h4><b>The cart has {{titems}} items.</b></h4></tr>
+<tr style="padding: 10px;" align="center">
+    <th>Qty</th>
+    <th>Name</th>   
+    <th>Weight</th>
+    <th>Price</th>
+</tr>
+
+<tr ng-repeat="x in addeditems">
+<td> {{x.qty}} </td>
+
+<td> {{x.nam}}</td>
+<td> {{x.q}} {{x.unit}}</td>
+<td> {{x.price}} </td>
+</tr>
+
+
+
+</table>
+<p align="center" ><button id="checkout" class="btn btn-success btn-md" align="center" style="margin: 10px;"><span class="glyphicon glyphicon-shopping-cart" style="z-index: 0;"></span> Check out</button></p>
 </div>
 </td>
 
