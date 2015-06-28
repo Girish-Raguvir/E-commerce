@@ -29,7 +29,9 @@
   background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
 }
 </style>
-
+<script type="text/javascript">
+sessionStorage.removeItem('pid');
+</script>
  
 </head>
 <body>
@@ -62,11 +64,14 @@
                   <div id="searchdiv" class="dropdown">
                     <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()" id="subsearch" ><span class="glyphicon glyphicon-search"></span> Submit</button>
                     <ul id="results" class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
-                      <li ng-repeat="x in search" ng-click="open()">
+                      <li ng-repeat="x in search" ng-click="open(search[$index].catID,search[$index].subCatID,search[$index].PID)">
                         <table  id="t02">
                           <tr style="height: 10%;width:100%;" id="searchlist">
-                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
+                          <!-- <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
                            <input type="number" style="color:black;" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
+                          </td> -->
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
+                           <img src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=400" alt={{ x.name }} width="80" height="80" />
                           </td>
                           <td style="padding: 10px;" align="center">
                           <div class="desc">{{ x.name }}</div>
@@ -75,13 +80,13 @@
                           <b>{{ x.q }} {{x.unit}}</b>
                           </td>
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
-                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td>
+                          <!-- <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td> -->
                           </tr>
                         </table>
                         
                       </li>
                     </ul>
-                  </div> 
+                  </div>
                 </span>
 
             </div>
@@ -95,14 +100,13 @@
       <div ng-controller="log_in_out">
         <ul class="nav navbar-nav navbar-right">
           <li><a tabindex="0" data-toggle="popover" role="button" data-container="body" data-contentwrapper=".content" ><span id="bindElement"></span></a></li>
-          <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-          <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
-        
           <li ng-if="loggedin()" id="notification_li" ng-controller="search">
             <span id="notification_count" ng-bind="titems"></span>
             <a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a>
           </li>
+          <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+          <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
           <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
         
           <div class="content" style="display:none;">
@@ -240,21 +244,22 @@
 <!-- ending delivery -->
 
 <!-- beginning pay -->
-<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Payment</h3>
+        <h3 class="modal-title" id="myModalLabel">The DreamStop</h3>
       </div>
       <div class="modal-body">
-        <p><h4>Your order has been successfully placed.Please pay the bill amount on delivery.</h4></p>
+        <p><h4>Your order has been successfully placed.</h4></p><p><h4>Please pay the bill amount on delivery.</h4></p>
+        <p><h5>The order ID for future reference is <b><span id="orderid"></span></b>.You can view it in the the list of your orders in your account page.</h5></p>
         <p><h5>Hoping to see you again soon.Have a nice day.</h5></p>
       </div>
       
       <div class="modal-footer">
         <p align="center">
-          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>Close</button><br><br>
+          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="fa fa-times-circle" style="float: left;"></span>Close</button><br><br>
         </p>
       </div>
     </div>
