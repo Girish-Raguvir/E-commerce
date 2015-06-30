@@ -341,7 +341,7 @@ a
   color: black;
   cursor:pointer;
 }
-a:hover,a:active
+a:hover,a:active,a:visited
 {
   color:#27003d;
   font-weight: bold;
