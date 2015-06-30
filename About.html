@@ -15,11 +15,53 @@
 <script type="text/javascript">
 $(window).load(function() {
   $(".loader").fadeOut("slow");
-})
+});
+/*$(document).ready(function()
+{
+  $(".team-member:eq(0)>figure").hover(function()
+  {
+    $(".team-member:eq(0)>.team-detail>span").text("Short Text 1");
+  },function()
+  {
+    $(".team-member:eq(0)>.team-detail>span").text("Web Design and Developement");
+  });
+
+  $(".team-member:eq(1)>figure").hover(function()
+  {
+    $(".team-member:eq(1)>.team-detail>span").text("Dream Stopper");
+  },function()
+  {
+    $(".team-member:eq(1)>.team-detail>span").text("Web Design and Developement");
+  });
+
+  $(".team-member:eq(2)>figure").hover(function()
+  {
+    $(".team-member:eq(2)>.team-detail>span").text("Short Text 3");
+  },function()
+  {
+    $(".team-member:eq(2)>.team-detail>span").text("Web Developement");
+  });
+
+  $(".team-member:eq(3)>figure").hover(function()
+  {
+    $(".team-member:eq(3)>.team-detail>span").text("Short Text 4");
+  },function()
+  {
+    $(".team-member:eq(3)>.team-detail>span").text("App Developement");
+  });
+
+  $(".team-member:eq(4)>figure").hover(function()
+  {
+    $(".team-member:eq(4)>.team-detail>span").text("Short Text 5");
+  },function()
+  {
+    $(".team-member:eq(4)>.team-detail>span").text("App Developement");
+  });
+
+  
+});*/
 </script>
-<script type="text/javascript">
-sessionStorage.removeItem('pid');
-</script>
+
    <link rel="stylesheet" type="text/css" href="css/frontpage.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/about.css">
@@ -36,8 +78,12 @@ sessionStorage.removeItem('pid');
 }
 img:hover
 {
-  cursor: auto;
-  opacity: 1;
+  cursor: pointer;
+  opacity: 0.65;
+}
+.intern-content>img:hover
+{
+  opacity:1.0;
 }
 </style>
 
@@ -73,14 +119,11 @@ img:hover
                   <div id="searchdiv" class="dropdown">
                     <button class="dropdown-toggle" data-toggle="dropdown" ng-click="searchlist()" id="subsearch" ><span class="glyphicon glyphicon-search"></span> Submit</button>
                     <ul id="results" class="dropdown-menu" style="margin-left:0px;margin-top: 0px;">
-                      <li ng-repeat="x in search" ng-click="open(search[$index].catID,search[$index].subCatID,search[$index].PID)">
+                      <li ng-repeat="x in search" ng-click="open()">
                         <table  id="t02">
                           <tr style="height: 10%;width:100%;" id="searchlist">
-                          <!-- <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
-                           <input type="number" style="color:black;" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
-                          </td> -->
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;">
-                           <img src="http://thedreamstop.com/api/prodImage.php?PID={{x.PID}}&width=400" alt={{ x.name }} width="80" height="80" />
+                           <input type="number" style="color:black;" min="1" max="10" value="1" id="{{x.PID}}" ng-model="search[$index].qty">
                           </td>
                           <td style="padding: 10px;" align="center">
                           <div class="desc">{{ x.name }}</div>
@@ -89,13 +132,13 @@ img:hover
                           <b>{{ x.q }} {{x.unit}}</b>
                           </td>
                           <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><div class="desc">Rs.{{ x.price }}</div></td>
-                          <!-- <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td> -->
+                          <td ng-if="x.q!=-1"  align="center" style="padding: 10px;"><button class="btn" ng-disabled="loggedout()" ng-click="add(search[$index].PID,search[$index].qty,x.name,search[$index].q*1,x.price*search[$index].qty,search[$index].unit)">ADD</button></td>
                           </tr>
                         </table>
                         
                       </li>
                     </ul>
-                  </div>
+                  </div> 
                 </span>
 
             </div>
@@ -109,13 +152,14 @@ img:hover
       <div ng-controller="log_in_out">
         <ul class="nav navbar-nav navbar-right">
           <li><a tabindex="0" data-toggle="popover" data-trigger="click focus"><span id="bindElement"></span></a></li>
+          <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+          <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
+        
           <li ng-if="loggedin()" id="notification_li" ng-controller="search">
             <span id="notification_count" ng-bind="titems"></span>
             <a style="align: center;" data-toggle="modal" data-target="#cartmodal"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; &nbsp;Cart</a>
           </li>
-          <li ng-if="!loggedin()"><a href="Register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-          <li ng-if="!loggedin()"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          <li ng-if="loggedin()"><a href="Account.html">Welcome &nbsp;<b>{{username}}</b></a></li>
           <li ng-if="loggedin()" ng-click="logout()"><a href="#">Logout</a></li>
         
           <div class="content" style="display:none;">
@@ -253,22 +297,21 @@ img:hover
 <!-- ending delivery -->
 
 <!-- beginning pay -->
-<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="" data-keyboard="false" data-backdrop="static">
+<div class="modal fade" id="paymodal" ng-controller="pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">The DreamStop</h3>
+        <h3 class="modal-title" id="myModalLabel">Payment</h3>
       </div>
       <div class="modal-body">
-        <p><h4>Your order has been successfully placed.</h4></p><p><h4>Please pay the bill amount on delivery.</h4></p>
-        <p><h5>The order ID for future reference is <b><span id="orderid"></span></b>.You can view it in the the list of your orders in your account page.</h5></p>
+        <p><h4>Your order has been successfully placed.Please pay the bill amount on delivery.</h4></p>
         <p><h5>Hoping to see you again soon.Have a nice day.</h5></p>
       </div>
       
       <div class="modal-footer">
         <p align="center">
-          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="fa fa-times-circle" style="float: left;"></span>Close</button><br><br>
+          <button type="button" class="btn btn-success" ng-click="clearall()" style="width:40%;"><span class="glyphicon glyphicon-arrow-left" style="float: left;"></span>Close</button><br><br>
         </p>
       </div>
     </div>
@@ -385,27 +428,10 @@ img:hover
         </div>
 
         <div class="row align-center mar-bot40">
-          <!-- <div class="col-md-3">
-            <div class="team-member">
-              <figure class="member-photo"><img src="images/fb.jpg" alt="" /></figure>
-              <div class="team-detail">
-                <h4>Rohit</h4>
-                <span>Founder</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="team-member">
-              <figure class="member-photo"><img src="images/fb.jpg" alt="" /></figure>
-              <div class="team-detail">
-                <h4>Anurag</h4>
-                <span>CTO</span>
-              </div>
-            </div>
-          </div> -->
+         
           <div class="col-md-4">
             <div class="team-member">
-              <figure class="member-photo"><img src="images/Team/Girish.jpg" alt=""/></figure>
+              <!--a href="https://www.facebook.com/girish.raguvir?fref=ts" target="_blank"--><figure class="member-photo" data-toggle="modal" data-target="#GirishModal" title="About Girish"><img src="images/Team/Girish.jpg" alt=""/></figure>
               <div class="team-detail">
                 <h4>Girish Raguvir J</h4>
                 <span>Web Design and Development</span>
@@ -414,7 +440,7 @@ img:hover
           </div>
           <div class="col-md-4">
             <div class="team-member">
-              <figure class="member-photo"><img src="images/Team/Anirudh.PNG" alt="" width="215" height="215"/></figure>
+              <figure class="member-photo" data-toggle="modal" data-target="#AnirudhModal" title="About Anirudh"><img src="images/Team/Anirudh.PNG" alt="" width="215" height="215"/></figure>
               <div class="team-detail">
               <h4>Anirudh R</h4>
                 <span>Web Design and Development</span>
@@ -423,48 +449,23 @@ img:hover
           </div>
           <div class="col-md-4">
             <div class="team-member">
-              <figure class="member-photo"><img src="images/Team/Adhityaa.jpg" alt="" width="215" height="215"/></figure>
+              <figure class="member-photo" data-toggle="modal" data-target="#AdhityaaModal" title="About Adhityaa"><img src="images/Team/Adhityaa.jpg" alt="" width="215" height="215"/></figure>
               <div class="team-detail">
                 <h4>Adhityaa Chandrasekar</h4>
                 <span>Web Development</span>
               </div>
             </div>
           </div>
-          <!-- <div class="col-md-3">
-            <div class="team-member">
-              <figure class="member-photo"><img src="images/fb.jpg" alt="" /></figure>
-              <div class="team-detail">
-              <h4>Arun</h4>
-                <span>Web Development</span>
-              </div>
-            </div>
-          </div> -->
+          
         </div>
 
         <div class="row align-center mar-bot40">
-          <!-- <div class="col-md-3">
-            <div class="team-member">
-              <figure class="member-photo"><img src="images/Team/Adhityaa.jpg" alt="" /></figure>
-              <div class="team-detail">
-                <h4>Adhityaa Chandrasekar</h4>
-                <span>Web Development</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="team-member">
-              <figure class="member-photo"><img src="images/fb.jpg" alt="" /></figure>
-              <div class="team-detail">
-              <h4>Arun</h4>
-                <span>Web Development</span>
-              </div>
-            </div>
-          </div> -->
+         
           
           
           <div class="col-md-4">
             <div class="team-member">
-              <figure class="member-photo"><img src="images/Team/Sugan.jpg" alt="" width="215" height="215"/></figure>
+              <figure class="member-photo" data-toggle="modal" data-target="#SuganModal" title="About Sugan"><img src="images/Team/Sugan.jpg" alt="" width="215" height="215"/></figure>
               <div class="team-detail">
                 <h4>Sugan Prabu</h4>
                 <span>App Development</span>
@@ -473,7 +474,7 @@ img:hover
           </div>
           <div class="col-md-4">
             <div class="team-member">
-              <figure class="member-photo"><img src="images/Team/SK.jpg" alt="" width="215" height="215"/></figure>
+              <figure class="member-photo" data-toggle="modal" data-target="#SKModal" title="About Sri Krishna"><img src="images/Team/SK.jpg" alt="" width="215" height="215"/></figure></a>
               <div class="team-detail">
                 <h4>Sri Krishna</h4>
                 <span>App Development</span>
@@ -488,6 +489,111 @@ img:hover
 </tr>  
 </table>
 </div>
+
+<!-- beginning of about us modals -->
+
+<!-- GIRISH -->
+
+<div class="modal fade" id="GirishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="position:absolute;top:130px">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove" ></span></button>
+        <h4 class="modal-title" id="myModalLabel" align="center">Girish Raguvir </h4>
+      </div>
+      <div class="modal-body">
+        <div class="intern-content" >
+          <span><p style="padding-right:200px"><a href="https://www.facebook.com/girish.raguvir?fref=ts" target="_blank" title="Click this to go to my Facebook page"><strong>Girish</strong></a> is the CEO of Cyanogen Inc and also a cofounder. Girish sets the company vision and strategic direction. A technology executive and entrepreneur with 20yrs experience working with the Fortune 500 around the world. Girish was co-founder of Boost Mobile, now wholly owned by Sprint & spent time at Sony and Sega defining mobile strategy. He has been a senior executive at multiple startups; 3 were acquired and 3 IPO'd (Nasdaq, TSE, ASX).</p></span>
+          <img src="images/Team/Girish.jpg" style="position:absolute;top:10px;right:10px">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- ANIRUDH -->
+
+<div class="modal fade" id="AnirudhModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="position:absolute;top:130px">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove" ></span></button>
+        <h4 class="modal-title" id="myModalLabel" align="center">Anirudh </h4>
+      </div>
+      <div class="modal-body">
+        <div class="intern-content" >
+          <span><p style="padding-right:200px">Hey Guys! This is Anirudh.I'm currently pursuing B.Tech in Electrical Engineering from IIT Madras.I like listening to music of all genres but mainly South Indian Music. That apart, in the technical side, I love developing things. This site happens to be my first shot at developing and I'm hoping that you'll have a good experience while browsing through our site. The DreamStop as such is a wonderful idea and I feel it has the potential to become really big. So, Relax and Enjoy the experience.<br> <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;Email ID: anirudh.ravichandran@gmail.com</p></span>
+          <img src="images/Team/Anirudh.PNG" style="position:absolute;top:10px;right:10px">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- ADHITYAA -->
+
+<div class="modal fade" id="AdhityaaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="position:absolute;top:130px">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove" ></span></button>
+        <h4 class="modal-title" id="myModalLabel" align="center">Adhityaa</h4>
+      </div>
+      <div class="modal-body">
+        <div class="intern-content" >
+          <span><p style="padding-right:200px"><a href="https://www.facebook.com/girish.raguvir?fref=ts" target="_blank" title="Click this to go to my Facebook page"><strong>Girish</strong></a> is the CEO of Cyanogen Inc and also a cofounder. Girish sets the company vision and strategic direction. A technology executive and entrepreneur with 20yrs experience working with the Fortune 500 around the world. Girish was co-founder of Boost Mobile, now wholly owned by Sprint & spent time at Sony and Sega defining mobile strategy. He has been a senior executive at multiple startups; 3 were acquired and 3 IPO'd (Nasdaq, TSE, ASX).</p></span>
+          <img src="images/Team/Adhityaa.jpg" style="position:absolute;top:10px;right:10px">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- SUGAN -->
+
+<div class="modal fade" id="SuganModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="position:absolute;top:130px">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove" ></span></button>
+        <h4 class="modal-title" id="myModalLabel" align="center">Sugan</h4>
+      </div>
+      <div class="modal-body">
+        <div class="intern-content" >
+          <span><p style="padding-right:200px"><a href="https://www.facebook.com/girish.raguvir?fref=ts" target="_blank" title="Click this to go to my Facebook page"><strong>Girish</strong></a> is the CEO of Cyanogen Inc and also a cofounder. Girish sets the company vision and strategic direction. A technology executive and entrepreneur with 20yrs experience working with the Fortune 500 around the world. Girish was co-founder of Boost Mobile, now wholly owned by Sprint & spent time at Sony and Sega defining mobile strategy. He has been a senior executive at multiple startups; 3 were acquired and 3 IPO'd (Nasdaq, TSE, ASX).</p></span>
+          <img src="images/Team/Sugan.jpg" style="position:absolute;top:10px;right:10px">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- SRI KRISHNA -->
+
+<div class="modal fade" id="SKModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="position:absolute;top:130px">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove" ></span></button>
+        <h4 class="modal-title" id="myModalLabel" align="center">Sri Krishna </h4>
+      </div>
+      <div class="modal-body">
+        <div class="intern-content" >
+          <span><p style="padding-right:200px"><a href="https://www.facebook.com/girish.raguvir?fref=ts" target="_blank" title="Click this to go to my Facebook page"><strong>Girish</strong></a> is the CEO of Cyanogen Inc and also a cofounder. Girish sets the company vision and strategic direction. A technology executive and entrepreneur with 20yrs experience working with the Fortune 500 around the world. Girish was co-founder of Boost Mobile, now wholly owned by Sprint & spent time at Sony and Sega defining mobile strategy. He has been a senior executive at multiple startups; 3 were acquired and 3 IPO'd (Nasdaq, TSE, ASX).</p></span>
+          <img src="images/Team/SK.jpg" style="position:absolute;top:10px;right:10px">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- ending of about modal -->
+
 <!-- beginning of bottom part -->
 
 <tr>
