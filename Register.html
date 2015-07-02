@@ -19,6 +19,7 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/about.css">
   <link href="css/simple-sidebar.css" rel="stylesheet">
+
   <style type="text/css">
 .loader {
   position: fixed;
@@ -32,6 +33,22 @@
 </style>
 <script type="text/javascript">
 sessionStorage.removeItem('pid');
+$(document).ready(function()
+{ 
+  $("input[type=checkbox]").click(function()
+  {
+    var check=$('#pass').prop('checked');
+    if(check)
+    {
+      $("#pwd").attr("type","text");
+    }
+    else
+    {
+      $("#pwd").attr("type","password");
+    }
+  });
+  
+});
 </script>
  
 </head>
@@ -387,7 +404,9 @@ Fields marked with <span style="color:red;">*</span> are mandatory<br><br>
     
     <div class="form-group">
       <label for="pwd"><span style="color:red;">*</span> Password:</label>
-      <input type="password" class="form-control" id="pwd" name="uPass" placeholder="Enter password" ng-model="user.password" required=""/>
+      <input type="password" class="form-control" id="pwd" name="uPass" placeholder="Enter password" ng-model="user.password" required="" />
+      
+      <label><input type="checkbox" id="pass" name="pass">View Password</label>
       <div ng-show="form.uPass.$dirty && form.uPass.$invalid" style="color:red;font-weight:bold;">
         <span ng-show="form.uPass.$error.required">Password is a required field</span>
       </div>
