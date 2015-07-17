@@ -344,7 +344,7 @@ $scope.searchlist=function(){
         { 
            //$scope.search=response.items;
           ////console.log(JSON.stringify(response));
-          if(response.numResults!=0){$scope.search=response.items;//console.log('yes');}
+          if(response.numResults!=0){$scope.search=response.items;}
           ////console.log(JSON.stringify($scope.search));
         }
       })
@@ -1254,7 +1254,10 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
 
               location.reload();
             }
-              else {$scope.wuser=1;//console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
+              else {
+                    $scope.wuser=1;
+                    //console.log($scope.wuser);$scope.user.password="";$scope.user.email="";
+                    }
             })
             .error(
             function(response)
