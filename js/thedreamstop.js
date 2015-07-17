@@ -80,7 +80,7 @@ return {
 //   }
 //   else
 //     $scope.err=1;
-//   //console.log($scope.vname+$scope.vpass);
+//   //////console.log($scope.vname+$scope.vpass);
 // }
 
 
@@ -120,16 +120,16 @@ $scope.login=function()
        .success(
        function(response)
        {
-          console.log(JSON.stringify(response));
-          //console.log("response :"+response.success);
+          ////console.log(JSON.stringify(response));
+          //////console.log("response :"+response.success);
           if(response.success=='true')
           { 
              $scope.orders=response.orders;
 
              window.location.assign("./vendor.html");
-            //console.log(JSON.stringify(response));
-            //if(response.numResults!=0){$scope.search=response.items;console.log('yes');}
-            //console.log(JSON.stringify($scope.search));
+            //////console.log(JSON.stringify(response));
+            //if(response.numResults!=0){$scope.search=response.items;////console.log('yes');}
+            //////console.log(JSON.stringify($scope.search));
           }
           else
           {
@@ -141,12 +141,12 @@ $scope.login=function()
        .error(
         function(response)
         {
-          console.log("error:"+ response.error_message);
+          ////console.log("error:"+ response.error_message);
         });
   }
   else
     $scope.err=1;
-  //console.log($scope.vname+$scope.vpass);
+  //////console.log($scope.vname+$scope.vpass);
 }
 $scope.logout=function()
 {
@@ -193,7 +193,7 @@ var op=0;
 $scope.items=[{nam:'test1',qty:1,q:1,unit:'kg',price:100},{nam:'test2',qty:5,q:1,unit:'kg',price:400},{nam:'test3',qty:3,q:2,unit:'kg',price:200}];
 $scope.open=function(id)
 {
-  console.log(id);
+  ////console.log(id);
   $('#'+id).toggleClass("in");op++;
   if(op%2==1)
   {
@@ -297,7 +297,7 @@ $scope.open=function(catid,subid,pid)
   var b=[["Baby Products","Deos and Perfumes",""],["Biscuits"],["Oil","Dals and Pulses","Rice & Rice Products"],["Energy Drinks","Soft Drinks"],["Bakery Products","Eggs","Diary Products"],["Imported Snacks","Imported Beverages","Chocolates and Confectionaries"],["Kitchen and Dining","Detergents","Platicware"]];
   sessionStorage.category=catid;sessionStorage.sub=subid;
   sessionStorage.pid=pid;
-  console.log(a[parseInt(catid)]);
+  //console.log(a[parseInt(catid)]);
   sessionStorage.catname=a[parseInt(catid)-1];
   sessionStorage.subcategory=b[parseInt(catid)-1][parseInt(subid)-1];
   window.location.assign('./Items.html');
@@ -324,7 +324,7 @@ $scope.searchlist=function(){
   //             ];
 
   $scope.data={"session":$scope.session,"q":$scope.searchdata,};
-  console.log(JSON.stringify($scope.data));
+  //console.log(JSON.stringify($scope.data));
   
     
     var req = 
@@ -338,20 +338,20 @@ $scope.searchlist=function(){
      .success(
      function(response)
      {
-        console.log(JSON.stringify(response));
-        //console.log("response :"+response.success);
+        //console.log(JSON.stringify(response));
+        ////console.log("response :"+response.success);
         if(response.success=='true')
         { 
            //$scope.search=response.items;
-          //console.log(JSON.stringify(response));
-          if(response.numResults!=0){$scope.search=response.items;console.log('yes');}
-          //console.log(JSON.stringify($scope.search));
+          ////console.log(JSON.stringify(response));
+          if(response.numResults!=0){$scope.search=response.items;//console.log('yes');}
+          ////console.log(JSON.stringify($scope.search));
         }
       })
      .error(
       function(response)
       {
-        console.log("error:"+ response.error_message);
+        //console.log("error:"+ response.error_message);
       });
 
 
@@ -364,9 +364,9 @@ app.controller("log_in_out",['$scope','$localstorage','$http',function($scope,$l
 
 $scope.c='kkkss';
 $scope.ctr=0;
-//console.log($scope.ctr);
+////console.log($scope.ctr);
 // $scope.titems=sessionStorage.titems;
-console.log(sessionStorage.length);
+//console.log(sessionStorage.length);
 $(document).ready(function()
 {
   $('[data-toggle="popover"]').popover({title:"Change Location?",content:function()
@@ -376,7 +376,7 @@ $(document).ready(function()
     {
       sessionStorage.clear('location');
       window.location.href='index.html';
-      //console.log('hello @ refresh');
+      ////console.log('hello @ refresh');
     });
     
 });
@@ -420,15 +420,15 @@ $scope.logout=function()
      .success(
      function(response)
      {
-        console.log(JSON.stringify(response));
-        console.log("response :"+response.success);
+        //console.log(JSON.stringify(response));
+        //console.log("response :"+response.success);
         $localstorage.clear('session');
         
       })
      .error(
       function(response)
       {
-        console.log("error:"+ response.error_message);
+        //console.log("error:"+ response.error_message);
         alert('Problem while logging out.Please try again.')
       });
      window.location.assign("index.html");
@@ -519,7 +519,7 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http','category',funct
      
      //$("#wrapper").toggleClass("toggled");
      function getsession(cname) {
-    console.log("inside "+cname)
+    //console.log("inside "+cname)
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++) 
@@ -541,12 +541,12 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http','category',funct
   }
   $scope.title="Items";
   $scope.session=getsession('session');
-  console.log(category.get());
+  //console.log(category.get());
   $scope.data={"session":$scope.session,"ID":category.get(),"subID":sessionStorage.sub};
   if(sessionStorage.pid!=null)
      {$scope.data={"session":$scope.session,"ID":category.get(),"subID":sessionStorage.sub,"PID":sessionStorage.pid};$scope.title="Search Results";}
   //$scope.data={"session":$scope.session,"ID":category.get()};
-  console.log('chchch'+JSON.stringify($scope.data));
+  //console.log('chchch'+JSON.stringify($scope.data));
   
     
     var req = 
@@ -560,18 +560,18 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http','category',funct
      .success(
      function(response)
      {
-        console.log(JSON.stringify(response));
-        console.log("response :"+response.success);
+        //console.log(JSON.stringify(response));
+        //console.log("response :"+response.success);
         if(response.success=='true')
         { 
            $scope.items=response.items;
-          console.log(JSON.stringify($scope.items));
+          //console.log(JSON.stringify($scope.items));
         }
       })
      .error(
       function(response)
       {
-        console.log("error:"+ response.error_message);
+        //console.log("error:"+ response.error_message);
       });
     
 
@@ -677,7 +677,7 @@ app.controller('itemdisplay', ['$scope','$localstorage','$http','category',funct
   // var gourthird=sessionStorage.getItem('gourthird');
   // var pcfirst=sessionStorage.getItem('pcfirst');
   // var pcsecond=sessionStorage.getItem('pcsecond');
-  // //console.log(bdefirstchild,typeof bdefirstchild);
+  // ////console.log(bdefirstchild,typeof bdefirstchild);
   // //var visibility;
   // if(!bdefirst.localeCompare('true')) { $scope.visibility='bakery';}
   // if(!bdesecond.localeCompare('true')) { $scope.visibility='eggs';}
@@ -952,8 +952,8 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
       $http(req)
       .success(
       function(response){
-      console.log(JSON.stringify(response));
-      console.log("response :"+response.success);
+      //console.log(JSON.stringify(response));
+      //console.log("response :"+response.success);
       if(response.success=='true')
       { 
         $scope.shipdata.name=response.name;
@@ -962,12 +962,12 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
       } 
       else 
       {
-        console.log("Sorry, your browser does not support web storage...");
+        //console.log("Sorry, your browser does not support web storage...");
       }
       })
       .error(
       function(response){
-      console.log("error:"+ response.error_message);
+      //console.log("error:"+ response.error_message);
       });
     $scope.tprice=parseInt(sessionStorage.tprice);$scope.titems=0;
     
@@ -993,13 +993,13 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
     
     var session=$localstorage.get('session');
     var date= $filter('date')(new Date(),'dd-MM-yyyy');
-    //console.log('hello'+$scope.date);
+    ////console.log('hello'+$scope.date);
     $scope.addorder=function()
     {
      var prodArray=JSON.stringify({'tprice':$scope.tprice,'titems':$scope.titems,'name':$scope.shipdata.name,'phno':$scope.shipdata.phno,'address':$scope.shipdata.address,'date':date}); 
      var itemArray=JSON.stringify($scope.addeditems);
      $scope.data={'session':session,'prodArray':prodArray,'itemArray':itemArray};
-     console.log(JSON.stringify($scope.data));
+     //console.log(JSON.stringify($scope.data));
       var req = 
         { method: 'POST',
           url: 'http://thedreamstop.com/api/addOrder.php', 
@@ -1011,8 +1011,8 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
       $http(req)
       .success(
       function(response){
-      console.log(JSON.stringify(response));
-      console.log("response :"+response.success);
+      //console.log(JSON.stringify(response));
+      //console.log("response :"+response.success);
       if(response.success=='true')
       { 
         $('#paymodal').modal('show');
@@ -1026,7 +1026,7 @@ app.controller("cart",['$localstorage','$scope','$http','$filter',function($loca
       })
       .error(
       function(response){
-      console.log("error:"+ response.error_message);
+      //console.log("error:"+ response.error_message);
       });
     }  
  }]);
@@ -1042,12 +1042,12 @@ app.controller("tiles",['$localstorage','$scope','$http','category',function($lo
 
     $scope.cats=function(id)
       {
-        //console.log(id);
+        ////console.log(id);
         $scope.cateshow=true;
       }
       $scope.cath=function(id)
       {
-        //console.log(id);
+        ////console.log(id);
         $scope.cateshow=false;
       }
 
@@ -1094,10 +1094,10 @@ app.controller("tiles",['$localstorage','$scope','$http','category',function($lo
         .success(function(response) {
             
           $scope.name1=response;
-          console.log("response :"+JSON.stringify(response));
+          //console.log("response :"+JSON.stringify(response));
         })
         .error(function(response, status, headers, config){
-          console.log("error:"+ response.error_message);
+          //console.log("error:"+ response.error_message);
          });
     
 
@@ -1143,8 +1143,8 @@ app.controller("tiles",['$localstorage','$scope','$http','category',function($lo
   $scope.colgour=false;
   $scope.colpc=false;
   
-  $scope.visbread=function(){category.set(5);console.log('entering visbread');$scope.colbread=true;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
-  $scope.visbev=function(){category.set(4);console.log('here2');$scope.colbread=false;$scope.colbev=true;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visbread=function(){category.set(5);//console.log('entering visbread');$scope.colbread=true;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
+  $scope.visbev=function(){category.set(4);//console.log('here2');$scope.colbread=false;$scope.colbev=true;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
   $scope.visbrand=function(){category.set(2);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=true;$scope.colgrocery=false;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
   $scope.visgrocery=function(){category.set(3);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=true;$scope.colhousehold=false;$scope.colgour=false;$scope.colpc=false;}
   $scope.vishousehold=function(){category.set(1);$scope.colbread=false;$scope.colbev=false;$scope.colbrand=false;$scope.colgrocery=false;$scope.colhousehold=true;$scope.colgour=false;$scope.colpc=false;}
@@ -1162,7 +1162,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
   $scope.user={"password":"","email":"",};
   $scope.userlogin=function()
   {
-    console.log("loginnow");
+    //console.log("loginnow");
     if($scope.user.password!="" && $scope.user.email!="")
     {
       $scope.wuser=0;
@@ -1177,8 +1177,8 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
        .success(
         function(response)
         {
-          console.log(JSON.stringify(response));
-          console.log("response :"+response.success);
+          //console.log(JSON.stringify(response));
+          //console.log("response :"+response.success);
           if(response.success=='true')
           { 
             
@@ -1187,7 +1187,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             d.setTime(d.getTime() + (30*24*60*60*1000));
             var expires = "expires="+d.toUTCString();
             document.cookie = "session" + "=" + response.session + "; " + expires;
-            console.log("hello"+"session" + "=" + response.session + "; " + expires);
+            //console.log("hello"+"session" + "=" + response.session + "; " + expires);
             $localstorage.set('session',response.session);
 
             var geocoder;
@@ -1206,13 +1206,13 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
                     headers: { 'Content-Type':'application/x-www-form-urlencoded' },
                     data: $.param({"latitude":lat,"longitude":longi,"session":response.session,}),
                 } 
-                //console.log(session);
+                ////console.log(session);
                 $http(req2)
                 .success(
                 function(response)
                 {
-                  console.log(JSON.stringify(response));
-                  console.log("response :"+response.name);
+                  //console.log(JSON.stringify(response));
+                  //console.log("response :"+response.name);
                   if(response.success=='true')
                 { 
                  
@@ -1222,9 +1222,9 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
                 .error(
                 function(response)
                 { 
-                  console.log("error:"+ response.error_message);
+                  //console.log("error:"+ response.error_message);
                 });
-                //console.log(lat);console.log(longi);
+                ////console.log(lat);//console.log(longi);
               } 
               else 
               {
@@ -1244,8 +1244,8 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
             .success(
             function(response)
             {
-              console.log(JSON.stringify(response));
-              console.log("response :"+response.name);
+              //console.log(JSON.stringify(response));
+              //console.log("response :"+response.name);
               if(response.success=='true')
             { 
               $scope.wuser=0; 
@@ -1254,12 +1254,12 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
 
               location.reload();
             }
-              else {$scope.wuser=1;console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
+              else {$scope.wuser=1;//console.log($scope.wuser);$scope.user.password="";$scope.user.email="";}
             })
             .error(
             function(response)
             { 
-              console.log("error:"+ response.error_message);
+              //console.log("error:"+ response.error_message);
             });
             
             //document.write("You will be redirected to main page in 10 sec.");
@@ -1273,10 +1273,10 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
        .error(
         function(response)
         {
-          console.log("error:"+ response.error_message);
+          //console.log("error:"+ response.error_message);
         });
     }
-    //console.log(session);
+    ////console.log(session);
    
   }
   }]);
@@ -1285,7 +1285,7 @@ app.controller("login",['$scope','$http','$localstorage','UserService',function(
 app.controller('myaccount',['$scope','$http','$localstorage', function($scope,$http,$localstorage) {
 function getsession(cname) 
 {
-  console.log("inside "+cname)
+  //console.log("inside "+cname)
   var name = cname + "=";
   var ca = document.cookie.split(';');
   for(var i=0; i<ca.length; i++) 
@@ -1316,8 +1316,8 @@ $scope.user={"success":"","ID":"","email":"","name":"","address":"","telephone":
   $http(req)
   .success(
   function(response){
-  console.log(JSON.stringify(response));
-  console.log("response :"+response.success);
+  //console.log(JSON.stringify(response));
+  //console.log("response :"+response.success);
   if(response.success=='true')
   { 
     $scope.user=response;
@@ -1331,12 +1331,12 @@ $scope.user={"success":"","ID":"","email":"","name":"","address":"","telephone":
   } 
   else 
   {
-    console.log("Sorry, your browser does not support web storage...");
+    //console.log("Sorry, your browser does not support web storage...");
   }
   })
   .error(
   function(response){
-  console.log("error:"+ response.error_message);
+  //console.log("error:"+ response.error_message);
   });
 
 $scope.useredit=function()
@@ -1349,17 +1349,17 @@ $scope.useredit=function()
     headers: { 'Content-Type':'application/x-www-form-urlencoded' },
     data: $.param(newuser),
   } 
-  console.log(JSON.stringify(newuser));
+  //console.log(JSON.stringify(newuser));
   $http(req)
   .success(
   function(response){
-  console.log(JSON.stringify(response));
-  console.log("response :"+response.success);
+  //console.log(JSON.stringify(response));
+  //console.log("response :"+response.success);
   if(response.success=='true'){ }
   })
   .error(
   function(response){
-  console.log("error:"+ response.error_message);
+  //console.log("error:"+ response.error_message);
   });
 }
 }]);
@@ -1410,8 +1410,8 @@ $scope.sendPost = function()
   .success(
   function(response)
   {
-    console.log(JSON.stringify(response));
-    console.log("response :"+response.success);
+    //console.log(JSON.stringify(response));
+    //console.log("response :"+response.success);
     if(response.success=='true')
       {
         $localstorage.set('session',response.session);
@@ -1425,7 +1425,7 @@ $scope.sendPost = function()
         {
           var location = results[0].geometry.location;
           lat=location.lat()*3.14/180;longi=location.lng()*3.14/180;
-          console.log(lat);console.log(longi);
+          //console.log(lat);//console.log(longi);
           var req2 = 
           {  method: 'POST',
               url: 'http://thedreamstop.com/api/latlong.php', 
@@ -1436,8 +1436,8 @@ $scope.sendPost = function()
           .success(
           function(response)
           {
-            console.log(JSON.stringify(response));
-            console.log("response :"+response.name);
+            //console.log(JSON.stringify(response));
+            //console.log("response :"+response.name);
             if(response.success=='true')
           { 
            
@@ -1447,7 +1447,7 @@ $scope.sendPost = function()
           .error(
           function(response)
           { 
-            console.log("error:"+ response.error_message);
+            //console.log("error:"+ response.error_message);
           });
         } 
         else 
@@ -1470,7 +1470,7 @@ $scope.sendPost = function()
   .error(
   function(response)
   {
-    console.log("error:"+ response.error_message);
+    //console.log("error:"+ response.error_message);
     alert('Some error has occured.Please try again.');
   });
     }     
@@ -1534,7 +1534,7 @@ app.controller('orderdisplay', ['$scope','$http','$localstorage', function($scop
 var op=0;
 $scope.open=function(id)
 {
-  console.log(id);
+  //console.log(id);
   $('#'+id).toggleClass("in");op++;
   if(op%2==1)
   {
@@ -1549,13 +1549,13 @@ $scope.open=function(id)
     .success(
     function(response)
     {
-      console.log(JSON.stringify(response));
-      console.log("response :"+response.success);
+      //console.log(JSON.stringify(response));
+      //console.log("response :"+response.success);
       if(response.success=='true')
         {
          $scope.items=response.transaction;
          $scope.status=response.status;
-         console.log(JSON.stringify($scope.items));
+         //console.log(JSON.stringify($scope.items));
         }
 
       else
@@ -1566,7 +1566,7 @@ $scope.open=function(id)
     .error(
     function(response)
     {
-      console.log("error:"+ response.error_message);
+      //console.log("error:"+ response.error_message);
       alert('Some error has occured.Please try again.');
     });
   }
@@ -1582,12 +1582,12 @@ var req=
   .success(
   function(response)
   {
-    console.log(JSON.stringify(response));
-    console.log("response :"+response.success);
+    //console.log(JSON.stringify(response));
+    //console.log("response :"+response.success);
     if(response.success=='true')
       {
        $scope.orders=response.history;
-       console.log(JSON.stringify($scope.orders));
+       //console.log(JSON.stringify($scope.orders));
       }
 
     else
@@ -1598,7 +1598,7 @@ var req=
   .error(
   function(response)
   {
-    console.log("error:"+ response.error_message);
+    //console.log("error:"+ response.error_message);
     alert('Some error has occured.Please try again.');
   });
 
@@ -1676,8 +1676,8 @@ $(document).ready(function()
         .success(
         function(response)
         {
-          //console.log(JSON.stringify(response));
-          //console.log("response :"+response.success);
+          ////console.log(JSON.stringify(response));
+          ////console.log("response :"+response.success);
           if(response.success=='true')
             {
              if(response.list!=null)
@@ -1693,11 +1693,11 @@ $(document).ready(function()
         .error(
         function(response)
         {
-          console.log("error:"+ response.error_message);
+          //console.log("error:"+ response.error_message);
           alert('Some error has occured.Please try again.');
         });
       }
-      //console.log($scope.areas);
+      ////console.log($scope.areas);
       $('#area1').show();
        $('#area2').hide();
       $('#area3').hide();
@@ -1705,9 +1705,9 @@ $(document).ready(function()
      {  var cityVal=$('#City option:selected').text();
         var i,r;
 
-     /*console.log(cityVal);
-     console.log(cityVal.localeCompare('Chennai'));
-     console.log($scope.visarea);*/
+     /*//console.log(cityVal);
+     //console.log(cityVal.localeCompare('Chennai'));
+     //console.log($scope.visarea);*/
 
         if(!cityVal.localeCompare('Chennai'))
         {
@@ -1758,22 +1758,22 @@ $(document).ready(function()
         {
           $('#bindElement').html("<b> City:&nbsp;</b> " + cityVal +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + area1);
            sessionStorage.location=JSON.stringify({'city':cityVal,'area':area1}); 
-           console.log('enters chennai');
-           console.log(area1);
+           //console.log('enters chennai');
+           //console.log(area1);
         }
        else if(!cityVal.localeCompare('Bangalore')) 
         {
           $('#bindElement').html("<b> City:&nbsp;</b> " + cityVal +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + area2);
            sessionStorage.location=JSON.stringify({'city':cityVal,'area':area2}); 
-           console.log('enters Bangalore');
-           console.log(area2);
+           //console.log('enters Bangalore');
+           //console.log(area2);
         }
       else if(!cityVal.localeCompare('Mumbai')) 
         {
           $('#bindElement').html("<b> City:&nbsp;</b> " + cityVal +"&nbsp;&nbsp;&nbsp;"+ "<b> Area:&nbsp;</b> " + area3);
            sessionStorage.location=JSON.stringify({'city':cityVal,'area':area3}); 
-           console.log('enters Mumbai');
-           console.log(area3);
+           //console.log('enters Mumbai');
+           //console.log(area3);
         }
         if($localstorage.get("session")!=null || $localstorage.get("session").localeCompare("Guest")!=0)
         {
@@ -1787,7 +1787,7 @@ $(document).ready(function()
           {
             var location = results[0].geometry.location;
             lat=location.lat()*3.14/180;longi=location.lng()*3.14/180;
-            console.log(lat);console.log(longi);
+            //console.log(lat);//console.log(longi);
             var req2 = 
             {  method: 'POST',
                 url: 'http://thedreamstop.com/api/latlong.php', 
@@ -1798,8 +1798,8 @@ $(document).ready(function()
             .success(
             function(response)
             {
-              console.log(JSON.stringify(response));
-              console.log("response :"+response.name);
+              //console.log(JSON.stringify(response));
+              //console.log("response :"+response.name);
               if(response.success=='true')
             { 
              
@@ -1809,7 +1809,7 @@ $(document).ready(function()
             .error(
             function(response)
             { 
-              console.log("error:"+ response.error_message);
+              //console.log("error:"+ response.error_message);
             });
               } 
               else 
@@ -1818,7 +1818,7 @@ $(document).ready(function()
               }
           });
         }
-        //console.log('here');
+        ////console.log('here');
       }
      $("#locsub").click(displayVals);
      
@@ -1831,7 +1831,7 @@ $('.navbar').css({"cursor":"pointer"});
 $(window).scroll(function() {
   document.getElementById("wrapper").className="toggled";
 
-  //console.log(document.getElementById("wrapper").className);
+  ////console.log(document.getElementById("wrapper").className);
   var navbarColor = "39,0,61";//color attr for rgba
   var smallLogoHeight = 30;
   var bigLogoHeight = 90;
@@ -1869,7 +1869,7 @@ $(window).scroll(function() {
     $('.navbar-inverse').css({"box-shadow": "0 2px 3px rgba(0,0,0," + shadowOpacity + ")"});
     //if($rootScope.f==1 || e==1){$("#wrapper").toggleClass("toggled");$rootScope.f=0;e=0;}
     // else{$("#wrapper").toggleClass("toggled");$rootScope.f=0;}
-    //console.log($rootScope.f)
+    ////console.log($rootScope.f)
     //if($("wrapper").className!="toggled")$("#wrapper").toggleClass("toggled");
   } 
   else 
