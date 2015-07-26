@@ -238,20 +238,35 @@ $(document).ready(function()
         <h3 class="modal-title" id="myModalLabel">Delivery Details</h3>
       </div>
       <div class="modal-body">
-        <div class="form">
+        <form role="form" name="delivery">
+          
           <div class="form-group">
-            <input type="text" class="form-control"placeholder="Name" ng-model="shipdata.name"></input><br>
-            <input type="tel" class="form-control"placeholder="Telephone Number" ng-model="shipdata.phno"></input><br>
-            <input type="text" class="form-control"placeholder="Address" ng-model="shipdata.address"></input><br>
-          </div>
-        </div>
-      </div>
+            <input type="text" class="form-control" placeholder="Name" name="name" id="name" ng-model="shipdata.name" required=""></input><br>
+            <div ng-show="delivery.name.$dirty && delivery.name.$invalid" style="color:red;font-weight:bold;margin-bottom:10px;">
+                  <span ng-show="delivery.name.$error.required">Name is a required field</span>
+                  
+             </div>
+           </div>
+           <div class="form-group">
+            <input class="form-control" placeholder="Telephone Number" name="phno" id="phno" ng-model="shipdata.phno" minlength="8" maxlength="10" required=""></input><br>
+            <div ng-show="delivery.phno.$dirty && delivery.phno.$invalid" style="color:red;font-weight:bold; margin-bottom:10px;">
+                  <span ng-show="delivery.phno.$error.required">Telephone is a required field</span>
+                  <span ng-show="delivery.phno.$error.number" >Please enter only numbers</span>
+                  <span ng-show="delivery.phno.$error.maxlength">Number of digits can't be more than 10!Kindly Check!</span>
+                  <!--span ng-show="delivery.phno.$error.minlength">Number of digits can't be less than 8!Kindly Check!</span-->
+             </div>
+             </div>
+            <input type="text" class="form-control" placeholder="Address" ng-model="shipdata.address"></input><br>
+          
+        
+        </form>
+     </div>
       <div class="modal-footer">
         <p align="center">
           <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;">
           <span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back
           </button>
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span>
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;" ng-disabled="delivery.name.$dirty&&delivery.name.$invalid||delivery.phno.$dirty&&delivery.phno.$invalid">Confirm Order<span class="glyphicon glyphicon-arrow-right" style="float: right;"></span>
           </button><br><br>
         </p>
       </div>

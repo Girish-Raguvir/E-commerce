@@ -300,20 +300,35 @@ $(document).ready(function()
         <h3 class="modal-title" id="myModalLabel">Delivery Details</h3>
       </div>
       <div class="modal-body">
-        <div class="form">
+        <form role="form" name="delivery">
+          
           <div class="form-group">
-            <input type="text" class="form-control"placeholder="Name" ng-model="shipdata.name"></input><br>
-            <input type="tel" class="form-control"placeholder="Telephone Number" ng-model="shipdata.phno"></input><br>
-            <input type="text" class="form-control"placeholder="Address" ng-model="shipdata.address"></input><br>
-          </div>
-        </div>
-      </div>
+            <input type="text" class="form-control" placeholder="Name" name="name" id="name" ng-model="shipdata.name" required=""></input><br>
+            <div ng-show="delivery.name.$dirty && delivery.name.$invalid" style="color:red;font-weight:bold;margin-bottom:10px;">
+                  <span ng-show="delivery.name.$error.required">Name is a required field</span>
+                  
+             </div>
+           </div>
+           <div class="form-group">
+            <input class="form-control" placeholder="Telephone Number" name="phno" id="phno" ng-model="shipdata.phno" minlength="8" maxlength="10" required=""></input><br>
+            <div ng-show="delivery.phno.$dirty && delivery.phno.$invalid" style="color:red;font-weight:bold; margin-bottom:10px;">
+                  <span ng-show="delivery.phno.$error.required">Telephone is a required field</span>
+                  <span ng-show="delivery.phno.$error.number" >Please enter only numbers</span>
+                  <span ng-show="delivery.phno.$error.maxlength">Number of digits can't be more than 10!Kindly Check!</span>
+                  <!--span ng-show="delivery.phno.$error.minlength">Number of digits can't be less than 8!Kindly Check!</span-->
+             </div>
+             </div>
+            <input type="text" class="form-control" placeholder="Address" ng-model="shipdata.address"></input><br>
+          
+        
+        </form>
+     </div>
       <div class="modal-footer">
         <p align="center">
           <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#cartmodal"style="width:40%;">
           <span class="glyphicon glyphicon-arrow-left" style="float: left;"></span> Back
           </button>
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;">Proceed to pay <span class="glyphicon glyphicon-arrow-right" style="float: right;"></span>
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" ng-click="addorder()"style="width:40%;" ng-disabled="delivery.name.$dirty&&delivery.name.$invalid||delivery.phno.$dirty&&delivery.phno.$invalid">Confirm Order<span class="glyphicon glyphicon-arrow-right" style="float: right;"></span>
           </button><br><br>
         </p>
       </div>
@@ -452,9 +467,9 @@ $(document).ready(function()
     <div id="bread" class="collapse">
       
       <ul>
-        <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Bakery Products'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp; Bakery Products</li></span></a>
-        <a href="items.html" onclick="sub(2);sessionStorage.subcategory='Eggs'"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp;Eggs</li></span></a>
-        <a href="items.html" onclick="sub(3);sessionStorage.subcategory='Dairy Products'"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp;Dairy Products</li></span></a>
+        <a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Bakery Products'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp; Bakery Products</li></span></a>
+        <a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Eggs'"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp;Eggs</li></span></a>
+        <a href="Items.html" onclick="sub(3);sessionStorage.subcategory='Dairy Products'"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp;Dairy Products</li></span></a>
         
       </ul>
     </div>
@@ -464,8 +479,8 @@ $(document).ready(function()
      
       <div id="beverage" class="collapse">
       <ul>
-        <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Energy Drinks'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Energy Drinks</li></span></a>
-        <a href="items.html" onclick="sub(2);sessionStorage.subcategory='Soft Drinks'"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp; Soft Drinks</li></span></a>
+        <a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Energy Drinks'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Energy Drinks</li></span></a>
+        <a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Soft Drinks'"><span><li><i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; &nbsp; Soft Drinks</li></span></a>
  
 
       </ul>
@@ -475,7 +490,7 @@ $(document).ready(function()
       
       <div id="branded" class="collapse" >
       <ul>
-        <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Biscuits'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Biscuits</li></span></a>
+        <a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Biscuits'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Biscuits</li></span></a>
         </ul>
     </div>
     </span>
@@ -483,9 +498,9 @@ $(document).ready(function()
       
       <div id="grocery" class="collapse" >
       <ul>
-        <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Oils'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Oil</li></span></a>
-        <a href="items.html" onclick="sub(2);sessionStorage.subcategory='Dals and Pulses'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Dals and Pulses</li></span></a>
-        <a href="items.html" onclick="sub(3);sessionStorage.subcategory='Rice & Rice Products'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Rice & Rice Products</li></span></a>
+        <a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Oils'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Oil</li></span></a>
+        <a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Dals and Pulses'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Dals and Pulses</li></span></a>
+        <a href="Items.html" onclick="sub(3);sessionStorage.subcategory='Rice & Rice Products'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Rice & Rice Products</li></span></a>
       </ul>
     </div>
     </span>
@@ -493,9 +508,9 @@ $(document).ready(function()
       
       <div id="household" class="collapse" >
       <ul>
-        <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Kitchen and Dining'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Kitchen and Dining</li></span></a>
-        <a href="items.html" onclick="sub(2);sessionStorage.subcategory='Detergents'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Detergents</li></span></a>
-        <a href="items.html" onclick="sub(3);Plasticware"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Plasticware</li></span></a>
+        <a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Kitchen and Dining'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Kitchen and Dining</li></span></a>
+        <a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Detergents'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Detergents</li></span></a>
+        <a href="Items.html" onclick="sub(3);Plasticware"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Plasticware</li></span></a>
       </ul>
     </div>
     </span>
@@ -503,9 +518,9 @@ $(document).ready(function()
      
       <div id="gourmet" class="collapse" >
       <ul>
-        <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Imported Snacks'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Snacks</li></span></a>
-        <a href="items.html" onclick="sub(2);sessionStorage.subcategory='Imported Beverages'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Beverages</li></span></a>
-        <a href="items.html" onclick="sub(3);sessionStorage.subcategory='Chocolates & Confectionaries'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Chocolates & Confectionaries</li></span></a>
+        <a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Imported Snacks'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Snacks</li></span></a>
+        <a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Imported Beverages'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Imported Beverages</li></span></a>
+        <a href="Items.html" onclick="sub(3);sessionStorage.subcategory='Chocolates & Confectionaries'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Chocolates & Confectionaries</li></span></a>
       </ul>
     </div>
     </span>
@@ -513,8 +528,8 @@ $(document).ready(function()
       
       <div id="personal" class="collapse" >
       <ul>
-        <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Baby Products'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Baby Products</li></span></a>
-        <a href="items.html" onclick="sub(2);sessionStorage.subcategory='Deos and Perfumes'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Deos and Perfumes</li></span></a>
+        <a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Baby Products'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Baby Products</li></span></a>
+        <a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Deos and Perfumes'"><span><li> <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;&nbsp;Deos and Perfumes</li></span></a>
       </ul>
     </div>
     </span>
@@ -526,7 +541,7 @@ $(document).ready(function()
 <!-- images display of subcategories -->
 
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="breadimg">
-  <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Bakery Products'"><div class="col-sm-6 col-md-4" >
+  <a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Bakery Products'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/bakery.jpg" alt="Bread" class="img-responsive">
       <div class="caption" >
@@ -536,7 +551,7 @@ $(document).ready(function()
   </div>
 </a>
 
- <a href="items.html" onclick="sub(3);sessionStorage.subcategory='Dairy Products'"><div class="col-sm-6 col-md-4" >
+ <a href="Items.html" onclick="sub(3);sessionStorage.subcategory='Dairy Products'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail" style="margin-right:30px;">
     <img src="images/Subcategory/dairy-products.jpg" alt="Dairy Products" class="img-responsive">
       <div class="caption" >
@@ -544,7 +559,7 @@ $(document).ready(function()
       </div>
     </div>
   </div> </a>
-   <a href="items.html" onclick="sub(2);sessionStorage.subcategory='Eggs'"><div class="col-sm-6 col-md-4" >
+   <a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Eggs'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/eggs.jpg" alt="Eggs" class="img-responsive">
       <div class="caption" >
@@ -555,7 +570,7 @@ $(document).ready(function()
 </div>
   
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="beverageimg">
- <a href="items.html" onclick="sub(1);sessionStorage.subcategory='Energy Drinks'"><div class="col-sm-6 col-md-4" >
+ <a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Energy Drinks'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/energy-drinks.PNG" alt="Energy Drinks" class="img-responsive">
       <div class="caption" >
@@ -563,7 +578,7 @@ $(document).ready(function()
       </div>
     </div>
   </div></a>
- <a href="items.html" onclick="sub(2);sessionStorage.subcategory='Soft Drinks'"><div class="col-sm-6 col-md-4" >
+ <a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Soft Drinks'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/soft-drinks.PNG" alt="Soft Drinks" class="img-responsive">
       <div class="caption" >
@@ -574,7 +589,7 @@ $(document).ready(function()
 </div></a>
 
  <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="brandedimg">
-<a href="items.html" onclick="sub(1);sessionStorage.subcategory='Biscuits'"><div class="col-sm-6 col-md-4" >
+<a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Biscuits'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/Biscuits.PNG" alt="Biscuits" class="img-responsive">
       <div class="caption" >
@@ -585,7 +600,7 @@ $(document).ready(function()
 </div>
 
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="groceryimg">
-<a href="items.html" onclick="sub(1);sessionStorage.subcategory='Oils'"><div class="col-sm-6 col-md-4" >
+<a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Oils'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/oils.PNG" alt="Oils" class="img-responsive">
       <div class="caption" >
@@ -593,7 +608,7 @@ $(document).ready(function()
       </div>
     </div>
   </div></a>
-<a href="items.html" onclick="sub(2);sessionStorage.subcategory='Dals and Pulses'"><div class="col-sm-6 col-md-4" >
+<a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Dals and Pulses'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/pulses.PNG" alt="pulses" class="img-responsive">
       <div class="caption" >
@@ -602,7 +617,7 @@ $(document).ready(function()
     </div>
   </div></a>
 
-<a href="items.html" onclick="sub(3);sessionStorage.subcategory='Rice & Rice Products'"><div class="col-sm-6 col-md-4" >
+<a href="Items.html" onclick="sub(3);sessionStorage.subcategory='Rice & Rice Products'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/rice.jpg" alt="rice products" class="img-responsive">
       <div class="caption" >
@@ -612,7 +627,7 @@ $(document).ready(function()
   </div></a>
 </div>
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="householdimg"> 
-<a href="items.html" onclick="sub(1);sessionStorage.subcategory='Kitchen and Dining'"><div class="col-sm-6 col-md-4" >
+<a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Kitchen and Dining'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/kitchen.PNG" alt="Kitchen Dining" class="img-responsive">
       <div class="caption" >
@@ -620,7 +635,7 @@ $(document).ready(function()
       </div>
     </div>
   </div></a>
-<a href="items.html" onclick="sub(2);sessionStorage.subcategory='Detergents'"><div class="col-sm-6 col-md-4" >
+<a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Detergents'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/detergents.PNG" alt="Detergents" class="img-responsive">
       <div class="caption" >
@@ -628,7 +643,7 @@ $(document).ready(function()
       </div>
     </div>
   </div></a>
-  <a href="items.html" onclick="sub(3);sessionStorage.subcategory='Plasticware'"><div class="col-sm-6 col-md-4" >
+  <a href="Items.html" onclick="sub(3);sessionStorage.subcategory='Plasticware'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/plasticware.PNG" alt="Plasticware" class="img-responsive">
       <div class="caption" >
@@ -639,7 +654,7 @@ $(document).ready(function()
 </div>
 
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="gourmetimg">
-<a href="items.html" onclick="sub(1);sessionStorage.subcategory='Imported Snacks'"><div class="col-sm-6 col-md-4" >
+<a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Imported Snacks'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/imported-Snacks.PNG" alt="Imported Snacks" class="img-responsive">
       <div class="caption" >
@@ -647,7 +662,7 @@ $(document).ready(function()
       </div>
     </div>
   </div></a>
-<a href="items.html" onclick="sub(2);sessionStorage.subcategory='Imported Beverages'"><div class="col-sm-6 col-md-4" >
+<a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Imported Beverages'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/imported-beverages.PNG" alt="Imported Beverages" class="img-responsive">
       <div class="caption" >
@@ -655,7 +670,7 @@ $(document).ready(function()
       </div>
     </div>
   </div></a>
-  <a href="items.html" onclick="sub(3);sessionStorage.subcategory='Chocolates'"><div class="col-sm-6 col-md-4" >
+  <a href="Items.html" onclick="sub(3);sessionStorage.subcategory='Chocolates'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/confectionery.PNG" alt="Chocolates" class="img-responsive">
       <div class="caption" >
@@ -666,7 +681,7 @@ $(document).ready(function()
 </div>
 
 <div class="row" style="position:absolute;left:350px;top:200px;z-index:1" id="personalimg">
-<a href="items.html" onclick="sub(1);sessionStorage.subcategory='Baby Products'"><div class="col-sm-6 col-md-4" >
+<a href="Items.html" onclick="sub(1);sessionStorage.subcategory='Baby Products'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/baby.PNG" alt="Baby Products" class="img-responsive">
       <div class="caption" >
@@ -674,7 +689,7 @@ $(document).ready(function()
       </div>
     </div>
   </div></a>
-<a href="items.html" onclick="sub(2);sessionStorage.subcategory='Deos and Perfumes'"><div class="col-sm-6 col-md-4" >
+<a href="Items.html" onclick="sub(2);sessionStorage.subcategory='Deos and Perfumes'"><div class="col-sm-6 col-md-4" >
     <div class="thumbnail">
     <img src="images/Subcategory/deos.PNG" alt="Deos and Perfumes" class="img-responsive">
       <div class="caption" >
