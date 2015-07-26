@@ -1,12 +1,8 @@
+Have to prevent placing empty cart orders.
+
+Download all libraries(bootstrap,js,jquery etc)to local folder to increase speed.
 
 
--coupon code input during payment-Coupon applied message(make appropriate changes)-and wrong code-No such coupon exists error.
-
--Captcha check
-
--Cart Modal in Items.html doesnot reflect changes unless page is refreshed.
-
--Somehow not able to dynamically update the content of the modal.It's kind of a big problem for the cart modal.We have to update it simultaneously.Currently,refreshing the page only updates it.That should not be the case.
 
 
 
